@@ -122,15 +122,12 @@
 	<div class="column-voting">
 	
 	<p id="demo"></p>
-
-	
-
 		<!-- Third column = Your vote -->
 		<!-- todo: Change to int type and value to default value -->
 		<h3>Your vote</h3>
 	<form name="vote_form" method="post" >
 		<input id="voting_input" type="text" name="voting_number" value="123"/>
-        <input type="submit" name="vote_button" onclick="buttonfire()" value="Vote"/> 
+        <input type="submit" name="vote_button" onclick="buttonfire(voting_input.value)" value="Vote"/> 
     </form> 
 	
 

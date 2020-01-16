@@ -1,26 +1,14 @@
-function buttonfire()
+function buttonfire(voting_number)
 {
-    alert("ajax_scripts funktioniert");
-
-    // jQuery.ajax(
-    //     {
-    //     type:'POST',
-    //     url: ajax_unique.ajaxurl,
-    //     data : {
-    //         action : 'retrieveDataAjax',
-    //         title: ajax_unique.title
-    //     },
-    //     success: function(data){
-    //         alert('succesful send');
-    //     }
-    // });
+    alert(voting_number);
 
     jQuery.ajax({
     type: 'POST',
     url: ajax_unique.ajaxurl,
     data: {
         action: 'serversidefunction',
-        title: ajax_unique.title
+        title: ajax_unique.title,
+        voting_number: voting_number
     },
     success: function (data, textStatus, XMLHttpRequest) {
         alert(data);
@@ -29,21 +17,4 @@ function buttonfire()
         alert(errorThrown);
     }
 });
-
-
 }
-
-// jQuery.ajax({
-//     type: 'POST',
-//     url: ajax_unique.ajaxurl,
-//     data: {
-//         action: 'serversidefunction',
-//         title: ajax_unique.title
-//     },
-//     success: function (data, textStatus, XMLHttpRequest) {
-//         alert(data);
-//     },
-//     error: function (XMLHttpRequest, textStatus, errorThrown) {
-//         alert(errorThrown);
-//     }
-// });

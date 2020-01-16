@@ -282,7 +282,7 @@
 		<h3>Your vote</h3>
 	<form name="vote_form" method="post" >
 		<input id="voting_input" type="text" name="voting_number" value="123"/>
-        <input type="submit" name="vote_button" onclick="showHintAjax()" value="Vote"/> 
+        <input type="submit" name="vote_button" onclick="buttonfire()" value="Vote"/> 
     </form> 
 	
 

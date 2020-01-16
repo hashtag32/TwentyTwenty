@@ -37,67 +37,8 @@
 } 
 </style>
 
-<!-- 
-<script type="text/javascript">
-		function foo () {
-		$.ajax({
-			type: "POST", //request type
-			url:"https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/content-voting-algo.php", //the page containing php script
-			data: { album: "testalbum" }
-			// success:function(result){
-			// 	content.html(response);
-			// }
-		});
-	}
-	</script> -->
-
-<script>
-// function showHint() {
-	
-// 	// document.getElementById("voting_input").innerHTML = "";
-//     // if (str.length == 0) {
-//     //     document.getElementById("voting_input").innerHTML = "";
-//     //     return;
-//     // } 
-// 	var xmlhttp = new XMLHttpRequest();
-
-// 	xmlhttp.onreadystatechange = function() {
-// 			// document.getElementById("voting_input").innerHTML = this.responseText;
-// 			// alert(this.responseText);
-// 	};
-	
-// 	xmlhttp.open("GET", "https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/content-voting-test.php?q=uebergabe", true);
-// // 	xmlhttp.send();
-// // }
-// Test
-// ajax_unique.ajaxurl;
-
-// function showHintAjax()
-// {
-// 	ajax_unique.ajaxurl;
-// 	alert("script ");
-// 	alert(ajax_unique.ajaxurl);
-// 	alert("script ");
-// 	// alert("content-voting.php script");
-// 	// $.ajax({
-// 	// 	type: "POST",
-// 	// 	url: "content-voting-test.php",
-// 	// 	datatype: "html",
-// 	// 	data: dataString,
-// 	// 	success: function(data) {
-// 	// 		alert(data);
-// 	// 	}
-// 	// });
-// }
-
-</script>
-
-
-
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-
-
 	<?php
 
 	get_template_part( 'template-parts/entry-header' );
@@ -126,100 +67,7 @@
 			
 	<div class="section-inner">
 		
-	<!-- <?php
 
-	function connectDB()
-	{
-		$conn = new mysqli(constant("DB_HOST"), constant("DB_USER"), constant("DB_PASSWORD"), constant("DB_NAME"));
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
-		return $conn;
-	}
-
-	function alert($msg) {
-		$msg="pre".$msg;
-		echo "<script type='text/javascript'>alert('$msg');</script>";
-	}
-	
-	function insertEntry($conn, $symbol, $date, $voting_number)
-	{
-		alert($date);
-		$sql = "INSERT INTO votingTable (symbol, date, voting) VALUES ('{$symbol}', '{$date}', '{$voting_number}')";
-		$result = $conn->query($sql);
-		return $result;
-	}
-
-	function readForecast($conn, $symbol)
-	{
-		//todo: voting as global table name
-		$sql = "SELECT symbol, date, voting FROM votingTable";
-		$result = mysqli_query($conn, $sql);
-
-		// Build array with votings of forecasts 
-		// -> calculate average and return it 
-		if (mysqli_num_rows($result) > 0) {
-			// output data of each row
-			while($row = mysqli_fetch_assoc($result)) {
-				// echo "id: " . $row["symbol"]. " - Name: " . $row["current_price"]. " " . $row["lastname"]. "<br>";
-				if($row["symbol"]=="Test2")
-				{
-					return $row["voting"];
-				}
-			}
-		} else { 
-			echo "0 results";
-		}
-	}
-
-	function vote()
-	{
-		$symbol="TSLA";
-		$voting_number = $_POST['voting_number'];
-
-		$conn = connectDB();
-		$result=insertEntry($conn, $symbol, date("d-m-Y H:i:s"), $voting_number);
-		$forecast=readForecast($conn, $symbol);
-	}
-
-
-	if (!empty($_POST['vote_button']))
-	{
-		// alert("test");
-
-		// vote();
-	}
-
-	
-	if (!empty($_POST['album']))
-	{
-		// alert("test");
-		// vote();
-	}
-
-	echo do_shortcode('[stock_ticker symbols="CSCO" show="name" static="1"]');
-	
-	?> -->
-
-	<?php
-	if (!empty($_POST['album']))
-	{
-		// alert("test");
-		// vote();
-	}
-	if (!empty($_POST['vote_button']))
-	{
-		// alert("test");
-
-		// vote();
-	}
-
-	// add_action( 'admin_enqueue_scripts', 'hook_ajax_script' );
-	
-	?>
-
-	
 
 
 	<button onclick="foo()">Click me</button>
@@ -286,11 +134,15 @@
     </form> 
 	
 
+	
+
 	</div>
 	</div>
 	</div><!-- .section-inner -->
 
 	<?php
+
+	// vote();
 
 	if ( is_single() ) {
 

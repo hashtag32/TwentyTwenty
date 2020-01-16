@@ -619,13 +619,99 @@ add_action( 'wp_ajax_nopriv_serversidefunction', 'serversidefunction' );
 add_action( 'wp_ajax_serversidefunction', 'serversidefunction' );
  
 function serversidefunction() {
-	$received= $_GET['data'];
+	$received= $_POST['title'];
 	echo $received;
 	echo "test";
 	$responseData = array("voll cooler AJAX Kram!!!");
 	array_push($responseData,"blue","yellow",$received);
 	echo json_encode($responseData);
 }
+
+
+// add_action( 'wp_ajax_nopriv_retrieveDataAjax', 'retrieveDataAjax' );
+
+// function retrieveDataAjax()
+// {
+// 	wp_localize_script( 'ajax_scripts_name', 'ajax_unique', array(
+// 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
+// 		'title' => get_the_title()
+// 	)
+// 	);
+
+// 	$id_vacabulary = $_POST['id_vocabulary'];
+// 	vote();
+// 	echo "returnValue";
+// }
+
+
+
+/***********Function database */
+function connectDB()
+{
+	$conn = new mysqli(constant("DB_HOST"), constant("DB_USER"), constant("DB_PASSWORD"), constant("DB_NAME"));
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+	return $conn;
+}
+
+function alert($msg) {
+	$msg="pre".$msg;
+	echo "<script type='text/javascript'>alert('$msg');</script>";
+}
+
+function insertEntry($conn, $symbol, $date, $voting_number)
+{
+	alert($date);
+	$sql = "INSERT INTO votingTable (symbol, date, voting) VALUES ('{$symbol}', '{$date}', '{$voting_number}')";
+	$result = $conn->query($sql);
+	return $result;
+}
+
+function readForecast($conn, $symbol)
+{
+	//todo: voting as global table name
+	$sql = "SELECT symbol, date, voting FROM votingTable";
+	$result = mysqli_query($conn, $sql);
+
+	// Build array with votings of forecasts 
+	// -> calculate average and return it 
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while($row = mysqli_fetch_assoc($result)) {
+			// echo "id: " . $row["symbol"]. " - Name: " . $row["current_price"]. " " . $row["lastname"]. "<br>";
+			if($row["symbol"]=="Test2")
+			{
+				return $row["voting"];
+			}
+		}
+	} else { 
+		echo "0 results";
+	}
+}
+
+function vote()
+{
+	$symbol="TSLA";
+	// $voting_number = $_POST['voting_number'];
+	$voting_number =123;
+
+	$conn = connectDB();
+	$result=insertEntry($conn, $symbol, date("d-m-Y H:i:s"), $voting_number);
+	$forecast=readForecast($conn, $symbol);
+}
+
+/**********Function database */
+
+
+
+
+
+
+
+
+
 
 
 /**

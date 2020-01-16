@@ -1,7 +1,21 @@
-alert("ajax_scripts funktioniert");
+function buttonfire()
+{
+    alert("ajax_scripts funktioniert");
 
+    // jQuery.ajax(
+    //     {
+    //     type:'POST',
+    //     url: ajax_unique.ajaxurl,
+    //     data : {
+    //         action : 'retrieveDataAjax',
+    //         title: ajax_unique.title
+    //     },
+    //     success: function(data){
+    //         alert('succesful send');
+    //     }
+    // });
 
-jQuery.ajax({
+    jQuery.ajax({
     type: 'POST',
     url: ajax_unique.ajaxurl,
     data: {
@@ -16,6 +30,20 @@ jQuery.ajax({
     }
 });
 
-// console.log("test");
 
-// alert(ajax_unique.ajaxurl);
+}
+
+// jQuery.ajax({
+//     type: 'POST',
+//     url: ajax_unique.ajaxurl,
+//     data: {
+//         action: 'serversidefunction',
+//         title: ajax_unique.title
+//     },
+//     success: function (data, textStatus, XMLHttpRequest) {
+//         alert(data);
+//     },
+//     error: function (XMLHttpRequest, textStatus, errorThrown) {
+//         alert(errorThrown);
+//     }
+// });

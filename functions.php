@@ -615,13 +615,17 @@ add_action( 'admin_enqueue_scripts', 'hook_ajax_script' );
 // add_action( 'wp_enqueue_scripts', 'serversidefunction' );
 
 
-// add_action( 'wp_ajax_nopriv_serversidefunction', 'serversidefunction' );
-// add_action( 'wp_ajax_serversidefunction', 'serversidefunction' );
+add_action( 'wp_ajax_nopriv_serversidefunction', 'serversidefunction' );
+add_action( 'wp_ajax_serversidefunction', 'serversidefunction' );
  
-// function serversidefunction() {
-// 	$responseData = array("voll cooler AJAX Kram!!!");
-//     echo json_encode($responseData);
-// }
+function serversidefunction() {
+	$received= $_GET['data'];
+	echo $received;
+	echo "test";
+	$responseData = array("voll cooler AJAX Kram!!!");
+	array_push($responseData,"blue","yellow",$received);
+	echo json_encode($responseData);
+}
 
 
 /**

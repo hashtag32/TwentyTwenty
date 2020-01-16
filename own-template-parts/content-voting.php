@@ -12,11 +12,9 @@
  */
 
 ?>
-<!-- <script src="https://www.gstatic.com/charts/loader.js" ></script> -->
-
-
-<script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/js/charts.js"> </script>
+<!-- <script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/js/charts.js"> </script> -->
 <script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"></script>
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 
 <style>
 /* * {
@@ -39,11 +37,66 @@
 } 
 </style>
 
+<!-- 
+<script type="text/javascript">
+		function foo () {
+		$.ajax({
+			type: "POST", //request type
+			url:"https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/content-voting-algo.php", //the page containing php script
+			data: { album: "testalbum" }
+			// success:function(result){
+			// 	content.html(response);
+			// }
+		});
+	}
+	</script> -->
+
+<script>
+// function showHint() {
+	
+// 	// document.getElementById("voting_input").innerHTML = "";
+//     // if (str.length == 0) {
+//     //     document.getElementById("voting_input").innerHTML = "";
+//     //     return;
+//     // } 
+// 	var xmlhttp = new XMLHttpRequest();
+
+// 	xmlhttp.onreadystatechange = function() {
+// 			// document.getElementById("voting_input").innerHTML = this.responseText;
+// 			// alert(this.responseText);
+// 	};
+	
+// 	xmlhttp.open("GET", "https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/content-voting-test.php?q=uebergabe", true);
+// // 	xmlhttp.send();
+// // }
+// Test
+// ajax_unique.ajaxurl;
+
+// function showHintAjax()
+// {
+// 	ajax_unique.ajaxurl;
+// 	alert("script ");
+// 	alert(ajax_unique.ajaxurl);
+// 	alert("script ");
+// 	// alert("content-voting.php script");
+// 	// $.ajax({
+// 	// 	type: "POST",
+// 	// 	url: "content-voting-test.php",
+// 	// 	datatype: "html",
+// 	// 	data: dataString,
+// 	// 	success: function(data) {
+// 	// 		alert(data);
+// 	// 	}
+// 	// });
+// }
+
+</script>
 
 
 
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+
 
 	<?php
 
@@ -73,7 +126,7 @@
 			
 	<div class="section-inner">
 		
-	<?php
+	<!-- <?php
 
 	function connectDB()
 	{
@@ -84,49 +137,93 @@
 		}
 		return $conn;
 	}
+
+	function alert($msg) {
+		$msg="pre".$msg;
+		echo "<script type='text/javascript'>alert('$msg');</script>";
+	}
 	
-	function insertEntry($conn, $symbol, $current_price, $forecast)
+	function insertEntry($conn, $symbol, $date, $voting_number)
 	{
-		$sql = "INSERT INTO voting (symbol, current_price, forecast) VALUES ('{$symbol}', '{$current_price}', '{$forecast}')";
+		alert($date);
+		$sql = "INSERT INTO votingTable (symbol, date, voting) VALUES ('{$symbol}', '{$date}', '{$voting_number}')";
 		$result = $conn->query($sql);
 		return $result;
 	}
 
-	function readEntry($conn, $symbol)
+	function readForecast($conn, $symbol)
 	{
 		//todo: voting as global table name
-		$sql = "SELECT symbol, current_price, forecast FROM voting";
+		$sql = "SELECT symbol, date, voting FROM votingTable";
 		$result = mysqli_query($conn, $sql);
 
+		// Build array with votings of forecasts 
+		// -> calculate average and return it 
 		if (mysqli_num_rows($result) > 0) {
 			// output data of each row
 			while($row = mysqli_fetch_assoc($result)) {
 				// echo "id: " . $row["symbol"]. " - Name: " . $row["current_price"]. " " . $row["lastname"]. "<br>";
 				if($row["symbol"]=="Test2")
 				{
-					return $row["forecast"];
+					return $row["voting"];
 				}
 			}
-		} else {
+		} else { 
 			echo "0 results";
 		}
 	}
-		
 
-	$conn = connectDB();
-	$result=insertEntry($conn, "Test2",11,14);
-	$forecast=readEntry($conn, "Test2");
+	function vote()
+	{
+		$symbol="TSLA";
+		$voting_number = $_POST['voting_number'];
 
-	$string = file_get_contents("http://finance.google.com/finance/info?client=ig&q=TSLA");
-	$arrMatches = explode('// ', $string); // get uncommented json string
-	$arrJson = json_decode($arrMatches[1], true)[0]; // decode json
-	$price = $assJson["l"];
-	echo $price;
-
+		$conn = connectDB();
+		$result=insertEntry($conn, $symbol, date("d-m-Y H:i:s"), $voting_number);
+		$forecast=readForecast($conn, $symbol);
+	}
 
 
-	// echo $forecast;
+	if (!empty($_POST['vote_button']))
+	{
+		// alert("test");
+
+		// vote();
+	}
+
+	
+	if (!empty($_POST['album']))
+	{
+		// alert("test");
+		// vote();
+	}
+
+	echo do_shortcode('[stock_ticker symbols="CSCO" show="name" static="1"]');
+	
+	?> -->
+
+	<?php
+	if (!empty($_POST['album']))
+	{
+		// alert("test");
+		// vote();
+	}
+	if (!empty($_POST['vote_button']))
+	{
+		// alert("test");
+
+		// vote();
+	}
+
+	// add_action( 'admin_enqueue_scripts', 'hook_ajax_script' );
+	
 	?>
+
+	
+
+
+	<button onclick="foo()">Click me</button>
+
 
 <div class="row">
 <a href="https://stockvoting.net/tag/tesla/"><h1>Tesla</h1></a>
@@ -175,20 +272,22 @@
 	></canvas>
   </div>
 	<div class="column-voting">
+	
+	<p id="demo"></p>
+
+	
+
 		<!-- Third column = Your vote -->
 		<!-- todo: Change to int type and value to default value -->
 		<h3>Your vote</h3>
-		<input type="text" name="fnum" value="121"/>
-	<button onclick="vote()">Vote</button>
+	<form name="vote_form" method="post" >
+		<input id="voting_input" type="text" name="voting_number" value="123"/>
+        <input type="submit" name="vote_button" onclick="showHintAjax()" value="Vote"/> 
+    </form> 
+	
 
 	</div>
 	</div>
-
-
-
-
-
-
 	</div><!-- .section-inner -->
 
 	<?php

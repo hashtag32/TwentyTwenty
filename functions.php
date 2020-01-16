@@ -598,6 +598,32 @@ function twentytwenty_customize_controls_enqueue_scripts() {
 
 add_action( 'customize_controls_enqueue_scripts', 'twentytwenty_customize_controls_enqueue_scripts' );
 
+
+function hook_ajax_script() {
+	wp_enqueue_script( 'ajax_scripts_name', get_template_directory_uri() . '/js/ajax_scripts.js', array(), $theme_version);
+		
+	wp_localize_script( 'ajax_scripts_name', 'ajax_unique', array(
+		'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		'title' => get_the_title()
+	)
+	);
+}
+add_action( 'wp_enqueue_scripts', 'hook_ajax_script' );
+add_action( 'admin_enqueue_scripts', 'hook_ajax_script' );
+
+// add_action( 'admin_enqueue_scripts', 'serversidefunction' );
+// add_action( 'wp_enqueue_scripts', 'serversidefunction' );
+
+
+// add_action( 'wp_ajax_nopriv_serversidefunction', 'serversidefunction' );
+// add_action( 'wp_ajax_serversidefunction', 'serversidefunction' );
+ 
+// function serversidefunction() {
+// 	$responseData = array("voll cooler AJAX Kram!!!");
+//     echo json_encode($responseData);
+// }
+
+
 /**
  * Enqueue scripts for the customizer preview.
  *

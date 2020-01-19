@@ -12,10 +12,17 @@
  * @since 1.0.0
  */
 
+//  Templates
+include("gauge.html");
+
 ?>
 <!-- <script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/js/charts.js"> </script> -->
 <script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"></script>
 <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+
+
+
+
 
 <style>
 	/* * {
@@ -81,40 +88,6 @@
 
 
 			<div class="column-voting" id="second-column">
-				<?php
-				include("gauge.html");
-				?>
-
-				<script>
-					// var myArr = ["Audi", "BMW", "Ford", "Honda", "Jaguar", "Nissan"];
-
-					function showContent() {
-						var template = document.getElementById("radial-gauge-template");
-						var second_col = document.getElementById("second-column");
-						var template_inst = template.content.cloneNode(true);
-
-						second_col.append(template_inst);
-						// second_col.parentNode.insertBefore(template_inst, second_col.nextSibling);
-
-
-						// var temp, item, a, i;
-						// // Get the DIV element from the template:
-						// item = template_inst.querySelector("div");
-						// // For each item in the array:
-						// for (i = 0; i < myArr.length; i++) {
-						// 	// Create a new node, based on the template:
-						// 	a = document.importNode(item, true);
-						// 	// Add data from the array:
-						// 	// a.textContent += myArr[i];
-						// 	// Append the new node wherever you like:
-						// 	second_col.parentNode.insertBefore(a, second_col.nextSibling);
-
-						// }
-					}
-				</script>
-
-
-
 
 			</div>
 
@@ -125,7 +98,6 @@
 
 				<form name="vote_form" method="post">
 					<input id="voting_input" type="text" name="voting_number" value="123" />
-					<!-- <input type="button" name="vote_button" onclick="showContent()" value="Vote" /> -->
 					<input type="button" name="vote_button" onclick="buttonfire(voting_input.value)" value="Vote" />
 				</form>
 			</div>
@@ -162,7 +134,6 @@
 	window.addEventListener("load", pageFullyLoaded, false);
 
 	function theDomHasLoaded(e) {
-		alert("domloaded");
 		// do something
 	}
 

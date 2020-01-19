@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The default template for displaying content
  *
@@ -17,142 +18,131 @@
 <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 
 <style>
-/* * {
+	/* * {
   box-sizing: border-box;
 } */
 
-/* Create two equal columns that floats next to each other */
-.column-voting {
-  float: left;
-  width: 33%;
-  padding: 10px;
-  /* border: 1px solid black; */
-}
+	/* Create two equal columns that floats next to each other */
+	.column-voting {
+		float: left;
+		width: 33%;
+		padding: 10px;
+		/* border: 1px solid black; */
+	}
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-} 
+	/* Clear floats after the columns */
+	.row:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
 </style>
 
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 	<?php
 
-	get_template_part( 'template-parts/entry-header' );
+	get_template_part('template-parts/entry-header');
 
-	if ( ! is_search() ) {
-		get_template_part( 'template-parts/featured-image' );
+	if (!is_search()) {
+		get_template_part('template-parts/featured-image');
 	}
 
 	?>
 
-	<div class="post-inner <?php echo is_page_template( 'templates/template-full-width.php' ) ? '' : 'thin'; ?> ">
+
+	<div class="post-inner <?php echo is_page_template('templates/template-full-width.php') ? '' : 'thin'; ?> ">
 
 		<div class="entry-content">
 
 			<?php
-			if ( is_search() || ! is_singular() && 'summary' === get_theme_mod( 'blog_content', 'full' ) ) {
+			if (is_search() || !is_singular() && 'summary' === get_theme_mod('blog_content', 'full')) {
 				the_excerpt();
 			} else {
-				the_content( __( 'Continue reading', 'twentytwenty' ) );
+				the_content(__('Continue reading', 'twentytwenty'));
 			}
 			?>
 
 		</div><!-- .entry-content -->
 
 	</div><!-- .post-inner -->
-			
+
 	<div class="section-inner">
-		
+		<div class="row">
+			<a href="https://stockvoting.net/tag/tesla/">
+				<h1>Tesla</h1>
+			</a>
+			<div class="column-voting">
+				<!-- First column=Overview -->
+				Overview
+				Total prognosis
+
+			</div>
+
+
+			<div class="column-voting" id="second-column">
+				<?php
+				include("gauge.html");
+				?>
+
+				<script>
+					// var myArr = ["Audi", "BMW", "Ford", "Honda", "Jaguar", "Nissan"];
+
+					function showContent() {
+						var template = document.getElementById("radial-gauge-template");
+						var second_col = document.getElementById("second-column");
+						var template_inst = template.content.cloneNode(true);
+
+						second_col.append(template_inst);
+						// second_col.parentNode.insertBefore(template_inst, second_col.nextSibling);
+
+
+						// var temp, item, a, i;
+						// // Get the DIV element from the template:
+						// item = template_inst.querySelector("div");
+						// // For each item in the array:
+						// for (i = 0; i < myArr.length; i++) {
+						// 	// Create a new node, based on the template:
+						// 	a = document.importNode(item, true);
+						// 	// Add data from the array:
+						// 	// a.textContent += myArr[i];
+						// 	// Append the new node wherever you like:
+						// 	second_col.parentNode.insertBefore(a, second_col.nextSibling);
+
+						// }
+					}
+				</script>
 
 
 
-	<button onclick="foo()">Click me</button>
 
+			</div>
 
-<div class="row">
-<a href="https://stockvoting.net/tag/tesla/"><h1>Tesla</h1></a>
-	<div class="column-voting">
-	  <!-- First column=Overview -->
-	  Overview
-	  Total prognosis
+			<div class="column-voting">
+				<!-- Third column = Your vote -->
+				<!-- todo: Change to int type and value to default value -->
+				<h2>Your vote</h2>
 
-  </div>
-  <div class="column-voting">
-	  <!-- Second column=Radial gauge -->
-	  <canvas data-type="radial-gauge"
-	  		data-width="250"
-        	data-height="250"
-			data-title="false"
-			data-value="0"
-			data-min-value="0"
-			data-max-value="220"
-			data-major-ticks="0,20,40,60,80,100,120,140,160,180,200,220"
-			data-minor-ticks="2"
-			data-stroke-ticks="false"
-			data-highlights='[
-				{ "from": 0, "to": 50, "color": "rgba(0,255,0,.15)" },
-				{ "from": 50, "to": 100, "color": "rgba(255,255,0,.15)" },
-				{ "from": 100, "to": 150, "color": "rgba(255,30,0,.25)" },
-				{ "from": 150, "to": 200, "color": "rgba(255,0,225,.25)" },
-				{ "from": 200, "to": 220, "color": "rgba(0,0,255,.25)" }
-			]'
-			data-color-plate="#222"
-			data-color-major-ticks="#f5f5f5"
-			data-color-minor-ticks="#ddd"
-			data-color-title="#fff"
-			data-color-units="#ccc"
-			data-color-numbers="#eee"
-			data-color-needle-start="rgba(240, 128, 128, 1)"
-			data-color-needle-end="rgba(255, 160, 122, .9)"
-			data-value-box="true"
-			data-animation-rule="bounce"
-			data-animation-duration="500"
-			data-font-value="Led"
-			data-animated-value="true"
-			data-animation-rule="elastic"
-			data-animation-duration="500"
-			animateOnInit="false"
-			animatedValue="150"
-	></canvas>
-  </div>
-	<div class="column-voting">
-	
-	<p id="demo"></p>
-		<!-- Third column = Your vote -->
-		<!-- todo: Change to int type and value to default value -->
-		<h3>Your vote</h3>
-	<form name="vote_form" method="post" >
-		<input id="voting_input" type="text" name="voting_number" value="123"/>
-        <input type="submit" name="vote_button" onclick="buttonfire(voting_input.value)" value="Vote"/> 
-    </form> 
-	
-
-	
-
-	</div>
-	</div>
+				<form name="vote_form" method="post">
+					<input id="voting_input" type="text" name="voting_number" value="123" />
+					<!-- <input type="button" name="vote_button" onclick="showContent()" value="Vote" /> -->
+					<input type="button" name="vote_button" onclick="buttonfire(voting_input.value)" value="Vote" />
+				</form>
+			</div>
+		</div>
 	</div><!-- .section-inner -->
 
 	<?php
-
-	// vote();
-
-	if ( is_single() ) {
-
-		get_template_part( 'template-parts/navigation' );
-
+	if (is_single()) {
+		get_template_part('template-parts/navigation');
 	}
 
 	/**
 	 *  Output comments wrapper if it's a post, or if comments are open,
 	 * or if there's a comment number – and check for password.
 	 * */
-	if ( ( is_single() || is_page() ) && ( comments_open() || get_comments_number() ) && ! post_password_required() ) {
-		?>
+	if ((is_single() || is_page()) && (comments_open() || get_comments_number()) && !post_password_required()) {
+	?>
 
 		<div class="comments-wrapper section-inner">
 
@@ -160,7 +150,7 @@
 
 		</div><!-- .comments-wrapper -->
 
-		<?php
+	<?php
 	}
 	?>
 
@@ -168,40 +158,57 @@
 
 
 <script>
-if (!Array.prototype.forEach) {
-    Array.prototype.forEach = function(cb) {
-        var i = 0, s = this.length;
-        for (; i < s; i++) {
-            cb && cb(this[i], i, this);
-        }
-    }
-}
+	document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
+	window.addEventListener("load", pageFullyLoaded, false);
 
-document.fonts && document.fonts.forEach(function(font) {
-    font.loaded.then(function() {
-        if (font.family.match(/Led/)) {
-            document.gauges.forEach(function(gauge) {
-                gauge.update();
-            });
-        }
-    });
-});
+	function theDomHasLoaded(e) {
+		alert("domloaded");
+		// do something
+	}
 
-var timers = [];
+	function pageFullyLoaded(e) {
+		buildtemplates();
 
-function animateGauges() {
-    document.gauges.forEach(function(gauge) {
-        timers.push(setInterval(function() {
-            gauge.value = Math.random() *
-                (gauge.options.maxValue - gauge.options.minValue) / 4 +
-                gauge.options.minValue / 4;
-        }, gauge.animation.duration + 50));
-    });
-}
+		// do something again
+	}
 
-function stopGaugesAnimation() {
-    timers.forEach(function(timer) {
-        clearInterval(timer);
-    });
-}
+
+
+	if (!Array.prototype.forEach) {
+		Array.prototype.forEach = function(cb) {
+			var i = 0,
+				s = this.length;
+			for (; i < s; i++) {
+				cb && cb(this[i], i, this);
+			}
+		}
+	}
+
+	document.fonts && document.fonts.forEach(function(font) {
+		font.loaded.then(function() {
+			if (font.family.match(/Led/)) {
+				document.gauges.forEach(function(gauge) {
+					gauge.update();
+				});
+			}
+		});
+	});
+
+	var timers = [];
+
+	function animateGauges() {
+		document.gauges.forEach(function(gauge) {
+			timers.push(setInterval(function() {
+				gauge.value = Math.random() *
+					(gauge.options.maxValue - gauge.options.minValue) / 4 +
+					gauge.options.minValue / 4;
+			}, gauge.animation.duration + 50));
+		});
+	}
+
+	function stopGaugesAnimation() {
+		timers.forEach(function(timer) {
+			clearInterval(timer);
+		});
+	}
 </script>

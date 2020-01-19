@@ -12,12 +12,23 @@ function pageFullyLoaded(e) {
 
 function buildtemplates() {
   // instantiate template
-  inst_template();
+  inst_template("tesla");
+  inst_template("pfizer");
 }
 
-function inst_template() {
-  var template = document.getElementById("voting_template");
-  var second_col = document.getElementById("section-inner");
-  var template_inst = template.content.cloneNode(true);
-  second_col.append(template_inst);
+function inst_template($stockName) {
+  // Get the elements to modify/load the template
+  var section_inner_element = document.getElementById("section-inner");
+  var template_element = document.getElementById("voting_template");
+
+  // Instantiate the template
+  section_inner_element.append(template_element.content);
+
+  // Replace all occurences of company with the given name
+  var template_content = document.querySelector(".voting-table").innerHTML;
+  var newInnerHTML = template_content.replace(
+    new RegExp("template_company", "g"),
+    $stockName
+  );
+  document.querySelector(".voting-table").innerHTML = newInnerHTML;
 }

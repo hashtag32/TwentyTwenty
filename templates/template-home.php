@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: Home Template
  * Template Post Type: post, page
@@ -14,17 +15,13 @@ get_header();
 <main id="site-content" role="main">
 
 	<?php
-	if(class_exists('NextendSocialLogin', false)){
-		NextendSocialLogin::renderButtonsWithContainer();
-	}
-	
 
-	if ( have_posts() ) {
+	if (have_posts()) {
 
-		while ( have_posts() ) {
+		while (have_posts()) {
 			the_post();
 
-			get_template_part( 'template-parts/content-cover' );
+			get_template_part('template-parts/content-cover');
 		}
 	}
 
@@ -32,6 +29,6 @@ get_header();
 
 </main><!-- #site-content -->
 
-<?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
+<?php get_template_part('template-parts/footer-menus-widgets'); ?>
 
 <?php get_footer(); ?>

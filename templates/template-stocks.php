@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: Stocks Template
  * Template Post Type: post, page
@@ -18,12 +19,12 @@ get_header();
 
 	<?php
 
-	if ( have_posts() ) {
+	if (have_posts()) {
 
-		while ( have_posts() ) {
+		while (have_posts()) {
 			the_post();
 
-			get_template_part( 'own-template-parts/content-analysis', get_post_type() );
+			get_template_part('own-template-parts/content-stocks', get_post_type());
 		}
 	}
 
@@ -31,6 +32,6 @@ get_header();
 
 </main><!-- #site-content -->
 
-<?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
+<?php get_template_part('template-parts/footer-menus-widgets'); ?>
 
 <?php get_footer(); ?>

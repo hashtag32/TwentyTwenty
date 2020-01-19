@@ -1,18 +1,59 @@
+<style>
+  /* * {
+    box-sizing: border-box;
+  } */
+
+  .column-overview {
+    float: left;
+    width: 33%;
+    padding: 10px;
+    /* border: 1px solid black; */
+  }
+
+  .column-gauge {
+    float: left;
+    width: 33%;
+    padding: 10px;
+    /* border: 1px solid black; */
+  }
+
+  /* Create two equal columns that floats next to each other */
+  .column-voting {
+    text-align: center;
+    float: left;
+    width: 33%;
+    padding: 10px;
+    /* border: 1px solid black; */
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .vote-span{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20pt;
+  }
+</style>
+
 <template id="voting_template">
   <script
     type="text/javascript"
     src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"
   ></script>
   <!-- Table -->
-  <div class="row">
-    <a href="https://stockvoting.net/tag/tesla/">
-      <h1>Tesla</h1>
+  <div class="voting-table">
+    <a href="https://stockvoting.net/tag/template_company/">
+      <h1>template_company</h1>
     </a>
-    <div class="column-voting">
+    <div class="column-overview">
       <!-- First column=Overview -->
-      Overview Total prognosis
+      <b>Overview Total prognosis</b>
     </div>
-    <div class="column-voting" id="second-column">
+    <div class="column-gauge">
       <div class="radial-gauge-class">
         <canvas
           id="radial-gauge-canvas"
@@ -57,17 +98,20 @@
     <div class="column-voting">
       <!-- Third column = Your vote -->
       <!-- todo: Change to int type and value to default value -->
-      <h2>Your vote</h2>
-
+      <span class="vote-span" >Your vote</span>
+      <br/></br>
       <form name="vote_form" method="post">
         <input id="voting_input" type="text" name="voting_number" value="123" />
-        <input
+        <br/></br>
+
+        <input 
           type="button"
           name="vote_button"
-          onclick="send_vote(voting_input.value)"
+          onclick="send_vote('template_company',voting_input.value)"
           value="Vote"
         />
       </form>
+    
     </div>
   </div>
 </template>

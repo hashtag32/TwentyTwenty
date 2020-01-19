@@ -1,10 +1,11 @@
-function send_vote(voting_number) {
+function send_vote(stockName, voting_number) {
   jQuery.ajax({
     type: "POST",
     url: ajax_unique.ajaxurl,
     data: {
       action: "serversidefunction",
       title: ajax_unique.title,
+      stockName: stockName,
       voting_number: voting_number
     },
     success: function(data, textStatus, XMLHttpRequest) {

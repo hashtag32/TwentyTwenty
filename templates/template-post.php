@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Cover Template
+ * Template Name: Post Template
  * Template Post Type: post, page
  *
  * @package WordPress

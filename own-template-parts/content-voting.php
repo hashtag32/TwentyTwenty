@@ -17,6 +17,7 @@ include("voting_template.html");
 
 ?>
 <script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
 
@@ -50,6 +51,7 @@ include("voting_template.html");
 
 	<div class="section-inner" id="section-inner">
 		<!-- Main part, is modified in buildtemplates// -->
+
 
 	</div><!-- .section-inner -->
 

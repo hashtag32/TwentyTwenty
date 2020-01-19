@@ -13,7 +13,7 @@
  */
 
 //  Templates
-include("gauge.html");
+include("voting_template.html");
 
 ?>
 <!-- <script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/js/charts.js"> </script> -->
@@ -74,34 +74,13 @@ include("gauge.html");
 
 	</div><!-- .post-inner -->
 
-	<div class="section-inner">
-		<div class="row">
-			<a href="https://stockvoting.net/tag/tesla/">
-				<h1>Tesla</h1>
-			</a>
-			<div class="column-voting">
-				<!-- First column=Overview -->
-				Overview
-				Total prognosis
+	<div class="section-inner" id="section-inner">
+		<!-- Main part, is modified in buildtemplates// -->
+		<form name="vote_form" method="post">
+			<input id="voting_input" type="text" name="voting_number" value="123" />
+			<input type="button" name="vote_button" onclick="send_vote(voting_input.value)" value="Vote" />
+		</form>
 
-			</div>
-
-
-			<div class="column-voting" id="second-column">
-
-			</div>
-
-			<div class="column-voting">
-				<!-- Third column = Your vote -->
-				<!-- todo: Change to int type and value to default value -->
-				<h2>Your vote</h2>
-
-				<form name="vote_form" method="post">
-					<input id="voting_input" type="text" name="voting_number" value="123" />
-					<input type="button" name="vote_button" onclick="buttonfire(voting_input.value)" value="Vote" />
-				</form>
-			</div>
-		</div>
 	</div><!-- .section-inner -->
 
 	<?php
@@ -130,21 +109,6 @@ include("gauge.html");
 
 
 <script>
-	document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
-	window.addEventListener("load", pageFullyLoaded, false);
-
-	function theDomHasLoaded(e) {
-		// do something
-	}
-
-	function pageFullyLoaded(e) {
-		buildtemplates();
-
-		// do something again
-	}
-
-
-
 	if (!Array.prototype.forEach) {
 		Array.prototype.forEach = function(cb) {
 			var i = 0,

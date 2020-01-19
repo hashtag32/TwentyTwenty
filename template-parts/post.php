@@ -62,6 +62,9 @@
 
 			get_template_part('template-parts/entry-author-bio');
 		}
+		if (function_exists('wp_applaud')) {
+			wp_applaud();
+		}
 		?>
 
 	</div><!-- .section-inner -->

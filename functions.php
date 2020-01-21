@@ -387,6 +387,18 @@ function twentytwenty_sidebar_registration()
 			)
 		)
 	);
+
+	// Siebar
+	register_sidebar(
+		array_merge(
+			$shared_args,
+			array(
+				'name'        => __('Dynamic Sidebar', 'twentytwenty'),
+				'id'          => 'sidebar-3',
+				'description' => __('Widgets in this area will be displayed in the dynamically on the site.', 'twentytwenty'),
+			)
+		)
+	);
 }
 
 add_action('widgets_init', 'twentytwenty_sidebar_registration');

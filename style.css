@@ -3554,7 +3554,6 @@ figure.wp-block-table.is-style-stripes {
 .entry-content
   > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
   max-width: 200rem;
-  text-align: center;
   width: calc(100% - 50rem);
 }
 

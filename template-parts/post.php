@@ -27,9 +27,7 @@
 	?>
 
 	<div class="post-inner <?php echo is_page_template('templates/template-full-width.php') ? '' : 'thin'; ?> ">
-
 		<div class="entry-content">
-
 			<?php
 			if (is_search() || !is_singular() && 'summary' === get_theme_mod('blog_content', 'full')) {
 				the_excerpt();
@@ -58,12 +56,16 @@
 		// Single bottom post meta.
 		twentytwenty_the_post_meta(get_the_ID(), 'single-bottom');
 
-		if (is_single()) {
-			get_template_part('template-parts/entry-author-bio');
-		}
+		// Clap button
 		if (function_exists('wp_applaud')) {
 			wp_applaud();
 		}
+
+		// Author biographie
+		if (is_single()) {
+			get_template_part('template-parts/entry-author-bio');
+		}
+
 		?>
 
 	</div><!-- .section-inner -->

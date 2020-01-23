@@ -48,27 +48,34 @@ function create_inst_of_template(stockName) {
   );
 }
 
+function updateVotingValues(stockName, voting_number) {
+  changeVotingValues(stockName, voting_number);
+}
+
 // is callback, triggered from the request_voting
 // request_voting(js) => request_votingfromServer (php) => MySQL
 // MySQL => (return) request_votingfromServer(php) => (echo) request_voting(js)
 // request_voting => changeVotingValues()
 function changeVotingValues(stockName, voting_number) {
+  if (voting_number == "") {
+    voting_number = 0;
+  }
   var votingInputIDStr = "voting_input_" + stockName;
   var votingInputElement = document.getElementById(votingInputIDStr);
 
   // Set the voting number, received from the server
+
   votingInputElement.value = voting_number;
   changeGauge(stockName, voting_number);
 }
 
 function changeGauge(stockName, voting_number) {
   var gauge_id = "gaugeID_" + stockName;
+  var gaugeElement = document.getElementById(gauge_id);
 
-  var votingInputElement = document.getElementById(gauge_id);
-  // console.log(voting_number);
-
-  votingInputElement.children[0].dataset.value = voting_number;
+  // Setting the voting_number
+  gaugeElement.children[0].dataset.value = voting_number;
 
   // Set the voting number, received from the server
-  votingInputElement.value = voting_number;
+  gaugeElement.value = voting_number;
 }

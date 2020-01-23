@@ -1,11 +1,10 @@
 <?php
 
-
 /*******Server API functions****/
 function vote($symbol, $voting_number)
 {
 	$conn = connectDB();
-	$result = insertEntry($conn, $symbol, date("d-m-Y H:i:s"), $voting_number);
+	$result = insertEntryvotingTable($conn, $symbol, date("d-m-Y H:i:s"), $voting_number);
 	// $forecast = readForecast($conn, $symbol);
 }
 
@@ -27,7 +26,14 @@ function connectDB()
 	return $conn;
 }
 
-function insertEntry($conn, $symbol, $date, $voting_number)
+function insertEntrystockValuation($conn, $symbol, $currentValue)
+{
+	$sql = "INSERT INTO stockValuation (symbol, currentValue) VALUES ('{$symbol}', '{$currentValue}')";
+	$result = $conn->query($sql);
+	return $result;
+}
+
+function insertEntryvotingTable($conn, $symbol, $date, $voting_number)
 {
 	$sql = "INSERT INTO votingTable (symbol, date, voting) VALUES ('{$symbol}', '{$date}', '{$voting_number}')";
 	$result = $conn->query($sql);

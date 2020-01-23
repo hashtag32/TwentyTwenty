@@ -10,7 +10,9 @@ function send_vote(stockName, voting_number) {
       voting_number: voting_number
     },
     success: function(data, textStatus, XMLHttpRequest) {
-      alert(data);
+      alert("Your vote was successful send!");
+      // update the values
+      request_voting(stockName);
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
       alert(errorThrown);
@@ -28,7 +30,7 @@ function request_voting(stockName) {
       stockName: stockName
     },
     success: function(data, textStatus, XMLHttpRequest) {
-      changeVotingValues(stockName, data);
+      updateVotingValues(stockName, data);
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
       alert(errorThrown);

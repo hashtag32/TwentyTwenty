@@ -1,59 +1,4 @@
-<style>
-  /* * {
-    box-sizing: border-box;
-  } */
-
-  .voting-table{
-    text-align: center;
-    float: left;
-    padding: 10px;
-    width: 100%;
-    border-style: solid;
-    border-width: 1px;
-    border-color:#6d6d6d;
-  }
-
-  .column-overview {
-    float: left;
-    width: 33%;
-    padding: 10px;
-    /* border: 1px solid black; */
-  }
-
-  .column-gauge {
-    float: left;
-    width: 33%;
-    padding: 10px;
-    /* border: 1px solid black; */
-  }
-
-  /* Create two equal columns that floats next to each other */
-  .column-voting {
-    text-align: center;
-    float: left;
-    width: 33%;
-    padding: 10px;
-    /* border: 1px solid black; */
-  }
-
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  .vote-span{
-    text-align: center;
-    font-weight: bold;
-    font-size: 20pt;
-  }
-</style>
-
 <template id="voting-template">
-  <script
-    type="text/javascript"
-    src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"
-  ></script>
   <!-- Table -->
   <div class="voting-table" >
     <a href="https://stockvoting.net/tag/template_company/">
@@ -65,7 +10,6 @@
     </div>
     <div class="column-gauge">
       <div class="radial-gauge-class" id="gaugeID_template_company">
-       
       </div>
     </div>
 

@@ -51,7 +51,7 @@ function readForecast($conn, $symbol)
 			}
 		}
 	} else {
-		echo "0 results";
+		// echo "0 results";
 	}
 	$a = array_filter($a);
 	$average = array_sum($a) / count($a);

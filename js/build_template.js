@@ -58,4 +58,17 @@ function changeVotingValues(stockName, voting_number) {
 
   // Set the voting number, received from the server
   votingInputElement.value = voting_number;
+  changeGauge(stockName, voting_number);
+}
+
+function changeGauge(stockName, voting_number) {
+  var gauge_id = "gaugeID_" + stockName;
+
+  var votingInputElement = document.getElementById(gauge_id);
+  // console.log(voting_number);
+
+  votingInputElement.children[0].dataset.value = voting_number;
+
+  // Set the voting number, received from the server
+  votingInputElement.value = voting_number;
 }

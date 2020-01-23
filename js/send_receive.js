@@ -2,6 +2,7 @@ function send_vote(stockName, voting_number) {
   jQuery.ajax({
     type: "POST",
     url: ajax_unique.ajaxurl,
+    dataType: "json",
     data: {
       action: "send_votingToServer",
       title: ajax_unique.title,

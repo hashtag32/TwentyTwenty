@@ -13,7 +13,7 @@ function getVoting($symbol)
 {
 	$conn = connectDB();
 	$forecast = readForecast($conn, $symbol);
-	return 1239;
+	return $forecast;
 }
 
 /*******Database related functions****/
@@ -46,11 +46,15 @@ function readForecast($conn, $symbol)
 		// output data of each row
 		while ($row = mysqli_fetch_assoc($result)) {
 			// echo "id: " . $row["symbol"]. " - Name: " . $row["current_price"]. " " . $row["lastname"]. "<br>";
-			if ($row["symbol"] == "Test2") {
-				return $row["voting"];
+			if ($row["symbol"] == $symbol) {
+				$a[] = $row["voting"];
 			}
 		}
 	} else {
 		echo "0 results";
 	}
+	$a = array_filter($a);
+	$average = array_sum($a) / count($a);
+	$average = round($average);
+	return $average;
 }

@@ -13,12 +13,12 @@ function pageFullyLoaded(e) {
 }
 
 function buildtemplates() {
-  // Get the elements to modify/load the template
-
-  var fruits = ["Apple", "Pfizer", "SAP", "Tesla"];
-  fruits.forEach(function(item, index, array) {
+  // todo: Get the list of stocks from the server
+  var listofStocks = ["Apple", "Pfizer", "SAP", "Tesla"];
+  listofStocks.forEach(function(item, index, array) {
     // Create the div section (see voting_template.html) for each stock
     create_inst_of_template(item);
+    request_voting(item); // will trigger a request to update the value of the voting_input boxes
   });
 }
 
@@ -42,9 +42,20 @@ function create_inst_of_template(stockName) {
 
   var gauge_id = "#gaugeID_" + stockName;
   //todo: optimize path
+  // https://api.jquery.com/load/
   $(gauge_id).load(
     "https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/gauge.html"
   );
+}
 
-  return;
+// is callback, triggered from the request_voting
+// request_voting(js) => request_votingfromServer (php) => MySQL
+// MySQL => (return) request_votingfromServer(php) => (echo) request_voting(js)
+// request_voting => changeVotingValues()
+function changeVotingValues(stockName, voting_number) {
+  var votingInputIDStr = "voting_input_" + stockName;
+  var votingInputElement = document.getElementById(votingInputIDStr);
+
+  // Set the voting number, received from the server
+  votingInputElement.value = voting_number;
 }

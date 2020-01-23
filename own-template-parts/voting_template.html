@@ -19,17 +19,14 @@
       <span class="vote-span" >Your vote</span>
       <br/></br>
       <form name="vote_form" method="post">
-        <input id="voting_input" type="text" name="voting_number" value="123" />
+        <input type="text" id="voting_input_template_company" />
         <br/></br>
-
         <input 
           type="button"
-          name="vote_button"
-          onclick="send_vote('template_company',voting_input.value)"
+          onclick="send_vote('template_company',voting_input_template_company.value)"
           value="Vote"
         />
       </form>
-    
     </div>
     <br>
   </div>

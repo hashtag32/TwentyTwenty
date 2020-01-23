@@ -51,8 +51,7 @@ include("voting_template.html");
 
 	<div class="section-inner" id="section-inner">
 		<!-- Main part, is modified in buildtemplates// -->
-
-
+		<!-- Will be automatically loaded in build_template.js -->
 	</div><!-- .section-inner -->
 
 	<?php

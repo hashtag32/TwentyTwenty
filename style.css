@@ -3498,7 +3498,7 @@ figure.wp-block-table.is-style-stripes {
 
 .entry-content p,
 .entry-content li {
-  line-height: 1.4;
+  line-height: 1.7;
 }
 
 .entry-content h1,
@@ -3553,8 +3553,8 @@ figure.wp-block-table.is-style-stripes {
 
 .entry-content
   > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
-  max-width: 200rem;
-  width: calc(100% - 50rem);
+  max-width: 85rem;
+  width: calc(80%);
 }
 
 [class*="__inner-container"]

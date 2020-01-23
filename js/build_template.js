@@ -7,6 +7,7 @@ function theDomHasLoaded(e) {
   // do something
 }
 
+// Will fire after theDomHasLoaded
 function pageFullyLoaded(e) {
   buildtemplates();
 }
@@ -14,17 +15,18 @@ function pageFullyLoaded(e) {
 function buildtemplates() {
   // Get the elements to modify/load the template
 
-  var fruits = ["Apple", "Tesla", "Pfizer"];
+  var fruits = ["Apple", "Pfizer", "SAP", "Tesla"];
   fruits.forEach(function(item, index, array) {
+    // Create the div section (see voting_template.html) for each stock
     create_inst_of_template(item);
   });
 }
 
 function create_inst_of_template(stockName) {
-  // Get headElement
-  var headElement = document.getElementById("section-inner");
+  // Get parentElement
+  var parentElement = document.getElementById("section-inner");
 
-  // Create a copy of the template
+  // Create a copy of the template for creating an instance
   var template_clone = document
     .getElementById("voting-template")
     .cloneNode(true);
@@ -36,12 +38,11 @@ function create_inst_of_template(stockName) {
   );
 
   // Append the new template inst in DOM
-  headElement.appendChild(template_clone.content);
+  parentElement.appendChild(template_clone.content);
 
-  // test
-  var id_str = "#gaugeID_" + stockName;
+  var gauge_id = "#gaugeID_" + stockName;
   //todo: optimize path
-  $(id_str).load(
+  $(gauge_id).load(
     "https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/gauge.html"
   );
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the footer
  *
@@ -12,50 +13,54 @@
  */
 
 ?>
-			<footer id="site-footer" role="contentinfo" class="header-footer-group">
+<footer id="site-footer" role="contentinfo" class="header-footer-group">
 
-				<div class="section-inner">
+	<div class="section-inner">
 
-					<div class="footer-credits">
+		<div class="footer-logo">
+			<img src="https://stockvoting.net/wp-content/uploads/2020/02/StockVoting_Logo.png" alt="StockVoting Logo" width="35" height="35">
+		</div>
+		<div class="footer-credits">
 
-						<p class="footer-copyright">&copy;
-							<?php
-							echo date_i18n(
-								/* translators: Copyright date format, see https://secure.php.net/date */
-								_x( 'Y', 'copyright date format', 'twentytwenty' )
-							);
-							?>
-							<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
-						</p><!-- .footer-copyright -->
+			<p class="footer-copyright">&copy;
+				<?php
+				echo date_i18n(
+					/* translators: Copyright date format, see https://secure.php.net/date */
+					_x('Y', 'copyright date format', 'twentytwenty')
+				);
+				?>
+				<a href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
+			</p><!-- .footer-copyright -->
 
-						<p class="powered-by-wordpress">
-							<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'twentytwenty' ) ); ?>">
-								<?php _e( 'Powered by WordPress', 'twentytwenty' ); ?>
-							</a>
-						</p><!-- .powered-by-wordpress -->
+			<p class="powered-by-wordpress">
+				<a href="<?php echo esc_url(__('https://wordpress.org/', 'twentytwenty')); ?>">
+					<?php _e('Powered by WordPress', 'twentytwenty'); ?>
+				</a>
+			</p><!-- .powered-by-wordpress -->
 
-					</div><!-- .footer-credits -->
+		</div><!-- .footer-credits -->
 
-					<a class="to-the-top" href="#site-header">
-						<span class="to-the-top-long">
-							<?php
-							/* translators: %s: HTML character for up arrow */
-							printf( __( 'To the top %s', 'twentytwenty' ), '<span class="arrow" aria-hidden="true">&uarr;</span>' );
-							?>
-						</span><!-- .to-the-top-long -->
-						<span class="to-the-top-short">
-							<?php
-							/* translators: %s: HTML character for up arrow */
-							printf( __( 'Up %s', 'twentytwenty' ), '<span class="arrow" aria-hidden="true">&uarr;</span>' );
-							?>
-						</span><!-- .to-the-top-short -->
-					</a><!-- .to-the-top -->
+		<a class="to-the-top" href="#site-header">
+			<span class="to-the-top-long">
+				<?php
+				/* translators: %s: HTML character for up arrow */
+				printf(__('To the top %s', 'twentytwenty'), '<span class="arrow" aria-hidden="true">&uarr;</span>');
+				?>
+			</span><!-- .to-the-top-long -->
+			<span class="to-the-top-short">
+				<?php
+				/* translators: %s: HTML character for up arrow */
+				printf(__('Up %s', 'twentytwenty'), '<span class="arrow" aria-hidden="true">&uarr;</span>');
+				?>
+			</span><!-- .to-the-top-short -->
+		</a><!-- .to-the-top -->
 
-				</div><!-- .section-inner -->
+	</div><!-- .section-inner -->
 
-			</footer><!-- #site-footer -->
+</footer><!-- #site-footer -->
 
-		<?php wp_footer(); ?>
+<?php wp_footer(); ?>
 
-	</body>
+</body>
+
 </html>

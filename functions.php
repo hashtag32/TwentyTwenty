@@ -667,13 +667,13 @@ function twentytwenty_get_color_for_area($area = 'content', $context = 'text')
 		array(
 			'content'       => array(
 				'text'      => '#000000',
-				'accent'    => '#cd2653',
+				'accent'    => '#1d4e9e',
 				'secondary' => '#6d6d6d',
 				'borders'   => '#dcd7ca',
 			),
 			'header-footer' => array(
 				'text'      => '#000000',
-				'accent'    => '#cd2653',
+				'accent'    => '#1d4e9e',
 				'secondary' => '#6d6d6d',
 				'borders'   => '#dcd7ca',
 			),

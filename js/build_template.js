@@ -14,11 +14,12 @@ function pageFullyLoaded(e) {
 
 function buildtemplates() {
   // todo: Get the list of stocks from the server
-  var listofStocks = ["Apple", "Pfizer", "SAP", "Tesla"];
+  var listofStocks = ["AAPL", "Pfizer", "SAP", "Tesla", "Chen"];
   listofStocks.forEach(function(item, index, array) {
     // Create the div section (see voting_template.html) for each stock
     create_inst_of_template(item);
     request_voting(item); // will trigger a request to update the value of the voting_input boxes
+    request_actual_value(item);
   });
 }
 
@@ -66,7 +67,7 @@ function changeVotingValues(stockName, voting_number) {
   // Set the voting number, received from the server
 
   votingInputElement.value = voting_number;
-  changeGauge(stockName, voting_number);
+  // changeGauge(stockName, voting_number);
 }
 
 function changeGauge(stockName, voting_number) {

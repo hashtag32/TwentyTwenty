@@ -37,3 +37,22 @@ function request_voting(stockName) {
     }
   });
 }
+
+function request_actual_value(stockName) {
+  jQuery.ajax({
+    type: "POST",
+    url: ajax_unique.ajaxurl,
+    data: {
+      action: "request_actual_valuefromServer",
+      title: ajax_unique.title,
+      stockName: stockName
+    },
+    success: function(data, textStatus, XMLHttpRequest) {
+      // alert(data);
+      changeGauge(stockName, data);
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      alert(errorThrown);
+    }
+  });
+}

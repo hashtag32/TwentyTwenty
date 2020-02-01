@@ -15,6 +15,23 @@ function getVoting($symbol)
 	return $forecast;
 }
 
+function getStockData($symbol)
+{
+	$conn = connectDB();
+	$actual_value =	readStockValue($conn, $symbol);
+	return $actual_value;
+}
+
+function getActualValues($symbol)
+{
+	$stock_data = Wpau_Stock_Ticker::get_stock_from_db($symbol);
+	// var_dump($stock_data);
+	return $stock_data[$symbol]["last_close"];
+}
+
+
+
+
 /*******Database related functions****/
 function connectDB()
 {
@@ -63,4 +80,27 @@ function readForecast($conn, $symbol)
 	$average = array_sum($a) / count($a);
 	$average = round($average);
 	return $average;
+}
+
+function readStockValue($conn, $symbol)
+{
+	//3 columns in MySQL: symbol, data, voting
+	$sql = "SELECT * FROM wp_stock_ticker_data";
+	$result = mysqli_query($conn, $sql);
+
+	// Build array with votings of forecasts 
+	// -> calculate average and return it 
+	if (mysqli_num_rows($result) > 0) {
+		// output data of each row
+		while ($row = mysqli_fetch_assoc($result)) {
+			if ($row["symbol"] == $symbol) {
+				$last_close_value[] = $row["last_close"];
+				$last_refreshed = $row["last_refreshed"];
+			}
+		}
+	} else {
+		// echo "0 results";
+	}
+	$last_close_value = array_filter($last_close_value);
+	return $last_close_value;
 }

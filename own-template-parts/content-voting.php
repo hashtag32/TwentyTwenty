@@ -50,6 +50,12 @@ include("voting_template.html");
 	</div><!-- .section-inner -->
 
 	<?php
+	// if (class_exists('Wpau_Stock_Ticker')) {
+	// 	$stock_data = Wpau_Stock_Ticker::get_stock_from_db('AAPL');
+	// 	var_dump($stock_data);
+	// 	echo $stock_data["AAPL"]["last_open"];
+	// }
+
 	if (is_single()) {
 		get_template_part('template-parts/navigation');
 	}

@@ -22,7 +22,7 @@ function request_votingfromServer()
 {
     $stockName = $_POST['stockName'];
 
-    $actual_value = getStockData($stockName);
+    $actual_value = getStockValue($stockName);
     $voting_number = getVoting($stockName);
     $request_votingArray = array(
         "actual_value" => $actual_value,

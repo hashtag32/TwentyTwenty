@@ -1,5 +1,6 @@
 <?php
 
+
 /*******Server API functions****/
 function vote($symbol, $voting_number)
 {
@@ -15,20 +16,21 @@ function getVoting($symbol)
 	return $forecast;
 }
 
-function getStockData($symbol)
+function getStockValue($stockName)
 {
+	// Todo: move outside
+	$StockNameToSymbol = [
+		"Apple" => "AAPL",
+		"SAP" => "SAP",
+		"Tesla" => "TSLA",
+		"Pfizer" => "PFE"
+	];
+
+	$symbol = $StockNameToSymbol[$stockName];
 	$conn = connectDB();
 	$actual_value =	readStockValue($conn, $symbol);
 	return $actual_value;
 }
-
-function getActualValues($symbol)
-{
-	$stock_data = Wpau_Stock_Ticker::get_stock_from_db($symbol);
-	// var_dump($stock_data);
-	return $stock_data[$symbol]["last_close"];
-}
-
 
 
 
@@ -70,16 +72,23 @@ function readForecast($conn, $symbol)
 		while ($row = mysqli_fetch_assoc($result)) {
 			// echo "id: " . $row["symbol"]. " - Name: " . $row["current_price"]. " " . $row["lastname"]. "<br>";
 			if ($row["symbol"] == $symbol) {
-				$a[] = $row["voting"];
+				$array_votings[] = $row["voting"];
 			}
 		}
 	} else {
 		// echo "0 results";
 	}
-	$a = array_filter($a);
-	$average = array_sum($a) / count($a);
-	$average = round($average);
-	return $average;
+	if (count($array_votings) > 0) {
+		$array_votings = array_filter($array_votings);
+		$average = array_sum($array_votings) / count($array_votings);
+		$average = round($average);
+		$result = $average;
+	} else {
+		// Default value (no votings available)
+		$result = 0;
+	}
+
+	return $result;
 }
 
 function readStockValue($conn, $symbol)
@@ -101,6 +110,8 @@ function readStockValue($conn, $symbol)
 	} else {
 		// echo "0 results";
 	}
+
 	$last_close_value = array_filter($last_close_value);
+
 	return $last_close_value;
 }

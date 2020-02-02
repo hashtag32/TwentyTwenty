@@ -13,13 +13,13 @@ function pageFullyLoaded(e) {
 }
 
 function buildtemplates() {
-  // todo: Get the list of stocks from the server
-  var listofStocks = ["AAPL", "Pfizer", "SAP", "Tesla", "Chen"];
-  listofStocks.forEach(function(item, index, array) {
+  // todo: Get list of symbols from stockList.csv (common stocks - S&P, DAX, + indices)
+  var listofStockNames = ["Apple", "Pfizer", "SAP", "Tesla"];
+
+  listofStockNames.forEach(function(item, index, array) {
     // Create the div section (see voting_template.html) for each stock
     create_inst_of_template(item);
     request_voting(item); // will trigger a request to update the value of the voting_input boxes
-    // request_actual_value(item);
   });
 }
 
@@ -72,16 +72,16 @@ function changeVotingValues(stockName, voting_number, actual_value) {
   // Set the voting number, received from the server
 
   votingInputElement.value = voting_number;
-  changeGauge(stockName, voting_number);
+  changeGauge(stockName, voting_number, actual_value);
 }
 
-function changeGauge(stockName, voting_number) {
+function changeGauge(stockName, voting_number, actual_value) {
   var gauge_id = "gaugeID_" + stockName;
   var gaugeElement = document.getElementById(gauge_id);
 
   // Setting the voting_number
-  gaugeElement.children[0].dataset.value = voting_number;
+  gaugeElement.children[0].dataset.value = actual_value;
 
   // Set the voting number, received from the server
-  gaugeElement.value = voting_number;
+  gaugeElement.value = actual_value;
 }

@@ -19,7 +19,7 @@ function buildtemplates() {
     // Create the div section (see voting_template.html) for each stock
     create_inst_of_template(item);
     request_voting(item); // will trigger a request to update the value of the voting_input boxes
-    request_actual_value(item);
+    // request_actual_value(item);
   });
 }
 
@@ -49,15 +49,20 @@ function create_inst_of_template(stockName) {
   );
 }
 
-function updateVotingValues(stockName, voting_number) {
-  changeVotingValues(stockName, voting_number);
+function updateVotingValues(request_votingArray) {
+  var request_votingArray_parsed = jQuery.parseJSON(request_votingArray);
+  changeVotingValues(
+    request_votingArray_parsed.stockName,
+    request_votingArray_parsed.voting_number,
+    request_votingArray_parsed.actual_value
+  );
 }
 
 // is callback, triggered from the request_voting
 // request_voting(js) => request_votingfromServer (php) => MySQL
 // MySQL => (return) request_votingfromServer(php) => (echo) request_voting(js)
 // request_voting => changeVotingValues()
-function changeVotingValues(stockName, voting_number) {
+function changeVotingValues(stockName, voting_number, actual_value) {
   if (voting_number == "") {
     voting_number = 0;
   }

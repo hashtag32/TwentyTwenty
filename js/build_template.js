@@ -67,7 +67,7 @@ function changeVotingValues(stockName, voting_number) {
   // Set the voting number, received from the server
 
   votingInputElement.value = voting_number;
-  // changeGauge(stockName, voting_number);
+  changeGauge(stockName, voting_number);
 }
 
 function changeGauge(stockName, voting_number) {

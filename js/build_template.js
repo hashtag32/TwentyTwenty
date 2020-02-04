@@ -3,6 +3,13 @@
 document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
 window.addEventListener("load", pageFullyLoaded, false);
 
+var StockNameToSymbol = {
+  Apple: "AAPL",
+  SAP: "SAP",
+  Tesla: "TSLA",
+  Pfizer: "PFE"
+};
+
 function theDomHasLoaded(e) {
   // do something
 }
@@ -34,8 +41,14 @@ function create_inst_of_template(stockName) {
 
   // Search and replace the template_company with the stockName
   template_clone.innerHTML = template_clone.innerHTML.replace(
-    new RegExp("template_company", "g"),
+    new RegExp("template_company_stockName", "g"),
     stockName
+  );
+
+  symbolName = StockNameToSymbol[stockName];
+  template_clone.innerHTML = template_clone.innerHTML.replace(
+    new RegExp("template_company_symbol", "g"),
+    symbolName
   );
 
   // Append the new template inst in DOM

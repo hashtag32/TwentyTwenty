@@ -1,15 +1,20 @@
 <template id="voting-template">
   <!-- Table -->
   <div class="voting-table" >
-    <a href="https://stockvoting.net/tag/template_company/">
-      <h2>template_company</h2>
+    <a href="https://stockvoting.net/tag/template_company_stockName/">
+      <h2>template_company_stockName</h2>
     </a>
     <div class="column-overview">
       <!-- First column=Overview -->
-      <span class="vote-span" >Overview prognosis</span>
+      <span class="vote-span" >Prognosis for the next 30 days</span>
+      
     </div>
     <div class="column-gauge">
-      <div class="radial-gauge-class" id="gaugeID_template_company">
+      <span class="vote-span" >People's opinion</span>
+      <?php
+      echo do_shortcode('[stock_ticker symbols="template_company_symbol" show="name"]');
+      ?> 
+      <div class="radial-gauge-class" id="gaugeID_template_company_stockName">
       </div>
     </div>
 
@@ -19,11 +24,11 @@
       <span class="vote-span" >Your vote</span>
       <br/></br>
       <form name="vote_form" method="post">
-        <input type="number" id="voting_input_template_company" />
+        <input type="number" id="voting_input_template_company_stockName" />
         <br/></br>
         <input 
           type="button"
-          onclick="send_vote('template_company',voting_input_template_company.value)"
+          onclick="send_vote('template_company_stockName',voting_input_template_company_stockName.value)"
           value="Vote" 
         />
       </form>

@@ -6540,12 +6540,25 @@ a.to-the-top > * {
   display: table;
   clear: both;
 }
+
 .vote-span {
   text-align: center;
   font-weight: bold;
-  font-size: 20pt;
+  font-size: 17pt;
+}
+
+.radial-gauge-class {
+  padding: 5px;
 }
 
 .footer-logo {
   height: 50px;
+}
+
+.prognosis-text {
+  text-align: center;
+  font-weight: bold;
+  font-size: 50pt;
+  color: #1d4e9e;
+  padding: 60px;
 }

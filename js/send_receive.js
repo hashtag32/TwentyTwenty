@@ -9,6 +9,7 @@ function request_voting(stockName) {
     },
     success: function(data, textStatus, XMLHttpRequest) {
       updateVotingValues(data);
+      return data;
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
       alert(errorThrown);
@@ -27,7 +28,9 @@ function send_vote(stockName, voting_number) {
       voting_number: voting_number
     },
     success: function(data, textStatus, XMLHttpRequest) {
-      alert("Your vote was successful send!");
+      //todo: https://stackoverflow.com/questions/28796650/how-does-this-popup-appear-and-disappear-after-a-while
+      // make disappearing popup
+      // alert("Your vote was successful send!");
       // update the values
       request_voting(stockName);
     },

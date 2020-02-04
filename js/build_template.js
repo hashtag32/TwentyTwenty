@@ -69,6 +69,10 @@ function updateVotingValues(request_votingArray) {
     request_votingArray_parsed.voting_number,
     request_votingArray_parsed.actual_value
   );
+  changePrognosis(
+    request_votingArray_parsed.stockName,
+    request_votingArray_parsed.voting_number
+  );
 }
 
 // is callback, triggered from the request_voting
@@ -84,7 +88,7 @@ function changeVotingValues(stockName, voting_number, actual_value) {
 
   // Set the voting number, received from the server
 
-  votingInputElement.value = voting_number;
+  votingInputElement.value = Math.round(actual_value);
   changeGauge(stockName, voting_number, actual_value);
 }
 
@@ -93,8 +97,24 @@ function changeGauge(stockName, voting_number, actual_value) {
   var gaugeElement = document.getElementById(gauge_id);
 
   // Setting the voting_number
-  gaugeElement.children[0].dataset.value = actual_value;
+  gaugeElement.children[0].dataset.value = getPercentage(
+    actual_value,
+    voting_number
+  );
 
   // Set the voting number, received from the server
   gaugeElement.value = actual_value;
+}
+
+function changePrognosis(stockName, voting_number) {
+  var elementPrognosis = document.getElementById("prognosis_" + stockName);
+
+  elementPrognosis.innerHTML = voting_number + " $";
+}
+
+/*********************onLoad/onClick Functions******************/
+
+/*********************Helper******************/
+function getPercentage(actual_value, voting_number) {
+  return (voting_number / actual_value - 1) * 100;
 }

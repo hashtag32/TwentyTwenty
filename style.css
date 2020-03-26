@@ -1593,6 +1593,7 @@ ul.primary-menu {
 }
 
 .primary-menu > li {
+  font-weight: bold;
   margin: 0.8rem 0 0 1.6rem;
 }
 

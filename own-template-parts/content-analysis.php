@@ -43,30 +43,7 @@
 	</div><!-- .post-inner -->
 
 	<div class="section-inner">
-		<?php
-		$tags = get_tags();
 
-		$html = '<div class="post_tags">';
-		foreach ($tags as $tag) {
-			$tag_link = get_tag_link($tag->term_id);
-
-			$html .= "<li> <a href='{$tag_link}' title='{$tag->name} Tag' class='{$tag->slug}'>";
-			$html .= "{$tag->name}</a> </li>";
-		}
-		$html .= '</div>';
-		echo $html;
-		// edit_post_link();
-
-		// echo '<ul>';
-		// foreach ($tags as $tag) {
-		//   echo '<li>' . $tag->name . '</li>';
-		// }
-		// echo '</ul>';
-
-		// Single bottom post meta.
-
-
-		?>
 
 	</div><!-- .section-inner -->
 

@@ -16,7 +16,11 @@ function request_voting(stockName) {
     }
   });
 }
-function send_vote(stockName, voting_number) {
+function send_vote(element, stockName, voting_number) {
+  // todo: disappearing popup
+  // prohibit double voting
+  element.disabled = true;
+
   jQuery.ajax({
     type: "POST",
     url: ajax_unique.ajaxurl,

@@ -1,5 +1,3 @@
-// Listen to page loading
-// todo: doesn't this fire on every site?
 document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
 window.addEventListener("load", pageFullyLoaded, false);
 
@@ -11,12 +9,20 @@ var StockNameToSymbol = {
 };
 
 function theDomHasLoaded(e) {
-  // do something
+  loadIncludes();
 }
 
 // Will fire after theDomHasLoaded
 function pageFullyLoaded(e) {
   buildtemplates();
+}
+
+function loadIncludes() {
+  var script = document.createElement("script");
+
+  script.src =
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js";
+  document.getElementsByTagName("head")[0].appendChild(script);
 }
 
 function buildtemplates() {

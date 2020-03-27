@@ -1995,9 +1995,28 @@ button.sub-menu-toggle.active svg {
 }
 
 /* Menu Modifications ------------------------------- */
-#login-menu-item {
-  .menu-item;
+/* Ununsed at the moment, but useful for login-menu/popup-item
+.promo-widget-box {
+  right: 5%; 
+  bottom: 10%; 
+  position: fixed; 
+  display: flex;
+  text-decoration: none; 
+  padding: 1.5%;
+  /* text-decoration: none; */
+  color: #f5efe0;
+  background-color: #1d4e9e;
+  max-width: 25%;
+  border-radius: 15px;
+  /* align: right; */
+  /* float:right; */
+  text-align: center;
 }
+
+a.promo-widget-text:link {
+  color:#f5efe0;
+}
+*/
 
 /* #c1, #c2 {
     width: 33%;

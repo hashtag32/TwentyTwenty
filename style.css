@@ -6582,3 +6582,9 @@ a.to-the-top > * {
   color: #1d4e9e;
   padding: 60px;
 }
+
+
+
+input.button-voting:hover {
+  background-color: #1d4e9e;
+}

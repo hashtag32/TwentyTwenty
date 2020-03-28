@@ -78,3 +78,12 @@ include("voting_template.html");
 	?>
 
 </article><!-- .post -->
+
+<style>
+input[type=button] {
+  transition: all 0.5s;
+  position: relative;
+  border-radius: 10px;
+  background-color: #5179BB;
+}
+</style>

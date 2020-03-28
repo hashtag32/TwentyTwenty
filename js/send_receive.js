@@ -17,10 +17,7 @@ function request_voting(stockName) {
     });
 }
 function send_vote(element, stockName, voting_number) {
-    // todo: disappearing popup
-    // prohibit double voting
-    element.disabled = true;
-    element.value = element.alt;
+    changeVotingButtonAfterSend(element);
 
     jQuery.ajax({
         type: "POST",

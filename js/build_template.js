@@ -124,3 +124,18 @@ function changePrognosis(stockName, voting_number) {
 function getPercentage(actual_value, voting_number) {
   return (voting_number / actual_value - 1) * 100;
 }
+
+
+
+
+/*********************Style functions******************/
+
+function changeVotingButtonAfterSend(element) {
+     // Prohibit double voting
+     element.disabled = true;
+     // Change text to alternative value
+     element.value = element.alt;
+     // Change background to default
+     element.style.background="#1d4e9e";
+  }
+  

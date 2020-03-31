@@ -85,7 +85,7 @@ get_header();
 			}
 			the_post();
 
-			get_template_part( 'template-parts/content', get_post_type() );
+			get_template_part( 'own-template-parts/content-analysis', get_post_type() );
 
 		}
 	} elseif ( is_search() ) {

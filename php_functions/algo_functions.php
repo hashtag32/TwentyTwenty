@@ -18,11 +18,50 @@ function getVoting($symbol)
 
 function getStockValue($symbolName)
 {
+	// Check whether this symbol has already a category
+	checkCategory($symbolName);
+	
 	$conn = connectDB();
 	$actual_value =	readStockValue($conn, $symbolName);
 	return $actual_value;
 }
 
+//****Categories****/// 
+function checkCategory($symbolName)
+{
+	// Check if catgeory is already existing
+	if(!existsCategory($symbolName))
+	{
+		createCategory($symbolName);
+	}
+}
+
+function existsCategory($symbolName)
+{
+	$args = array(
+		'hide_empty'      => false,
+	);
+	 
+	foreach( get_categories($args) as $category ) {
+		if ($symbolName == $category->name) {
+			return true;
+		}
+		else {
+			// Print warning: No row found";
+		}
+	}
+	return false; 
+}
+
+function createCategory($category)
+{
+	//Define the category
+	// TODO: cat_name is Tesla, nice_name is tsla!!! 
+	$wpdocs_cat = array('cat_name' => $category);
+	
+	// Create the category
+	$wpdocs_cat_id = wp_insert_category($wpdocs_cat);
+}
 
 
 /*******Database related functions****/

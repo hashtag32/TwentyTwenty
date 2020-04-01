@@ -12,13 +12,11 @@ function request_voting(symbolName) {
             return data;
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert(errorThrown);
+            alert("Data couldn't load.");
         }
     });
 }
 function send_vote(element, symbolName, voting_number) {
-    changeVotingButtonAfterSend(element);
-
     jQuery.ajax({
         type: "POST",
         url: ajax_unique.ajaxurl,
@@ -31,9 +29,10 @@ function send_vote(element, symbolName, voting_number) {
         },
         success: function(data, textStatus, XMLHttpRequest) {
             request_voting(symbolName);
+            changeVotingButtonAfterSend(element);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert(errorThrown);
+            alert("Sending didn't work. Try again.");
         }
     });
 }

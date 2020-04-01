@@ -16,19 +16,10 @@ function getVoting($symbol)
 	return $forecast;
 }
 
-function getStockValue($stockName)
+function getStockValue($symbolName)
 {
-	// Todo: move outside
-	$StockNameToSymbol = [
-		"Apple" => "AAPL",
-		"SAP" => "SAP",
-		"Tesla" => "TSLA",
-		"Pfizer" => "PFE"
-	];
-
-	$symbol = $StockNameToSymbol[$stockName];
 	$conn = connectDB();
-	$actual_value =	readStockValue($conn, $symbol);
+	$actual_value =	readStockValue($conn, $symbolName);
 	return $actual_value;
 }
 

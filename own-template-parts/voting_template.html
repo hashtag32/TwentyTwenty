@@ -1,20 +1,20 @@
 <template id="voting-template">
   <!-- Table -->
   <div class="voting-table" >
-    <a href="https://stockvoting.net/category/template_company_stockName/">
+    <a href="https://stockvoting.net/category/template_company_symbol/">
       <h2>template_company_stockName</h2>
     </a>
     <div class="column-overview">
       <!-- First column=Overview -->
       <span class="vote-span" >Prognosis for the next 30 days</span>
-      <div class="prognosis-text" id="prognosis_template_company_stockName"></div>
+      <div class="prognosis-text" id="prognosis_template_company_symbol"></div>
       <?php
       echo do_shortcode('[stock_ticker symbols="template_company_symbol" show="name"]');
       ?> 
     </div>
     <div class="column-gauge">
       <span class="vote-span" >People's opinion</span>
-      <div class="radial-gauge-class" id="gaugeID_template_company_stockName">
+      <div class="radial-gauge-class" id="gaugeID_template_company_symbol">
       </div>
     </div>
 
@@ -24,12 +24,12 @@
       <span class="vote-span" >Your vote</span>
       <br/></br>
       <form name="vote_form" method="post">
-        <input type="number" id="voting_input_template_company_stockName" />
+        <input type="number" id="voting_input_template_company_symbol" />
         <br/></br>
         <input 
           type="button" 
           class="button-voting"
-          onclick="send_vote(this,'template_company_stockName',voting_input_template_company_stockName.value)"
+          onclick="send_vote(this,'template_company_symbol',voting_input_template_company_symbol.value)"
           value="Send Vote" 
           alt="Thank you!"
         />

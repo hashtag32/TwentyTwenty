@@ -1,11 +1,11 @@
-function request_voting(stockName) {
+function request_voting(symbolName) {
     jQuery.ajax({
         type: "POST",
         url: ajax_unique.ajaxurl,
         data: {
             action: "request_votingfromServer",
             title: ajax_unique.title,
-            stockName: stockName
+            symbolName: symbolName
         },
         success: function(data, textStatus, XMLHttpRequest) {
             updateVotingValues(data);
@@ -16,7 +16,7 @@ function request_voting(stockName) {
         }
     });
 }
-function send_vote(element, stockName, voting_number) {
+function send_vote(element, symbolName, voting_number) {
     changeVotingButtonAfterSend(element);
 
     jQuery.ajax({
@@ -26,15 +26,11 @@ function send_vote(element, stockName, voting_number) {
         data: {
             action: "send_votingToServer",
             title: ajax_unique.title,
-            stockName: stockName,
+            symbolName: symbolName,
             voting_number: voting_number
         },
         success: function(data, textStatus, XMLHttpRequest) {
-            //todo: https://stackoverflow.com/questions/28796650/how-does-this-popup-appear-and-disappear-after-a-while
-            // make disappearing popup
-            // alert("Your vote was successful send!");
-            // update the values
-            request_voting(stockName);
+            request_voting(symbolName);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert(errorThrown);

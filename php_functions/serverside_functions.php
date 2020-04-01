@@ -5,13 +5,13 @@
 function send_votingToServer()
 {
     $voting_number = $_POST['voting_number'];
-    $stockName = $_POST['stockName'];
+    $symbolName = $_POST['symbolName'];
 
     $responseData = array("Data received + Response: ");
-    array_push($responseData, "voting_number:", $voting_number, "stockName: ", $stockName);
+    array_push($responseData, "voting_number:", $voting_number, "symbolName: ", $symbolName);
     echo json_encode($responseData);
     // Send to MySQL
-    vote($stockName, $voting_number);
+    vote($symbolName, $voting_number);
     wp_die(); // avoiding 0
 }
 add_action('wp_ajax_nopriv_send_votingToServer', 'send_votingToServer');
@@ -20,14 +20,14 @@ add_action('wp_ajax_send_votingToServer', 'send_votingToServer');
 
 function request_votingfromServer()
 {
-    $stockName = $_POST['stockName'];
+    $symbolName = $_POST['symbolName'];
 
-    $actual_value = getStockValue($stockName);
-    $voting_number = getVoting($stockName);
+    $actual_value = getStockValue($symbolName);
+    $voting_number = getVoting($symbolName);
     $request_votingArray = array(
         "actual_value" => $actual_value,
         "voting_number" => $voting_number,
-        "stockName" => $stockName
+        "symbolName" => $symbolName
     );
 
     echo json_encode($request_votingArray);

@@ -76,7 +76,18 @@
 								<?php
 							}
 
-							// the_title( '<h1 class="entry-title">', '</h1>' );
+							//todo: Move back to the_title -> modification in wp possible
+							// the_title( '<h1 class="entry-title">Real Title', '</h1>', false );
+
+							?>
+							
+							<h2 class="entry-title">Stock Analysis for Professionals</h2>
+
+							<div class="intro-text section-inner max-percentage<?php echo esc_attr( $intro_text_width ); ?>">
+								<p>Platform for investment knowledge</p>
+							</div>
+
+							<?php
 
 							if ( is_page() ) {
 								?>
@@ -101,15 +112,13 @@
 									$intro_text_width = ' thin';
 								}
 
-								if ( has_excerpt() ) {
-									?>
+								?>
 
-									<div class="intro-text section-inner max-percentage<?php echo esc_attr( $intro_text_width ); ?>">
-										<?php the_excerpt(); ?>
-									</div>
+								<div class="intro-text section-inner max-percentage<?php echo esc_attr( $intro_text_width ); ?>">
+									<p>The  other title</p>
+								</div>
 
-									<?php
-								}
+								<?php
 
 								twentytwenty_the_post_meta( get_the_ID(), 'single-top' );
 

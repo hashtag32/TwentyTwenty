@@ -6576,11 +6576,11 @@ a.to-the-top > * {
 }
 
 .prognosis-text {
-  text-align: center;
-  font-weight: bold;
-  font-size: 50pt;
+  /* text-align: center; */
+  /* font-weight: bold;
+  font-size: 50pt; */
   color: #1d4e9e;
-  padding: 60px;
+  /* padding: 60px; */
 }
 
 

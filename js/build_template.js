@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
 window.addEventListener("load", pageFullyLoaded, false);
 
 var SymbolToStockName;
-var VotingURL="https://stockvoting.net/voting/";
+var VotingURL="https://stockvoting.net/voting";
 
 function theDomHasLoaded(e) {
   if(window.location.href==VotingURL)

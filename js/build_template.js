@@ -2,14 +2,21 @@ document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
 window.addEventListener("load", pageFullyLoaded, false);
 
 var SymbolToStockName;
+var VotingURL="https://stockvoting.net/voting/";
 
 function theDomHasLoaded(e) {
-  loadIncludes();
+  if(window.location.href==VotingURL)
+  {
+    loadIncludes();
+  }
 }
 
 // Will fire after theDomHasLoaded
 function pageFullyLoaded(e) {
-  buildtemplates();
+  if(window.location.href==VotingURL)
+  {
+    buildtemplates();
+  }
 }
 
 function loadIncludes() {
@@ -23,7 +30,6 @@ function loadIncludes() {
 
 function buildtemplates() {
   getStockDict();
-
   // Move functionality from setSymboltoStockName
 }
 

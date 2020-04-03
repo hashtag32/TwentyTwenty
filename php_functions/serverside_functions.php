@@ -6,12 +6,13 @@ function send_votingToServer()
 {
     $voting_number = $_POST['voting_number'];
     $symbolName = $_POST['symbolName'];
+    $user_id = $_POST['user_id'];
 
     $responseData = array("Data received + Response: ");
-    array_push($responseData, "voting_number:", $voting_number, "symbolName: ", $symbolName);
+    array_push($responseData, "voting_number:", $voting_number, "symbolName: ", $symbolName, "user_id: ", $user_id);
     echo json_encode($responseData);
     // Send to MySQL
-    vote($symbolName, $voting_number);
+    vote($symbolName, $voting_number, $user_id);
     wp_die(); // avoiding 0
 }
 add_action('wp_ajax_nopriv_send_votingToServer', 'send_votingToServer');

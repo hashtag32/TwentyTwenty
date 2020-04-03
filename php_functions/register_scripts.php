@@ -11,7 +11,8 @@ function send_receive_ajax_script()
 		'ajax_unique',
 		array(
 			'ajaxurl' => admin_url('admin-ajax.php'),
-			'title' => get_the_title()
+			'title' => get_the_title(),
+			'user_id' => get_current_user_id()
 		)
 	);
 }

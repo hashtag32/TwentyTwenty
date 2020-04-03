@@ -29,9 +29,36 @@
 	<div class="post-inner <?php echo is_page_template('templates/template-full-width.php') ? '' : 'thin'; ?> ">
 
 		<div class="entry-content">
-				<p> Test</p>
+				<p> Testhtml</p>
 			<?php
 
+
+
+			
+			if ( is_user_logged_in()) {
+				$user_id=get_current_user_id();
+				foreach (getVotings($user_id) as $voting_array)
+				{
+					// echo $voting_array["symbol"];
+					// // printing result in days format 
+					echo $voting_array["date"];
+					echo "<br>";
+					echo getDaysLeft($voting_array["date"]); 
+					echo "<br>";
+					echo getStockDiff($voting_array["symbol"],(int)$voting_array["voting"]);
+					echo "<br>";
+					
+				}
+			} else {
+				echo 'You not voted yet, see Votings to get your votes!';
+				echo(getAllVotings($user_id));
+				echo 'Welcome, visitor!';
+			}
+
+
+			// go through all votings
+			// while(have_votings)
+				// 
 
 			if (is_search() || !is_singular() && 'summary' === get_theme_mod('blog_content', 'full')) {
 				the_excerpt();

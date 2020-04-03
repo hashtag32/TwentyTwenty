@@ -1,12 +1,12 @@
 <?php
 
-
 /*******Server API functions****/
-function vote($symbol, $voting_number)
+function vote($symbol, $voting_number,$user_id)
 {
+	checkCategory($symbolName);
+
 	$conn = connectDB();
-	$result = insertEntryvotingTable($conn, $symbol, date("d-m-Y H:i:s"), $voting_number);
-	// $forecast = readForecast($conn, $symbol);
+	$result = insertEntryvotingTable($conn, $symbol, date("d-m-Y H:i:s"), $voting_number, $user_id);
 }
 
 function getVoting($symbol)
@@ -18,9 +18,6 @@ function getVoting($symbol)
 
 function getStockValue($symbolName)
 {
-	// Check whether this symbol has already a category
-	checkCategory($symbolName);
-	
 	$conn = connectDB();
 	$actual_value =	readStockValue($conn, $symbolName);
 	return $actual_value;
@@ -63,7 +60,6 @@ function createCategory($category)
 	$wpdocs_cat_id = wp_insert_category($wpdocs_cat);
 }
 
-
 /*******Database related functions****/
 function connectDB()
 {
@@ -82,9 +78,9 @@ function insertEntrystockValuation($conn, $symbol, $currentValue)
 	return $result;
 }
 
-function insertEntryvotingTable($conn, $symbol, $date, $voting_number)
+function insertEntryvotingTable($conn, $symbol, $date, $voting_number, $user_id)
 {
-	$sql = "INSERT INTO votingTable (symbol, date, voting) VALUES ('{$symbol}', '{$date}', '{$voting_number}')";
+	$sql = "INSERT INTO votingTable (symbol, date, voting, user_id) VALUES ('{$symbol}', '{$date}', '{$voting_number}', '{$user_id}')";
 	$result = $conn->query($sql);
 	return $result;
 }
@@ -133,15 +129,13 @@ function readStockValue($conn, $symbol)
 		// output data of each row
 		while ($row = mysqli_fetch_assoc($result)) {
 			if ($row["symbol"] == $symbol) {
-				$last_close_value[] = $row["last_close"];
-				$last_refreshed = $row["last_refreshed"];
+				$last_close_value = (int)$row["last_close"];
 			}
 		}
 	} else {
 		// echo "0 results";
 	}
 
-	$last_close_value = array_filter($last_close_value);
-
 	return $last_close_value;
 }
+?>

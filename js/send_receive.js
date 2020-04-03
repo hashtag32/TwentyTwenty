@@ -25,7 +25,8 @@ function send_vote(element, symbolName, voting_number) {
             action: "send_votingToServer",
             title: ajax_unique.title,
             symbolName: symbolName,
-            voting_number: voting_number
+            voting_number: voting_number,
+            user_id: ajax_unique.user_id
         },
         success: function(data, textStatus, XMLHttpRequest) {
             request_voting(symbolName);

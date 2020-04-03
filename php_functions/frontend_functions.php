@@ -2,12 +2,6 @@
 
 
 // Voting related functions
-function getVotings($user_id)
-{
-	$conn = connectDB();
-	return userVotings($conn, $user_id);
-}
-
 function getDaysLeft($date_due)
 {
 	// Due date
@@ -26,23 +20,25 @@ function getDaysLeft($date_due)
 function getStockDiff($symbol, $prediction)
 { 
 	$currentStockValue=getStockValue($symbol);
-	// return gettype($currentStockValue);
-	// $percentage=($prediction / $currentStockValue );
 	return ($currentStockValue /  $prediction - 1) * 100;
-	// return $percentage;
 }
 
-function getScore($percentage_array)
+function getScore($stock_diff_array)
 { 
-	$currentStockValue=getStockValue($symbol);
-	// return gettype($currentStockValue);
-	// $percentage=($prediction / $currentStockValue );
-	return ($currentStockValue /  $prediction - 1) * 100;
-	// return $percentage;
+	$score_array=array();
+	// Calculate scores
+	foreach ($stock_diff_array as $stock_diff){
+		$score=2.5+2.5*((int)$stock_diff_array/50);
+		array_push($score_array,$score);
+	}
+	
+	// Calculate mean
+	return array_sum($score_array)/count($score_array);
 }
 
-function userVotings($conn, $user_id)
+function getVotings( $user_id)
 {
+	$conn = connectDB();
 	//3 columns in MySQL: symbol, data, voting
 	// SELECT * FROM `votingTable` WHERE `user_id` = 1
 	$sql = "SELECT symbol, date, voting, user_id FROM votingTable";
@@ -56,5 +52,15 @@ function userVotings($conn, $user_id)
 		}
 	}
 	return $array_votings;
+}
+
+
+function delete_all_votes($user_id)
+{
+	$conn = connectDB();
+	$sql = 'DELETE FROM `votingTable` WHERE `user_id` = ' . $user_id;
+	$result = mysqli_query($conn, $sql);
+
+	return $result;
 }
 ?>

@@ -39,8 +39,9 @@
 					<thead>
 						<tr>
 							<th class="has-text-align-center" data-align="center">Symbols</th>
-							<th class="has-text-align-center" data-align="center">Your Vote</th>
-							<th class="has-text-align-center" data-align="center">Difference to now</th>
+							<th class="has-text-align-center" data-align="center">Vote</th>
+							<th class="has-text-align-center" data-align="center">Current price</th>
+							<th class="has-text-align-center" data-align="center">Difference price/vote</th>
 							<th class="has-text-align-center" data-align="center">Days Left</th>
 						</tr>
 					</thead>
@@ -48,15 +49,19 @@
 			<!-- Iterate over all votings -->
 			<?php
 				$user_id=get_current_user_id();
+				$stock_diff_array=array();
 				foreach (getVotings($user_id) as $voting_array)
 				{ 
 					$stock_diff=round(getStockDiff($voting_array["symbol"],(int)$voting_array["voting"]), 2);
-					// $score_array[] = $stock_diff;
+					array_push($stock_diff_array,$stock_diff);
 			?> 
 					<tbody> 
 						<tr>
+							<!-- todo: Maybe add average Vote -->
+							<!-- todo: Derive Symbol Names -->
 							<td class="has-text-align-center" data-align="center"><?php echo $voting_array["symbol"] ?></td>
 							<td class="has-text-align-center" data-align="center"><?php echo $voting_array["voting"] ?> $</td>
+							<td class="has-text-align-center" data-align="center"><?php echo getStockValue($voting_array["symbol"]) ?> $</td>
 							<td class="has-text-align-center" data-align="center"><?php echo $stock_diff ?> %</td>
 							<td class="has-text-align-center" data-align="center"><?php echo getDaysLeft($voting_array["date"]) ?></td>
 						</tr>
@@ -85,50 +90,25 @@
 			?>
 			
 			<div class="scoring-area">
-
 				<h2 class="has-text-align-center">Score</h2>
-				<h3 class="has-accent-color has-text-color has-text-align-center">4.2</h3>
-		</div> <!-- .scoring-area -->
+				<h3 class="has-accent-color has-text-color has-text-align-center"><?php echo getScore($stock_diff_array) ?></h3>
+			</div> <!-- .scoring-area -->
 
-		<form name="delete_my_votes_button" method="post">
-        <input 
-          type="button" 
-          style="border-radius:50px"
-          value="Delete my Votes" 
-        />
+		<form name="delete_my_votes_button_form" method="post">
+			<input 
+			class="delete_my_votes_button"
+			type="button" 
+			value="Delete my Votes" 
+			onclick="<?php echo delete_all_votes(get_current_user_id()) ?>"
+			/>
 	  </form>
-	  <input style="border-radius:50px" type="button" value="Click Me" style="float: right;">
-
+	  <!-- <input style="border-radius:50px" type="button" value="Click Me" style="float: right;"> -->
 
 		</div><!-- .entry-content -->
 
 	</div><!-- .post-inner -->
 
 	<div class="section-inner">
-		<?php
-		$tags = get_tags();
-
-		$html = '<div class="post_tags">';
-		foreach ($tags as $tag) {
-			$tag_link = get_tag_link($tag->term_id);
-
-			$html .= "<li> <a href='{$tag_link}' title='{$tag->name} Tag' class='{$tag->slug}'>";
-			$html .= "{$tag->name}</a> </li>";
-		}
-		$html .= '</div>';
-		echo $html;
-		// edit_post_link();
-
-		// echo '<ul>';
-		// foreach ($tags as $tag) {
-		//   echo '<li>' . $tag->name . '</li>';
-		// }
-		// echo '</ul>';
-
-		// Single bottom post meta.
-
-
-		?>
 
 	</div><!-- .section-inner -->
 

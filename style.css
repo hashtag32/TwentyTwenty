@@ -6563,3 +6563,8 @@ background-color: #1d4e9e;
 	@extend .h2;
 	text-align: center;
 }
+
+.delete_my_votes_button{
+	float: right;
+	border-radius: 50px;
+}

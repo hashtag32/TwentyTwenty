@@ -11,30 +11,35 @@ function getVotings($user_id)
 function getDaysLeft($date_due)
 {
 	// Due date
-	$due_date_date=date($date_due);
-	$date_due_DateTime=new DateTime($date_due);
-	// $due_date_time= strtotime($due_date); 
-    // $due_date_date=date("d-m-Y H:i:s", $due_date_time);
+	$due_date_date=date("d-m-Y H:i:s",strtotime('+30 days',strtotime($date_due)));
+	$date_due_DateTime=new DateTime($due_date_date);
   
 	// Date now
 	$date_now_date=date("d-m-Y H:i:s");
 	$date_now_DateTime=new DateTime($date_now_date);
-	// $interval = date_diff($due_date_date, $date_now_date); 
   
 	// Diff
-	$interval = $date_due_DateTime->diff($date_now_DateTime);
-	return $interval->format('%a');
+	$interval = date_diff($date_now_DateTime,$date_due_DateTime);
+	return $interval->format('%r%a');
 }
 
 function getStockDiff($symbol, $prediction)
-{
+{ 
 	$currentStockValue=getStockValue($symbol);
 	// return gettype($currentStockValue);
 	// $percentage=($prediction / $currentStockValue );
-	return ($prediction /  $currentStockValue - 1) * 100;
+	return ($currentStockValue /  $prediction - 1) * 100;
 	// return $percentage;
 }
 
+function getScore($percentage_array)
+{ 
+	$currentStockValue=getStockValue($symbol);
+	// return gettype($currentStockValue);
+	// $percentage=($prediction / $currentStockValue );
+	return ($currentStockValue /  $prediction - 1) * 100;
+	// return $percentage;
+}
 
 function userVotings($conn, $user_id)
 {

@@ -16,22 +16,14 @@
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
-	<?php
-
-	get_template_part('template-parts/entry-header');
-
-	if (!is_search()) {
-		get_template_part('template-parts/featured-image');
-	}
-
-	?>
-
-	<div class="post-inner <?php echo is_page_template('templates/template-full-width.php') ? '' : 'thin'; ?> ">
-		<div class="entry-content">
+	<div class="post-inner ">
+	<div class="category-heading h2">Performance Overview </div>
+		<div class="category-performance">
 			<h2>
 				<?php 
 				// echo single_cat_title( '', false );
-				echo do_shortcode('[stock_ticker symbols="AAPL" show="name" static="1"]');
+				echo do_shortcode('[stock_ticker symbols="' . single_cat_title( '', false ) . '" show="name" static="1"]');
+				echo "<br>"
 				?> 
 			</h2>
 		</div><!-- .entry-content -->

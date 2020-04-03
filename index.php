@@ -78,9 +78,9 @@ get_header();
 	// Category page
 	if(is_category())
 	{
-		get_template_part( 'own-template-parts/content-category', get_post_type() );
+		get_template_part( 'own-template-parts/content-category' );
 	}
-
+	
 	if ( have_posts() ) {
 
 		$i = 0;

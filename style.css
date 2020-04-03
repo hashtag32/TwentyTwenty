@@ -6550,12 +6550,16 @@ color: #1d4e9e;
 /* padding: 60px; */
 }
 
-
-
 input.button-voting:hover {
 background-color: #1d4e9e;
 }
 
-.category-stock-ticker{
+.stock-ticker-wrapper {
+    text-align: center;
+}
+
+.category-heading
+{
+	@extend .h2;
 	text-align: center;
 }

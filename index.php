@@ -47,7 +47,8 @@ get_header();
 		} else {
 			$archive_subtitle = __( 'We could not find any results for your search. You can give it another try through the search form below.', 'twentytwenty' );
 		}
-	} elseif ( ! is_home() ) {
+	}
+	elseif ( ! is_home() ) {
 		$archive_title    = get_the_archive_title();
 		$archive_subtitle = get_the_archive_description();
 	}
@@ -72,6 +73,12 @@ get_header();
 		</header><!-- .archive-header -->
 
 		<?php
+	}
+
+	// Category page
+	if(is_category())
+	{
+		get_template_part( 'own-template-parts/content-category', get_post_type() );
 	}
 
 	if ( have_posts() ) {

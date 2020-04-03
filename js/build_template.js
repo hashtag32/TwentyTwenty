@@ -187,3 +187,18 @@ function SymbolToStockNameDict(allText) {
       }
   return dict;
 }
+
+
+//construct.js
+/*	-----------------------------------------------------------------------------------------------
+	Fade Blocks
+--------------------------------------------------------------------------------------------------- */
+
+$(document).ready(function(){
+  $(window).scroll(function(){
+      var windowOffset = window.pageYOffset;
+      $(".entry-header-inner").css(
+        {"opacity": 1 -( windowOffset * 0.002)
+      });
+  });
+});

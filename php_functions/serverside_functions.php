@@ -8,6 +8,7 @@ function send_votingToServer()
     $symbolName = $_POST['symbolName'];
     $user_id = $_POST['user_id'];
 
+    // Required for sending 'success' to ajax function in js
     $responseData = array("Data received + Response: ");
     array_push($responseData, "voting_number:", $voting_number, "symbolName: ", $symbolName, "user_id: ", $user_id);
     echo json_encode($responseData);
@@ -36,3 +37,15 @@ function request_votingfromServer()
 }
 add_action('wp_ajax_nopriv_request_votingfromServer', 'request_votingfromServer');
 add_action('wp_ajax_request_votingfromServer', 'request_votingfromServer');
+
+
+function delete_votesServer()
+{
+    $user_id = $_POST['user_id'];
+    $result=delete_all_votes($user_id);
+
+    echo json_encode($result);
+    wp_die(); // avoiding 0
+}
+add_action('wp_ajax_nopriv_delete_votesServer', 'delete_votesServer');
+add_action('wp_ajax_delete_votesServer', 'delete_votesServer');

@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", theDomHasLoaded, false);
 window.addEventListener("load", pageFullyLoaded, false);
 
-var SymbolToStockName;
 var VotingURL="https://stockvoting.net/voting";
+var $ = jQuery;
+
 
 function theDomHasLoaded(e) {
   if(window.location.href==VotingURL)
@@ -29,31 +30,7 @@ function loadIncludes() {
 
 
 function buildtemplates() {
-  getStockDict();
-  // Move functionality from setSymboltoStockName
-}
-
-// is should be move of the build chain -> encapsulated
-function getStockDict() {
-  $(document).ready(function() {
-    $.ajax({
-        type: "GET",
-        url: "https://stockvoting.net/wp-content/themes/twentytwenty/js/stockList.csv",
-        dataType: "text",
-        asnyc:false,
-        success: function(data) {
-          stockDict=SymbolToStockNameDict(data);
-          setSymbolToStockName(stockDict);
-
-          return stockDict;
-        }
-     });
-  });
-}
-
-function setSymbolToStockName(stockDict) {
-  const listofStockNames = Object.keys(stockDict);
-  SymbolToStockName=stockDict;
+  const listofStockNames = Object.keys(SymbolToStockName);
 
   listofStockNames.forEach(function(item, index, array) {
     // Create the div section (see voting_template.html) for each stock
@@ -154,7 +131,7 @@ function getPercentage(actual_value, voting_number) {
 
 
 
-
+// Frontendfunctions.js
 /*********************Style functions******************/
 
 function changeVotingButtonAfterSend(element) {
@@ -182,23 +159,123 @@ function SymbolToStockNameDict(allText) {
       // Check if header matches the data
       if (data.length == headers.length) {
         // Key is TSLA, value is Tesla 
+        alert(data[0]);
         dict[data[0]]=data[1];
         }
       }
   return dict;
 }
 
+function delete_all_votes(element)
+{
+  $.ajax({
+    type: "POST",
+    url: ajax_unique.ajaxurl,
+    dataType: "json",
+    data: {
+        action: "delete_votesServer",
+        title: ajax_unique.title,
+        user_id: ajax_unique.user_id
+    },
+    success: function(data, textStatus, XMLHttpRequest) {
+      location.reload();
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert("Deleting didn't work. Try again.");
+    }
+});
+}
 
-//construct.js
+// function push_SymbolToStockName_to_SQL()
+// {
+//   $.ajax({
+//     type: "POST",
+//     url: ajax_unique.ajaxurl,
+//     dataType: "json",
+//     data: {
+//         action: "push_SymbolToStockName_to_SQL",
+//         title: ajax_unique.title,
+//         SymbolToStockName: SymbolToStockName
+//     },
+//     success: function(data, textStatus, XMLHttpRequest) {
+//       location.reload();
+//     },
+//     error: function(XMLHttpRequest, textStatus, errorThrown) {
+//         alert("Pushing didn't work. Try again.");
+//     }
+//   });
+// }
+
+
+// construct.js
 /*	-----------------------------------------------------------------------------------------------
-	Fade Blocks
+	Fade out entry-headers -> is automatically executed on every page
 --------------------------------------------------------------------------------------------------- */
-
-$(document).ready(function(){
-  $(window).scroll(function(){
-      var windowOffset = window.pageYOffset;
-      $(".entry-header-inner").css(
-        {"opacity": 1 -( windowOffset * 0.002)
-      });
+$(window).on('scroll', function () {
+  $(".entry-header-inner").css(
+    {"opacity": 1 -( window.pageYOffset * 0.002)
   });
 });
+
+
+
+
+// Taken with formatting from csv
+// csv -> Javascript here
+// csv -> SQL Import manual
+// csv is original file
+var SymbolToStockName = {
+  DJIA: "Dow Jones Industrial Average",
+  COMP: "NASDAQ Composite Index",
+  SPX: "S&P 500 Index",
+  SX5E: "EURO STOXX 50",
+  HSI: "Hang Seng Index",
+  DAX: "DAX Performance Index",
+  TSLA: "Tesla",
+  AAPL: "Apple",
+  AMZN: "Amazon.com",
+  MSFT: "Microsoft",
+  BCO: "Boeing",
+  NVDA: "NVIDIA ",
+  FB: "Facebook",
+  AMD: "AMD",
+  ABEA: "Alphabet A",
+  XONA: "Exxon Mobil",
+  CMC: "JPMorgan",
+  AHLA: "Alibaba",
+  NFLX: "Netflix",
+  GIS: "Gilead",
+  SOBA: "AT&T",
+  WDP: "Walt Disney",
+  NCB: "Bank of America",
+  HDI: "Home Depot",
+  INL: "Intel",
+  OPC: "Occidental",
+  BRK: "Berkshire Hathaway B",
+  ADB: "Adobe",
+  CHV: "Chevron",
+  OYC: "Delta Air Lines	",
+  UNH: "UnitedHealth",
+  CVC1: "Carnival Corp",
+  PFE: "Pfizer",
+  M4I: "Mastercard ",
+  BAC: "Verizon",
+  TRVC: "Citigroup	",
+  307: "Shopify Inc",
+  UBER: "Uber Tech",
+  SRB: "Starbucks",
+  PRG: "Procter&Gamble",
+  NWT: "Wells Fargo&Co",
+  CIS: "Cisco	 ",
+  SQ3: "Square Inc ",
+  AAL: "American Airlines ",
+  BRM: "Bristol-Myers Squibb",
+  MDO: "McDonald’s ",
+  FOO: "Salesforce.com",
+  CTO: "Costco",
+  LOM: "Lockheed Martin",
+  AEC1: "American Express"
+};
+
+
+

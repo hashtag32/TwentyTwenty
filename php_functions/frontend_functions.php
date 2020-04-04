@@ -33,6 +33,10 @@ function getScore($stock_diff_array)
 	}
 	
 	// Calculate mean
+	if(count($score_array)==0)
+	{
+		return 0;
+	}
 	return array_sum($score_array)/count($score_array);
 }
 
@@ -63,4 +67,19 @@ function delete_all_votes($user_id)
 
 	return $result;
 }
+
+function getStockName($symbol)
+{
+	$conn = connectDB();
+	$sql = "SELECT SymbolName, StockName FROM SymbolNameToStockName";
+	$result = mysqli_query($conn, $sql);
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		// just get the first value -> Cleanup manual required
+		if ($row["SymbolName"] == $symbol) {
+			return $row["StockName"];
+		}
+	}
+}
+
 ?>

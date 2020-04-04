@@ -6568,3 +6568,29 @@ background-color: #1d4e9e;
 	float: right;
 	border-radius: 50px;
 }
+
+
+.score-value {
+	text-decoration-line: underline;
+	text-decoration-style: dotted;
+}
+
+.score-tooltip { 
+	font-size: 0.5em;
+	visibility: hidden;
+	width: 350px;
+	background-color: white;
+	color: #6d6d6d;
+	border-radius: 6px;
+	padding: 20px 0;
+	padding-bottom: 50px;
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+  
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+}
+
+.score-value:hover .score-tooltip {
+  visibility: visible;
+}

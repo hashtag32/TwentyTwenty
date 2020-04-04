@@ -59,7 +59,7 @@
 						<tr>
 							<!-- todo: Maybe add average Vote -->
 							<!-- todo: Derive Symbol Names -->
-							<td class="has-text-align-center" data-align="center"><?php echo $voting_array["symbol"] ?></td>
+							<td class="has-text-align-center" data-align="center"><?php echo getStockName($voting_array["symbol"]) ?></td>
 							<td class="has-text-align-center" data-align="center"><?php echo $voting_array["voting"] ?> $</td>
 							<td class="has-text-align-center" data-align="center"><?php echo getStockValue($voting_array["symbol"]) ?> $</td>
 							<td class="has-text-align-center" data-align="center"><?php echo $stock_diff ?> %</td>
@@ -91,7 +91,14 @@
 			
 			<div class="scoring-area">
 				<h2 class="has-text-align-center">Score</h2>
-				<h3 class="has-accent-color has-text-color has-text-align-center"><?php echo getScore($stock_diff_array) ?></h3>
+				<h2 class="has-accent-color has-text-color has-text-align-center score-value">
+					<?php echo getScore($stock_diff_array) ?> 
+					<span class="score-tooltip">
+						Score is a value between 0 and 5.
+
+						It shows you how good are your predictions.
+					</span> 
+				</h2>  
 			</div> <!-- .scoring-area -->
 
 		<form name="delete_my_votes_button_form" method="post">
@@ -99,9 +106,11 @@
 			class="delete_my_votes_button"
 			type="button" 
 			value="Delete my Votes" 
-			onclick="<?php echo delete_all_votes(get_current_user_id()) ?>"
+			style="border-radius:50px"
+			onclick="delete_all_votes(this)"
 			/>
 	  </form>
+	  <!-- <div class="wp-block-button"><a class="wp-block-button__link" style="border-radius:50px">Delete my b</a></div> -->
 	  <!-- <input style="border-radius:50px" type="button" value="Click Me" style="float: right;"> -->
 
 		</div><!-- .entry-content -->

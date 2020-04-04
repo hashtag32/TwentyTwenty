@@ -2023,38 +2023,6 @@ button.sub-menu-toggle.active svg {
 	}
 }
 
-/* Menu Modifications ------------------------------- */
-/* Ununsed at the moment, but useful for login-menu/popup-item
-.promo-widget-box {
-  right: 5%; 
-  bottom: 10%; 
-  position: fixed; 
-  display: flex;
-  text-decoration: none; 
-  padding: 1.5%;
-  /* text-decoration: none; */
-  color: #f5efe0;
-  background-color: #1d4e9e;
-  max-width: 25%;
-  border-radius: 15px;
-  /* align: right; */
-  /* float:right; */
-  text-align: center;
-}
-
-a.promo-widget-text:link {
-  color:#f5efe0;
-}
-*/
-
-/* #c1, #c2 {
-    width: 33%;
-}
-
-#c3 {
-    width: auto;
-} */
-
 /* Expanded Menu ----------------------------- */
 
 .expanded-menu {
@@ -2714,6 +2682,14 @@ h2.entry-title {
 	text-decoration: underline;
 }
 
+
+/* Own modification for showing the score */
+.author-bio .author-score {
+    border-radius: 30%;
+    border: 1px solid;
+    background: white;
+
+}
 
 /* Single Pagination ------------------------- */
 

@@ -23,20 +23,28 @@ function getStockDiff($symbol, $prediction)
 	return ($currentStockValue /  $prediction - 1) * 100;
 }
 
-function getScore($stock_diff_array)
+function getScore($user_id)
 { 
+	// Collect stock_diffs
+	$stock_diff_array=array();
+	foreach (getVotings($user_id) as $voting_array)
+	{ 
+		$stock_diff=getStockDiff($voting_array["symbol"],(int)$voting_array["voting"]);
+		array_push($stock_diff_array,$stock_diff);
+	}
+
+	// Calculate scores 
 	$score_array=array();
-	// Calculate scores
 	foreach ($stock_diff_array as $stock_diff){
 		$score=2.5+2.5*((int)$stock_diff_array/50);
 		array_push($score_array,$score);
 	}
 	
-	// Calculate mean
 	if(count($score_array)==0)
 	{
 		return 0;
 	}
+	
 	return array_sum($score_array)/count($score_array);
 }
 

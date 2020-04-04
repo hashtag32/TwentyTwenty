@@ -22,6 +22,12 @@ if ( (bool) get_the_author_meta( 'description' ) && (bool) get_theme_mod( 'show_
 			);
 			?>
 		</h2>
+		<h2 class="author-score has-accent-color heading-size-4">
+		<?php
+			echo getScore(get_current_user_id());
+		?>
+		</h2>
+
 	</div><!-- .author-name -->
 	<div class="author-description">
 		<?php echo wp_kses_post( wpautop( get_the_author_meta( 'description' ) ) ); ?>

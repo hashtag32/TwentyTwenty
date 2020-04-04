@@ -48,12 +48,9 @@
 			
 			<!-- Iterate over all votings -->
 			<?php
-				$user_id=get_current_user_id();
-				$stock_diff_array=array();
-				foreach (getVotings($user_id) as $voting_array)
+				foreach (getVotings(get_current_user_id()) as $voting_array)
 				{ 
 					$stock_diff=round(getStockDiff($voting_array["symbol"],(int)$voting_array["voting"]), 2);
-					array_push($stock_diff_array,$stock_diff);
 			?> 
 					<tbody> 
 						<tr>
@@ -92,7 +89,7 @@
 			<div class="scoring-area">
 				<h2 class="has-text-align-center">Score</h2>
 				<h2 class="has-accent-color has-text-color has-text-align-center score-value">
-					<?php echo getScore($stock_diff_array) ?> 
+					<?php echo getScore(get_current_user_id()) ?> 
 					<span class="score-tooltip">
 						Score is a value between 0 and 5.
 

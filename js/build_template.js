@@ -72,8 +72,10 @@ function create_inst_of_template(symbolName) {
   );
 }
 
+
 function updateVotingValues(request_votingArray) {
   var request_votingArray_parsed = jQuery.parseJSON(request_votingArray);
+  adjustGaugeToWindow(request_votingArray_parsed.symbolName);
   changeVotingValues(
     request_votingArray_parsed.symbolName,
     request_votingArray_parsed.voting_number,
@@ -83,6 +85,16 @@ function updateVotingValues(request_votingArray) {
     request_votingArray_parsed.symbolName,
     request_votingArray_parsed.voting_number
   );
+}
+
+function adjustGaugeToWindow(symbolName)
+{
+  var gauge_id = "gaugeID_" + symbolName;
+  var gaugeElement = document.getElementById(gauge_id);
+
+  // Setting the voting_number
+  gaugeElement.children[0].dataset.width=window.innerWidth*0.2;
+  gaugeElement.children[0].dataset.height=window.innerHeight*0.3;
 }
 
 // is callback, triggered from the request_voting
@@ -212,7 +224,7 @@ function delete_all_votes(element)
 	Fade out entry-headers -> is automatically executed on every page
 --------------------------------------------------------------------------------------------------- */
 $(window).on('scroll', function () {
-  $(".entry-header-inner").css(
+  $("#entry-header-inner-cover").css(
     {"opacity": 1 -( window.pageYOffset * 0.002)
   });
 });

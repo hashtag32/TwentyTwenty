@@ -23,7 +23,7 @@
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
   {
   "symbol": "<?php echo $symbol;  ?>",
-  "width": 800,
+  "width": "80%",
   "locale": "en",
   "colorTheme": "light",
   "isTransparent": true
@@ -41,8 +41,8 @@
 		<script type="text/javascript">
 		new TradingView.widget(
 		{
-		"width": 980,
-		"height": 610,
+		"width": "80%",
+		"height": 400,
 		"symbol": "<?php echo $symbol;  ?>",
 		"timezone": "Etc/UTC",
 		"theme": "dark",
@@ -83,7 +83,7 @@
 <div class="stock-voting has-text-align-center ">
       <!-- Third column = Your vote -->
       <!-- todo: Change to int type and value to default value -->
-      <span class="vote-span" >Your vote</span>
+      <span class="vote-span " >Your vote</span>
       <br/></br>
       <form name="vote_form" method="post" >
         <input type="number"  id="voting_input_<?php echo $symbol;  ?>" class="voting_input" />
@@ -91,7 +91,7 @@
           type="button" 
 		  class="button-voting"
           onclick="send_vote(this,'<?php echo $symbol;  ?>',voting_input_<?php echo $symbol;  ?>.value)"
-          value="Send Vote" 
+          value="Vote" 
           alt="Thank you!"
         />
       </form>

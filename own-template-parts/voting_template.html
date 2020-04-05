@@ -8,11 +8,6 @@
       <!-- First column=Overview -->
       <span class="vote-span" >Prognosis for the next 30 days</span>
       <h2 class="has-accent-color has-text-color has-text-align-center prognosis-text" id="prognosis_template_company_symbol"></h2>
-      <h5 class="has-text-align-center prognosis-ticker" >
-        <?php
-        echo do_shortcode('[stock_ticker symbols="template_company_symbol" show="name"]');
-        ?> 
-      </h5>
     </div>
     <div class="column-gauge">
       <span class="vote-span" >People's opinion</span>
@@ -23,7 +18,7 @@
     <div class="column-voting">
       <!-- Third column = Your vote -->
       <!-- todo: Change to int type and value to default value -->
-      <span class="vote-span" >Your vote</span>
+      <h2 class="vote-span has-text-align-center" >Your vote</h2>
       <br/></br>
       <form name="vote_form" method="post">
         <input type="number" id="voting_input_template_company_symbol" />
@@ -32,7 +27,7 @@
           type="button" 
           class="button-voting"
           onclick="send_vote(this,'template_company_symbol',voting_input_template_company_symbol.value)"
-          value="Send Vote" 
+          value="Vote"
           alt="Thank you!"
         />
       </form>

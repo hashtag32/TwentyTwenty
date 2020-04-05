@@ -26,7 +26,7 @@
 
 	?>
 
-	<div class="post-inner <?php echo is_page_template('templates/template-full-width.php') ? '' : 'thin'; ?> ">
+	<div class="post-inner">
 		<div class="entry-content">
 
 			<?php
@@ -67,7 +67,7 @@
 				} 
 			?>
 				</table>
-			</figure>
+			</figure> 
 
 
 			<?php
@@ -86,31 +86,32 @@
 			}
 			?>
 			
-			<div class="scoring-area">
-				<h2 class="has-text-align-center">Score</h2>
-				<h2 class="has-accent-color has-text-color has-text-align-center score-value">
-					<?php echo getScore(get_current_user_id()) ?> 
-					<span class="score-tooltip">
-						Score is a value between 0 and 5.
+		<div class="scoring-area">
+			<h2 class="has-text-align-center">Score</h2>
+			<h2 class="has-accent-color has-text-color has-text-align-center score-value">
+				<?php echo getScore(get_current_user_id())?> 
+				<span class="score-tooltip">
+					Score is a value between 0 and 5.
 
-						It shows you how good are your predictions.
-					</span> 
-				</h2>  
-			</div> <!-- .scoring-area -->
+					It shows you how good your predictions are.
+				</span> 
+			</h2>  
 
-		<form name="delete_my_votes_button_form" method="post">
-			<input 
-			class="delete_my_votes_button"
-			type="button" 
-			value="Delete my Votes" 
-			style="border-radius:50px"
-			onclick="delete_all_votes(this)"
-			/>
-	  </form>
+			<form name="delete_my_votes_button_form" method="post">
+				<input 
+				class="delete_my_votes_button"
+				type="button" 
+				value="Delete my Votes" 
+				style="border-radius:50px"
+				onclick="delete_all_votes(this)"
+				/>
+			</form>
+		</div> <!-- .scoring-area -->
+
 	  <!-- <div class="wp-block-button"><a class="wp-block-button__link" style="border-radius:50px">Delete my b</a></div> -->
 	  <!-- <input style="border-radius:50px" type="button" value="Click Me" style="float: right;"> -->
 
-		</div><!-- .entry-content -->
+	</div><!-- .entry-content -->
 
 	</div><!-- .post-inner -->
 

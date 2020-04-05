@@ -35,8 +35,13 @@ function getScore($user_id)
 
 	// Calculate scores 
 	$score_array=array();
-	foreach ($stock_diff_array as $stock_diff){
-		$score=2.5+2.5*((int)$stock_diff_array/50);
+	foreach ($stock_diff_array as $stock_diff_element){
+		$stock_diff_value=(float)$stock_diff_element;
+		$stock_diff_value=abs($stock_diff_value);
+		
+		// y=5*0.972^stock_diff
+		// y=2.5 -> should be at stock_diff=25
+		$score=5*pow(0.9726549474,$stock_diff_value); 
 		array_push($score_array,$score);
 	}
 	
@@ -45,7 +50,7 @@ function getScore($user_id)
 		return 0;
 	}
 	
-	return array_sum($score_array)/count($score_array);
+	return round(array_sum($score_array)/count($score_array),2);
 }
 
 function getVotings( $user_id)

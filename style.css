@@ -6519,11 +6519,15 @@ height: 50px;
 }
 
 .prognosis-text {
-/* text-align: center; */
-/* font-weight: bold;
-font-size: 50pt; */
-color: #1d4e9e;
-/* padding: 60px; */
+}
+
+.prognosis-ticker {
+}
+
+input.button-voting{
+	border-radius: 50px;
+	padding: 30px;
+	margin-top:30px;
 }
 
 input.button-voting:hover {
@@ -6569,3 +6573,23 @@ background-color: #1d4e9e;
 .score-value:hover .score-tooltip {
   visibility: visible;
 }
+
+.stock-voting {
+	padding: 5%;
+}
+
+.voting_form{
+	width:30%;
+}
+
+input.voting_input{
+	display: block;
+	margin:0 auto;
+	border-radius:30px;
+	width:40%;
+}
+	 
+/* 
+.tradingview-widget-container-technical {
+	align: center;
+  } */

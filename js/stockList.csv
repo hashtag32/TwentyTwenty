@@ -1,19 +1,18 @@
-DJIA,Dow Jones Industrial Average
+DJI,Dow Jones Industrial Average
 SPX,S&P 500 Index
 HSI,Hang Seng Index
-DAX,DAX Performance Index
 TSLA,Tesla
 AAPL,Apple
 AMZN,Amazon.com
 MSFT,Microsoft
 BCO,Boeing
-NVDA,NVIDIA 
+NVDA,NVIDIA
 FB,Facebook
 AMD,AMD
 GOOGL,Alphabet A
 V,Visa Inc.
 CMC,JPMorgan
-BABA,Alibaba	 
+BABA,Alibaba
 NFLX,Netflix
 ZM,Zoom Video
 GIS,Gilead
@@ -21,15 +20,15 @@ T,AT&T
 DIS,Walt Disney
 NCB,Bank of America
 HD,Home Depot
-INTC,Intel 
-BRK,Berkshire Hathaway
-ADB,Adobe
+INTC,Intel
+BRK-B,Berkshire Hathaway
+ADBE,Adobe
 CVX,Chevron
-DAL,Delta Air Lines	
+DAL,Delta Air Lines
 UNH,UnitedHealth
 CCL,Carnival Corp
 PFE,Pfizer
-MA,Mastercard 
+MA,Mastercard
 BAC,Verizon
 C,Citigroup	
 SHOP,Shopify Inc
@@ -37,11 +36,10 @@ UBER,Uber Tech
 SBUX,Starbucks
 PG,Procter&Gamble
 WFC,Wells Fargo&Co
-CSCO,Cisco	 
-SQ,Square Inc 
-AAL,American Airlines 
-BRM,Bristol-Myers Squibb
-MCD,McDonald’s 
+CSCO,Cisco
+SQ,Square Inc
+AAL,American Airlines
+MCD,McDonald’s
 CRM,Salesforce.com
 COST,Costco Wholesale
 LMT,Lockheed Martin

@@ -102,6 +102,7 @@ function getSymbolName($stockName)
 			return $row["SymbolName"];
 		}
 	}
+	return 0;
 }
 
 ?>

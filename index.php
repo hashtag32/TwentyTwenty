@@ -53,7 +53,23 @@ get_header();
 		$archive_subtitle = get_the_archive_description();
 	}
 
-	if ( $archive_title || $archive_subtitle ) {
+	// Category page
+	if(is_category())
+	{
+		?>
+		<header class="archive-header has-text-align-center header-footer-group">
+
+			<div class="archive-header-inner section-inner medium">
+
+				<?php if ( $archive_title ) { ?>
+					<h2 class="category-title"><?php echo single_cat_title( '', false ); ?></h2>
+				<?php } ?>
+			</div><!-- .archive-header-inner -->
+		</header><!-- .archive-header -->
+	<?php
+		get_template_part( 'own-template-parts/content-category' );
+	}
+	elseif ( $archive_title || $archive_subtitle ) {
 		?>
 
 		<header class="archive-header has-text-align-center header-footer-group">
@@ -75,11 +91,7 @@ get_header();
 		<?php
 	}
 
-	// Category page
-	if(is_category())
-	{
-		get_template_part( 'own-template-parts/content-category' );
-	}
+	
 	
 	if ( have_posts() ) {
 

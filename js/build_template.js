@@ -237,7 +237,7 @@ $(window).on('scroll', function () {
 // csv -> SQL Import manual
 // csv is original file
 var SymbolToStockName = {
-  DJIA:"Dow Jones Industrial Average",
+  DJI:"Dow Jones Industrial Average",
   SPX:"S&P 500 Index",
   HSI:"Hang Seng Index",
   TSLA:"Tesla",
@@ -260,7 +260,6 @@ var SymbolToStockName = {
   NCB:"Bank of America",
   HD:"Home Depot",
   INTC:"Intel",
-  BRK:"Berkshire Hathaway",
   ADBE:"Adobe",
   CVX:"Chevron",
   DAL:"Delta Air Lines",
@@ -278,7 +277,6 @@ var SymbolToStockName = {
   CSCO:"Cisco",
   SQ:"Square Inc",
   AAL:"American Airlines",
-  BRM:"Bristol-Myers Squibb",
   MCD:"McDonald’s",
   CRM:"Salesforce.com",
   COST:"Costco Wholesale",

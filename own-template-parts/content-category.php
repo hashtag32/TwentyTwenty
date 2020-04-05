@@ -80,7 +80,7 @@
 </div> -->
 
 
-<div class="stock-voting ">
+<div class="stock-voting has-text-align-center ">
       <!-- Third column = Your vote -->
       <!-- todo: Change to int type and value to default value -->
       <span class="vote-span" >Your vote</span>

@@ -1,52 +1,48 @@
 DJIA,Dow Jones Industrial Average
-COMP,NASDAQ Composite Index
 SPX,S&P 500 Index
-SX5E,EURO STOXX 50
 HSI,Hang Seng Index
 DAX,DAX Performance Index
 TSLA,Tesla
 AAPL,Apple
 AMZN,Amazon.com
-MSFT,Microsoft	 
+MSFT,Microsoft
 BCO,Boeing
 NVDA,NVIDIA 
 FB,Facebook
 AMD,AMD
-ABEA,Alphabet A
-XONA,Exxon Mobil
-3V64,Visa Inc.
+GOOGL,Alphabet A
+V,Visa Inc.
 CMC,JPMorgan
-AHLA,Alibaba ADR	 
+BABA,Alibaba	 
 NFLX,Netflix
-5ZM,Zoom Video
+ZM,Zoom Video
 GIS,Gilead
-SOBA,AT&T
-WDP,Walt Disney
+T,AT&T
+DIS,Walt Disney
 NCB,Bank of America
-HDI,Home Depot
-INL,Intel
-OPC,Occidental
-BRK.B,Berkshire Hathaway B
+HD,Home Depot
+INTC,Intel 
+BRK,Berkshire Hathaway
 ADB,Adobe
-CHV,Chevron
-OYC,Delta Air Lines	
+CVX,Chevron
+DAL,Delta Air Lines	
 UNH,UnitedHealth
-CVC1,Carnival Corp
+CCL,Carnival Corp
 PFE,Pfizer
-M4I,Mastercard 
+MA,Mastercard 
 BAC,Verizon
-TRVC,Citigroup	
-307,Shopify Inc
+C,Citigroup	
+SHOP,Shopify Inc
 UBER,Uber Tech
-SRB,Starbucks
-PRG,Procter&Gamble
-NWT,Wells Fargo&Co
-CIS,Cisco	 
-SQ3,Square Inc 
+SBUX,Starbucks
+PG,Procter&Gamble
+WFC,Wells Fargo&Co
+CSCO,Cisco	 
+SQ,Square Inc 
 AAL,American Airlines 
 BRM,Bristol-Myers Squibb
-MDO,McDonald’s 
-FOO,Salesforce.com
-CTO,Costco
-LOM,Lockheed Martin
-AEC1,American Express
+MCD,McDonald’s 
+CRM,Salesforce.com
+COST,Costco Wholesale
+LMT,Lockheed Martin
+AXP,American Express

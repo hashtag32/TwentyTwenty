@@ -6536,7 +6536,6 @@ background-color: #1d4e9e;
 
 .category-heading
 {
-	@extend .h2;
 	text-align: center;
 }
 

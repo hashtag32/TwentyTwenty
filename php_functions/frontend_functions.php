@@ -90,4 +90,18 @@ function getStockName($symbol)
 	}
 }
 
+function getSymbolName($stockName)
+{
+	$conn = connectDB();
+	$sql = "SELECT SymbolName, StockName FROM SymbolNameToStockName";
+	$result = mysqli_query($conn, $sql);
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		// just get the first value -> Cleanup manual required
+		if ($row["StockName"] == $stockName) {
+			return $row["SymbolName"];
+		}
+	}
+}
+
 ?>

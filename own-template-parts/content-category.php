@@ -17,12 +17,12 @@
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
 	<div class="post-inner ">
-	<div class="category-heading h2">Performance Overview </div>
+	<h2 class="has-accent-color has-text-color has-text-align-center">Performance Overview </h2>
 		<div class="category-performance">
 			<h2>
 				<?php 
 				// echo single_cat_title( '', false );
-				echo do_shortcode('[stock_ticker symbols="' . single_cat_title( '', false ) . '" show="name" static="1"]');
+				echo do_shortcode('[stock_ticker symbols="' . getSymbolName(single_cat_title( '', false )) . '" show="name" static="1"]');
 				echo "<br>"
 				?> 
 			</h2>

@@ -3,8 +3,8 @@
 /*******Server API functions****/
 function vote($symbol, $voting_number,$user_id)
 {
-	checkCategory($symbolName);
-
+	checkCategory($symbol);
+	
 	$conn = connectDB();
 	$result = insertEntryvotingTable($conn, $symbol, date("d-m-Y H:i:s"), $voting_number, $user_id);
 }
@@ -50,11 +50,13 @@ function existsCategory($symbolName)
 	return false; 
 }
 
-function createCategory($category)
+function createCategory($symbolName)
 {
+	$stockName=getStockName($symbolName);
+
 	//Define the category
 	// TODO: cat_name is Tesla, nice_name is tsla!!! 
-	$wpdocs_cat = array('cat_name' => $category);
+	$wpdocs_cat = array('cat_name' => $stockName, 'category_nicename' => $symbolName );
 	
 	// Create the category
 	$wpdocs_cat_id = wp_insert_category($wpdocs_cat);

@@ -92,21 +92,61 @@ get_header();
 	}
 
 	
-	
 	if ( have_posts() ) {
+		// Go to the analysis site
 
 		$i = 0;
+		?>
+		<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+
+
+		<header class="entry-header has-text-align-center header-footer-group">
+
+		<div class="entry-header-inner section-inner medium">
+
+			<h1 class="entry-title">Analysis</h1>
+		</div><!-- .entry-header-inner -->
+
+		</header>
+		</article>
+		<?php
+
+
+	
 
 		while ( have_posts() ) {
-			$i++;
-			if ( $i > 1 ) {
-				echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
-			}
-			the_post();
+			?>
+			<div class="wp-block-columns"><!-- wp:column {"className":"analysis-column"} -->
+			
+				<div class="wp-block-column analysis-column-left">
 
-			get_template_part( 'own-template-parts/content-analysis', get_post_type() );
+				<?php
+				$i++;
+				if ( $i > 1 ) {
+					// echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
+				}
+				the_post();
+				get_template_part( 'own-template-parts/content-analysis', get_post_type() );
+				?>
+				</div>
 
+
+				<div class="wp-block-column analysis-column-right">
+
+				<?php
+				$i++;
+				if ( $i > 1 ) {
+					// echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
+				}
+				the_post();
+				get_template_part( 'own-template-parts/content-analysis', get_post_type() );
+				?>
+				</div>
+			</div>
+				<hr class="post-separator styled-separator   has-accent-color is-style-wide section-inner" aria-hidden="true" />
+		<?php
 		}
+
 	} elseif ( is_search() ) {
 		?>
 

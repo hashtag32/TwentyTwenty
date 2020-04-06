@@ -1,11 +1,12 @@
 <?php
 
 /*******Server API functions****/
-function vote($symbol, $voting_number)
+function vote($symbol, $voting_number,$user_id)
 {
+	checkCategory($symbol);
+	
 	$conn = connectDB();
-	$result = insertEntryvotingTable($conn, $symbol, date("d-m-Y H:i:s"), $voting_number);
-	// $forecast = readForecast($conn, $symbol);
+	$result = insertEntryvotingTable($conn, $symbol, date("d-m-Y H:i:s"), $voting_number, $user_id);
 }
 
 function getVoting($symbol)
@@ -15,22 +16,51 @@ function getVoting($symbol)
 	return $forecast;
 }
 
-function getStockData($symbol)
+function getStockValue($symbolName)
 {
 	$conn = connectDB();
-	$actual_value =	readStockValue($conn, $symbol);
+	$actual_value =	readStockValue($conn, $symbolName);
 	return $actual_value;
 }
 
-function getActualValues($symbol)
+//****Categories****/// 
+function checkCategory($symbolName)
 {
-	$stock_data = Wpau_Stock_Ticker::get_stock_from_db($symbol);
-	// var_dump($stock_data);
-	return $stock_data[$symbol]["last_close"];
+	// Check if catgeory is already existing
+	if(!existsCategory($symbolName))
+	{
+		createCategory($symbolName);
+	}
 }
 
+function existsCategory($symbolName)
+{
+	$args = array(
+		'hide_empty'      => false,
+	);
+	 
+	foreach( get_categories($args) as $category ) {
+		if ($symbolName == $category->name) {
+			return true;
+		}
+		else {
+			// Print warning: No row found";
+		}
+	}
+	return false; 
+}
 
+function createCategory($symbolName)
+{
+	$stockName=getStockName($symbolName);
 
+	//Define the category
+	// TODO: cat_name is Tesla, nice_name is tsla!!! 
+	$wpdocs_cat = array('cat_name' => $stockName, 'category_nicename' => $symbolName );
+	
+	// Create the category
+	$wpdocs_cat_id = wp_insert_category($wpdocs_cat);
+}
 
 /*******Database related functions****/
 function connectDB()
@@ -50,9 +80,9 @@ function insertEntrystockValuation($conn, $symbol, $currentValue)
 	return $result;
 }
 
-function insertEntryvotingTable($conn, $symbol, $date, $voting_number)
+function insertEntryvotingTable($conn, $symbol, $date, $voting_number, $user_id)
 {
-	$sql = "INSERT INTO votingTable (symbol, date, voting) VALUES ('{$symbol}', '{$date}', '{$voting_number}')";
+	$sql = "INSERT INTO votingTable (symbol, date, voting, user_id) VALUES ('{$symbol}', '{$date}', '{$voting_number}', '{$user_id}')";
 	$result = $conn->query($sql);
 	return $result;
 }
@@ -70,16 +100,23 @@ function readForecast($conn, $symbol)
 		while ($row = mysqli_fetch_assoc($result)) {
 			// echo "id: " . $row["symbol"]. " - Name: " . $row["current_price"]. " " . $row["lastname"]. "<br>";
 			if ($row["symbol"] == $symbol) {
-				$a[] = $row["voting"];
+				$array_votings[] = $row["voting"];
 			}
 		}
 	} else {
 		// echo "0 results";
 	}
-	$a = array_filter($a);
-	$average = array_sum($a) / count($a);
-	$average = round($average);
-	return $average;
+	if (count($array_votings) > 0) {
+		$array_votings = array_filter($array_votings);
+		$average = array_sum($array_votings) / count($array_votings);
+		$average = round($average);
+		$result = $average;
+	} else {
+		// Default value (no votings available)
+		$result = 0;
+	}
+
+	return $result;
 }
 
 function readStockValue($conn, $symbol)
@@ -94,13 +131,13 @@ function readStockValue($conn, $symbol)
 		// output data of each row
 		while ($row = mysqli_fetch_assoc($result)) {
 			if ($row["symbol"] == $symbol) {
-				$last_close_value[] = $row["last_close"];
-				$last_refreshed = $row["last_refreshed"];
+				$last_close_value = (int)$row["last_close"];
 			}
 		}
 	} else {
 		// echo "0 results";
 	}
-	$last_close_value = array_filter($last_close_value);
+
 	return $last_close_value;
 }
+?>

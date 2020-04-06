@@ -17,7 +17,7 @@ include("voting_template.html");
 
 ?>
 <script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 	<?php
@@ -50,11 +50,6 @@ include("voting_template.html");
 	</div><!-- .section-inner -->
 
 	<?php
-	// if (class_exists('Wpau_Stock_Ticker')) {
-	// 	$stock_data = Wpau_Stock_Ticker::get_stock_from_db('AAPL');
-	// 	var_dump($stock_data);
-	// 	echo $stock_data["AAPL"]["last_open"];
-	// }
 
 	if (is_single()) {
 		get_template_part('template-parts/navigation');
@@ -79,43 +74,11 @@ include("voting_template.html");
 
 </article><!-- .post -->
 
-
-<script>
-	if (!Array.prototype.forEach) {
-		Array.prototype.forEach = function(cb) {
-			var i = 0,
-				s = this.length;
-			for (; i < s; i++) {
-				cb && cb(this[i], i, this);
-			}
-		}
-	}
-
-	document.fonts && document.fonts.forEach(function(font) {
-		font.loaded.then(function() {
-			if (font.family.match(/Led/)) {
-				document.gauges.forEach(function(gauge) {
-					gauge.update();
-				});
-			}
-		});
-	});
-
-	var timers = [];
-
-	function animateGauges() {
-		document.gauges.forEach(function(gauge) {
-			timers.push(setInterval(function() {
-				gauge.value = Math.random() *
-					(gauge.options.maxValue - gauge.options.minValue) / 4 +
-					gauge.options.minValue / 4;
-			}, gauge.animation.duration + 50));
-		});
-	}
-
-	function stopGaugesAnimation() {
-		timers.forEach(function(timer) {
-			clearInterval(timer);
-		});
-	}
-</script>
+<style>
+input[type=button] {
+  transition: all 0.5s;
+  position: relative;
+  border-radius: 10px;
+  background-color: #5179BB;
+}
+</style>

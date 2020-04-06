@@ -55,12 +55,20 @@
 
 		// Single bottom post meta.
 		twentytwenty_the_post_meta(get_the_ID(), 'single-bottom');
+		?>
 
-		// Clap button
-		if (function_exists('wp_applaud')) {
-			wp_applaud();
-		}
+		<div class="wp-applaud-section">
+			<?php
 
+			// Clap button
+			if (function_exists('wp_applaud')) {
+				wp_applaud();
+			}
+
+			?>
+		</div>
+
+		<?php
 		// Author biographie
 		if (is_single()) {
 			get_template_part('template-parts/entry-author-bio');

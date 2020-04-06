@@ -4,7 +4,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Twenty
- * @since 1.0.0
+ * @since Twenty Twenty 1.0
  */
 
 if ( (bool) get_the_author_meta( 'description' ) && (bool) get_theme_mod( 'show_author_bio', true ) ) : ?>
@@ -16,12 +16,18 @@ if ( (bool) get_the_author_meta( 'description' ) && (bool) get_theme_mod( 'show_
 		<h2 class="author-title heading-size-4">
 			<?php
 			printf(
-				/* translators: %s: Author name */
+				/* translators: %s: Author name. */
 				__( 'By %s', 'twentytwenty' ),
 				esc_html( get_the_author() )
 			);
 			?>
 		</h2>
+		<h2 class="author-score has-accent-color heading-size-4">
+		<?php
+			echo getScore(get_current_user_id());
+		?>
+		</h2>
+
 	</div><!-- .author-name -->
 	<div class="author-description">
 		<?php echo wp_kses_post( wpautop( get_the_author_meta( 'description' ) ) ); ?>

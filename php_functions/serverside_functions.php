@@ -5,13 +5,15 @@
 function send_votingToServer()
 {
     $voting_number = $_POST['voting_number'];
-    $stockName = $_POST['stockName'];
+    $symbolName = $_POST['symbolName'];
+    $user_id = $_POST['user_id'];
 
+    // Required for sending 'success' to ajax function in js
     $responseData = array("Data received + Response: ");
-    array_push($responseData, "voting_number:", $voting_number, "stockName: ", $stockName);
+    array_push($responseData, "voting_number:", $voting_number, "symbolName: ", $symbolName, "user_id: ", $user_id);
     echo json_encode($responseData);
     // Send to MySQL
-    vote($stockName, $voting_number);
+    vote($symbolName, $voting_number, $user_id);
     wp_die(); // avoiding 0
 }
 add_action('wp_ajax_nopriv_send_votingToServer', 'send_votingToServer');
@@ -20,35 +22,30 @@ add_action('wp_ajax_send_votingToServer', 'send_votingToServer');
 
 function request_votingfromServer()
 {
-    $stockName = $_POST['stockName'];
+    $symbolName = $_POST['symbolName'];
 
-    // $responseData = array("Data received + Response: ");
-    // array_push($responseData, "voting_number:", $voting_number, "stockName: ", $stockName);
-    $voting_number = getVoting($stockName);
-    echo json_encode($voting_number);
+    $actual_value = getStockValue($symbolName);
+    $voting_number = getVoting($symbolName);
+    $request_votingArray = array(
+        "actual_value" => $actual_value,
+        "voting_number" => $voting_number,
+        "symbolName" => $symbolName
+    );
+
+    echo json_encode($request_votingArray);
     wp_die(); // avoiding 0
 }
 add_action('wp_ajax_nopriv_request_votingfromServer', 'request_votingfromServer');
 add_action('wp_ajax_request_votingfromServer', 'request_votingfromServer');
 
 
-function request_actual_valuefromServer()
+function delete_votesServer()
 {
-    // 	var_dump($stock_data);
-    // 	echo $stock_data["AAPL"]["last_open"];
-    // }
-    $stockName = $_POST['stockName'];
+    $user_id = $_POST['user_id'];
+    $result=delete_all_votes($user_id);
 
-
-    // $stock_data = Wpau_Stock_Ticker::get_stock_from_db($stockName);
-    $actual_value = getStockData($stockName);
-    // $actual_value = 100;
-
-    // $responseData = array("Data received + Response: ");
-    // array_push($responseData, "voting_number:", $voting_number, "stockName: ", $stockName);
-    // $voting_number = getVoting($stockName);
-    echo json_encode($actual_value);
+    echo json_encode($result);
     wp_die(); // avoiding 0
 }
-add_action('wp_ajax_nopriv_request_actual_valuefromServer', 'request_actual_valuefromServer');
-add_action('wp_ajax_request_actual_valuefromServer', 'request_actual_valuefromServer');
+add_action('wp_ajax_nopriv_delete_votesServer', 'delete_votesServer');
+add_action('wp_ajax_delete_votesServer', 'delete_votesServer');

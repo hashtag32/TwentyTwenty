@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Stocks Template
+ * Template Name: My Votings Template
  * Template Post Type: post, page
  * The template for displaying single posts and pages.
  *
@@ -24,7 +24,7 @@ get_header();
 		while (have_posts()) {
 			the_post();
 
-			get_template_part('own-template-parts/content-stocks', get_post_type());
+			get_template_part('own-template-parts/content-my-votings', get_post_type());
 		}
 	}
 

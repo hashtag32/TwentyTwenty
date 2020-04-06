@@ -11,7 +11,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Twenty
- * @since 1.0.0
+ * @since Twenty Twenty 1.0
  */
 
 get_header();
@@ -35,7 +35,7 @@ get_header();
 
 		if ( $wp_query->found_posts ) {
 			$archive_subtitle = sprintf(
-				/* translators: %s: Number of search results */
+				/* translators: %s: Number of search results. */
 				_n(
 					'We found %s result for your search.',
 					'We found %s results for your search.',
@@ -47,12 +47,29 @@ get_header();
 		} else {
 			$archive_subtitle = __( 'We could not find any results for your search. You can give it another try through the search form below.', 'twentytwenty' );
 		}
-	} elseif ( ! is_home() ) {
+	}
+	elseif ( ! is_home() ) {
 		$archive_title    = get_the_archive_title();
 		$archive_subtitle = get_the_archive_description();
 	}
 
-	if ( $archive_title || $archive_subtitle ) {
+	// Category page
+	if(is_category())
+	{
+		?>
+		<header class="archive-header has-text-align-center header-footer-group">
+
+			<div class="archive-header-inner section-inner medium">
+
+				<?php if ( $archive_title ) { ?>
+					<h2 class="category-title"><?php echo single_cat_title( '', false ); ?></h2>
+				<?php } ?>
+			</div><!-- .archive-header-inner -->
+		</header><!-- .archive-header -->
+	<?php
+		get_template_part( 'own-template-parts/content-category' );
+	}
+	elseif ( $archive_title || $archive_subtitle ) {
 		?>
 
 		<header class="archive-header has-text-align-center header-footer-group">
@@ -74,6 +91,8 @@ get_header();
 		<?php
 	}
 
+	
+	
 	if ( have_posts() ) {
 
 		$i = 0;
@@ -85,7 +104,7 @@ get_header();
 			}
 			the_post();
 
-			get_template_part( 'template-parts/content', get_post_type() );
+			get_template_part( 'own-template-parts/content-analysis', get_post_type() );
 
 		}
 	} elseif ( is_search() ) {

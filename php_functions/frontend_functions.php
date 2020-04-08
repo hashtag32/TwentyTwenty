@@ -93,6 +93,11 @@ function getStockName($symbol)
 			return $row["StockName"];
 		}
 	}
+	if(empty($row["StockName"]))
+	{
+		//Get stockName from API
+		fetchStockName($symbol);
+	}
 }
 
 function getSymbolName($stockName)

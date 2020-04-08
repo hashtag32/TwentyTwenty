@@ -119,6 +119,19 @@ function readForecast($conn, $symbol)
 	return $result;
 }
 
+
+function fetchStockName($symbol)
+{
+	// Get name from API
+	$data_arr=fetch_fmpcloud_feed($symbol);
+	$stockName=$data_arr["name"];
+	
+	// Insert into DB
+	insertStockName($symbol,$stockName);
+
+	return $stockName;
+}
+
 function readStockValue($conn, $symbol)
 {
 	//3 columns in MySQL: symbol, data, voting
@@ -160,13 +173,9 @@ function updateStockValue($symbol, $date_now)
 {
 	// Get newest value from alpha vantage
 
-	// Re-Try 3 times | Current problem: Unresolved Bad API Problem occur very often -> read from datebase as soon as possible
-	$price=0;
-	for ($i = 0; ($i <= 3) && ($price==0); $i++) {
-		$data_arr=fetch_alphavantage_feed($symbol);
-		$price=$data_arr["price"];
-	}
-	
+	$data_arr=fetch_fmpcloud_feed($symbol);
+	$price=$data_arr["price"];
+	 
 	// Insert if not erroneus
 	if($price!=0)
 	{
@@ -191,6 +200,15 @@ function getHoursDiff($date1,$date2)
 	return $interval->format('%h');
 }
 
+function insertStockName($symbolName, $stockName)
+{
+	$conn = connectDB();
+	$sql = "INSERT INTO SymbolNameToStockName (symbolName, stockName) VALUES ('{$symbolName}', '{$stockName}')";
+	$result = $conn->query($sql);
+	return $result;
+
+}
+
 function insertStockValue($symbol, $date_now, $price)
 {
 	$conn = connectDB();
@@ -199,7 +217,7 @@ function insertStockValue($symbol, $date_now, $price)
 	return $result;
 }
 
-function fetch_alphavantage_feed( $symbol ) {
+function fetch_fmpcloud_feed( $symbol ) {
 
 	// self::log( "Fetching data for symbol {$symbol}..." );
 
@@ -213,7 +231,8 @@ function fetch_alphavantage_feed( $symbol ) {
 
 	// Define AplhaVantage API URL
 	// self::log( "Using GLOBAL_QUOTE for {$symbol}..." );
-	$feed_url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&apikey=XKWVUWQ9QOUW98DB&datatype=json&symbol=' . $symbol;
+	
+	$feed_url = 'https://fmpcloud.io/api/v3/quote/' . $symbol . '?apikey=fd1432a9b894108cc5852e4a0f4a29ba';
 
 	//todoSet timer to fetch according to alpha vantage restraints
 	$wparg = array(
@@ -233,44 +252,46 @@ function fetch_alphavantage_feed( $symbol ) {
 		// Get response from AV and parse it - look for error
 		$json = wp_remote_retrieve_body( $response );
 		$response_arr = json_decode( $json, true );
+		$response_arr=$response_arr[0];
+		return $response_arr;
 		// If we got some error from AV, log to self::log and return none
-		if ( ! empty( $response_arr['Error Message'] ) ) {
-			return 'Stock Ticker connected to AlphaVantage.co but got error: ' . $response_arr['Error Message'];
-		} else if ( ! empty( $response_arr['Information'] ) ) {
-			return 'Stock Ticker connected to AlphaVantage.co and got response: ' . $response_arr['Information'];
-		} 
-		else if ( ! isset( $response_arr['Global Quote'] ) ) {
-			// return array_keys($response_arr['Global Quote']);
-			// return $response_arr['Global Quote'];
-			// return 'Bad API';
-			return 'Bad API response: Stock Ticker connected to AlphaVantage.co and received response w/o Global Quote object!';
-		} else {
-			// Crunch data from AlphaVantage for symbol and prepare compact array
-			// self::log( "We got some data from AlphaVantage for $symbol, so now let we crunch them and save to database if possible..." );
+		// if ( ! empty( $response_arr['Error Message'] ) ) {
+		// 	return 'Stock Ticker connected to AlphaVantage.co but got error: ' . $response_arr['Error Message'];
+		// } else if ( ! empty( $response_arr['Information'] ) ) {
+		// 	return 'Stock Ticker connected to AlphaVantage.co and got response: ' . $response_arr['Information'];
+		// } 
+		// else if ( ! isset( $response_arr['Global Quote'] ) ) {
+		// 	// return array_keys($response_arr['Global Quote']);
+		// 	// return $response_arr['Global Quote'];
+		// 	// return 'Bad API';
+		// 	return 'Bad API response: Stock Ticker connected to AlphaVantage.co and received response w/o Global Quote object!';
+		// } else {
+		// 	// Crunch data from AlphaVantage for symbol and prepare compact array
+		// 	// self::log( "We got some data from AlphaVantage for $symbol, so now let we crunch them and save to database if possible..." );
 
-			// GLOBAL_QUOTE
-			$quote = $response_arr['Global Quote'];
-			if ( empty( $quote['07. latest trading day'] ) ) {
-				return 'Bad API response: Stock Ticker connected to AlphaVantage.co and received empty Global Quote object.';
-			}
-			$data_arr = array(
-				't'   => $symbol,
-				'pc'  => $quote['08. previous close'],
-				'c'   => $quote['09. change'],
-				'cp'  => str_replace( '%', '', $quote['10. change percent'] ),
-				'price'   => $quote['05. price'], // $last_close,
-				'lt'  => $quote['07. latest trading day'], // $last_trade_refresh,
-				'ltz' => 'US/Eastern', // default US/Eastern
-				'r'   => "{$quote['04. low']} - {$quote['03. high']}", // $range,
-				'o'   => $quote['02. open'], // $last_open,
-				'h'   => $quote['03. high'], // $last_high,
-				'low' => $quote['04. low'], // $last_low,
-				'v'   => $quote['06. volume'], // $last_volume,
-			);
-			// self::log( 'data_arr w/o raw JSON: ' . print_r( $data_arr, 1 ) );
-			$data_arr['raw'] = $json;
+		// 	// GLOBAL_QUOTE
+		// 	$quote = $response_arr['Global Quote'];
+		// 	if ( empty( $quote['07. latest trading day'] ) ) {
+		// 		return 'Bad API response: Stock Ticker connected to AlphaVantage.co and received empty Global Quote object.';
+		// 	}
+		// 	$data_arr = array(
+		// 		't'   => $symbol,
+		// 		'pc'  => $quote['08. previous close'],
+		// 		'c'   => $quote['09. change'],
+		// 		'cp'  => str_replace( '%', '', $quote['10. change percent'] ),
+		// 		'price'   => $quote['05. price'], // $last_close,
+		// 		'lt'  => $quote['07. latest trading day'], // $last_trade_refresh,
+		// 		'ltz' => 'US/Eastern', // default US/Eastern
+		// 		'r'   => "{$quote['04. low']} - {$quote['03. high']}", // $range,
+		// 		'o'   => $quote['02. open'], // $last_open,
+		// 		'h'   => $quote['03. high'], // $last_high,
+		// 		'low' => $quote['04. low'], // $last_low,
+		// 		'v'   => $quote['06. volume'], // $last_volume,
+		// 	);
+		// 	// self::log( 'data_arr w/o raw JSON: ' . print_r( $data_arr, 1 ) );
+		// 	$data_arr['raw'] = $json;
 
-		}
+		// }
 		unset( $response_arr );
 	}
 

@@ -33,6 +33,7 @@ include("voting_template.html");
 		<div class="entry-content">
 
 			<?php
+			// copy value from 
 			if (is_search() || !is_singular() && 'summary' === get_theme_mod('blog_content', 'full')) {
 				the_excerpt();
 			} else {

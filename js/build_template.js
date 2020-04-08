@@ -236,17 +236,17 @@ $(window).on('scroll', function () {
 // csv -> Javascript here
 // csv -> SQL Import manual
 // csv is original file
+// DJI:"Dow Jones Industrial Average",
+// SPX:"S&P 500 Index",
+// HSI:"Hang Seng Index",
 var SymbolToStockName = {
-  DJI:"Dow Jones Industrial Average",
-  SPX:"S&P 500 Index",
-  HSI:"Hang Seng Index",
   TSLA:"Tesla",
   AAPL:"Apple",
   AMZN:"Amazon.com",
   MSFT:"Microsoft",
   BCO:"Boeing",
   NVDA:"NVIDIA",
-  FB:"Facebook",
+  FB:"Facebook", 
   AMD:"AMD",
   GOOGL:"Alphabet A",
   V:"Visa Inc.",

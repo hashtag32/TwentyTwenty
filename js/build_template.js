@@ -250,7 +250,6 @@ var SymbolToStockName = {
   AMD:"AMD",
   GOOGL:"Alphabet A",
   V:"Visa Inc.",
-  CMC:"JPMorgan", 
   BABA:"Alibaba",
   NFLX:"Netflix",
   ZM:"Zoom Video",

@@ -57,14 +57,14 @@
 							<!-- todo: Maybe add average Vote -->
 							<!-- todo: Derive Symbol Names -->
 							<td class="has-text-align-center" data-align="center">
-								<a href="https://stockvoting.net/category/<?php echo $voting_array["symbol"]?>">
+								<a href="https://stockvoting.net/category/stocks/<?php echo $voting_array["symbol"]?>">
 									<div style="font-weight:bold">
 										<?php echo getStockName($voting_array["symbol"]) ?>
 									</div>
 								</a>
 							</td>
 							<td class="has-text-align-center" data-align="center"><?php echo $voting_array["voting"] ?> $</td>
-							<td class="has-text-align-center" data-align="center"><?php echo getStockValue($voting_array["symbol"]) ?> $</td>
+							<td class="has-text-align-center" data-align="center"><?php echo round(getStockValue($voting_array["symbol"]),2) ?> $</td>
 							<td class="has-text-align-center" data-align="center"><?php echo $stock_diff ?> %</td>
 							<td class="has-text-align-center" data-align="center"><?php echo getDaysLeft($voting_array["date"], "+30 days") ?></td>
 						</tr>

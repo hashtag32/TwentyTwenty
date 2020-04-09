@@ -19,7 +19,7 @@ if($symbol!="")
 {
 ?>
 
-<div class="post-inner ">
+<div class="post-inner">
 
 	
 	<!-- TradingView Widget BEGIN -->

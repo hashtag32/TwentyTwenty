@@ -55,11 +55,11 @@ function createCategory($symbolName)
 	$stockName=getStockName($symbolName);
 
 	//Define the category
-	// TODO: cat_name is Tesla, nice_name is tsla!!! 
-	$wpdocs_cat = array('cat_name' => $stockName, 'category_nicename' => $symbolName );
+	$wpdocs_cat = array('cat_name' => $stockName, 'category_nicename' => $symbolName, 'category_parent' => '187'  );
 	
 	// Create the category
 	$wpdocs_cat_id = wp_insert_category($wpdocs_cat);
+
 }
 
 /*******Database related functions****/

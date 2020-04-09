@@ -66,8 +66,8 @@ get_header();
 				<?php } ?>
 			</div><!-- .archive-header-inner -->
 		</header><!-- .archive-header -->
+		<!-- Stocks are handled in subcategory.php -->
 	<?php
-		get_template_part( 'own-template-parts/content-category' );
 	}
 	elseif ( $archive_title || $archive_subtitle ) {
 		?>
@@ -94,60 +94,10 @@ get_header();
 	
 	if ( have_posts() ) {
 		// Go to the analysis site
-
-		$i = 0;
-		?>
-		<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-
-
-		<header class="entry-header has-text-align-center header-footer-group">
-
-		<div class="entry-header-inner section-inner medium">
-
-			<h1 class="entry-title">Analysis</h1>
-		</div><!-- .entry-header-inner -->
-
-		</header>
-		</article>
-		<?php
-
-
+		get_template_part( 'own-template-parts/content-posts' );
+	} 
 	
-
-		while ( have_posts() ) {
-			?>
-			<div class="wp-block-columns"><!-- wp:column {"className":"analysis-column"} -->
-			
-				<div class="wp-block-column analysis-column-left">
-
-				<?php
-				$i++;
-				if ( $i > 1 ) {
-					// echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
-				}
-				the_post();
-				get_template_part( 'own-template-parts/content-analysis', get_post_type() );
-				?>
-				</div>
-
-
-				<div class="wp-block-column analysis-column-right">
-
-				<?php
-				$i++;
-				if ( $i > 1 ) {
-					// echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
-				}
-				the_post();
-				get_template_part( 'own-template-parts/content-analysis', get_post_type() );
-				?>
-				</div>
-			</div>
-				<hr class="post-separator styled-separator   has-accent-color is-style-wide section-inner" aria-hidden="true" />
-		<?php
-		}
-
-	} elseif ( is_search() ) {
+	elseif ( is_search() ) {
 		?>
 
 		<div class="no-search-results-form section-inner thin">

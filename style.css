@@ -6597,7 +6597,11 @@ input.voting_input{
 	width: calc(100% - 4rem);
 }
 
-	 
+.cn-button.bootstrap { 
+	background-color: #1d4e9e; 
+	color: white;
+
+ }
 /* 
 .tradingview-widget-container-technical {
 	align: center;

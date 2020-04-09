@@ -23,6 +23,15 @@ function getStockDiff($symbol, $prediction)
 	return ($currentStockValue /  $prediction - 1) * 100;
 }
 
+
+function getPredictionScore($symbol)
+{ 
+	$dataArr=fetch_fmpcloud_feed($symbol, "rating");
+	
+	return $dataArr["ratingScore"];
+}
+
+
 function getScore($user_id)
 { 
 	// Collect stock_diffs

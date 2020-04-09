@@ -244,7 +244,7 @@ var SymbolToStockName = {
   AAPL:"Apple",
   AMZN:"Amazon.com",
   MSFT:"Microsoft",
-  BCO:"Boeing",
+  BA:"Boeing",
   NVDA:"NVIDIA",
   FB:"Facebook", 
   AMD:"AMD",

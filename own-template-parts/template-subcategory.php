@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Template Name: My Votings Template
- * Template Post Type: post, page
+ * Template Name: Subcategory template
+ * Template Post Type:  page
  * The template for displaying single posts and pages.
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
@@ -33,5 +33,4 @@ if ( have_posts() ) {
 
 <?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
 
-<?php
-get_footer();
+<?php get_footer(); ?>

@@ -14,16 +14,7 @@
 
 ?>
 
-<!-- Search Form -->
-<div class="no-search-results-form section-inner thin">
-<?php
-get_search_form(
-	array(
-		'label' => __( 'search again', 'twentytwenty' ),
-	)
-);
-?>
-</div>
+
 
 <!-- Logic Stocks -->
 <?php
@@ -51,12 +42,19 @@ get_search_form(
 	$stocks = $wpdb->get_results( $wpdb->prepare( $select, $string_replace ) );
 
 
-
 	// Search results subheading
-	$number_results=count(have_posts()) + count($stocks)-1;
-	if($number_results!=0)
+	$search_title = sprintf(
+		'%1$s %2$s',
+		'<span class="color-accent">' . __( 'Search:', 'twentytwenty' ) . '</span>',
+		'&ldquo;' . get_search_query() . '&rdquo;'
+	);
+
+	global $wp_query;
+	$number_results=(int)$wp_query->found_posts + count($stocks);
+
+	if($number_results>0)
 	{
-		$results_subtitle = sprintf(
+		$search_subtitle = sprintf(
 			/* translators: %s: Number of search results. */
 			_n(
 				'We found %s result for your search.',
@@ -69,18 +67,36 @@ get_search_form(
 	}
 	else
 	{
-		$results_subtitle = __( 'We could not find any results for your search. You can give it another try through the search form below.', 'twentytwenty' );
+		$search_subtitle = __( 'We could not find any results for your search. You can give it another try through the search form below.', 'twentytwenty' );
 	}
 	?>
 	
 <!-- Search results -->
 <header class="archive-header has-text-align-center header-footer-group">
-<div class="archive-header-inner section-inner medium">
-	<?php if ( $results_subtitle ) { ?>
-		<div class="archive-subtitle section-inner thin max-percentage intro-text"><?php echo wp_kses_post( wpautop( $results_subtitle ) ); ?></div>
-	<?php } ?>
-</div>
-</header>
+	<div class="archive-header-inner section-inner medium">
+		<h1 class="archive-title"><?php echo wp_kses_post( $search_title ); ?></h1>
+		<div class="archive-subtitle section-inner thin max-percentage intro-text"><?php echo wp_kses_post( wpautop( $search_subtitle ) ); ?></div>
+	</div><!-- .archive-header-inner -->
+</header><!-- .archive-header -->
+
+
+<!-- Search Form -->
+<?php 
+if($number_results==0)
+	{ 
+?>
+	<div class="no-search-results-form section-inner thin">
+		<?php
+		get_search_form(
+			array(
+				'label' => __( 'search again', 'twentytwenty' ),
+			)
+		);
+		?>
+	</div>
+<?php 
+	} 
+?>
 
 
 <!-- Stock results displaying -->

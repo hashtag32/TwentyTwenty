@@ -83,7 +83,7 @@
 							
 							<h2 class="entry-title">Stock Analysis for Professionals</h2>
 
-							<div class="intro-text section-inner max-percentage<?php echo esc_attr( $intro_text_width ); ?>">
+							<div class="intro-text section-inner max-percentage">
 								<p>Platform for investment knowledge</p>
 							</div>
 

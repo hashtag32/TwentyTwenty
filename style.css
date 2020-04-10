@@ -6511,7 +6511,9 @@ font-size: 17pt;
 }
 
 .radial-gauge-class {
-padding: 5px;
+	width:100%;
+	height: 100%;
+	padding-top: 10%;
 }
 
 .footer-logo {
@@ -6524,10 +6526,17 @@ height: 50px;
 .prognosis-ticker {
 }
 
+/* Div button */
+.button-voting-div{
+	text-align:center;
+}
+
+/* Button */
 input.button-voting{
 	width: 60%;
 	border-radius: 50px;
-	margin-top:30px;
+	margin-top:10%;
+	text-align:center;
 }
 
 input.button-voting:hover {
@@ -6597,10 +6606,11 @@ input.voting_input{
 	width: calc(100% - 4rem);
 }
 
+/* cookie notice button */
 .cn-button.bootstrap { 
 	background-color: #1d4e9e; 
 	color: white;
-
+	border-radius: 15px;
  }
 /* 
 .tradingview-widget-container-technical {

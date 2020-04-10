@@ -75,7 +75,7 @@ function create_inst_of_template(symbolName) {
 
 function updateVotingValues(request_votingArray) {
   var request_votingArray_parsed = jQuery.parseJSON(request_votingArray);
-  adjustGaugeToWindow(request_votingArray_parsed.symbolName); 
+  // adjustGaugeToWindow(request_votingArray_parsed.symbolName); 
   changeVotingValues(
     request_votingArray_parsed.symbolName,
     request_votingArray_parsed.voting_number,
@@ -282,6 +282,3 @@ var SymbolToStockName = {
   LMT:"Lockheed Martin",
   AXP:"American Express"
 };
-
-
-

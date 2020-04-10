@@ -20,7 +20,7 @@ get_header();
 
 <?php
 
-get_template_part( 'own-template-parts/content-category' );
+get_template_part( 'own-template-parts/content-subcategory' );
 
 if ( have_posts() ) {
 	// Go to the analysis site

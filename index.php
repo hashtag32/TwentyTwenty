@@ -26,7 +26,6 @@ get_header();
 
 	if ( is_search() ) {
 		get_template_part( 'own-template-parts/content-search' );
-		
 	}
 	elseif ( ! is_home() ) {
 		$archive_title    = get_the_archive_title();
@@ -36,18 +35,7 @@ get_header();
 	// Category page
 	if(is_category())
 	{
-		?>
-		<header class="archive-header has-text-align-center header-footer-group">
-
-			<div class="archive-header-inner section-inner medium">
-
-				<?php if ( $archive_title ) { ?>
-					<h2 class="category-title"><?php echo single_cat_title( '', false ); ?></h2>
-				<?php } ?>
-			</div><!-- .archive-header-inner -->
-		</header><!-- .archive-header -->
-		<!-- Stocks are handled in subcategory.php -->
-	<?php
+		get_template_part( 'own-template-parts/content-category' );
 	}
 	elseif ( $archive_title || $archive_subtitle ) {
 		?>

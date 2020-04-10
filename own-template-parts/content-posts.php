@@ -16,11 +16,12 @@
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
+<?php $heading=is_search() ? 'Articles' : 'Analysis'; ?>
+
 <header class="entry-header has-text-align-center header-footer-group">
 
 <div class="entry-header-inner section-inner medium">
-
-	<h1 class="entry-title">Analysis</h1>
+	<h1 class="entry-title"><?php echo $heading?></h1>
 </div><!-- .entry-header-inner -->
 
 </header>

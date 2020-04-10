@@ -10,4 +10,14 @@ function filter_subcategory( ) {
 }
 add_filter( 'category_template', 'filter_subcategory' ); 
 
+
+function add_pages_to_search( $query ) {
+    if ( $query->is_search ) {
+		$query->set( 'post_type', array('post','page') );
+        add_query_arg( 'cat', "stocks" );
+    }
+    return $query;
+}
+add_filter('pre_get_posts','add_pages_to_search');
+
 ?>

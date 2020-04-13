@@ -218,20 +218,6 @@ function insertStockValue($symbol, $date_now, $price)
 }
 
 function fetch_fmpcloud_feed( $symbol, $type ) {
-
-	// self::log( "Fetching data for symbol {$symbol}..." );
-
-	// Get defaults (for API key)
-	// $defaults = $this->defaults;
-
-	// Exit if we don't have API Key
-	// if ( empty( $defaults['avapikey'] ) ) {
-	// 	return 'Stock Ticker Fatal Error: AlphaVantage.co API key has not set';
-	// }
-
-	// Define AplhaVantage API URL
-	// self::log( "Using GLOBAL_QUOTE for {$symbol}..." );
-	
 	$feed_url = 'https://fmpcloud.io/api/v3/'. $type . '/' . $symbol . '?apikey=fd1432a9b894108cc5852e4a0f4a29ba';
 
 	//todoSet timer to fetch according to alpha vantage restraints
@@ -239,7 +225,6 @@ function fetch_fmpcloud_feed( $symbol, $type ) {
 		// 'timeout' => intval( $defaults['timeout'] ),
 	);
 
-	// self::log( 'Fetching data from AV: ' . $feed_url );
 	$response = wp_remote_get( $feed_url, $wparg );
 
 	// Initialize empty $json variable
@@ -252,52 +237,12 @@ function fetch_fmpcloud_feed( $symbol, $type ) {
 		// Get response from AV and parse it - look for error
 		$json = wp_remote_retrieve_body( $response );
 		$response_arr = json_decode( $json, true );
-		$response_arr=$response_arr[0];
-		return $response_arr;
-		// If we got some error from AV, log to self::log and return none
-		// if ( ! empty( $response_arr['Error Message'] ) ) {
-		// 	return 'Stock Ticker connected to AlphaVantage.co but got error: ' . $response_arr['Error Message'];
-		// } else if ( ! empty( $response_arr['Information'] ) ) {
-		// 	return 'Stock Ticker connected to AlphaVantage.co and got response: ' . $response_arr['Information'];
-		// } 
-		// else if ( ! isset( $response_arr['Global Quote'] ) ) {
-		// 	// return array_keys($response_arr['Global Quote']);
-		// 	// return $response_arr['Global Quote'];
-		// 	// return 'Bad API';
-		// 	return 'Bad API response: Stock Ticker connected to AlphaVantage.co and received response w/o Global Quote object!';
-		// } else {
-		// 	// Crunch data from AlphaVantage for symbol and prepare compact array
-		// 	// self::log( "We got some data from AlphaVantage for $symbol, so now let we crunch them and save to database if possible..." );
-
-		// 	// GLOBAL_QUOTE
-		// 	$quote = $response_arr['Global Quote'];
-		// 	if ( empty( $quote['07. latest trading day'] ) ) {
-		// 		return 'Bad API response: Stock Ticker connected to AlphaVantage.co and received empty Global Quote object.';
-		// 	}
-		// 	$data_arr = array(
-		// 		't'   => $symbol,
-		// 		'pc'  => $quote['08. previous close'],
-		// 		'c'   => $quote['09. change'],
-		// 		'cp'  => str_replace( '%', '', $quote['10. change percent'] ),
-		// 		'price'   => $quote['05. price'], // $last_close,
-		// 		'lt'  => $quote['07. latest trading day'], // $last_trade_refresh,
-		// 		'ltz' => 'US/Eastern', // default US/Eastern
-		// 		'r'   => "{$quote['04. low']} - {$quote['03. high']}", // $range,
-		// 		'o'   => $quote['02. open'], // $last_open,
-		// 		'h'   => $quote['03. high'], // $last_high,
-		// 		'low' => $quote['04. low'], // $last_low,
-		// 		'v'   => $quote['06. volume'], // $last_volume,
-		// 	);
-		// 	// self::log( 'data_arr w/o raw JSON: ' . print_r( $data_arr, 1 ) );
-		// 	$data_arr['raw'] = $json;
-
-		// }
+		$data_arr=$response_arr[0];
 		unset( $response_arr );
 	}
 
-	return $data_arr;
+	return $data_arr; 
 
-} // END function fetch_alphavantage_feed( $symbol )
-
+} 
 
 ?>

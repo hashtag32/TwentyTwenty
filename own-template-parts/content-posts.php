@@ -30,35 +30,22 @@
 
 <!-- List all articles -->
 <?php
-
-$i = 0;
 while ( have_posts() ) {
 	?>
 	<div class="wp-block-columns"><!-- wp:column {"className":"analysis-column"} -->
 	
 		<div class="wp-block-column analysis-column-left">
-
-		<?php
-		$i++;
-		if ( $i > 1 ) {
-			// echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
-		}
-		the_post();
-		get_template_part( 'own-template-parts/content-analysis', get_post_type() );
-		?>
+			<?php
+			the_post();
+			get_template_part( 'own-template-parts/content-analysis', get_post_type() );
+			?>
 		</div>
 
-
 		<div class="wp-block-column analysis-column-right">
-
-		<?php
-		$i++;
-		if ( $i > 1 ) {
-			// echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
-		}
-		the_post();
-		get_template_part( 'own-template-parts/content-analysis', get_post_type() );
-		?>
+			<?php
+			the_post();
+			get_template_part( 'own-template-parts/content-analysis', get_post_type() );
+			?>
 		</div>
 	</div>
 	<hr class="post-separator styled-separator   has-accent-color is-style-wide section-inner" aria-hidden="true" />

@@ -20,4 +20,7 @@ function add_pages_to_search( $query ) {
 }
 add_filter('pre_get_posts','add_pages_to_search');
 
+// Also include unused categories 
+add_filter('wpseo_sitemap_exclude_empty_terms', '__return_false');
+ 
 ?>

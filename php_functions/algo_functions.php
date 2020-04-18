@@ -29,13 +29,14 @@ function checkCategory($symbolName)
 	// Check if catgeory is already existing
 	if(!existsCategory($symbolName))
 	{
-		createCategory($symbolName);
+		return createCategory($symbolName); 
 	}
+	return true;
 }
 
 function existsCategory($symbolName)
 {
-	$args = array(
+	$args = array( 
 		'hide_empty'      => false,
 	);
 	 
@@ -52,14 +53,16 @@ function existsCategory($symbolName)
 
 function createCategory($symbolName)
 {
+	require_once( ABSPATH . '/wp-admin/includes/taxonomy.php');
+
 	$stockName=getStockName($symbolName);
 
 	//Define the category
-	$wpdocs_cat = array('cat_name' => $stockName, 'category_nicename' => $symbolName, 'category_parent' => '187'  );
+	$category_to_insert = array('cat_name' => $stockName, 'category_nicename' => $symbolName, 'category_parent' => '187'  );
 	
 	// Create the category
-	$wpdocs_cat_id = wp_insert_category($wpdocs_cat);
-
+	$category_to_insert_id = wp_insert_category($category_to_insert);
+	return $category_to_insert_id;
 }
 
 /*******Database related functions****/
@@ -218,11 +221,17 @@ function insertStockValue($symbol, $date_now, $price)
 }
 
 function fetch_fmpcloud_feed( $symbol, $type ) {
-	$feed_url = 'https://fmpcloud.io/api/v3/'. $type . '/' . $symbol . '?apikey=fd1432a9b894108cc5852e4a0f4a29ba';
-
-	//todoSet timer to fetch according to alpha vantage restraints
+	if ($type=="search") {
+		$feed_url = 'https://fmpcloud.io/api/v3/search?query=' . $symbol . '&limit=3&apikey=fd1432a9b894108cc5852e4a0f4a29ba';
+	}
+	else
+	{
+		$feed_url = 'https://fmpcloud.io/api/v3/'. $type . '/' . $symbol . '?apikey=fd1432a9b894108cc5852e4a0f4a29ba';
+	}
+	
+	//todoSet timer to fetch according to alpha vantage restr aints
 	$wparg = array(
-		// 'timeout' => intval( $defaults['timeout'] ),
+		// 'timeout' => intval( $defaults['timeout'] ), 
 	);
 
 	$response = wp_remote_get( $feed_url, $wparg );
@@ -237,12 +246,20 @@ function fetch_fmpcloud_feed( $symbol, $type ) {
 		// Get response from AV and parse it - look for error
 		$json = wp_remote_retrieve_body( $response );
 		$response_arr = json_decode( $json, true );
-		$data_arr=$response_arr[0];
+		if($type=="search")
+		{
+			$data_arr=$response_arr;
+		}
+		else
+		{
+			$data_arr=$response_arr[0];
+		}
 		unset( $response_arr );
 	}
 
 	return $data_arr; 
 
 } 
+
 
 ?>

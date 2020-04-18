@@ -19,7 +19,14 @@
 <!-- Logic Stocks -->
 <?php
 	// Stock search
-	$search_term = explode( ' ', get_search_query( false ) );   
+
+	// plus von fmtp -> first 3 results
+	$search_query=get_search_query( false );
+	$stocks_search=fetch_stock_search($search_query);
+	// Now the elements should be in the database
+	
+	// Stocks in db
+	$search_term = explode( ' ', get_search_query( false ) ); // Array of separated search elements   
 	global $wpdb;
 	$select = "
 	SELECT DISTINCT t.*, tt.* 
@@ -28,20 +35,31 @@
 	ON t.term_id = tt.term_id 
 	WHERE tt.taxonomy IN ('category')";      
 	$first = true;
-	foreach ( $search_term as $s ){
-		if ( $first ){
-			$select .= " AND (t.name LIKE '%s')";
-			$string_replace[] = '%'.$wpdb->esc_like( $s ).'%';
-			$first = false;
-		}else{
-			$select .= " OR (t.name LIKE '%s')";
-			$string_replace[] = '%'. $wpdb->esc_like( $s ).'%';
-		}
-	}
+	$select .= " AND (t.name LIKE '%s')";
+	$string_replace[] = '%'.$wpdb->esc_like( $s ).'%';
+
+	$select .= " OR (t.slug LIKE '%s')";
+	$string_replace[] = '%'. $wpdb->esc_like( $s ).'%';
+	// 	}
+	// foreach ( $search_term as $s ){
+	// 	if ( $first ){
+	// 		$select .= " AND (t.name LIKE '%s')";
+	// 		$string_replace[] = '%'.$wpdb->esc_like( $s ).'%';
+	// 		$first = false;
+	// 	}else{
+	// 		$select .= " OR (t.name LIKE '%s')";
+	// 		$string_replace[] = '%'. $wpdb->esc_like( $s ).'%';
+	// 	}
+	// }
 	$select .= " ORDER BY t.name ASC";
-	$stocks = $wpdb->get_results( $wpdb->prepare( $select, $string_replace ) );
+	$stocks_db = $wpdb->get_results( $wpdb->prepare( $select, $string_replace ) );
+	$stocks_db=array();
 
-
+	// Unify both, but make sure only one element of each is given
+	//todo: If one element is in search and db, not working -> displays both elements
+	$stocks=array_unique(array_merge($stocks_db,$stocks_search), SORT_REGULAR); 
+	
+	
 	// Search results subheading
 	$search_title = sprintf(
 		'%1$s %2$s',
@@ -115,12 +133,12 @@ if($number_results==0)
 	<!-- List all stocks -->
 	<div class="entry-content">
 	<?php
-	foreach ( $stocks as $term ) { ?> 
+	foreach ( $stocks as $stock ) { ?> 
 		<div class="wp-block-columns"><!-- wp:column {"className":"analysis-column"} -->
 			<div class="wp-block-column has-accent-color">
 
 			<?php
-			echo '<h2 class="has-accent-color has-text-color heading-size-2"><a href="'.esc_url( get_term_link( $term ) ).'" title="'.esc_attr( $term->name ).'">' . esc_html( $term->name ) . '</a></li>';
+			echo '<h2 class="has-accent-color has-text-color heading-size-2"><a href="'.esc_url( get_term_link( $stock ) ).'" title="'.esc_attr( $stock->name ).'">' . esc_html( $stock->name ) . '</a></li>';
 			?>
 			</div>
 		</div>

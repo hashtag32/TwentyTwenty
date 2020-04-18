@@ -31,6 +31,32 @@ function getPredictionScore($symbol)
 	return $dataArr["ratingScore"];
 }
 
+function fetch_stock_search($symbol)
+{
+	$dataArr=fetch_fmpcloud_feed($symbol, "search");
+
+	$stock_array=array();
+
+	foreach( $dataArr as $dataEle)
+	{
+		$obj = new stdClass;
+		$obj->name=$dataEle["name"];
+		$obj->slug="stocks/" . $dataEle["symbol"];
+		$obj->taxonomy="category";
+
+		array_push($stock_array,  $obj );
+
+		$category_id=checkCategory($dataEle["symbol"]); // if true -> category already exists, else get_term (cat_id)
+		// category_id currently not usable because wp_insert_category returns an element that is not usable in content-search.php
+		// Maybe do it through jquery would be the correct way
+		// if($category_id==true){
+		// 	array_push($stock_array,  get_term($category_id) );
+		// }  
+	}
+	// sleep(1); //wait for elements to sql - shouldn't be required (waiting for data to be loaded to SQL)
+	return $stock_array;
+}
+
 
 function getScore($user_id)
 { 

@@ -126,7 +126,7 @@ function readForecast($conn, $symbol)
 function fetchStockName($symbol)
 {
 	// Get name from API
-	$data_arr=fetch_fmpcloud_feed($symbol, "quote");
+	$data_arr=fetch_fmpcloud_feed($symbol, "quote")[0];
 	$stockName=$data_arr["name"];
 	
 	// Insert into DB
@@ -176,7 +176,7 @@ function updateStockValue($symbol, $date_now)
 {
 	// Get newest value from alpha vantage
 
-	$data_arr=fetch_fmpcloud_feed($symbol, "quote");
+	$data_arr=fetch_fmpcloud_feed($symbol, "quote")[0];
 	$price=$data_arr["price"];
 	 
 	// Insert if not erroneus
@@ -220,14 +220,12 @@ function insertStockValue($symbol, $date_now, $price)
 	return $result;
 }
 
-function fetch_fmpcloud_feed( $symbol, $type ) {
-	if ($type=="search") {
-		$feed_url = 'https://fmpcloud.io/api/v3/search?query=' . $symbol . '&limit=3&apikey=fd1432a9b894108cc5852e4a0f4a29ba';
-	}
-	else
+function fetch_fmpcloud_feed( $symbol, $type, $feed_url="" ) {
+	if($feed_url=="")
 	{
-		$feed_url = 'https://fmpcloud.io/api/v3/'. $type . '/' . $symbol . '?apikey=fd1432a9b894108cc5852e4a0f4a29ba';
+		$feed_url = 'https://fmpcloud.io/api/v3/'. $type . '/' . $symbol .  '?apikey=fd1432a9b894108cc5852e4a0f4a29ba';
 	}
+
 	
 	//todoSet timer to fetch according to alpha vantage restr aints
 	$wparg = array(
@@ -246,20 +244,10 @@ function fetch_fmpcloud_feed( $symbol, $type ) {
 		// Get response from AV and parse it - look for error
 		$json = wp_remote_retrieve_body( $response );
 		$response_arr = json_decode( $json, true );
-		if($type=="search")
-		{
-			$data_arr=$response_arr;
-		}
-		else
-		{
-			$data_arr=$response_arr[0];
-		}
+		$data_arr=$response_arr;
 		unset( $response_arr );
 	}
-
 	return $data_arr; 
-
 } 
-
 
 ?>

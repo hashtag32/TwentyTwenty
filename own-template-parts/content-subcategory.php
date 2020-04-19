@@ -93,37 +93,195 @@ if($symbol!="")
 
 
 
-
-	<div class="stock-voting has-text-align-center ">
-		<!-- Third column = Your vote -->
-		<!-- todo: Change to int type and value to default value -->
-		<span class="vote-span " >Your vote</span>
-		<br/></br>
-		<form name="vote_form" method="post" >
-		<input type="number"  id="voting_input_<?php echo $symbol;  ?>" class="voting_input" />
-		<input 
-			type="button" 
-			class="button-voting"
-			onclick="send_vote(this,'<?php echo $symbol;  ?>',voting_input_<?php echo $symbol;  ?>.value)"
-			value="Vote" 
-			alt="Thank you!"/>
-		</form>
-	</div>
-
-	<div class="scoring-area">
-			<h2 class="has-text-align-center">Prediction Score </h2>
-			<h2 class="has-accent-color has-text-color has-text-align-center score-value">
-				<?php echo getPredictionScore($symbol)?> 
-				<span class="score-tooltip">
-					Score is a value between 0 and 5 with 0 = Selling and 5 = Buying
-				</span> 
-			</h2>  
-	</div> <!-- .scoring-area -->
-
-
-<?php 
+<?php  
 }
+
+
+$symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
+
 ?>
+
+
+
+<!-- wp:columns {"align":"wide"} -->
+<div class="wp-block-columns alignwide"><!-- wp:top-columns -->
+	<div class="wp-block-column"><!-- wp:heading -->
+		<h2>Risk</h2>
+		<figure class="wp-block-table is-style-stripes">
+			<table>
+				<tbody>
+					<tr>
+						<td>GrahamNumber</td>
+						<td><?php echo display_eval_nr($symbol_key_mectrics['grahamNumber'])?></td>
+						<td>stockPrice</td>
+					</tr>
+					<tr>
+						<td>RD Expense Growth</td>
+						<td><?php echo display_eval_nr(RDExpenseGrowth($symbol))?></td> 
+						<td><0.3</td>
+					</tr>
+					<tr>
+						<td>Debt/Equity</td>
+						<td><?php echo display_eval_nr($symbol_key_mectrics['debtToEquity'])?></td>
+						<td><3</td>
+					</tr>
+				</tbody>
+			</table>
+		</figure>
+
+		
+		<h2>Growth</h2>
+		<figure class="wp-block-table is-style-stripes">
+			<table>
+				<tbody>
+					<tr>
+						<td>Revenue Growth mean (3y)</td>
+						<td><?php echo display_eval_nr(RevenueGrowth($symbol))?></td>
+						<td> >0.1 </td>
+					</tr>
+					<tr>
+						<td>Gross Profit Growth mean (3y)</td>
+						<td><?php echo display_eval_nr(GrossProfitgrowth($symbol))?></td>
+						<td> >0.1 </td>
+					</tr>
+					<tr>
+						<td>EPS Growth mean (3y)</td>
+						<td><?php echo display_eval_nr(EPSGrowth($symbol))?></td>
+						<td> >0.1 </td>
+					</tr>
+					<tr>
+						<td>Operating CF Growth (3y)</td>
+						<td><?php echo display_eval_nr(OpCFGrowth($symbol))?></td>
+						<td> >0.1 </td>
+					</tr>
+				</tbody>
+			</table>
+		</figure>
+
+		<h2>Prospects</h2>
+		<figure class="wp-block-table is-style-stripes">
+			<table>
+				<tbody>
+					<tr>
+						<td>EPS mean (3y)</td>
+						<td><?php echo display_eval_nr(EPS_Mean($symbol))?></td>
+						<td> >10 </td>
+					</tr>
+					<tr>
+						<td>ROE</td>
+						<td><?php echo display_eval_nr(fmp_key_first($symbol, 'key-metrics', 'roe'))?></td>
+						<td>>0.2</td>
+					</tr>
+					<tr>
+						<td>PE</td>
+						<td><?php echo display_eval_nr(fmp_key_first($symbol, 'ratios', 'priceEarningsRatio'))?></td>
+						<td><12</td>
+					</tr>
+					<tr>
+						<td>PEG</td>
+						<td><?php echo display_eval_nr(fmp_key_first($symbol, 'ratios', 'priceEarningsToGrowthRatio'))?></td>
+						<td> <1.5, ideal 1 </td>
+					</tr>
+				</tbody>
+			</table>
+		</figure>
+
+
+		<h2>Rating</h2>
+		<figure class="wp-block-table is-style-stripes">
+			<table>
+				<tbody>
+					<tr>
+						<td>Rating Score</td>
+						<td><?php echo fetch_fmpcloud_feed($symbol, "rating")[0]['ratingScore']?></td>
+						<td>=5</td>
+					</tr>
+				</tbody>
+			</table>
+		</figure>
+		
+	</div><!-- /wp:column -->
+
+	<!-- wp:second column -->
+	<div class="wp-block-column"><!-- wp:heading {"align":"center"} -->
+		<h2 class="has-text-align-center">People's Opinion</h2>
+		<!-- /wp:heading -->
+
+		<!-- wp:paragraph {"align":"center"} -->
+		<p class="has-text-align-center">Uhr</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:separator {"className":"is-style-dots"} -->
+		<hr class="wp-block-separator has-text-color has-background has-accent-background-color has-accent-color is-style-dots"/>
+		<!-- /wp:separator -->
+
+		
+		<div class="stock-voting has-text-align-center ">
+			<!-- Third column = Your vote -->
+			<!-- todo: Change to int type and value to default value -->
+			<!-- <span class="vote-span " >Your vote</span> -->
+			<!-- wp:heading {"align":"center"} -->
+			<h2 class="has-text-align-center">Your vote</h2>
+			<!-- /wp:heading -->
+
+			<br/></br>
+			<form name="vote_form" method="post" >
+				<input type="number"  id="voting_input_<?php echo $symbol;  ?>" class="voting_input" />
+				<input 
+					type="button" 
+					class="button-voting"
+					onclick="send_vote(this,'<?php echo $symbol;  ?>',voting_input_<?php echo $symbol;  ?>.value)"
+					value="Vote" 
+					alt="Thank you!"/>
+					<input 
+					type="button" 
+					class="button-voting"
+					onclick="send_vote(this,'<?php echo $symbol;  ?>',voting_input_<?php echo $symbol;  ?>.value)"
+					value="Bet" 
+					alt="Thank you!"/>
+			</form>
+		</div>
+
+		<!-- wp:columns -->
+		<div class="wp-block-columns"><!-- wp:column -->
+			<div class="wp-block-column"><!-- wp:buttons -->
+				<div class="wp-block-buttons"><!-- wp:button -->
+				<div class="wp-block-button"><a class="wp-block-button__link">Vote</a></div>
+				<!-- /wp:button --></div>
+				<!-- /wp:buttons --></div>
+				<!-- /wp:column -->
+
+				<!-- wp:column -->
+				<div class="wp-block-column"><!-- wp:buttons -->
+				<div class="wp-block-buttons"><!-- wp:button -->
+				<div class="wp-block-button"><a class="wp-block-button__link">Bet</a>
+				</div><!-- /wp:button -->
+				</div><!-- /wp:buttons -->
+
+			</div><!-- /wp:column -->
+		</div><!-- /wp:columns -->
+
+</div><!-- /wp:top-column -->
+</div><!-- /wp:top-columns -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
 
 </div><!-- .section-inner -->

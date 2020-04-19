@@ -26,14 +26,15 @@ function getStockDiff($symbol, $prediction)
 
 function getPredictionScore($symbol)
 { 
-	$dataArr=fetch_fmpcloud_feed($symbol, "rating");
+	$dataArr=fetch_fmpcloud_feed($symbol, "rating")[0];
 	
 	return $dataArr["ratingScore"];
 }
 
 function fetch_stock_search($symbol)
 {
-	$dataArr=fetch_fmpcloud_feed($symbol, "search");
+	$feed_url='https://fmpcloud.io/api/v3/search?query=' . $symbol  . '&limit=3&apikey=fd1432a9b894108cc5852e4a0f4a29ba';
+	$dataArr=fetch_fmpcloud_feed($symbol, "search", $feed_url);
 
 	$stock_array=array();
 
@@ -149,5 +150,134 @@ function getSymbolName($stockName)
 	}
 	return "";
 }
+
+
+ 
+// Getter for stock analysis
+
+function RDExpenseGrowth($symbol)
+{
+	$stock_values=getValues_quarterly($symbol,"financial-growth", "rdexpenseGrowth");
+	return mean_yearly($stock_values);
+}
+
+
+function RevenueGrowth($symbol)
+{
+	$stock_values=getValues_quarterly($symbol,"financial-growth", "revenueGrowth");
+	return mean_yearly($stock_values);
+}
+
+function GrossProfitgrowth($symbol)
+{
+	$stock_values=getValues_quarterly($symbol,"financial-growth", "grossProfitGrowth");
+	return mean_yearly($stock_values);
+}
+
+function EPSGrowth($symbol)
+{
+	$stock_values=getValues_quarterly($symbol,"financial-growth", "epsgrowth");
+	return mean_yearly($stock_values);
+}
+
+
+function OpCFGrowth($symbol)
+{
+	$stock_values=getValues_quarterly($symbol,"financial-growth", "operatingCashFlowGrowth");
+	return mean_yearly($stock_values);
+}
+
+
+function EPS_Mean($symbol)
+{
+	$stock_values=getValues_quarterly($symbol,"income-statement", "eps");
+	return mean_yearly($stock_values);
+}
+
+
+
+function fmp_key_first($symbol, $fmp_category, $key)
+{
+	return fetch_fmpcloud_feed($symbol, $fmp_category)[0][$key];
+}
+
+
+
+
+// General functions
+function getValues_quarterly($symbol, $fmp_category, $key)
+{
+	$feed_url='https://fmpcloud.io/api/v3/' . $fmp_category . '/' . $symbol . '?period=quarter&apikey=fd1432a9b894108cc5852e4a0f4a29ba';
+	$stock_data=fetch_fmpcloud_feed($symbol, $fmp_category, $feed_url);
+	
+	$value_array=array();
+
+	$i=0;
+	foreach($stock_data as $item)
+	{
+		if($i>11)  
+		{ 
+			break;
+		}
+		array_push($value_array,$item[$key]);
+		$i++;
+	}
+	return $value_array; 
+}
+
+
+// General functions
+function getValues_quarterly_income_statement($symbol, $fmp_category, $key)
+{
+	$feed_url='https://fmpcloud.io/api/v3/' . $fmp_category . '/' . $symbol . '?period=quarter&apikey=fd1432a9b894108cc5852e4a0f4a29ba';
+	$stock_data=fetch_fmpcloud_feed($symbol, $fmp_category, $feed_url);
+	
+	$value_array=array();
+
+	$i=0;
+	foreach($stock_data as $item)
+	{
+		if($i>11)  
+		{ 
+			break;
+		}
+		array_push($value_array,$item[$key]);
+		$i++;
+	}
+	return $value_array; 
+}
+
+function mean_yearly($list_quarterly)
+{
+	return mean($list_quarterly)*4;
+}
+
+function mean($list)
+{
+	// Filter empty values
+	$list= array_filter($list);
+	$average = floatval(array_sum($list)/count($list));
+	return $average;
+}
+
+
+function display_eval_nr($number)
+{
+	return round($number,2);
+}
+
+
+
+
+
+// // Getter for the pmi
+// function getMostVoted()
+// {
+// 	// Get all categories
+
+// 	// iterate
+
+
+// }
 
 ?>

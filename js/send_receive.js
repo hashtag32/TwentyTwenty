@@ -13,6 +13,7 @@ function request_voting(symbolName) {
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert("Data couldn't load.");
+            location.reload();
         }
     });
 }

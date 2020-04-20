@@ -117,8 +117,8 @@ $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 					</tr>
 					<tr>
 						<td>RD Expense Growth</td>
-						<td><?php echo display_eval_nr(RDExpenseGrowth($symbol))?></td> 
-						<td><0.3</td>
+						<td><?php echo display_eval_nr(getPercentage(RDExpenseGrowth($symbol)))  ?>%</td> 
+						<td><30%</td>
 					</tr>
 					<tr>
 						<td>Debt/Equity</td>
@@ -136,23 +136,23 @@ $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 				<tbody>
 					<tr>
 						<td>Revenue Growth mean (3y)</td>
-						<td><?php echo display_eval_nr(RevenueGrowth($symbol))?></td>
-						<td> >0.1 </td>
+						<td><?php echo display_eval_nr(getPercentage(RevenueGrowth($symbol)))?>%</td>
+						<td> >10% </td>
 					</tr>
 					<tr>
 						<td>Gross Profit Growth mean (3y)</td>
-						<td><?php echo display_eval_nr(GrossProfitgrowth($symbol))?></td>
-						<td> >0.1 </td>
+						<td><?php echo display_eval_nr(getPercentage(GrossProfitgrowth($symbol)))?>%</td>
+						<td> >10% </td>
 					</tr>
 					<tr>
 						<td>EPS Growth mean (3y)</td>
-						<td><?php echo display_eval_nr(EPSGrowth($symbol))?></td>
-						<td> >0.1 </td>
+						<td><?php echo display_eval_nr(getPercentage(EPSGrowth($symbol)))?>%</td>
+						<td> >10% </td>
 					</tr>
 					<tr>
 						<td>Operating CF Growth (3y)</td>
-						<td><?php echo display_eval_nr(OpCFGrowth($symbol))?></td>
-						<td> >0.1 </td>
+						<td><?php echo display_eval_nr(getPercentage(OpCFGrowth($symbol)))?>%</td>
+						<td> >10% </td>
 					</tr>
 				</tbody>
 			</table>
@@ -169,8 +169,8 @@ $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 					</tr>
 					<tr>
 						<td>ROE</td>
-						<td><?php echo display_eval_nr(fmp_key_first($symbol, 'key-metrics', 'roe'))?></td>
-						<td>>0.2</td>
+						<td><?php echo display_eval_nr(getPercentage(fmp_key_first($symbol, 'key-metrics', 'roe')))?>%</td>
+						<td>>20%</td>
 					</tr>
 					<tr>
 						<td>PE</td>

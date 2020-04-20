@@ -20,7 +20,7 @@ function getDaysLeft($date_due)
 function getStockDiff($symbol, $prediction)
 { 
 	$currentStockValue=getStockValue($symbol);
-	return ($currentStockValue /  $prediction - 1) * 100;
+	return ( $prediction / $currentStockValue - 1) * 100;
 }
 
 
@@ -33,10 +33,10 @@ function getPredictionScore($symbol)
 
 function fetch_stock_search($symbol)
 {
-	$feed_url='https://fmpcloud.io/api/v3/search?query=' . $symbol  . '&limit=3&apikey=fd1432a9b894108cc5852e4a0f4a29ba';
+	$feed_url='https://fmpcloud.io/api/v3/search?query=' . $symbol  . '&limit=10&apikey=fd1432a9b894108cc5852e4a0f4a29ba';
 	$dataArr=fetch_fmpcloud_feed($symbol, "search", $feed_url);
 
-	$stock_array=array();
+	$stock_array=array(); 
 
 	foreach( $dataArr as $dataEle)
 	{
@@ -58,6 +58,10 @@ function fetch_stock_search($symbol)
 	return $stock_array;
 }
 
+function getPercentage($value)
+{
+	return $value*100;
+}
 
 function getScore($user_id)
 { 
@@ -202,6 +206,10 @@ function fmp_key_first($symbol, $fmp_category, $key)
 }
 
 
+function getMostVotedStocks($max_count) 
+{
+	return getVotingCountList($max_count);
+}
 
 
 // General functions

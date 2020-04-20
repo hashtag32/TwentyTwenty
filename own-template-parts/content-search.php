@@ -138,7 +138,7 @@ if($number_results==0)
 			<div class="wp-block-column has-accent-color">
 
 			<?php
-			echo '<h2 class="has-accent-color has-text-color heading-size-2"><a href="'.esc_url( get_term_link( $stock ) ).'" title="'.esc_attr( $stock->name ).'">' . esc_html( $stock->name ) . '</a></li>';
+			echo '<h3 class="has-accent-color has-text-color"><a href="'.esc_url( get_term_link( $stock ) ).'" title="'.esc_attr( $stock->name ).'">' . esc_html( $stock->name ) . '</a></li>';
 			?>
 			</div>
 		</div>

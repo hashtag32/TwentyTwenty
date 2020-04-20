@@ -16,7 +16,7 @@ function theDomHasLoaded(e) {
 function pageFullyLoaded(e) {
   if(window.location.href==VotingURL)
   {
-    buildtemplates();
+    // buildtemplates();
   }
 }
 

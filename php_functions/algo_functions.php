@@ -23,6 +23,24 @@ function getStockValue($symbolName)
 	return $actual_value;
 }
 
+function getVotingCountList($max_count) 
+{
+	$conn = connectDB();
+	// SQL in format (TSLA,51), get sorted list by count of symbol
+	$sql = "SELECT symbol, count(symbol) as count FROM votingTable GROUP BY symbol ORDER BY count DESC";
+	$result = mysqli_query($conn, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			$symbolSortedList[] = $row["symbol"];
+		}
+	}
+	$symbolSortedList=array_slice($symbolSortedList, 0, $max_count, true);
+
+	return $symbolSortedList;
+}
+
+
 //****Categories****/// 
 function checkCategory($symbolName)
 {

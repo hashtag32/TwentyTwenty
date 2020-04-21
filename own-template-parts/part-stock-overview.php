@@ -14,8 +14,11 @@
 
 // get variable from upper context 
 $symbol= get_query_var('symbol');
+set_query_var('gauge_div_class', "radial-gauge-class-voting");
   
 ?>
+
+
 <div class="voting-table"> <!-- Stock Overview -->
     <a href="https://stockvoting.net/category/stocks/<?php echo $symbol?>/">
         <h2 class="has-text-align-center"><?php echo getStockName($symbol)?></h2>
@@ -28,8 +31,10 @@ $symbol= get_query_var('symbol');
                 <?php echo getVoting($symbol) ?> $
             </h2>
         </div>
-        <?php get_template_part('own-template-parts/part', 'gauge')?>
-        
+        <div class="wp-block-column"> <!-- Opinion Block -->
+            <h2 class="vote-span has-text-align-center" >StockVoter's opinion</h2> 
+            <?php get_template_part('own-template-parts/part', 'gauge')?>
+        </div>  <!-- Opinion Block-->
     </div> <!-- Stock Overview Table-->
     <form name="vote_form" method="post" >
         <input type="number" value="<?php echo round(getStockValue($symbol),2)?>" id="voting_input_<?php echo $symbol ?>" class="voting_input" />

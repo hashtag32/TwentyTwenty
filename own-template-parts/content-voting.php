@@ -10,14 +10,12 @@
  * @package WordPress
  * @subpackage Twenty_Twenty
  * @since 1.0.0
- */
-
-//  Templates
-include("voting_template.html");
+ */ 
 
 ?>
-<script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"></script>
 
+<script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"></script>
+ 
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 	<?php

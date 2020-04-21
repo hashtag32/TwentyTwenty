@@ -6,10 +6,7 @@ var $ = jQuery;
 
 
 function theDomHasLoaded(e) {
-  if(window.location.href==VotingURL)
-  {
-    loadIncludes();
-  }
+  loadIncludes();
 }
 
 // Will fire after theDomHasLoaded
@@ -21,11 +18,11 @@ function pageFullyLoaded(e) {
 }
 
 function loadIncludes() {
-  var script = document.createElement("script");
-
-  script.src =
+  // Jquery Script
+  var script_jquery = document.createElement("script");
+  script_jquery.src =
     "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js";
-  document.getElementsByTagName("head")[0].appendChild(script);
+  document.getElementsByTagName("head")[0].appendChild(script_jquery);
 }
 
 

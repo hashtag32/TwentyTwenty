@@ -14,6 +14,7 @@
 
 ?>
 
+<script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"></script>
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
@@ -96,16 +97,13 @@ if($symbol!="")
 <?php  
 }
 
-
 $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 
 ?>
 
-
-
 <!-- wp:columns {"align":"wide"} -->
-<div class="wp-block-columns alignwide"><!-- wp:top-columns -->
-	<div class="wp-block-column"><!-- wp:heading -->
+<div class="wp-block-columns alignwide has-background has-text-color has-background-background-color has-secondary-color"><!-- wp:top-columns -->
+	<div class="wp-block-column"><!--top-column -->
 		<h2>Risk</h2>
 		<figure class="wp-block-table is-style-stripes">
 			<table>
@@ -129,7 +127,6 @@ $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 			</table>
 		</figure>
 
-		
 		<h2>Growth</h2>
 		<figure class="wp-block-table is-style-stripes">
 			<table>
@@ -186,7 +183,6 @@ $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 			</table>
 		</figure>
 
-
 		<h2>Rating</h2>
 		<figure class="wp-block-table is-style-stripes">
 			<table>
@@ -200,23 +196,20 @@ $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 			</table>
 		</figure>
 		
-	</div><!-- /wp:column -->
+	</div><!-- /wp:top-column -->
 
-	<!-- wp:second column -->
-	<div class="wp-block-column"><!-- wp:heading {"align":"center"} -->
-		<h2 class="has-text-align-center">People's Opinion</h2>
-		<!-- /wp:heading -->
 
-		<!-- wp:paragraph {"align":"center"} -->
-		<p class="has-text-align-center">Uhr</p>
-		<!-- /wp:paragraph -->
+	 <div class="wp-block-column"> <!-- /wp:top-column -->
+		<h2 class="has-text-align-center" >StockVoter's opinion (30 days prognosis)</h2> 
+		<?php 
+			set_query_var('symbol', $symbol);
+			set_query_var('gauge_div_class', "radial-gauge-class-stock");
+			get_template_part('own-template-parts/part', 'gauge');
+		?>
 
-		<!-- wp:separator {"className":"is-style-dots"} -->
 		<hr class="wp-block-separator has-text-color has-background has-accent-background-color has-accent-color is-style-dots"/>
-		<!-- /wp:separator -->
-
 		
-		<div class="stock-voting has-text-align-center ">
+		<div class=" has-text-align-center ">
 			<!-- Third column = Your vote -->
 			<!-- todo: Change to int type and value to default value -->
 			<!-- <span class="vote-span " >Your vote</span> -->
@@ -240,28 +233,8 @@ $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 					value="Bet" 
 					alt="Thank you!"/>
 			</form>
-		</div>
-
-		<!-- wp:columns -->
-		<div class="wp-block-columns"><!-- wp:column -->
-			<div class="wp-block-column"><!-- wp:buttons -->
-				<div class="wp-block-buttons"><!-- wp:button -->
-				<div class="wp-block-button"><a class="wp-block-button__link">Vote</a></div>
-				<!-- /wp:button --></div>
-				<!-- /wp:buttons --></div>
-				<!-- /wp:column -->
-
-				<!-- wp:column -->
-				<div class="wp-block-column"><!-- wp:buttons -->
-				<div class="wp-block-buttons"><!-- wp:button -->
-				<div class="wp-block-button"><a class="wp-block-button__link">Bet</a>
-				</div><!-- /wp:button -->
-				</div><!-- /wp:buttons -->
-
-			</div><!-- /wp:column -->
-		</div><!-- /wp:columns -->
-
-</div><!-- /wp:top-column -->
+		</div> <!-- Button section --> 
+	</div><!-- /wp:top-column -->
 </div><!-- /wp:top-columns -->
 
 

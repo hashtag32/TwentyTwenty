@@ -22,23 +22,7 @@ function getStockValue($symbolName)
 	$actual_value =	readStockValue($conn, $symbolName);
 	return $actual_value;
 }
-
-function getVotingCountList($max_count) 
-{
-	$conn = connectDB();
-	// SQL in format (TSLA,51), get sorted list by count of symbol
-	$sql = "SELECT symbol, count(symbol) as count FROM votingTable GROUP BY symbol ORDER BY count DESC";
-	$result = mysqli_query($conn, $sql);
-
-	if (mysqli_num_rows($result) > 0) {
-		while ($row = mysqli_fetch_assoc($result)) {
-			$symbolSortedList[] = $row["symbol"];
-		}
-	}
-	$symbolSortedList=array_slice($symbolSortedList, 0, $max_count, true);
-
-	return $symbolSortedList;
-}
+ 
 
 
 //****Categories****/// 
@@ -94,6 +78,11 @@ function connectDB()
 	return $conn;
 }
 
+function closeconnectDB($con)
+{
+	return mysqli_close($conn);
+}
+
 function insertEntrystockValuation($conn, $symbol, $currentValue)
 {
 	$sql = "INSERT INTO stockValuation (symbol, currentValue) VALUES ('{$symbol}', '{$currentValue}')";
@@ -116,12 +105,14 @@ function readForecast($conn, $symbol)
 
 	// Build array with votings of forecasts 
 	// -> calculate average and return it 
+	$symbol=strtoupper($symbol);
+	$array_votings=array();
 	if (mysqli_num_rows($result) > 0) {
 		// output data of each row
 		while ($row = mysqli_fetch_assoc($result)) {
 			// echo "id: " . $row["symbol"]. " - Name: " . $row["current_price"]. " " . $row["lastname"]. "<br>";
 			if ($row["symbol"] == $symbol) {
-				$array_votings[] = $row["voting"];
+				array_push($array_votings,$row["voting"]); 
 			}
 		}
 	} else {
@@ -137,7 +128,7 @@ function readForecast($conn, $symbol)
 		$result = 0;
 	}
 
-	return $result;
+	return (float) $result;
 }
 
 
@@ -156,7 +147,7 @@ function fetchStockName($symbol)
 function readStockValue($conn, $symbol)
 {
 	//3 columns in MySQL: symbol, data, voting
-	$sql = "SELECT * FROM SymbolDatePrice";
+	$sql = "SELECT * FROM StockTable";
 	$result = mysqli_query($conn, $sql);
 
 	// Search in the DB first
@@ -165,46 +156,18 @@ function readStockValue($conn, $symbol)
 		while ($row = mysqli_fetch_assoc($result)) {
 			if ($row["symbol"] == $symbol) {
 				//todo: Get newest date (currently through order)
-				$date_db = $row["date"];
-				$price_db=$row["price"];
+				$price_db=$row["stockPrice"];
 			}
 		}
 	} else {
 		// Symbol is not even in there -> insert
 	}
 
-	$date_now=date("d-m-Y H:i:s");
-	$hours_diff=getHoursDiff($date_now, $date_db);
 
-	if($hours_diff>2)
-	{
-		// Get from Alpha Vantage
-		$price=updateStockValue($symbol, $date_now);
-		if($price_av==0)
-		{
-			return $price_db;
-		}
-	}
-
-	// Read from DB
-	return $price=$price_db;
+	return $price_db;
 }
  
-function updateStockValue($symbol, $date_now) 
-{
-	// Get newest value from alpha vantage
 
-	$data_arr=fetch_fmpcloud_feed($symbol, "quote")[0];
-	$price=$data_arr["price"];
-	 
-	// Insert if not erroneus
-	if($price!=0)
-	{
-		insertStockValue($symbol, $date_now, $price);
-	}
-	// Not successful
-	return $price; 
-}
 
 function getHoursDiff($date1,$date2)
 {
@@ -239,6 +202,7 @@ function insertStockValue($symbol, $date_now, $price)
 }
 
 function fetch_fmpcloud_feed( $symbol, $type, $feed_url="" ) {
+	$symbol=strtoupper($symbol);
 	if($feed_url=="")
 	{
 		$feed_url = 'https://fmpcloud.io/api/v3/'. $type . '/' . $symbol .  '?apikey=fd1432a9b894108cc5852e4a0f4a29ba';

@@ -17,10 +17,21 @@ function getDaysLeft($date_due)
 	return $interval->format('%r%a');
 }
 
-function getStockDiff($symbol, $prediction)
+function getStockDiff($symbol, $prediction, $stockValue=0)
 { 
-	$currentStockValue=getStockValue($symbol);
-		return ( $prediction / $currentStockValue - 1) * 100;
+	if($stockValue==0)
+	{
+		// Read from SQL
+		$stockValue=getStockValue($symbol);
+	}
+
+	// division by zero
+	// todo: use nan instead of -100
+	if($stockValue==0)
+	{
+		return -100;
+	}
+	return ( $prediction / $stockValue - 1) * 100;
 }
 
 
@@ -208,7 +219,36 @@ function fmp_key_first($symbol, $fmp_category, $key)
 
 function getMostVotedStocks($max_count) 
 {
-	return getVotingCountList($max_count);
+	$conn = connectDB();
+	// SQL in format (TSLA,51), get sorted list by count of symbol
+	$sql = "SELECT symbol, count(symbol) as count FROM votingTable GROUP BY symbol ORDER BY count DESC";
+	$result = mysqli_query($conn, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			$symbolSortedList[] = $row["symbol"];
+		}
+	}
+	$symbolSortedList=array_slice($symbolSortedList, 0, $max_count, true);
+
+	return $symbolSortedList;
+}
+
+function getHighestConfidence($max_count) 
+{
+	$conn = connectDB();
+	// SQL in format (TSLA,51), get sorted list by count of symbol
+	$sql="SELECT symbol, stockName, stockPrice, votingPrice, stockDiff FROM StockTable ORDER BY stockDiff DESC LIMIT 10";
+	$result = mysqli_query($conn, $sql);
+
+	$symbolSortedList=array();
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			array_push($symbolSortedList, $row["symbol"]);
+		}
+	}
+
+	return $symbolSortedList;
 }
 
 

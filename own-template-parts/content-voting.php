@@ -58,7 +58,6 @@ include("voting_template.html");
 				{
 					set_query_var('symbol', $symbol);
 					get_template_part('own-template-parts/part', 'stock-overview');
-					 
 				}
 				?>  
 
@@ -66,8 +65,13 @@ include("voting_template.html");
 			<div class="wp-block-column"> 
 				<h2 class="has-text-color has-text-align-center">Highest confidence</h2> <!-- Second column -->
 				<!-- Abstrahieren -> nicht zweimal gleiche Stock Overview -->
-
-
+				<?php 
+					foreach (getHighestConfidence(10) as $symbol)
+					{
+						set_query_var('symbol', $symbol);
+						get_template_part('own-template-parts/part', 'stock-overview');
+					}
+				?>
 			</div><!-- /wp:column -->
 		</div><!-- /wp:columns -->
 	</div><!-- .section-inner -->

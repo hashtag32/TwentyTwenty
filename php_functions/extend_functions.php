@@ -54,7 +54,63 @@ function filter_taxonomy($tax_template) {
 add_filter( 'taxonomy_template', 'filter_taxonomy' );   
 
 
-//***
+//*** Cronjobs
+add_action( 'updatestockdb', 'updateStockDB_func' );
+ 
+function updateStockDB_func() {
+	updateStockTable();
+	return;
+}
 
+function updateStockTable()
+{
+	$args = array( 
+		'hide_empty'      => false,
+		'child_of' => '187'
+	);
+	
+	$conn = connectDB();
+
+	// Iterate through all subcategories-stocks
+	foreach(get_categories($args) as $stock_cat)
+	{
+		$symbol=$stock_cat->category_nicename;
+		$symbol=strtoupper($symbol); // Everywhere always big letters
+		$stockName=update_getStockName($symbol);
+		
+		$stockPrice=update_getStockValue($symbol);
+		$votingPrice=getVoting($symbol);
+		$stockDiff = getStockDiff( $symbol, $votingPrice, $stockPrice);
+		// Automatically insert/update
+		$sql = "REPLACE INTO StockTable (symbol, stockName, stockPrice, votingPrice, stockDiff) VALUES ('{$symbol}', '{$stockName}', '{$stockPrice}', '{$votingPrice}', '{$stockDiff}')";
+		$result = $conn->query($sql);
+		//todo: check result  
+	} 
+ 
+	return closeconnectDB($conn);
+}
+
+function update_getStockName($symbol)
+{
+	// Get name from API
+	$data_arr=fetch_fmpcloud_feed($symbol, "quote")[0];
+	$stockName=$data_arr["name"];
+	
+	return $stockName;
+}
+
+function update_getStockValue($symbol) 
+{
+	// Get newest value from alpha vantage
+	$data_arr=fetch_fmpcloud_feed($symbol, "quote")[0];
+	$price=$data_arr["price"];
+	 
+	if($price!=0)
+	{
+		return $price;
+	}
+	// Not successful
+	return 0;
+}
  
 ?>

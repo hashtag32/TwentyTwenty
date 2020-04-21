@@ -20,7 +20,7 @@ function getDaysLeft($date_due)
 function getStockDiff($symbol, $prediction)
 { 
 	$currentStockValue=getStockValue($symbol);
-	return ( $prediction / $currentStockValue - 1) * 100;
+		return ( $prediction / $currentStockValue - 1) * 100;
 }
 
 

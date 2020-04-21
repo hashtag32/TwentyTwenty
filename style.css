@@ -6533,7 +6533,7 @@ height: 50px;
 
 /* Button */
 input.button-voting{
-	width: 60%;
+	width: 40%;
 	border-radius: 50px;
 	margin-top:10%;
 	text-align:center;
@@ -6594,8 +6594,9 @@ background-color: #1d4e9e;
 input.voting_input{
 	display: block;
 	margin:0 auto;
-	border-radius:30px;
+	border-radius:10px;
 	width:40%;
+	text-align: center;
 }
 
 

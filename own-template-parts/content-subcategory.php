@@ -113,7 +113,7 @@ $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 					<tr>
 						<td>GrahamNumber</td>
 						<td><?php echo display_eval_nr($symbol_key_mectrics['grahamNumber'])?></td>
-						<td>stockPrice</td>
+						<td><?php echo display_eval_nr(getStockValue($symbol))?></td>
 					</tr>
 					<tr>
 						<td>RD Expense Growth</td>

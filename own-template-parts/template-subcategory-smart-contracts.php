@@ -1,8 +1,6 @@
 <?php
 
 /**
- * Template Name: Subcategory template
- * Template Post Type:  page
  * The template for displaying single posts and pages.
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
@@ -19,12 +17,7 @@ get_header();
 <main id="site-content" role="main">
 
 <?php
-get_template_part( 'own-template-parts/content-stocks' );
-
-if ( have_posts() ) {
-	// Go to the analysis site
-	get_template_part( 'own-template-parts/content-posts' );
-} 
+get_template_part( 'own-template-parts/content-subcategory-smart-contracts' );
 
 ?>
 

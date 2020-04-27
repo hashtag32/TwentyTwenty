@@ -5,11 +5,11 @@ function filter_subcategory( ) {
 
 	if(  $cat->category_parent ==187 ) //stocks
 	{	
-		$single_template=get_template_directory() . '/own-template-parts/template-stocks.php' ;
+		$single_template=get_template_directory() . '/own-template-parts/template-subcategory-stocks.php' ;
 	}
 	elseif (  $cat->category_parent ==271 ) //smart_contracts
 	{
-		$single_template=get_template_directory() . '/own-template-parts/template-smart-contracts.php' ;
+		$single_template=get_template_directory() . '/own-template-parts/template-subcategory-smart-contracts.php' ;
 	}
     return $single_template; 
 }

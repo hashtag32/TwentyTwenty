@@ -18,9 +18,13 @@ get_header();
 
 <main id="site-content" role="main">
 
-	TEST2
 <?php
-get_template_part( 'own-template-parts/content-smart-contracts' );
+get_template_part( 'own-template-parts/content-subcategory-stocks' );
+
+if ( have_posts() ) {
+	// Go to the analysis site
+	get_template_part( 'own-template-parts/content-posts' );
+} 
 
 ?>
 

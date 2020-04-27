@@ -117,5 +117,44 @@ function update_getStockValue($symbol)
 	// Not successful
 	return 0;
 }
+
+
+
+
+
+
+
+// Include bootstrap
+function wps_scripts() {
+    /* Theme CSS */
+    wp_enqueue_style(
+        'wps-style',
+        get_stylesheet_uri(),
+        array( 'bootstrap' ),
+        '1.0.0'
+    );
+    
+    /* Bootstrap CSS */
+    wp_enqueue_style( 
+        'bootstrap',
+        get_template_directory_uri() . '/bootstrap/css/bootstrap.min.css',
+        array(),
+        '4.4.1'
+    );
+
+    /* Bootstrap JS */
+    wp_enqueue_script(
+        'bootstrap',
+        get_template_directory_uri() . '/bootstrap/js/bootstrap.min.js',
+        array( 'jquery' ),
+        '4.4.1', 
+        true
+    );
+}
+
+add_action(
+    'wp_enqueue_scripts',
+    'wps_scripts'
+);
  
 ?>

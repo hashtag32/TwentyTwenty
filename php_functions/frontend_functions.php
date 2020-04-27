@@ -171,6 +171,23 @@ function getSymbolName($stockName)
 }
 
 
+function getAllSymbols()
+{
+	$conn = connectDB();
+	$sql = "SELECT SymbolName FROM SymbolNameToStockName";
+	$result = mysqli_query($conn, $sql);
+
+	$symbolList=array();
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			array_push($symbolList, $row["SymbolName"]);
+		}
+	}
+
+	return $symbolList;
+}
+
+
  
 // Getter for stock analysis
 

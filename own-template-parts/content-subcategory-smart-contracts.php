@@ -26,10 +26,69 @@
 
 	?>
 
+<!-- todo: Heading -->
 	<div class="post-inner">
-		<div class="entry-content">
+		<div class="entry-content" style="font-size: 30px; font-weight:bold;">
+		<form>
+			<div class="form-group">
+				<label for="exampleFormControlSelect2" >Stock</label>
+				<select multiple class="form-control" style="font-size:large;" id="exampleFormControlSelect2">
+					<?php foreach (getAllSymbols() as $symbol){	?> 
+						<option><?php echo getStockName($symbol)?></option>
+					<?php } ?>
+				</select>
+			</div>
+			<button type="button" class="btn btn-primary btn-lg smart-contract-button" data-toggle="modal" data-target="#exampleModal">Load contract</button>
+			<button type="button" class="btn btn-primary btn-lg float-right smart-contract-button ">Create contract</button>
+		</form>
 
-			<button class="transferFunds">Send Money!</button>
+
+
+
+
+		<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-left style="font-size: 20px; font-weight:bold; text-align:left;" id="exampleModalLabel">Load existing contract</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  
+		<form>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Enter your contract address:</label>
+				<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="0xcE7f64728e998aD96bD82e8b0603B9a3E32Cf8f7">
+			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+		<button type="submit" class="btn btn-secondary">Submit</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+		
+
+
+		<form name="vote_form" method="post" >
+
+				<input 
+				type="button" 
+				class="button-voting"
+				onclick="symbol_chosen(this,symbol_chose.value)"
+				value="Bet" 
+				alt="Thank you!"/>
+			</form>
+
+			<button class="createContract">Create contract</button>
 			<button class="setbid">Bid!</button>
 			<button class="changeVotingTime">Change Voting Time!</button>
 			<button class="displayChairPerson">Show ChairPerson!</button>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Smart Contract Template
+ * Template Name: Smart Contracts Template
  * Template Post Type: post, page
  *
  * @package WordPress
@@ -16,7 +16,7 @@ get_header();
 
 	<?php
 
-	get_template_part('own-template-parts/content-smart-contract', get_post_type());
+	get_template_part('own-template-parts/content-smart-contracts-overview', get_post_type());
 
 	?>
 	

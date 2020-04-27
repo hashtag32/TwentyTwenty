@@ -29,6 +29,37 @@
 	<div class="post-inner">
 		<div class="entry-content">
 
+			<div class="wp-block-columns"><!-- ggf. alignwide? -->
+				<div class="wp-block-column">
+					<div class="bordered-area">
+						<a href="https://stockvoting.net/category/smart_contracts/bet_against_a_friend">
+							<h2 class="has-accent-color has-text-align-center ">Bet against a friend</h2>
+						</a>
+						<p class="has-large-font-size">Immediately after finishing an university physics degree, he hit the blackjack tables, trying to make a profit from his mathematical skills. Seven years later, he was winning so much that the casinos kicked him out. He then met a like-minded gambler whose expertise in horseracing complemented his own in computers. </p>
+					</div><!-- bordered-area -->
+				<hr class="post-separator styled-separator   has-accent-color is-style-wide section-inner" aria-hidden="true" />
+
+					<div class="bordered-area">
+						<a href="https://stockvoting.net/category/smart_contracts/knock_out">
+							<h2 class="has-accent-color has-text-align-center ">Knock Out</h2>
+						</a>
+						<p class="has-large-font-size">Immediately after finishing an university physics degree, he hit the blackjack tables, trying to make a profit from his mathematical skills. Seven years later, he was winning so much that the casinos kicked him out. He then met a like-minded gambler whose expertise in horseracing complemented his own in computers. </p>
+					</div><!-- bordered-area -->
+
+					<!-- todo: link -->
+					
+					<?php
+					// foreach (getMostVotedStocks(10) as $symbol)
+					// {
+					// 	set_query_var('symbol', $symbol);
+					// 	get_template_part('own-template-parts/part', 'stock-overview');
+					// }
+					?>  
+
+				</div><!-- /wp:column -->
+				
+			</div><!-- /wp:column -->
+
 		<script src="https://rawgit.com/ethereum/web3.js/0.16.0/dist/web3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/ethjs@0.3.0/dist/ethjs.min.js"></script>
 	<script>

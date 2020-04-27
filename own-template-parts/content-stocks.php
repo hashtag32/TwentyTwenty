@@ -21,6 +21,8 @@
 
 <div class="section-inner">
 
+
+
 <?php $symbol=getSymbolName(single_cat_title( '', false ));
 if($symbol!="")
 {
@@ -95,7 +97,6 @@ if($symbol!="")
 
 
 <?php  
-}
 
 $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 
@@ -236,6 +237,8 @@ $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 		</div> <!-- Button section --> 
 	</div><!-- /wp:top-column -->
 </div><!-- /wp:top-columns -->
+
+<?php } ?>
 
 
 

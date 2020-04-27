@@ -6635,3 +6635,10 @@ input.voting_input{
 	h5{font-size:1.3em;}
 	h6{font-size:1.1em;}
 }
+
+.bordered-area{
+	border:1px solid;
+	background:white; 
+	padding:25px;
+	border-radius:20px;
+}

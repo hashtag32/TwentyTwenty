@@ -19,8 +19,7 @@ get_header();
 <main id="site-content" role="main">
 
 <?php
-
-get_template_part( 'own-template-parts/content-subcategory' );
+get_template_part( 'own-template-parts/content-stocks' );
 
 if ( have_posts() ) {
 	// Go to the analysis site

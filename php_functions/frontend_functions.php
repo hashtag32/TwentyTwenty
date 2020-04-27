@@ -74,6 +74,7 @@ function getPercentage($value)
 	return $value*100;
 }
 
+// todo: should be cronjob
 function getScore($user_id)
 { 
 	// Collect stock_diffs
@@ -82,6 +83,9 @@ function getScore($user_id)
 	{ 
 		$stock_diff=getStockDiff($voting_array["symbol"],(int)$voting_array["voting"]);
 		array_push($stock_diff_array,$stock_diff);
+
+
+
 	}
 
 	// Calculate scores 

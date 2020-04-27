@@ -2404,6 +2404,11 @@ body:not(.singular) main > article:first-of-type {
 	padding: 4rem 0;
 }
 
+.entry-header-white{
+	background-color: #fff;
+	padding: 4rem 0;
+}
+
 .entry-categories {
 	line-height: 1.25;
 	margin-bottom: 2rem;
@@ -6647,4 +6652,10 @@ input.voting_input{
 	background:white; 
 	padding:25px;
 	border-radius:20px;
+}
+
+.own-h2 {
+	text-align: center;
+	font-weight: bold;
+	font-size: 17pt;
 }

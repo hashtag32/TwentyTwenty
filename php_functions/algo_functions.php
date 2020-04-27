@@ -151,6 +151,7 @@ function readStockValue($conn, $symbol)
 	$result = mysqli_query($conn, $sql);
 
 	// Search in the DB first
+	$price_db=0;
 	if (mysqli_num_rows($result) > 0) {
 		// output data of each row
 		while ($row = mysqli_fetch_assoc($result)) {
@@ -162,7 +163,6 @@ function readStockValue($conn, $symbol)
 	} else {
 		// Symbol is not even in there -> insert
 	}
-
 
 	return $price_db;
 }

@@ -25,7 +25,6 @@
 </div><!-- .entry-header-inner -->
 
 </header>
-</article>
 
 
 <!-- List all articles -->
@@ -52,3 +51,5 @@ while ( have_posts() ) {
 <?php
 }
 ?>
+
+</article>

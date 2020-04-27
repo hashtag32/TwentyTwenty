@@ -14,9 +14,12 @@
 
 ?>
 
-<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
 	<?php
+
+	$special_title="Smart Con";
+	set_query_var('special_title', $special_title);
+
 
 	get_template_part('template-parts/entry-header');
 
@@ -42,8 +45,22 @@
 			<button type="button" class="btn btn-primary btn-lg float-right smart-contract-button" id="createContractButton">Create contract</button>
 		</form>
 
-		<div id="welcomeDiv"  style="display:none;" class="answer_list" > WELCOME</div>
-<input id="ShowButton" type="button" name="answer" value="Show Div" />
+		<div id="createContractDiv" style="display: none;"   > 
+		<!-- <input id="ShowButton" type="button" name="answer" value="Show Div" /> -->
+			<!-- todo: a popup that signalized new contract created -->
+        	<!-- <h2 class="text-left" style="font-size: 20px; font-weight:bold; text-align:left;" id="">New Contract creating</h5> -->
+			<h2 class="vote-span has-text-align-center" >New Contract creating</h2> 
+			
+		<form>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Make your bet</label>
+				<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Place your bet">
+			</div>
+			<button type="button" class="btn btn-primary btn-lg float-center smart-contract-button" id="createContractButton">Send bet</button>
+		</form>
+
+		</div>
+
 
 
 
@@ -57,7 +74,7 @@
   <div class="modal-dialog modal-dialog-centered"  role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-left style="font-size: 20px; font-weight:bold; text-align:left;" id="exampleModalLabel">Load existing contract</h5>
+        <h5 class="modal-title text-left" style="font-size: 20px; font-weight:bold; text-align:left;" id="exampleModalLabel">Load existing contract</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -103,20 +120,20 @@
 	<script src="https://cdn.jsdelivr.net/npm/ethjs@0.3.0/dist/ethjs.min.js"></script>
 	<script>
 		$(document).ready(function () {
-			$('#ShowButton').click(function () {
+			$('#createContractButton').click(function () {
 			// $('#red-box').hide();
-				$('#welcomeDiv').fadeIn('slow');
+				$('#createContractDiv').fadeIn('slow');
 			});
 		});
 
 
 
-//    document.getElementById('welcomeDiv').style.display = "block";
 		window.addEventListener('load', function() {
 		// Check if Web3 has been injected by the browser:
 		if (typeof web3 !== 'undefined') {
 			// You have a web3 browser! Continue below!
-			startApp(web3);
+			// startApp(web3);
+			initializationweb3();
 			//alert("Web3");
 		} else {
 			//alert("No hay web3");
@@ -131,20 +148,35 @@
 
 	const contract_address = '0xcE7f64728e998aD96bD82e8b0603B9a3E32Cf8f7'
 	const etherValue = web3.toWei(1, 'ether');
-	var address = '0x0F60841dFDD78535E11f71192e1dDeCE598fE541'
-	function startApp(web3) {
+	// var address = '0x0F60841dFDD78535E11f71192e1dDeCE598fE541'
+	function initializationweb3(web3)
+	{
 		ethereum.enable();
+		eth = new Eth(web3.currentProvider);
+		listenForClicks(contractInstance,web3);
+	}
+	function createNewContract(web3) {
+		var newContract = eth.contract(abi);
+		var firstAccount = web3.eth.accounts[0];
 
-		console.log("entro");
-		const eth = new Eth(web3.currentProvider)
-		const token = eth.contract(abi).at(contract_address);
-		listenForClicks(token,web3);
+		//todo: add date
+		var contractInstance = MyContract.new(30, {from: firstAccount, gas: 1000000});
+		return contractInstance;
 
-		console.log("llego");
+
 		// const web3 = new Web3(Web3.givenProvider);
 		// const accounts = await web3.eth.getAccounts();
 		// console.log(accounts);
 		// const sign = await web3.eth.personal.sign('dataToSign', accounts[0]);
+	}
+
+	function loadContract(contract_address)
+	{
+		var newContract = eth.contract(abi);
+		const contractInstance = newContract.at(contract_address);
+
+		return contractInstance;
+
 	}
 	function listenForClicks (miniToken, web3) {
 		console.log("now listening");
@@ -185,5 +217,3 @@
 	// }
 	</script>
 
-
-</article><!-- .post -->

@@ -39,8 +39,11 @@
 				</select>
 			</div>
 			<button type="button" class="btn btn-primary btn-lg smart-contract-button" data-toggle="modal" data-target="#exampleModal">Load contract</button>
-			<button type="button" class="btn btn-primary btn-lg float-right smart-contract-button ">Create contract</button>
+			<button type="button" class="btn btn-primary btn-lg float-right smart-contract-button" id="createContractButton">Create contract</button>
 		</form>
+
+		<div id="welcomeDiv"  style="display:none;" class="answer_list" > WELCOME</div>
+<input id="ShowButton" type="button" name="answer" value="Show Div" />
 
 
 
@@ -78,7 +81,7 @@
 		
 
 
-		<form name="vote_form" method="post" >
+		<!-- <form name="vote_form" method="post" >
 
 				<input 
 				type="button" 
@@ -86,12 +89,12 @@
 				onclick="symbol_chosen(this,symbol_chose.value)"
 				value="Bet" 
 				alt="Thank you!"/>
-			</form>
-
+			</form> -->
+<!-- 
 			<button class="createContract">Create contract</button>
 			<button class="setbid">Bid!</button>
 			<button class="changeVotingTime">Change Voting Time!</button>
-			<button class="displayChairPerson">Show ChairPerson!</button>
+			<button class="displayChairPerson">Show ChairPerson!</button> -->
 
 		</div><!-- /wp:entry-content -->
 	</div><!-- /wp:post-inner -->
@@ -99,6 +102,16 @@
 	<script src="https://rawgit.com/ethereum/web3.js/0.16.0/dist/web3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/ethjs@0.3.0/dist/ethjs.min.js"></script>
 	<script>
+		$(document).ready(function () {
+			$('#ShowButton').click(function () {
+			// $('#red-box').hide();
+				$('#welcomeDiv').fadeIn('slow');
+			});
+		});
+
+
+
+//    document.getElementById('welcomeDiv').style.display = "block";
 		window.addEventListener('load', function() {
 		// Check if Web3 has been injected by the browser:
 		if (typeof web3 !== 'undefined') {
@@ -136,14 +149,21 @@
 	function listenForClicks (miniToken, web3) {
 		console.log("now listening");
 		console.log(miniToken);
-		var button = document.querySelector('button.displayChairPerson')
+		var createContractbutton = document.querySelector('#createContractButton');
+		var Contractbutton = document.querySelector('#createContractButton');
 		web3.eth.getAccounts(function(err, accounts) { console.log(accounts); address = accounts.toString(); })
-		button.addEventListener('click', function() {
+		createContractbutton.addEventListener('click', function() {
 			console.log("trying to transfer");
 			getchairPerson(miniToken);
 
 			// miniToken.transfer(contract_address, etherValue, { from: address });
 		})
+	}
+
+	async function createContract (miniToken) {
+		chairPerson= await miniToken.chairperson.call();
+		console.log(chairPerson);
+		return chairPerson;
 	}
 
 	async function getchairPerson (miniToken) {

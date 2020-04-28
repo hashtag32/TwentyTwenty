@@ -144,12 +144,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/ethjs@0.3.0/dist/ethjs.min.js"></script>
 	<script>
 		// Front End functions
-		$(document).ready(function () {
-			$('#createContractButton').click(function () {
-			// $('#red-box').hide();
-				$('#createContractDiv').fadeIn('slow');
-			});
-		});
+		// $(document).ready(function () {
+		// 	$('#createContractButton').click(function () {
+		// 	// $('#red-box').hide();
+		// 		$('#createContractDiv').fadeIn('slow');
+		// 	});
+		// });
 
 		// $(document).ready(function () {
 		// 	// When the new contracted is created
@@ -190,8 +190,6 @@
 		var createContractButton = document.querySelector('#createContractButton');
 		var loadContractButton = document.querySelector('#loadContractButton');
 
-
-
 		createContractButton.addEventListener('click', function() {
 			createNewContract(web3);
 			// document.getElementById('contractMinedHash').innerText="test"
@@ -213,31 +211,49 @@
 		var newContract = eth.contract(abi);
 		var firstAccount = web3.eth.accounts[0];
 
-		console.log(firstAccount);
+		console.log( newContract);
+
 
 		//todo: add date
-		console.log(newContract);
 
-		// var byteCode;
 
-		// web3.eth.getCode(contract_address, function(error, result){
-		// 	byteCode=result;
-		// })
+		// Method can take await bzw
+		var result=await web3.eth.getCode('0xcE7f64728e998aD96bD82e8b0603B9a3E32Cf8f7', async function(err, byteCode) {
+			if (!err)
+			{
+				estimate=1000000;
+				console.log( newContract);
+				contractInstance = await newContract.new(30, {data: byteCode, from: firstAccount, gas: estimate});
+
+				// chairPerson= await contractInstance.chairperson.call();
+				// console.log(chairPerson);
+
+				var receipt = web3.eth.getTransactionReceipt(contractInstance, function(err, txHash) {
+					if (!err)
+					{
+						postContractloading(contractInstance);
+					}
+				})
+
+		// //todo: wait for transaction to be confirmed: https://ethereum.stackexchange.com/questions/67232/how-to-wait-until-transaction-is-confirmed-web3-js
+
+
+
+
+				// createNewContract2(web3);
+				// console.log("bytCode:" + transactionHash); 
+			}
+		})
+
+		// console.log("byteCode: " + result);
 
 		// var byteCode=  web3.eth.getCode(contract_address);
 		//todo: estimate gas 
 		// var contractData = contractObject.new.getData(someparam, another, {data: byteCode});
 		// var estimate = web3.eth.estimateGas({data: contractData});
-		estimate=1000000;
-		contractInstance = await newContract.new(30, {data: byteCode, from: firstAccount, gas: estimate});
 
-		chairPerson= await contractInstance.chairperson.call();
-		console.log(chairPerson);
 		// contractInstance="test";
 
-		// // Change elements after contract creation
-		// document.getElementById('contractMinedHash').innerText=contractInstance; 
-		// document.getElementById('contractMinedHashLink').href="https://ropsten.etherscan.io/tx/"+ contractInstance; 
 		
 		// //todo: wait for transaction to be confirmed: https://ethereum.stackexchange.com/questions/67232/how-to-wait-until-transaction-is-confirmed-web3-js
 
@@ -257,8 +273,8 @@
 		// const web3 = new Web3(Web3.givenProvider);
 		// const accounts = await web3.eth.getAccounts();
 		// const sign = await web3.eth.personal.sign('dataToSign', accounts[0]);
-		postContractloading(contractInstance);
 	}
+
 
 	function loadContract(web3, contract_address)
 	{
@@ -305,7 +321,7 @@
 		// var bidvalue_val=bidvalue.val();
 		// console.log(bidvalue_val);
 
-		var result=await contractInstance.bid(bidvalue,{ from: firstAccount, value: bidamount });
+		var txHash=await contractInstance.bid(bidvalue,{ from: firstAccount, value: bidamount });
 		console.log(result);
 
 

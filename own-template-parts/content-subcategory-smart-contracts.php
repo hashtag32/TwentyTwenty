@@ -73,7 +73,7 @@
 		
 			<form>
 				<div class="form-group">
-					<label for="exampleInputEmail1">Place your bet for stock price in 30days</label>
+					<label for="exampleInputEmail1">Place your bet for stock price in 30 days</label>
 					<input type="email" class="form-control" id="betstockPrice" aria-describedby="emailHelp" placeholder="Place your bet">
 					<!-- todo: Let select wei/ether -->
 					<label for="exampleInputEmail1">Amount (wei)</label>
@@ -144,12 +144,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/ethjs@0.3.0/dist/ethjs.min.js"></script>
 	<script>
 		// Front End functions
-		// $(document).ready(function () {
-		// 	$('#createContractButton').click(function () {
-		// 	// $('#red-box').hide();
-		// 		$('#createContractDiv').fadeIn('slow');
-		// 	});
-		// });
+		$(document).ready(function () {
+			$('#createContractButton').click(function () {
+			// $('#red-box').hide();
+				$('#createContractDiv').fadeIn('slow');
+			});
+		});
 
 		// $(document).ready(function () {
 		// 	// When the new contracted is created
@@ -206,101 +206,62 @@
 	}
 
 	async function createNewContract(web3) { 
+		$('#createContractDiv').fadeIn('slow');
+
 		eth = new Eth(web3.currentProvider);
-
 		var newContract = eth.contract(abi);
-		var firstAccount = web3.eth.accounts[0];
-
-		console.log( newContract);
-
+		var firstAccount = await web3.eth.accounts[0];
 
 		//todo: add date
+		estimate=1000000;
+		console.log( newContract); 
+		console.log( firstAccount);
+		contractInstance = await newContract.new(30, {data: byteCode, from: firstAccount, gas: estimate});
 
-
-		// Method can take await bzw
-		var result=await web3.eth.getCode('0xcE7f64728e998aD96bD82e8b0603B9a3E32Cf8f7', async function(err, byteCode) {
-			if (!err)
-			{
-				estimate=1000000;
-				console.log( newContract);
-				contractInstance = await newContract.new(30, {data: byteCode, from: firstAccount, gas: estimate});
-
-				// chairPerson= await contractInstance.chairperson.call();
-				// console.log(chairPerson);
-
-				var receipt = web3.eth.getTransactionReceipt(contractInstance, function(err, txHash) {
-					if (!err)
-					{
-						postContractloading(contractInstance);
-					}
-				})
+		console.log( contractInstance );
+		// loadContract(contractInstance);
+		postContractloading(contractInstance);
 
 		// //todo: wait for transaction to be confirmed: https://ethereum.stackexchange.com/questions/67232/how-to-wait-until-transaction-is-confirmed-web3-js
-
-
-
-
-				// createNewContract2(web3);
-				// console.log("bytCode:" + transactionHash); 
-			}
-		})
-
-		// console.log("byteCode: " + result);
-
-		// var byteCode=  web3.eth.getCode(contract_address);
-		//todo: estimate gas 
+		//todo: estimate gas  
 		// var contractData = contractObject.new.getData(someparam, another, {data: byteCode});
 		// var estimate = web3.eth.estimateGas({data: contractData});
 
-		// contractInstance="test";
-
 		
 		// //todo: wait for transaction to be confirmed: https://ethereum.stackexchange.com/questions/67232/how-to-wait-until-transaction-is-confirmed-web3-js
 
-		// $('#BettingDiv').fadeIn('slow');
-
-
-		// $('#contractMinedHash').fadeIn('slow');
-
-		// contractMinedHash
-
-		// Popup 
-		
-
-		// return contractInstance;
-
-
-		// const web3 = new Web3(Web3.givenProvider);
-		// const accounts = await web3.eth.getAccounts();
-		// const sign = await web3.eth.personal.sign('dataToSign', accounts[0]);
 	}
 
 
-	function loadContract(web3, contract_address)
+	async function loadContract(web3, contract_address)
 	{
+		$('#createContractDiv').fadeIn('slow'); 
+ 
+
 		eth = new Eth(web3.currentProvider);
 
 		// web3.eth.getAccounts(function(err, accounts) { console.log(accounts); address = accounts.toString(); })
 
 		var newContract = eth.contract(abi);
-		contractInstance = newContract.at(contract_address);
+		contractInstance = await newContract.at(contract_address);
+
+
+		console.log(contractInstance);
 
 
 		postContractloading( contractInstance);
-
-		return contractInstance;
 
 	}
 
 	function postContractloading(contractInstance)
 	{
+		$('#createContractDiv').fadeOut('slow');
+
 		document.getElementById('contractMinedHash').innerText=contractInstance; 
 		document.getElementById('contractMinedHashLink').href="https://ropsten.etherscan.io/tx/"+ contractInstance; 
 		
 		//todo: wait for transaction to be confirmed: https://ethereum.stackexchange.com/questions/67232/how-to-wait-until-transaction-is-confirmed-web3-js
-
 		$('#BettingDiv').fadeIn('slow');
-
 	}
 
 	async function sendBet( element,selectedStock, bidamount, bidvalue) {
@@ -322,7 +283,7 @@
 		// console.log(bidvalue_val);
 
 		var txHash=await contractInstance.bid(bidvalue,{ from: firstAccount, value: bidamount });
-		console.log(result);
+		console.log(txHash);
 
 
 		//todo: save to sql (contractaddress + selectedStock)

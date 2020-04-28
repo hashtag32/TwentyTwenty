@@ -45,7 +45,7 @@
 				<select multiple class="form-control" style="font-size:large;" id="stockPickSelect">
 				<!-- todo: StockName, but get it later in ajax?-> bad, better in save as key TSLA -->
 					<?php foreach (getAllSymbols() as $symbol){	?> 
-						<option><?php echo $symbol?></option>
+						<option><?php echo $symbol?>, <?php echo getStockName($symbol)?></option>
 					<?php } ?>
 				</select>
 
@@ -216,11 +216,21 @@
 		estimate=1000000;
 		console.log( newContract); 
 		console.log( firstAccount);
-		contractInstance = await newContract.new(30, {data: byteCode, from: firstAccount, gas: estimate});
+		
+		// $.getJSON('https://ethgasstation.info/json/ethgasAPI.json', async function(data) {
+		// 	gasPrice=data["average"];
+		// 	gasPrice=web3.toWei(gasPrice, 'gwei');
+			// todo: gasPrice/gas/ gas limit?
+		contractInstance = await newContract.new(30, {data: byteCode, from: firstAccount, gas: estimate, gasPrice: estimate});
 
-		console.log( contractInstance );
-		// loadContract(contractInstance);
+			// web3.eth.getTransactionReceipt(contractInstance, async function(data){
 		postContractloading(contractInstance);
+			// })
+		// })
+		
+		// contractInstance = await newContract.new(30, {data: byteCode, from: firstAccount, gas: estimate, gasPrice: estimate});
+
+		// loadContract(contractInstance);
 
 		// //todo: wait for transaction to be confirmed: https://ethereum.stackexchange.com/questions/67232/how-to-wait-until-transaction-is-confirmed-web3-js
 		//todo: estimate gas  
@@ -275,7 +285,7 @@
 		console.log(firstAccount);
 
 
-		chairPerson= await contractInstance.chairperson.call();
+		// chairPerson= await contractInstance.chairperson.call();
 		// console.log(chairPerson);
 
 		console.log(bidvalue);

@@ -54,6 +54,7 @@ with others.
 /* -------------------------------------------------------------------------- */
 
 
+
 html,
 body {
 	border: none;
@@ -414,6 +415,7 @@ hr {
 	border-color: #dcd7ca;
 	margin: 4rem 0;
 }
+
 
 .entry-content hr,
 hr.styled-separator {
@@ -1325,6 +1327,9 @@ ul.social-icons li {
 
 /* Cover Modals ------------------------------ */
 
+
+
+
 .cover-modal {
 	display: none;
 	-ms-overflow-style: none;
@@ -1443,7 +1448,7 @@ body:not(.enable-search-modal) .site-logo img {
 }
 
 .overlay-header .header-inner {
-	color: #fff;
+	color: #000000;
 }
 
 .overlay-header .site-description,
@@ -1657,9 +1662,9 @@ ul.primary-menu {
 /* SUB MENU */
 
 .primary-menu ul {
-	background: #000;
+	background: #000; 
 	border-radius: 0.4rem;
-	color: #fff;
+	color: #000000;
 	font-size: 1.7rem;
 	opacity: 0;
 	padding: 1rem 0;
@@ -2239,7 +2244,7 @@ button.search-untoggle {
 }
 
 .cover-header .entry-header * {
-	color: #fff;
+	color: #000000;
 }
 
 body.template-cover .entry-header {
@@ -3482,6 +3487,8 @@ figure.wp-block-table.is-style-stripes {
 
 /*	11. Entry Content
 /* -------------------------------------------------------------------------- */
+
+
 
 
 .entry-content {
@@ -5995,6 +6002,7 @@ a.to-the-top > * {
 		max-width: calc((100% - 58rem) / 2 - 6rem);
 	}
 
+
 	[class*="wp-block"]:not(.alignwide):not(.alignfull) [class*="__inner-container"] > .alignright,
 	[class*="wp-block"]:not(.alignwide):not(.alignfull) [class*="__inner-container"] > p .alignright,
 	[class*="wp-block"]:not(.alignwide):not(.alignfull) [class*="__inner-container"] > .wp-block-image .alignright {
@@ -6423,6 +6431,7 @@ a.to-the-top > * {
 
 }
 
+
 @media ( min-width: 1330px ) {
 
 
@@ -6554,6 +6563,7 @@ background-color: #1d4e9e;
 }
  
 .smart-contract-button{
+	background-color: #1d4e9e;
 	font-size:30px;
 	margin-top:30px;
 	border-radius:20px;
@@ -6658,4 +6668,14 @@ input.voting_input{
 	text-align: center;
 	font-weight: bold;
 	font-size: 17pt;
+}
+
+body:not(.overlay-header) .primary-menu > li > a, body:not(.overlay-header) .primary-menu > li > .icon, .modal-menu a, .footer-menu a, .footer-widgets a, #site-footer .wp-block-button.is-style-outline, .wp-block-pullquote:before, .singular:not(.overlay-header) .entry-header a, .archive-header a, .header-footer-group .color-accent, .header-footer-group .color-accent-hover:hover
+{
+	color: #1d4e9e;
+}
+
+button:not(.toggle), .button, .faux-button, .wp-block-button__link, .wp-block-file .wp-block-file__button, input[type="button"], input[type="reset"], input[type="submit"], .bg-accent, .bg-accent-hover:hover, .bg-accent-hover:focus, :root .has-accent-background-color, .comment-reply-link
+{
+	background-color: black;
 }

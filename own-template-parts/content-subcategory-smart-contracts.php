@@ -48,10 +48,9 @@
 						<option><?php echo $symbol?>, <?php echo getStockName($symbol)?></option>
 					<?php } ?>
 				</select>
-
 			</div>
-			<button type="button" class="btn btn-primary btn-lg smart-contract-button" data-toggle="modal" data-target="#exampleModal" id="loadContractButton">Load contract</button>
-			<button type="button" class="btn btn-primary btn-lg float-right smart-contract-button" id="createContractButton">Create contract</button>
+			<button type="button" class="btn btn-secondary btn-lg smart-contract-button" data-toggle="modal" data-target="#exampleModal" id="loadContractButton">Load contract</button>
+			<button type="button" class="btn btn-secondary btn-lg float-right smart-contract-button" id="createContractButton">Create contract</button>
 		</form>
 
 		<div id="createContractDiv" style="display: none;" > 
@@ -122,20 +121,6 @@
 		
 
 
-		<!-- <form name="vote_form" method="post" >
-
-				<input 
-				type="button" 
-				class="button-voting"
-				onclick="symbol_chosen(this,symbol_chose.value)"
-				value="Bet" 
-				alt="Thank you!"/>
-			</form> -->
-<!-- 
-			<button class="createContract">Create contract</button>
-			<button class="setbid">Bid!</button>
-			<button class="changeVotingTime">Change Voting Time!</button>
-			<button class="displayChairPerson">Show ChairPerson!</button> -->
 
 		</div><!-- /wp:entry-content -->
 	</div><!-- /wp:post-inner --> 
@@ -167,9 +152,8 @@
 			// You have a web3 browser! Continue below!
 			initializationweb3(web3);
 		} else {
-			//alert("No hay web3");
-			// Warn the user that they need to get a web3 browser
-			// Or install MetaMask, maybe with a nice graphic.
+			// todo: Modal
+			alert("For the following actions please install MetaMask or any other crypto wallet Plugin.");
 		}
 	})
 
@@ -182,7 +166,6 @@
 	function initializationweb3(web3)
 	{
 		ethereum.enable();
-		
 		eth = new Eth(web3.currentProvider);
 		
 		listenForClicks(web3);
@@ -204,15 +187,11 @@
 	async function createNewContract(web3) { 		
 		$('#createContractDiv').fadeIn('slow');
 
-		var SampleContract = eth.contract(abi);
 		var firstAccount = web3.eth.accounts[0];
-
-		
+		var SampleContract = eth.contract(abi);
 
 		txHashContract = await SampleContract.new(30, {data: byteCode, from: firstAccount, gas: gas_estimate});
 		await waitForMinedContract(web3,txHashContract);
-
-
 
 		
 		// // $.getJSON('https://ethgasstation.info/json/ethgasAPI.json', async function(data) {
@@ -251,6 +230,12 @@
 
 		postContractloading( contractInstance);
 	}
+
+	async function getBidOfAccount(web3, account )
+	{
+		var returnArray=await contractInstance.getBidofAccount(account); //returns array
+		var bidValue=returnArray[0]["words"][0];
+	} 
 
 	function postContractloading(contractInstance)
 	{

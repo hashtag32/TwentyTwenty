@@ -230,7 +230,7 @@ $symbol_key_mectrics=fetch_fmpcloud_feed($symbol, "key-metrics")[0];
 					<input 
 					type="button" 
 					class="button-voting"
-					onclick="send_vote(this,'<?php echo $symbol;  ?>',voting_input_<?php echo $symbol;  ?>.value)"
+					onclick="window.location = 'https://stockvoting.net/smart-contracts';"
 					value="Bet" 
 					alt="Thank you!"/>
 			</form>

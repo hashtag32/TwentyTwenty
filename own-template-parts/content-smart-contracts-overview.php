@@ -35,7 +35,10 @@
 						<a href="https://stockvoting.net/category/smart_contracts/bet_against_a_friend">
 							<h2 class="has-accent-color has-text-align-center ">Bet against a friend</h2>
 						</a>
-						<p class="has-large-font-size">Immediately after finishing an university physics degree, he hit the blackjack tables, trying to make a profit from his mathematical skills. Seven years later, he was winning so much that the casinos kicked him out. He then met a like-minded gambler whose expertise in horseracing complemented his own in computers. </p>
+						<p class="has-large-font-size">
+							Bet against your friend through a modern blockchain technology service.
+							Using MetaMask, you can chose to either bet on the Testnetwork or bet for real money.
+						</p>
 					</div><!-- bordered-area -->
 				<hr class="post-separator styled-separator   has-accent-color is-style-wide section-inner" aria-hidden="true" />
 
@@ -43,7 +46,11 @@
 						<a href="https://stockvoting.net/category/smart_contracts/knock_out">
 							<h2 class="has-accent-color has-text-align-center ">Knock Out</h2>
 						</a>
-						<p class="has-large-font-size">Immediately after finishing an university physics degree, he hit the blackjack tables, trying to make a profit from his mathematical skills. Seven years later, he was winning so much that the casinos kicked him out. He then met a like-minded gambler whose expertise in horseracing complemented his own in computers. </p>
+						<p class="has-large-font-size">
+							This contract is equivalent to an ordinary knock out certificate from your emittent bank. 
+							For only a small transaction fee, you can use it the same way you could bet on the stock market.
+							There are no invisible fees like in usual certificates. 
+						</p>
 					</div><!-- bordered-area -->
 				</div><!-- /wp:column -->
 			</div><!-- /wp:column -->

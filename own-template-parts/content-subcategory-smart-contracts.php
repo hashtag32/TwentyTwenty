@@ -140,7 +140,7 @@
 		</div><!-- /wp:entry-content -->
 	</div><!-- /wp:post-inner -->
 
-	<script src="https://rawgit.com/ethereum/web3.js/0.16.0/dist/web3.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@1.2.7/dist/web3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/ethjs@0.3.0/dist/ethjs.min.js"></script>
 	<script>
 		// Front End functions
@@ -183,6 +183,8 @@
 	{
 		ethereum.enable();
 		
+		eth = new Eth(web3.currentProvider);
+
 		listenForClicks(web3);
 	}
 
@@ -195,7 +197,7 @@
 			// document.getElementById('contractMinedHash').innerText="test"
 		})
 		loadContractButton.addEventListener('click', function() {
-			loadContract(web3, '0xcE7f64728e998aD96bD82e8b0603B9a3E32Cf8f7');
+			loadContract(web3, '0x8429804AB459cB6E07045BB6C762a30bEe509823');
 		})
 		// sendBetButton.addEventListener('click', function() {
 		// 	// var element=document.getElementById('stockPickSelect');
@@ -205,26 +207,110 @@
 		// })
 	}
 
+
 	async function createNewContract(web3) { 
 		$('#createContractDiv').fadeIn('slow');
 
 		eth = new Eth(web3.currentProvider);
-		var newContract = eth.contract(abi);
-		var firstAccount = await web3.eth.accounts[0];
 
-		//todo: add date
-		estimate=1000000;
-		console.log( newContract); 
-		console.log( firstAccount);
+		SampleContract = eth.contract(abi);
+
+		web3.eth.getAccounts(async function(err, accounts) 
+		{
+
+					// todo: gasPrice/gas/ gas limit?
+			firstAccount=accounts[0];
+
+			estimate=100000;
+
+			contractInstance = await new SampleContract.new(30, {data: byteCode, from: firstAccount, gas: estimate, gasPrice: estimate});
+			console.log(contractInstance); 
+
+			// contractInstance = await SampleContract.new.getData(30, {data: byteCode, from: firstAccount, gas: estimate, gasPrice: estimate});
+			// console.log(contractInstance); 
+
+			// console.log(firstAccount); 
+
+			// MyContract = new web3.eth.contract(abi);
+			// estimate=100000;
+			// ontractInstance = new SampleContract.new(30, {data: byteCode, from: firstAccount, gas: estimate, gasPrice: estimate});
+			// // var contractInstance = new MyContract.eth.new(30, {data: byteCode, from: firstAccount, gas: 1000000});
+			// console.log(ontractInstance);
+
+
+
+
+ 
+			// var myContract = new web3.eth.contract(abi, '0xcE7f64728e998aD96bD82e8b0603B9a3E32Cf8f7', {
+			// from: firstAccount, // default from address
+			// gasPrice: '20000000000' // default gas price in wei, 20 gwei in this case
+			// });
+
+			// console.log(MyContract);
+
+
+			// estimate=1000000;
+			// console.log( SampleContract); 
+			// console.log( firstAccount);
+
+			// var SampleContract2=myContract.clone();
+
+			// console.log(SampleContract2);
+
+			// newContract=new web3.eth.Contract(abi);
+
+			// myContract.deploy({
+			// 	data: byteCode,
+			// 	arguments: [30]
+			// })
+			// .send({
+			// 	from: firstAccount,
+			// 	gas: 1500000,
+			// 	gasPrice: '30000000000000'
+			// }, function(error, transactionHash){  })
+			// .on('error', function(error){  })
+			// .on('transactionHash', function(transactionHash){  })
+			// .on('receipt', function(receipt){
+			// console.log(receipt.contractAddress) // contains the new contract address
+			// })
+			// .on('confirmation', function(confirmationNumber, receipt){  })
+			// .then(function(newContractInstance){
+			// 	console.log(newContractInstance.options.address) // instance with the new contract address
+			// });
+
+
+
+
+
+
+
+
+
 		
 		// $.getJSON('https://ethgasstation.info/json/ethgasAPI.json', async function(data) {
 		// 	gasPrice=data["average"];
 		// 	gasPrice=web3.toWei(gasPrice, 'gwei');
 			// todo: gasPrice/gas/ gas limit?
-		contractInstance = await newContract.new(30, {data: byteCode, from: firstAccount, gas: estimate, gasPrice: estimate});
+		// contractInstance = new SampleContract.new(30, {data: byteCode, from: firstAccount, gas: estimate, gasPrice: estimate});
 
+
+		// console.log( "contractInstance");
+		// console.log( contractInstance);
+		
 			// web3.eth.getTransactionReceipt(contractInstance, async function(data){
 		postContractloading(contractInstance);
+
+
+
+		})
+			 
+			
+			
+
+ 
+
+		//todo: add date
+	
 			// })
 		// })
 		
@@ -248,13 +334,10 @@
 		$('#createContractDiv').fadeIn('slow'); 
  
 
-		eth = new Eth(web3.currentProvider);
-
-		// web3.eth.getAccounts(function(err, accounts) { console.log(accounts); address = accounts.toString(); })
-
 		var newContract = eth.contract(abi);
 		contractInstance = await newContract.at(contract_address);
 
+		console.log("loadContract:");
 
 		console.log(contractInstance);
 
@@ -280,20 +363,27 @@
 
 		eth = new Eth(web3.currentProvider);
 
-		var firstAccount = await web3.eth.accounts[0];
+		web3.eth.getAccounts(function(err, accounts) 
+		{
+			firstAccount=accounts[0];
 
-		console.log(firstAccount);
+
+			console.log(firstAccount);
 
 
-		// chairPerson= await contractInstance.chairperson.call();
-		// console.log(chairPerson);
+			// chairPerson= await contractInstance.chairperson.call();
+			// console.log(chairPerson);
 
-		console.log(bidvalue);
-		// var bidvalue_val=bidvalue.val();
-		// console.log(bidvalue_val);
+			console.log(bidvalue);
+			console.log("sendBet contractInstance");
+			console.log(contractInstance);
+			// var bidvalue_val=bidvalue.val();
+			// console.log(bidvalue_val);
 
-		var txHash=await contractInstance.bid(bidvalue,{ from: firstAccount, value: bidamount });
-		console.log(txHash);
+			var txHash= contractInstance.bid(bidvalue,{ from: firstAccount, value: bidamount, gasPrice:100000, gas:100000 });
+			console.log(txHash);
+
+		})
 
 
 		//todo: save to sql (contractaddress + selectedStock)

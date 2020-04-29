@@ -53,6 +53,8 @@ with others.
 /*	0. CSS Reset
 /* -------------------------------------------------------------------------- */
 
+/* Primary color change */
+/* a{color:green !important;} */
 
 
 html,
@@ -61,7 +63,7 @@ body {
 	margin: 0;
 	padding: 0;
 }
-
+ 
 h1,
 h2,
 h3,
@@ -1093,7 +1095,7 @@ button.toggle {
 .color-accent,
 .color-accent-hover:focus,
 .color-accent-hover:hover {
-	color: #1d4e9e;
+	color: #1d4e9e; 
 }
 
 /* BACKGROUND COLOR */
@@ -5377,6 +5379,7 @@ a.to-the-top > * {
 		margin: 4.5rem auto 2.5rem;
 	}
 
+
 	.alignnone,
 	.aligncenter {
 		margin-bottom: 4rem;
@@ -6562,8 +6565,8 @@ input.button-voting:hover {
 background-color: #1d4e9e;
 }
  
-.smart-contract-button{
-	background-color: #1d4e9e;
+.smart-contract-button{ 
+	background-color: black;
 	font-size:30px;
 	margin-top:30px;
 	border-radius:20px;
@@ -6664,18 +6667,50 @@ input.voting_input{
 	border-radius:20px;
 }
 
-.own-h2 {
-	text-align: center;
+.entry-content .own-h2 {
+	text-align: center; 
 	font-weight: bold;
 	font-size: 17pt;
+	margin: 3rem auto 3rem;
 }
 
+/* Menu/Navigation Footer */
 body:not(.overlay-header) .primary-menu > li > a, body:not(.overlay-header) .primary-menu > li > .icon, .modal-menu a, .footer-menu a, .footer-widgets a, #site-footer .wp-block-button.is-style-outline, .wp-block-pullquote:before, .singular:not(.overlay-header) .entry-header a, .archive-header a, .header-footer-group .color-accent, .header-footer-group .color-accent-hover:hover
 {
 	color: #1d4e9e;
 }
 
-button:not(.toggle), .button, .faux-button, .wp-block-button__link, .wp-block-file .wp-block-file__button, input[type="button"], input[type="reset"], input[type="submit"], .bg-accent, .bg-accent-hover:hover, .bg-accent-hover:focus, :root .has-accent-background-color, .comment-reply-link
+
+button:not(.toggle)
 {
-	background-color: black;
+	background-color:#1d4e9e;
+}
+
+.modal-title{
+	font-size: 23px; 
+	font-weight:bold; 
+	text-align:left;
+}
+
+.modal-body{
+	font-size:17px;
+}
+ 
+.modal-body-p{
+	font-size: 17px; 
+	font-weight: 600;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.entry-smart-contract
+{
+	font-family: sans-serif;
+	font-size: 25px; 
+	font-weight:bold;
+}
+
+.modal-header h5
+{
+	margin:1rem;
 }

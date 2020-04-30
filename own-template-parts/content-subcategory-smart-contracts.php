@@ -55,7 +55,7 @@
 		</form>
 
 		<div id="createContractDiv" style="display: none;" >
-			<h2 class="own-h2 has-text-align-center" >Creating new contract...</h2>
+			<h2 class="own-h2 has-text-align-center" >Loading/Creating contract...</h2>
 			<div class="text-center">
 			<div class="spinner-grow" role="status">
 				<span class="sr-only text-primary">Loading...</span>
@@ -73,19 +73,19 @@
 
 			<form>
 				<div class="form-group">
-					<label for="stock-price">Stock price</label>
-					<input type="email" class="form-control" id="stock-price" aria-describedby="emailHelp" placeholder="Place your predicted stock Price">
+					<label for="bet_stock_price">Stock price</label>
+					<input type="email" class="form-control" id="bet_stock_price" aria-describedby="emailHelp" placeholder="Place your predicted stock Price">
 					<!-- todo: Let select wei/ether -->
 
-					<label for="due-date-input">Due Date</label>
-					<input class="form-control" type="date" value="2020-08-19" id="due-date-input">
+					<label for="bet_due_date">Due Date</label>
+					<input class="form-control" type="date" value="2020-08-19" id="bet_due_date">
 
-					<label for="bet-amount">Amount (wei)</label>
-					<input type="email" class="form-control" id="bet-amount" aria-describedby="emailHelp" placeholder="Put money where your mouth is ;)">
+					<label for="bet_amount">Amount (wei)</label>
+					<input type="email" class="form-control" id="bet_amount" aria-describedby="emailHelp" placeholder="Put money where your mouth is ;)">
 
 				</div>
 				<div class="form-group text-center">
-					<button type="button" onclick="sendBet(this,betamount.value, stockPickSelect.value, betamount.value)" data-toggle="modal" data-target="#sharingModal" class="btn btn-primary smart-contract-button btn-lg" id="SendBetButton"  >Send bet</button>
+					<button type="button" class="btn btn-primary smart-contract-button btn-lg" onclick="sendBet(this,stockPickSelect.value, bet_stock_price.value, bet_due_date.value, bet_amount.value);ShareableLink(true);" data-toggle="modal" data-target="#sharingModal"  id="SendBetButton"  >Send bet</button>
 				</div>
 			</form>
 		</div>
@@ -133,10 +133,11 @@
         <h5 class="modal-title text-left" id="exampleModalLabel">Sharing is caring</h5>
       </div>
       <div class="modal-body">
-		<p class="modal-body-p" id="exampleModalLabel">https://stockvoting.net/test  &#x2398</p>
- 
-		<a href="" role="button" class="btn btn-primary popover-test" onclick="ShareableLink(this, true)" title="Copy the link to your clipboard" data-content="Popover body content is set in this attribute.">Copy</a>
-	  </div>
+		<p class="modal-body-p" id="shareableLinkBody"></p>
+		<!-- <a href="" role="button" class="btn btn-primary popover-test" onclick="ShareableLink(contractAddress.value, true)" title="Copy the link to your clipboard" data-content="Popover body content is set in this attribute.">Copy</a> -->
+		<button type="button" class="btn btn-primary popover-test" onclick="ShareableLink(true)" title="Copy the link to your clipboard" data-content="Popover body content is set in this attribute.">Copy</button>
+		
+	</div>
 
 
 	  <!-- Footer group -->
@@ -163,6 +164,14 @@
 				$('#createContractDiv').fadeIn('slow');
 			});
 		});
+
+			// Front End functions
+		// $(document).ready(function () {
+		// 	$('#SendBetButton').click(function () {
+		// 		ShareableLink(contractAddress.value, false);
+		// 	});
+		// });
+
 
 		// $(document).ready(function () {
 		// 	// When the new contracted is created
@@ -196,6 +205,8 @@
 		ethereum.enable();
 		eth = new Eth(web3.currentProvider);
 
+		ShareActions(window.location.href);
+
 		listenForClicks(web3);
 	}
 
@@ -208,18 +219,56 @@
 		})
 	}
 
-	function ShareableLink(element, copyLink=false)
+	shareBase="https://stockvoting.net/category/smart_contracts/bet_against_a_friend#share:";
+
+	function ShareableLink( copyLink=false)
 	{
+		console.log("called");
+		console.log(contract_address);
 		// get link
-		var shareableLink="https://stockvoting.net/test";
+		var shareableLink=shareBase+"contract_address="+contract_address;
+
+		// Set ShareableLink in textfield
+		document.getElementById('shareableLinkBody').innerText=shareableLink;
 
 		// copy
 		if(true==copyLink)
 		{
-
+			copyToClipboard("#shareableLinkBody");
 		}
 
 		return shareableLink;
+	}
+
+	// Don't know how this works, but it works...
+	function copyToClipboard(element) {
+		var $temp = $("<input>");
+		$("body").append($temp);
+		$temp.val($(element).text()).select();
+		document.execCommand("copy");
+		$temp.remove();
+	}
+
+
+	// Actions that are triggered through the #share of the link URL
+	function ShareActions(link)
+	{
+		if(link.includes(shareBase))
+		{
+			// minor todo: dynamically read contract_address -> independent of the position (search)
+			// minor todo: convert strings to variables (if even possible)
+			// link is shareable
+			console.log("got linkData:"+link);
+			var linkData=link.substr(shareBase.length);
+			console.log("got linkData:"+linkData);
+
+			option_contract_address="contract_address=";
+			var contract_address=linkData.substr(option_contract_address.length);
+			console.log("got address:"+contract_address);
+			loadContract(contract_address);
+ 
+		}
+
 
 	}
 
@@ -288,7 +337,7 @@
 		$('#BettingDiv').fadeIn('slow');
 	}
 
-	async function sendBet( element,selectedStock, bidamount, bidvalue) {
+	async function sendBet( element,selectedStock, bet_stock_price, bet_due_date, bet_amount) {
 		ethereum.enable();
 
 		eth = new Eth(web3.currentProvider);
@@ -296,7 +345,9 @@
 		web3.eth.getAccounts(function(err, accounts)
 		{
 			firstAccount=accounts[0];
-			var txHash= contractInstance.bid(bidvalue,{ from: firstAccount, value: bidamount, gas: gas_estimate });
+			console.log(bet_stock_price);
+			console.log(bet_amount);
+			var txHash= contractInstance.bid(bet_stock_price,{ from: firstAccount, value: bet_amount, gas: gas_estimate });
 		})
 		//todo: save to sql (contractaddress + selectedStock)
 	}

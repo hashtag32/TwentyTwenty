@@ -40,19 +40,13 @@
 	<div class="post-inner">
 		<div class="entry-content entry-smart-contract" >
 
-		<form>
-			<div class="form-group">
-				<label for="stockPickSelect" >Stock</label>
-				<select multiple class="form-control" style="font-size:large;" id="stockPickSelect">
-				<!-- todo: StockName, but get it later in ajax?-> bad, better in save as key TSLA -->
-					<?php foreach (getAllSymbols() as $symbol){	?>
-						<option><?php echo $symbol?>, <?php echo getStockName($symbol)?></option>
-					<?php } ?>
-				</select>
-			</div>
-			<button type="button" class="btn btn-secondary btn-lg smart-contract-button" data-toggle="modal" data-target="#loadContractModal" id="loadContractButton">Load contract</button>
-			<button type="button" class="btn btn-secondary float-right smart-contract-button" id="createContractButton">Create contract</button>
-		</form>
+		<div id="LoadCreateContractDiv" >
+			<form>
+				<button type="button" class="btn btn-secondary btn-lg smart-contract-button" data-toggle="modal" data-target="#loadContractModal" id="loadContractButton">Load contract</button>
+				<button type="button" class="btn btn-secondary float-right smart-contract-button" id="createContractButton">Create contract</button>
+			</form>
+		</div >
+
 
 		<div id="createContractDiv" style="display: none;" >
 			<h2 class="own-h2 has-text-align-center" >Loading/Creating contract...</h2>
@@ -65,7 +59,7 @@
 
 
 		<div id="BettingDiv" style="display: none;" >
-			<h2 class="own-h2 has-text-align-center" >Your contract</h2>
+			<h2 class="own-h2 has-text-align-center" style="font-size:35px" >Your contract</h2>
 
 			<a href="https://ropsten.etherscan.io/address/" target="_blank" id="contractMinedHashLink">
 				<h2 class="own-h2 has-text-align-center " id="contractMinedHash"></h2>
@@ -73,6 +67,14 @@
 
 			<form>
 				<div class="form-group">
+					<label for="stockPickSelect" >Stock</label>
+					<select multiple class="form-control" style="font-size:large;" id="stockPickSelect">
+					<!-- todo: StockName, but get it later in ajax?-> bad, better in save as key TSLA -->
+						<?php foreach (getAllSymbols() as $symbol){	?>
+							<option><?php echo $symbol?>, <?php echo getStockName($symbol)?></option>
+						<?php } ?>
+					</select>
+
 					<label for="bet_stock_price">Stock price</label>
 					<input type="email" class="form-control" id="bet_stock_price" aria-describedby="emailHelp" placeholder="Place your predicted stock Price">
 					<!-- todo: Let select wei/ether -->
@@ -334,6 +336,7 @@
 		document.getElementById('contractMinedHash').innerText=contract_address;
 		document.getElementById('contractMinedHashLink').href="https://ropsten.etherscan.io/address/"+ contract_address;
 
+		$('#LoadCreateContractDiv').fadeOut('slow');
 		$('#BettingDiv').fadeIn('slow');
 	}
 

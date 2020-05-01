@@ -50,6 +50,9 @@ while ( have_posts() ) {
 	<hr class="post-separator styled-separator   has-accent-color is-style-wide section-inner" aria-hidden="true" />
 <?php
 }
+
+// Add your Analysis
+get_template_part('small-parts/add-button');
 ?>
 
 </article>

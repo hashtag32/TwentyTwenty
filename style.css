@@ -128,7 +128,7 @@ html {
 }
 
 body {
-	background: #f5efe0;
+	background: #EDF5E1;
 	box-sizing: border-box;
 	color: #000;
 	font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
@@ -459,7 +459,7 @@ hr.styled-separator::after {
 }
 
 a {
-	color: #1d4e9e;
+	color: #05386B;
 	text-decoration: underline;
 }
 
@@ -542,7 +542,7 @@ dd + dt {
 /* Quotes ------------------------------------ */
 
 blockquote {
-	border-color: #1d4e9e;
+	border-color: #05386B;
 	border-style: solid;
 
 	/*rtl:ignore*/
@@ -839,7 +839,7 @@ input[type="reset"],
 input[type="submit"] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	background: #1d4e9e;
+	background: #05386B;
 	border: none;
 	border-radius: 0;
 	color: #fff;
@@ -1095,7 +1095,7 @@ button.toggle {
 .color-accent,
 .color-accent-hover:focus,
 .color-accent-hover:hover {
-	color: #1d4e9e; 
+	color: #05386B; 
 }
 
 /* BACKGROUND COLOR */
@@ -1103,7 +1103,7 @@ button.toggle {
 .bg-accent,
 .bg-accent-hover:focus,
 .bg-accent-hover:hover {
-	background-color: #1d4e9e;
+	background-color: #05386B;
 }
 
 /* BORDER COLOR */
@@ -1111,14 +1111,14 @@ button.toggle {
 .border-color-accent,
 .border-color-accent-hover:focus,
 .border-color-accent-hover:hover {
-	border-color: #1d4e9e;
+	border-color: #05386B;
 }
 
 /* FILL COLOR */
 
 .fill-children-accent,
 .fill-children-accent * {
-	fill: #1d4e9e;
+	fill: #05386B;
 }
 
 .fill-children-current-color,
@@ -1308,7 +1308,7 @@ ul.social-icons li {
 
 .social-icons a {
 	align-items: center;
-	background: #1d4e9e;
+	background: #05386B;
 	border-radius: 50%;
 	color: #fff;
 	display: flex;
@@ -1359,7 +1359,7 @@ ul.social-icons li {
 
 
 #site-header {
-	background: #fff;
+	background: #5CDB95;
 	position: relative;
 }
 
@@ -2407,12 +2407,12 @@ body:not(.singular) main > article:first-of-type {
 /* Post Header ------------------------------- */
 
 .singular .entry-header {
-	background-color: #fff;
+	background-color: #5CDB95;
 	padding: 4rem 0;
 }
 
-.entry-header-white{
-	background-color: #fff;
+.entry-header-green{
+	background-color: #5CDB95;
 	padding: 4rem 0;
 }
 
@@ -2761,11 +2761,11 @@ h2.entry-title {
 /* CUSTOM COLORS */
 
 :root .has-accent-color {
-	color: #1d4e9e;
+	color: #05386B;
 }
 
 :root .has-accent-background-color {
-	background-color: #1d4e9e;
+	background-color: #05386B;
 	color: #fff;
 }
 
@@ -2775,7 +2775,7 @@ h2.entry-title {
 
 :root .has-primary-background-color {
 	background-color: #000;
-	color: #f5efe0;
+	color: #EDF5E1;
 }
 
 :root .has-secondary-color {
@@ -2797,11 +2797,11 @@ h2.entry-title {
 }
 
 :root .has-background-color {
-	color: #f5efe0;
+	color: #EDF5E1;
 }
 
 :root .has-background-background-color {
-	background-color: #f5efe0;
+	background-color: #EDF5E1;
 	color: #000;
 }
 
@@ -2823,7 +2823,7 @@ h2.entry-title {
 }
 
 .has-drop-cap:not(:focus)::first-letter {
-	color: #1d4e9e;
+	color: #05386B;
 	font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
 	font-size: 5.1em;
 	font-weight: 800;
@@ -3042,7 +3042,7 @@ h2.entry-title {
 }
 
 .wp-block-button.is-style-outline {
-	color: #1d4e9e;
+	color: #05386B;
 }
 
 .is-style-outline .wp-block-button__link:not(.has-text-color) {
@@ -3228,7 +3228,7 @@ figure.wp-block-gallery.alignfull {
 .wp-block-pullquote::before {
 	background: #fff;
 	border-radius: 50%;
-	color: #1d4e9e;
+	color: #05386B;
 	content: "”";
 	display: block;
 	font-size: 6.2rem;
@@ -3845,7 +3845,7 @@ div.comment:first-of-type {
 }
 
 .comment-reply-link {
-	background-color: #1d4e9e;
+	background-color: #05386B;
 	color: #fff;
 	display: block;
 	padding: 0.7rem;
@@ -4379,8 +4379,8 @@ div.comment:first-of-type {
 
 .footer-nav-widgets-wrapper,
 #site-footer {
-	background-color: #fff;
-	border-color: #dedfdf;
+	background-color: #5CDB95;
+	border-color: #8EE4AF;
 	border-style: solid;
 	border-width: 0;
 }
@@ -4460,7 +4460,7 @@ ul.footer-social li {
 }
 
 .footer-social a {
-	background-color: #1d4e9e;
+	background-color: #05386B;
 	height: 3.6rem;
 	width: 3.6rem;
 }
@@ -6562,7 +6562,7 @@ input.button-voting{
 }
 
 input.button-voting:hover {
-background-color: #1d4e9e;
+background-color: #05386B;
 }
  
 .smart-contract-button{ 
@@ -6638,7 +6638,7 @@ input.voting_input{
 
 /* cookie notice button */
 .cn-button.bootstrap { 
-	background-color: #1d4e9e; 
+	background-color: #05386B; 
 	color: white;
 	border-radius: 15px;
  }
@@ -6662,7 +6662,7 @@ input.voting_input{
 
 .bordered-area{
 	border:1px solid;
-	background:white; 
+	background:#5CDB95; 
 	padding:25px;
 	border-radius:20px;
 }
@@ -6677,13 +6677,13 @@ input.voting_input{
 /* Menu/Navigation Footer */
 body:not(.overlay-header) .primary-menu > li > a, body:not(.overlay-header) .primary-menu > li > .icon, .modal-menu a, .footer-menu a, .footer-widgets a, #site-footer .wp-block-button.is-style-outline, .wp-block-pullquote:before, .singular:not(.overlay-header) .entry-header a, .archive-header a, .header-footer-group .color-accent, .header-footer-group .color-accent-hover:hover
 {
-	color: #1d4e9e;
+	color: #05386B;
 }
 
 
 button:not(.toggle)
 {
-	background-color:#1d4e9e;
+	background-color:#05386B;
 }
 
 .modal-title{

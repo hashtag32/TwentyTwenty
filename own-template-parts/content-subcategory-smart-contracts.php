@@ -15,7 +15,7 @@
 ?>
 
 <!-- todo move to separate file -->
-<header class="entry-header-white has-text-align-center header-footer-group">
+<header class="entry-header-green has-text-align-center header-footer-group">
 	<div class="entry-header-inner section-inner medium">
 		<h1 class="entry-title">Bet against a friend</h1>
 	</div><!-- .entry-header-inner -->
@@ -30,6 +30,7 @@
 				<button type="button" class="btn btn-secondary float-right smart-contract-button" id="createContractButton">Create contract</button>
 			</form>
 		</div >
+		
 
 		<div id="createContractDiv" style="display: none;" >
 			<h2 class="own-h2 has-text-align-center" >Loading/Creating contract...</h2>

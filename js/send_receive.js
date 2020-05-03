@@ -38,3 +38,26 @@ function send_vote(element, symbolName, voting_number) {
         }
     });
 }
+
+function php_function_call(functionName, argumentArray) {
+    jQuery.ajax({
+        type: "POST",
+        url: ajax_unique.ajaxurl,
+        dataType: "json",
+        data: {
+            action: "php_function_call",
+            title: ajax_unique.title,
+            functionname: functionName,  
+            arguments: argumentArray
+        },
+    
+        success: function (obj, textstatus) {
+                      if( !('error' in obj) ) {
+                          yourVariable = obj.result;
+                      }
+                      else {
+                          console.log(obj.error);
+                      }
+                }
+    });
+}

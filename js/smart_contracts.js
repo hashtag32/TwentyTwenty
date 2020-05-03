@@ -72,11 +72,12 @@ const abi=
 	}
 
 	async function createNewContract(web3) {
-		$('#createContractDiv').fadeIn('slow');
+		$('#createContractDiv').fadeIn('slow'); 
+
 
 		var firstAccount = web3.eth.accounts[0];
 		var SampleContract = eth.contract(abi);
-
+ 
 		txHashContract = await SampleContract.new(30, {data: byteCode, from: firstAccount, gas: gas_estimate});
 		await waitForMinedContract(web3,txHashContract);
 
@@ -89,12 +90,18 @@ const abi=
 
 		//todo: add date
 	}
-
-	function waitForMinedContract(web3,contract_address) {
+ 
+	function registerContractDB(contract_address)
+	{
+		php_function_call("AddContractData",[contract_address , "Sawyer", "John" ]  );
+	}
+	
+	function waitForMinedContract(web3,contract_address) {   
 		function innerWaitBlock() {
 			web3.eth.getTransactionReceipt(contract_address, function(err, receipt){
 				if (receipt && receipt.contractAddress) {
 					console.log("Your contract has been deployed");
+					registerContractDB(receipt.contractAddress);
 					loadContract(receipt.contractAddress);
 				} else {
 					console.log("Waiting for mining of contract " );

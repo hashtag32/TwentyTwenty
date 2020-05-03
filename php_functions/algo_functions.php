@@ -193,6 +193,7 @@ function insertStockName($symbolName, $stockName)
 
 }
 
+ 
 function insertStockValue($symbol, $date_now, $price)
 {
 	$conn = connectDB();

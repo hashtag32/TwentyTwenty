@@ -49,3 +49,40 @@ function delete_votesServer()
 }
 add_action('wp_ajax_nopriv_delete_votesServer', 'delete_votesServer');
 add_action('wp_ajax_delete_votesServer', 'delete_votesServer');
+
+
+
+function php_function_call()
+{
+    $aResult = array();
+
+    if( !isset($_POST['functionname']) ) { $aResult['error'] = 'No function name!'; }
+    if( !isset($_POST['arguments']) ) { $aResult['error'] = 'No function arguments!'; }
+    if( !isset($aResult['error']) ) {
+        switch($_POST['functionname']) {
+            case 'AddContractData':
+               if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 2) ) {
+                   $aResult['error'] = 'Error in arguments!';
+                }
+                else {
+                    $argumentList=$_POST['arguments'];
+                    $parameterArray = array("contract_address" => $argumentList[0],  
+                        "due_date" => $argumentList[1], 
+                        "creationDate" => $argumentList[2]
+                        );
+                    $aResult['result'] = InsertDataToDB("ContractActionBAF_creation", $parameterArray);
+               }
+               break; 
+
+            default:
+               $aResult['error'] = 'Not found function '.$_POST['functionname'].'!';
+               break;
+        }
+    }
+
+    echo json_encode($aResult);
+    wp_die(); // avoiding 0
+
+}
+add_action('wp_ajax_nopriv_php_function_call', 'php_function_call');
+add_action('wp_ajax_php_function_call', 'php_function_call');

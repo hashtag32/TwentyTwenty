@@ -1540,7 +1540,7 @@ body:not(.enable-search-modal) .site-logo img {
 .search-toggle {
 	position: absolute;
 	bottom: 0;
-	left: 0;
+	right: 0;
 	top: 0;
 }
 
@@ -1549,14 +1549,14 @@ body:not(.enable-search-modal) .site-logo img {
 	height: 2.5rem;
 	max-width: 2.3rem;
 	width: 2.3rem;
-}
+} 
 
 /* Navigation Toggle ------------------------- */
 
 .nav-toggle {
 	position: absolute;
 	bottom: 0;
-	right: 0;
+	left: 0;
 	top: 0;
 	width: 6.6rem;
 }

@@ -4915,11 +4915,11 @@ a.to-the-top > * {
 	}
 
 	.search-toggle {
-		left: 2rem;
+		right: 2rem;
 	}
 
 	.nav-toggle {
-		right: 2rem;
+		left: 2rem;
 	}
 
 

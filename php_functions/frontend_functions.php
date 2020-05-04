@@ -335,6 +335,15 @@ function display_eval_nr($number)
 	return round($number,2);
 }
 
+function display_stock_diff($stockDiff)
+{
+	if($stockDiff==-100)
+	{
+		return 0;
+	}
+	return $stockDiff;
+}
+
 
 
 

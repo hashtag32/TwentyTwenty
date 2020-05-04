@@ -6714,3 +6714,11 @@ button:not(.toggle)
 {
 	margin:1rem;
 }
+
+
+.img-centered{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}

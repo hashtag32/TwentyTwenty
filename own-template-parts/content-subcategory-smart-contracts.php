@@ -78,57 +78,84 @@
 
 		<!-- Modal/Popup for load contract -->
 		<div class="modal fade" id="loadContractModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-			
-				<!-- Header -->
-				<div class="modal-header">
-					<h5 class="modal-title text-left" id="exampleModalLabel">Load existing contract</h5>
-				</div>
-
-				<!-- Body -->
-				<div class="modal-body">
-				<form>
-					<div class="form-group">
-						<label for="exampleInputEmail1">Enter your contract address:</label>
-						<input type="email" class="form-control" id="contractAddress" aria-describedby="emailHelp" placeholder="0xce7f64728e998ad96bd82e8b0603b9a3e32cf8f7">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				
+					<!-- Header -->
+					<div class="modal-header">
+						<h5 class="modal-title text-left" id="exampleModalLabel">Load existing contract</h5>
 					</div>
-				</form>
-			</div>
 
-			<!-- Footer group -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="submit" onclick="loadContract(contractAddress.value)"  data-dismiss="modal" class="btn btn-primary">Submit</button>
+					<!-- Body -->
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Enter your contract address:</label>
+								<input type="email" class="form-control" id="contractAddress" aria-describedby="emailHelp" placeholder="0xce7f64728e998ad96bd82e8b0603b9a3e32cf8f7">
+							</div>
+						</form>
+					</div>
+
+					<!-- Footer group -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" onclick="loadContract(contractAddress.value)"  data-dismiss="modal" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
 			</div>
-			</div>
-		</div>
 		</div>
 
 
 		<!-- Modal/Popup for sharing -->
 		<div class="modal fade" id="sharingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered"  role="document">
-			<div class="modal-content">
-				
-				<!-- Header -->
-				<div class="modal-header">
-					<h5 class="modal-title text-left" id="exampleModalLabel">Sharing is caring</h5>
-				</div>
+			<div class="modal-dialog modal-dialog-centered"  role="document">
+				<div class="modal-content">
+					
+					<!-- Header -->
+					<div class="modal-header">
+						<h5 class="modal-title text-left" id="exampleModalLabel">Sharing is caring</h5>
+					</div>
 
-				<!-- Body -->
-				<div class="modal-body">
-					<p class="modal-body-p" id="shareableLinkBody"></p>
-					<!-- todo: Improve, see https://ropsten.etherscan.io/address/0xce7f64728e998ad96bd82e8b0603b9a3e32cf8f7 Copy button -->
-					<button type="button" class="btn btn-primary popover-test" onclick="ShareableLink(true)" title="Copy the link to your clipboard" data-content="Popover body content is set in this attribute.">Copy</button>
-				</div>
+					<!-- Body -->
+					<div class="modal-body">
+						<p class="modal-body-p" id="shareableLinkBody"></p>
+						<!-- todo: Improve, see https://ropsten.etherscan.io/address/0xce7f64728e998ad96bd82e8b0603b9a3e32cf8f7 Copy button -->
+						<button type="button" class="btn btn-primary popover-test" onclick="ShareableLink(true)" title="Copy the link to your clipboard" data-content="Popover body content is set in this attribute.">Copy</button>
+					</div>
 
-				<!-- Footer group -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<!-- Footer group -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>
+
+		<!-- Modal/Popup for installMetaMaskModal -->
+		<div class="modal fade" id="installMetaMaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered"  role="document">
+				<div class="modal-content">
+					
+					<!-- Header -->
+					<div class="modal-header">
+					
+						<h5 class="modal-title text-left" id="exampleModalLabel">Please install MetaMask</h5>
+					</div>
+
+					<!-- Body -->
+					<div class="modal-body">
+						<p class="modal-body-p" id="installMetaMaskModalBody">For the following actions is a blockchain plugin required: MetaMask</p>
+						<a href="https://metamask.io/download.html" target="_blank" >
+							<img class="img-centered" src="https://stockvoting.net/wp-content/uploads/2020/05/download-metamask.png" width="150" height="120" alt="Italian Trulli">
+						</a>
+					</div>
+
+					<!-- Footer group -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div><!-- .entry-content -->
@@ -140,8 +167,11 @@
 	<script>
 		// Front End functions
 		$(document).ready(function () {
+			if (typeof web3 == 'undefined') {
+				// Please install MetaMask first
+				$('#installMetaMaskModal').modal('show');
+			}
 			$('#createContractButton').click(function () {
-			// $('#red-box').hide();
 				$('#createContractDiv').fadeIn('slow');
 			});
 		});
@@ -152,10 +182,7 @@
 		if (typeof web3 !== 'undefined') {
 			// You have a web3 browser! Continue below!
 			initialization(web3);
-		} else {
-			// todo: Modal
-			alert("For the following actions please install MetaMask or any other crypto wallet Plugin.");
-		}
+		} 
 	})
 
 	

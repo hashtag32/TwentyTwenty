@@ -26,3 +26,18 @@ function build_template_scripts()
 add_action('wp_enqueue_scripts', 'build_template_scripts');
 
 // build_template.js script for building the template of voting_template.html (normal way to include a js script)
+
+
+function smart_contracts_scripts()
+{
+	wp_enqueue_script('smart_contracts_script_name', get_template_directory_uri() . '/js/smart_contracts.js');
+}
+add_action('wp_enqueue_scripts', 'smart_contracts_scripts');
+
+
+
+function front_end_scripts()
+{
+	wp_enqueue_script('front_end_script_name', get_template_directory_uri() . '/js/front_end.js');
+}
+add_action('wp_enqueue_scripts', 'front_end_scripts');

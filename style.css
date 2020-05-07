@@ -53,6 +53,9 @@ with others.
 /*	0. CSS Reset
 /* -------------------------------------------------------------------------- */
 
+/* Primary color change */
+/* a{color:green !important;} */
+
 
 html,
 body {
@@ -60,7 +63,7 @@ body {
 	margin: 0;
 	padding: 0;
 }
-
+ 
 h1,
 h2,
 h3,
@@ -125,10 +128,10 @@ html {
 }
 
 body {
-	background: #f5efe0;
+	background: #EDF5E1;
 	box-sizing: border-box;
 	color: #000;
-	font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif, "Helvetica Neue", Helvetica ;
 	font-size: 1.8rem;
 	letter-spacing: -0.015em;
 	text-align: left;
@@ -137,7 +140,7 @@ body {
 @supports ( font-variation-settings: normal ) {
 
 	body {
-		font-family: "Inter var", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+		font-family: "Inter var", -apple-system, BlinkMacSystemFont, sans-serif, "Helvetica Neue", Helvetica;
 	}
 }
 
@@ -415,6 +418,7 @@ hr {
 	margin: 4rem 0;
 }
 
+
 .entry-content hr,
 hr.styled-separator {
 	background: linear-gradient(to left, currentColor calc(50% - 16px), transparent calc(50% - 16px), transparent calc(50% + 16px), currentColor calc(50% + 16px));
@@ -455,7 +459,7 @@ hr.styled-separator::after {
 }
 
 a {
-	color: #1d4e9e;
+	color: #05386B;
 	text-decoration: underline;
 }
 
@@ -538,7 +542,7 @@ dd + dt {
 /* Quotes ------------------------------------ */
 
 blockquote {
-	border-color: #1d4e9e;
+	border-color: #05386B;
 	border-style: solid;
 
 	/*rtl:ignore*/
@@ -684,7 +688,7 @@ legend {
 
 label {
 	display: block;
-	font-size: 1.6rem;
+	font-size: inherit;
 	font-weight: 400;
 	margin: 0 0 0.5rem 0;
 }
@@ -835,7 +839,7 @@ input[type="reset"],
 input[type="submit"] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	background: #1d4e9e;
+	background: #05386B;
 	border: none;
 	border-radius: 0;
 	color: #fff;
@@ -1091,7 +1095,7 @@ button.toggle {
 .color-accent,
 .color-accent-hover:focus,
 .color-accent-hover:hover {
-	color: #1d4e9e;
+	color: #05386B; 
 }
 
 /* BACKGROUND COLOR */
@@ -1099,7 +1103,7 @@ button.toggle {
 .bg-accent,
 .bg-accent-hover:focus,
 .bg-accent-hover:hover {
-	background-color: #1d4e9e;
+	background-color: #05386B;
 }
 
 /* BORDER COLOR */
@@ -1107,14 +1111,14 @@ button.toggle {
 .border-color-accent,
 .border-color-accent-hover:focus,
 .border-color-accent-hover:hover {
-	border-color: #1d4e9e;
+	border-color: #05386B;
 }
 
 /* FILL COLOR */
 
 .fill-children-accent,
 .fill-children-accent * {
-	fill: #1d4e9e;
+	fill: #05386B;
 }
 
 .fill-children-current-color,
@@ -1304,7 +1308,7 @@ ul.social-icons li {
 
 .social-icons a {
 	align-items: center;
-	background: #1d4e9e;
+	background: #05386B;
 	border-radius: 50%;
 	color: #fff;
 	display: flex;
@@ -1324,6 +1328,9 @@ ul.social-icons li {
 
 
 /* Cover Modals ------------------------------ */
+
+
+
 
 .cover-modal {
 	display: none;
@@ -1352,7 +1359,7 @@ ul.social-icons li {
 
 
 #site-header {
-	background: #fff;
+	background: #5CDB95;
 	position: relative;
 }
 
@@ -1443,7 +1450,7 @@ body:not(.enable-search-modal) .site-logo img {
 }
 
 .overlay-header .header-inner {
-	color: #fff;
+	color: #000000;
 }
 
 .overlay-header .site-description,
@@ -1533,7 +1540,7 @@ body:not(.enable-search-modal) .site-logo img {
 .search-toggle {
 	position: absolute;
 	bottom: 0;
-	left: 0;
+	right: 0;
 	top: 0;
 }
 
@@ -1542,14 +1549,14 @@ body:not(.enable-search-modal) .site-logo img {
 	height: 2.5rem;
 	max-width: 2.3rem;
 	width: 2.3rem;
-}
+} 
 
 /* Navigation Toggle ------------------------- */
 
 .nav-toggle {
 	position: absolute;
 	bottom: 0;
-	right: 0;
+	left: 0;
 	top: 0;
 	width: 6.6rem;
 }
@@ -1657,9 +1664,9 @@ ul.primary-menu {
 /* SUB MENU */
 
 .primary-menu ul {
-	background: #000;
+	background: #000; 
 	border-radius: 0.4rem;
-	color: #fff;
+	color: #000000;
 	font-size: 1.7rem;
 	opacity: 0;
 	padding: 1rem 0;
@@ -2239,7 +2246,7 @@ button.search-untoggle {
 }
 
 .cover-header .entry-header * {
-	color: #fff;
+	color: #000000;
 }
 
 body.template-cover .entry-header {
@@ -2400,7 +2407,12 @@ body:not(.singular) main > article:first-of-type {
 /* Post Header ------------------------------- */
 
 .singular .entry-header {
-	background-color: #fff;
+	background-color: #5CDB95;
+	padding: 4rem 0;
+}
+
+.entry-header-green{
+	background-color: #5CDB95;
 	padding: 4rem 0;
 }
 
@@ -2749,11 +2761,11 @@ h2.entry-title {
 /* CUSTOM COLORS */
 
 :root .has-accent-color {
-	color: #1d4e9e;
+	color: #05386B;
 }
 
 :root .has-accent-background-color {
-	background-color: #1d4e9e;
+	background-color: #05386B;
 	color: #fff;
 }
 
@@ -2763,7 +2775,7 @@ h2.entry-title {
 
 :root .has-primary-background-color {
 	background-color: #000;
-	color: #f5efe0;
+	color: #EDF5E1;
 }
 
 :root .has-secondary-color {
@@ -2785,11 +2797,11 @@ h2.entry-title {
 }
 
 :root .has-background-color {
-	color: #f5efe0;
+	color: #EDF5E1;
 }
 
 :root .has-background-background-color {
-	background-color: #f5efe0;
+	background-color: #EDF5E1;
 	color: #000;
 }
 
@@ -2811,7 +2823,7 @@ h2.entry-title {
 }
 
 .has-drop-cap:not(:focus)::first-letter {
-	color: #1d4e9e;
+	color: #05386B;
 	font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
 	font-size: 5.1em;
 	font-weight: 800;
@@ -3030,7 +3042,7 @@ h2.entry-title {
 }
 
 .wp-block-button.is-style-outline {
-	color: #1d4e9e;
+	color: #05386B;
 }
 
 .is-style-outline .wp-block-button__link:not(.has-text-color) {
@@ -3216,7 +3228,7 @@ figure.wp-block-gallery.alignfull {
 .wp-block-pullquote::before {
 	background: #fff;
 	border-radius: 50%;
-	color: #1d4e9e;
+	color: #05386B;
 	content: "”";
 	display: block;
 	font-size: 6.2rem;
@@ -3479,6 +3491,8 @@ figure.wp-block-table.is-style-stripes {
 /* -------------------------------------------------------------------------- */
 
 
+
+
 .entry-content {
 	line-height: 1.5;
 }
@@ -3535,7 +3549,7 @@ figure.wp-block-table.is-style-stripes {
 /* Font Families ----------------------------- */
 
 .entry-content {
-	font-family: NonBreakingSpaceOverride, "Hoefler Text", Garamond, "Times New Roman", serif;
+	font-family: NonBreakingSpaceOverride, sans-serif, "Hoefler Text", Garamond, "Times New Roman", serif;
 	letter-spacing: normal;
 }
 
@@ -3831,7 +3845,7 @@ div.comment:first-of-type {
 }
 
 .comment-reply-link {
-	background-color: #1d4e9e;
+	background-color: #05386B;
 	color: #fff;
 	display: block;
 	padding: 0.7rem;
@@ -4365,8 +4379,8 @@ div.comment:first-of-type {
 
 .footer-nav-widgets-wrapper,
 #site-footer {
-	background-color: #fff;
-	border-color: #dedfdf;
+	background-color: #5CDB95;
+	border-color: #8EE4AF;
 	border-style: solid;
 	border-width: 0;
 }
@@ -4446,7 +4460,7 @@ ul.footer-social li {
 }
 
 .footer-social a {
-	background-color: #1d4e9e;
+	background-color: #05386B;
 	height: 3.6rem;
 	width: 3.6rem;
 }
@@ -4901,11 +4915,11 @@ a.to-the-top > * {
 	}
 
 	.search-toggle {
-		left: 2rem;
+		right: 2rem;
 	}
 
 	.nav-toggle {
-		right: 2rem;
+		left: 2rem;
 	}
 
 
@@ -5364,6 +5378,7 @@ a.to-the-top > * {
 	.entry-content h6 {
 		margin: 4.5rem auto 2.5rem;
 	}
+
 
 	.alignnone,
 	.aligncenter {
@@ -5990,6 +6005,7 @@ a.to-the-top > * {
 		max-width: calc((100% - 58rem) / 2 - 6rem);
 	}
 
+
 	[class*="wp-block"]:not(.alignwide):not(.alignfull) [class*="__inner-container"] > .alignright,
 	[class*="wp-block"]:not(.alignwide):not(.alignfull) [class*="__inner-container"] > p .alignright,
 	[class*="wp-block"]:not(.alignwide):not(.alignfull) [class*="__inner-container"] > .wp-block-image .alignright {
@@ -6418,6 +6434,7 @@ a.to-the-top > * {
 
 }
 
+
 @media ( min-width: 1330px ) {
 
 
@@ -6499,7 +6516,7 @@ padding: 10px;
 
 /* Clear floats after the columns */
 .row:after {
-content: "";
+content: ""; 
 display: table;
 clear: both;
 }
@@ -6510,8 +6527,15 @@ font-weight: bold;
 font-size: 17pt;
 }
 
-.radial-gauge-class {
-padding: 5px;
+.radial-gauge-class-voting {
+	width:100%;
+	height: 100%;
+	padding-top: 10%;
+}
+
+.radial-gauge-class-stock {
+	width:100%;
+	padding-top: 10%;
 }
 
 .footer-logo {
@@ -6524,14 +6548,28 @@ height: 50px;
 .prognosis-ticker {
 }
 
+/* Div button */
+.button-voting-div{
+	text-align:center;
+}
+
+/* Button */
 input.button-voting{
+	width: 40%;
 	border-radius: 50px;
-	padding: 30px;
-	margin-top:30px;
+	margin-top:10%;
+	text-align:center;
 }
 
 input.button-voting:hover {
-background-color: #1d4e9e;
+background-color: #05386B;
+}
+ 
+.smart-contract-button{ 
+	background-color: black;
+	font-size:30px;
+	margin-top:30px;
+	border-radius:20px;
 }
 
 .stock-ticker-wrapper {
@@ -6557,7 +6595,7 @@ background-color: #1d4e9e;
 .score-tooltip { 
 	font-size: 0.5em;
 	visibility: hidden;
-	width: 350px;
+	width: 30%;
 	background-color: white;
 	color: #6d6d6d;
 	border-radius: 6px;
@@ -6585,11 +6623,102 @@ background-color: #1d4e9e;
 input.voting_input{
 	display: block;
 	margin:0 auto;
-	border-radius:30px;
+	border-radius:10px;
 	width:40%;
+	text-align: center;
 }
-	 
+
+
+.scoring-area {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 120rem;
+	width: calc(100% - 4rem);
+}
+
+/* cookie notice button */
+.cn-button.bootstrap { 
+	background-color: #05386B; 
+	color: white;
+	border-radius: 15px;
+ }
 /* 
 .tradingview-widget-container-technical {
 	align: center;
   } */
+
+  @media only screen and (min-width: 700px) {
+	/* ----------------------
+	TYPOGRAPHY 
+	---------------------- */
+	body{font-size:20px;}
+	h1{font-size:2em;}
+	h2{font-size:2em;}
+	h3{font-size:1.4em;}
+	h4{font-size:1.5em;}
+	h5{font-size:1.3em;}
+	h6{font-size:1.1em;}
+}
+
+.bordered-area{
+	border:1px solid;
+	background:#5CDB95; 
+	padding:25px;
+	border-radius:20px;
+}
+
+.entry-content .own-h2 {
+	text-align: center; 
+	font-weight: bold;
+	font-size: 17pt;
+	margin: 3rem auto 3rem;
+}
+
+/* Menu/Navigation Footer */
+body:not(.overlay-header) .primary-menu > li > a, body:not(.overlay-header) .primary-menu > li > .icon, .modal-menu a, .footer-menu a, .footer-widgets a, #site-footer .wp-block-button.is-style-outline, .wp-block-pullquote:before, .singular:not(.overlay-header) .entry-header a, .archive-header a, .header-footer-group .color-accent, .header-footer-group .color-accent-hover:hover
+{
+	color: #05386B;
+}
+
+
+button:not(.toggle)
+{
+	background-color:#05386B;
+}
+
+.modal-title{
+	font-size: 23px; 
+	font-weight:bold; 
+	text-align:left;
+}
+
+.modal-body{
+	font-size:17px;
+}
+ 
+.modal-body-p{
+	font-size: 17px; 
+	font-weight: 600;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.entry-smart-contract
+{
+	font-family: sans-serif;
+	font-size: 25px; 
+	font-weight:bold;
+}
+
+.modal-header h5
+{
+	margin:1rem;
+}
+
+
+.img-centered{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}

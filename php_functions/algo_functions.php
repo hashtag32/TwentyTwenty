@@ -22,6 +22,8 @@ function getStockValue($symbolName)
 	$actual_value =	readStockValue($conn, $symbolName);
 	return $actual_value;
 }
+ 
+
 
 //****Categories****/// 
 function checkCategory($symbolName)
@@ -29,13 +31,14 @@ function checkCategory($symbolName)
 	// Check if catgeory is already existing
 	if(!existsCategory($symbolName))
 	{
-		createCategory($symbolName);
+		return createCategory($symbolName); 
 	}
+	return true;
 }
 
 function existsCategory($symbolName)
 {
-	$args = array(
+	$args = array( 
 		'hide_empty'      => false,
 	);
 	 
@@ -52,14 +55,16 @@ function existsCategory($symbolName)
 
 function createCategory($symbolName)
 {
+	require_once( ABSPATH . '/wp-admin/includes/taxonomy.php');
+
 	$stockName=getStockName($symbolName);
 
 	//Define the category
-	// TODO: cat_name is Tesla, nice_name is tsla!!! 
-	$wpdocs_cat = array('cat_name' => $stockName, 'category_nicename' => $symbolName );
+	$category_to_insert = array('cat_name' => $stockName, 'category_nicename' => $symbolName, 'category_parent' => '187'  );
 	
 	// Create the category
-	$wpdocs_cat_id = wp_insert_category($wpdocs_cat);
+	$category_to_insert_id = wp_insert_category($category_to_insert);
+	return $category_to_insert_id;
 }
 
 /*******Database related functions****/
@@ -71,6 +76,11 @@ function connectDB()
 		die("Connection failed: " . $conn->connect_error);
 	}
 	return $conn;
+}
+
+function closeconnectDB($con)
+{
+	return mysqli_close($conn);
 }
 
 function insertEntrystockValuation($conn, $symbol, $currentValue)
@@ -95,12 +105,14 @@ function readForecast($conn, $symbol)
 
 	// Build array with votings of forecasts 
 	// -> calculate average and return it 
+	$symbol=strtoupper($symbol);
+	$array_votings=array();
 	if (mysqli_num_rows($result) > 0) {
 		// output data of each row
 		while ($row = mysqli_fetch_assoc($result)) {
 			// echo "id: " . $row["symbol"]. " - Name: " . $row["current_price"]. " " . $row["lastname"]. "<br>";
 			if ($row["symbol"] == $symbol) {
-				$array_votings[] = $row["voting"];
+				array_push($array_votings,$row["voting"]); 
 			}
 		}
 	} else {
@@ -116,28 +128,109 @@ function readForecast($conn, $symbol)
 		$result = 0;
 	}
 
-	return $result;
+	return (float) $result;
+}
+
+
+function fetchStockName($symbol)
+{
+	// Get name from API
+	$data_arr=fetch_fmpcloud_feed($symbol, "quote")[0];
+	$stockName=$data_arr["name"];
+	
+	// Insert into DB
+	insertStockName($symbol,$stockName);
+
+	return $stockName;
 }
 
 function readStockValue($conn, $symbol)
 {
 	//3 columns in MySQL: symbol, data, voting
-	$sql = "SELECT * FROM wp_stock_ticker_data";
+	$sql = "SELECT * FROM StockTable";
 	$result = mysqli_query($conn, $sql);
 
-	// Build array with votings of forecasts 
-	// -> calculate average and return it 
+	// Search in the DB first
+	$price_db=0;
 	if (mysqli_num_rows($result) > 0) {
 		// output data of each row
 		while ($row = mysqli_fetch_assoc($result)) {
 			if ($row["symbol"] == $symbol) {
-				$last_close_value = (int)$row["last_close"];
+				//todo: Get newest date (currently through order)
+				$price_db=$row["stockPrice"];
 			}
 		}
 	} else {
-		// echo "0 results";
+		// Symbol is not even in there -> insert
 	}
 
-	return $last_close_value;
+	return $price_db;
 }
+ 
+
+
+function getHoursDiff($date1,$date2)
+{
+	// Due date
+	$date1_date=date("d-m-Y H:i:s",strtotime($date1));
+	$date1_DateTime=new DateTime($date1_date);
+  
+	// Date now
+	$date2_date=date("d-m-Y H:i:s",strtotime($date2));
+	$date2_DateTime=new DateTime($date2_date);
+  
+	// Diff
+	$interval = date_diff($date1_DateTime,$date2_DateTime);
+	return $interval->format('%h');
+}
+
+function insertStockName($symbolName, $stockName)
+{
+	$conn = connectDB();
+	$sql = "INSERT INTO SymbolNameToStockName (symbolName, stockName) VALUES ('{$symbolName}', '{$stockName}')";
+	$result = $conn->query($sql);
+	return $result;
+
+}
+
+ 
+function insertStockValue($symbol, $date_now, $price)
+{
+	$conn = connectDB();
+	$sql = "INSERT INTO SymbolDatePrice (symbol, date, price) VALUES ('{$symbol}', '{$date_now}', '{$price}')";
+	$result = $conn->query($sql);
+	return $result;
+}
+
+function fetch_fmpcloud_feed( $symbol, $type, $feed_url="" ) {
+	$symbol=strtoupper($symbol);
+	if($feed_url=="")
+	{
+		$feed_url = 'https://fmpcloud.io/api/v3/'. $type . '/' . $symbol .  '?apikey=fd1432a9b894108cc5852e4a0f4a29ba';
+	}
+
+	
+	//todoSet timer to fetch according to alpha vantage restr aints
+	$wparg = array(
+		// 'timeout' => intval( $defaults['timeout'] ), 
+	);
+
+	$response = wp_remote_get( $feed_url, $wparg );
+
+	// Initialize empty $json variable
+	$data_arr = '';
+
+	// If we have WP error log it and return none
+	if ( is_wp_error( $response ) ) {
+		return 'Stock Ticker got error fetching feed from AlphaVantage.co: ' . $response->get_error_message();
+	} else {
+		// Get response from AV and parse it - look for error
+		$json = wp_remote_retrieve_body( $response );
+		$response_arr = json_decode( $json, true );
+		$data_arr=$response_arr;
+		unset( $response_arr );
+	}
+	return $data_arr; 
+} 
+
 ?>

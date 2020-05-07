@@ -69,6 +69,11 @@
 		</div>
 
 		<?php
+		// Add your Analysis
+		if (is_single()) {
+			get_template_part('small-parts/add-button');
+		}
+
 		// Author biographie
 		if (is_single()) {
 			get_template_part('template-parts/entry-author-bio');
@@ -101,5 +106,5 @@
 	<?php
 	}
 	?>
-
+		
 </article><!-- .post -->

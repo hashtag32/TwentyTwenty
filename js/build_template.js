@@ -6,26 +6,23 @@ var $ = jQuery;
 
 
 function theDomHasLoaded(e) {
-  if(window.location.href==VotingURL)
-  {
-    loadIncludes();
-  }
+  loadIncludes();
 }
 
 // Will fire after theDomHasLoaded
 function pageFullyLoaded(e) {
   if(window.location.href==VotingURL)
   {
-    buildtemplates();
+    // buildtemplates();
   }
 }
 
 function loadIncludes() {
-  var script = document.createElement("script");
-
-  script.src =
+  // Jquery Script
+  var script_jquery = document.createElement("script");
+  script_jquery.src =
     "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js";
-  document.getElementsByTagName("head")[0].appendChild(script);
+  document.getElementsByTagName("head")[0].appendChild(script_jquery);
 }
 
 
@@ -75,7 +72,7 @@ function create_inst_of_template(symbolName) {
 
 function updateVotingValues(request_votingArray) {
   var request_votingArray_parsed = jQuery.parseJSON(request_votingArray);
-  adjustGaugeToWindow(request_votingArray_parsed.symbolName); 
+  // adjustGaugeToWindow(request_votingArray_parsed.symbolName); 
   changeVotingValues(
     request_votingArray_parsed.symbolName,
     request_votingArray_parsed.voting_number,
@@ -236,21 +233,20 @@ $(window).on('scroll', function () {
 // csv -> Javascript here
 // csv -> SQL Import manual
 // csv is original file
+// DJI:"Dow Jones Industrial Average",
+// SPX:"S&P 500 Index",
+// HSI:"Hang Seng Index",
 var SymbolToStockName = {
-  DJI:"Dow Jones Industrial Average",
-  SPX:"S&P 500 Index",
-  HSI:"Hang Seng Index",
   TSLA:"Tesla",
   AAPL:"Apple",
   AMZN:"Amazon.com",
   MSFT:"Microsoft",
-  BCO:"Boeing",
+  BA:"Boeing",
   NVDA:"NVIDIA",
-  FB:"Facebook",
+  FB:"Facebook", 
   AMD:"AMD",
   GOOGL:"Alphabet A",
   V:"Visa Inc.",
-  CMC:"JPMorgan", 
   BABA:"Alibaba",
   NFLX:"Netflix",
   ZM:"Zoom Video",
@@ -283,6 +279,3 @@ var SymbolToStockName = {
   LMT:"Lockheed Martin",
   AXP:"American Express"
 };
-
-
-

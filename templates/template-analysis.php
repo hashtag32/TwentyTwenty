@@ -18,7 +18,7 @@ get_header();
 	$wpb_all_query = new WP_Query(array('post_type'=>'post', 'post_status'=>'publish', 'posts_per_page'=>-1)); ?>
 
 <main id="site-content" role="main">
-
+ 
 	<?php
 	if ( $wpb_all_query->have_posts() ) {
 
@@ -39,8 +39,7 @@ get_header();
 
 		}
 	}
-	?>
-
+	?> 
 
 
 <?php get_template_part( 'template-parts/pagination' ); ?>

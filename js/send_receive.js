@@ -13,6 +13,7 @@ function request_voting(symbolName) {
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert("Data couldn't load.");
+            location.reload();
         }
     });
 }
@@ -35,5 +36,28 @@ function send_vote(element, symbolName, voting_number) {
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert("Sending didn't work. Try again.");
         }
+    });
+}
+
+function php_function_call(functionName, argumentArray) {
+    jQuery.ajax({
+        type: "POST",
+        url: ajax_unique.ajaxurl,
+        dataType: "json",
+        data: {
+            action: "php_function_call",
+            title: ajax_unique.title,
+            functionname: functionName,  
+            arguments: argumentArray
+        },
+    
+        success: function (obj, textstatus) {
+                      if( !('error' in obj) ) {
+                          yourVariable = obj.result;
+                      }
+                      else {
+                          console.log(obj.error);
+                      }
+                }
     });
 }

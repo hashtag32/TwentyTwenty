@@ -10,17 +10,16 @@
  * @package WordPress
  * @subpackage Twenty_Twenty
  * @since 1.0.0
- */
-
-//  Templates
-include("voting_template.html");
+ */ 
 
 ?>
-<script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"></script>
 
+<script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"></script>
+ 
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 	<?php
+
 	get_template_part('template-parts/entry-header');
 
 	if (!is_search()) {
@@ -33,6 +32,7 @@ include("voting_template.html");
 		<div class="entry-content">
 
 			<?php
+			// copy value from 
 			if (is_search() || !is_singular() && 'summary' === get_theme_mod('blog_content', 'full')) {
 				the_excerpt();
 			} else {
@@ -45,12 +45,37 @@ include("voting_template.html");
 	</div><!-- .post-inner -->
 
 	<div class="section-inner" id="section-inner">
-		<!-- Main part, is modified in buildtemplates// -->
-		<!-- Will be automatically loaded in build_template.js -->
+		<!-- Table of columns -->
+		<div class="wp-block-columns"><!-- ggf. alignwide? -->
+			<!-- First block Most voted -->
+			<div class="wp-block-column">
+				<h2 class="has-text-color has-text-align-center">Most voted</h2>
+				
+				<?php
+				foreach (getMostVotedStocks(10) as $symbol)
+				{
+					set_query_var('symbol', $symbol);
+					get_template_part('own-template-parts/part', 'stock-overview');
+				}
+				?>  
+
+			</div><!-- /wp:column -->
+			<div class="wp-block-column"> 
+				<h2 class="has-text-color has-text-align-center">Highest confidence</h2> <!-- Second column -->
+				<!-- Abstrahieren -> nicht zweimal gleiche Stock Overview -->
+				<?php 
+					foreach (getHighestConfidence(10) as $symbol)
+					{
+						set_query_var('symbol', $symbol);
+						get_template_part('own-template-parts/part', 'stock-overview');
+					}
+				?>
+			</div><!-- /wp:column -->
+		</div><!-- /wp:columns -->
 	</div><!-- .section-inner -->
-
+	
+	
 	<?php
-
 	if (is_single()) {
 		get_template_part('template-parts/navigation');
 	}

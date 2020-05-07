@@ -14,6 +14,12 @@ get_header();
 
 <main id="site-content" role="main">
 
+
+
+
+
+
+
 	<script src="https://rawgit.com/ethereum/web3.js/0.16.0/dist/web3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/ethjs@0.3.0/dist/ethjs.min.js"></script>
 	<script>

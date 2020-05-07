@@ -128,7 +128,7 @@ html {
 }
 
 body {
-	background: #EDF5E1;
+	background: #f3f2f2;
 	box-sizing: border-box;
 	color: #000;
 	font-family: -apple-system, BlinkMacSystemFont, sans-serif, "Helvetica Neue", Helvetica ;
@@ -1359,7 +1359,7 @@ ul.social-icons li {
 
 
 #site-header {
-	background: #5CDB95;
+	background: #fff;
 	position: relative;
 }
 
@@ -2407,12 +2407,12 @@ body:not(.singular) main > article:first-of-type {
 /* Post Header ------------------------------- */
 
 .singular .entry-header {
-	background-color: #5CDB95;
+	background-color: #fff;
 	padding: 4rem 0;
 }
 
 .entry-header-green{
-	background-color: #5CDB95;
+	background-color: #fff;
 	padding: 4rem 0;
 }
 
@@ -2775,7 +2775,7 @@ h2.entry-title {
 
 :root .has-primary-background-color {
 	background-color: #000;
-	color: #EDF5E1;
+	color: #f3f2f2;
 }
 
 :root .has-secondary-color {
@@ -2797,11 +2797,11 @@ h2.entry-title {
 }
 
 :root .has-background-color {
-	color: #EDF5E1;
+	color: #f3f2f2;
 }
 
 :root .has-background-background-color {
-	background-color: #EDF5E1;
+	background-color: #f3f2f2;
 	color: #000;
 }
 
@@ -4379,7 +4379,7 @@ div.comment:first-of-type {
 
 .footer-nav-widgets-wrapper,
 #site-footer {
-	background-color: #5CDB95;
+	background-color: #fff;
 	border-color: #8EE4AF;
 	border-style: solid;
 	border-width: 0;
@@ -6642,6 +6642,7 @@ input.voting_input{
 	color: white;
 	border-radius: 15px;
  }
+ #f3f2f2
 /* 
 .tradingview-widget-container-technical {
 	align: center;
@@ -6662,7 +6663,7 @@ input.voting_input{
 
 .bordered-area{
 	border:1px solid;
-	background:#5CDB95; 
+	background:#fff; 
 	padding:25px;
 	border-radius:20px;
 }
@@ -6721,4 +6722,14 @@ button:not(.toggle)
 	margin-left: auto;
 	margin-right: auto;
 	width: 50%;
+}
+
+.background-cover{
+	z-index:110000;
+}
+
+/* This is for the transparency of the first block on the cover page */
+.first-cover-header-block
+{
+	background-color: rgba(	243, 242, 242,0.3);
 }

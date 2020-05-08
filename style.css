@@ -131,7 +131,7 @@ body {
 	background: #f3f2f2;
 	box-sizing: border-box;
 	color: #000;
-	font-family: -apple-system, BlinkMacSystemFont, sans-serif, "Helvetica Neue", Helvetica ;
+	font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
 	font-size: 1.8rem;
 	letter-spacing: -0.015em;
 	text-align: left;
@@ -140,7 +140,7 @@ body {
 @supports ( font-variation-settings: normal ) {
 
 	body {
-		font-family: "Inter var", -apple-system, BlinkMacSystemFont, sans-serif, "Helvetica Neue", Helvetica;
+		font-family: "Inter var", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
 	}
 }
 
@@ -3554,7 +3554,7 @@ figure.wp-block-table.is-style-stripes {
 /* Font Families ----------------------------- */
 
 .entry-content {
-	font-family: NonBreakingSpaceOverride, sans-serif, "Hoefler Text", Garamond, "Times New Roman", serif;
+	font-family: NonBreakingSpaceOverride, "Hoefler Text", Garamond, "Times New Roman", serif;
 	letter-spacing: normal;
 }
 

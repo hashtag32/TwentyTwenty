@@ -26,13 +26,12 @@ if (!is_search()) {
 ?>
 
 <div class="post-inner <?php echo is_page_template('templates/template-full-width.php') ? '' : 'thin'; ?> ">
-
 	<div class="entry-content analysis-entry-content">
-		<a href="https://stockvoting.net">
+		<?php echo '<a href=' . esc_url(get_permalink(get_the_ID())) . '>';	?>
 			<?php the_excerpt(); ?>
 		</a>
 	</div><!-- .entry-content -->
-	</div><!-- .post-inner -->
+</div><!-- .post-inner -->
 
 	<div class="section-inner">
 		<?php

@@ -136,14 +136,12 @@ function delete_all_votes($user_id)
 function getStockName($symbol)
 {
 	$conn = connectDB();
-	$sql = "SELECT SymbolName, StockName FROM SymbolNameToStockName";
+	$sql = "SELECT StockName FROM SymbolNameToStockName WHERE `SymbolName` LIKE '" . $symbol . "'";
 	$result = mysqli_query($conn, $sql);
 
 	while ($row = mysqli_fetch_assoc($result)) {
 		// just get the first value -> Cleanup manual required
-		if ($row["SymbolName"] == $symbol) {
-			return $row["StockName"];
-		}
+		return $row["StockName"];
 	}
 	if(empty($row["StockName"]))
 	{
@@ -155,14 +153,12 @@ function getStockName($symbol)
 function getSymbolName($stockName)
 {
 	$conn = connectDB();
-	$sql = "SELECT SymbolName, StockName FROM SymbolNameToStockName";
+	$sql = "SELECT SymbolName FROM SymbolNameToStockName WHERE `StockName` LIKE '" . $stockName . "'";
 	$result = mysqli_query($conn, $sql);
 
 	while ($row = mysqli_fetch_assoc($result)) {
 		// just get the first value -> Cleanup manual required
-		if ($row["StockName"] == $stockName) {
-			return $row["SymbolName"];
-		}
+		return $row["SymbolName"];
 	}
 	return "";
 }

@@ -12,12 +12,14 @@
  * @since 1.0.0
  */
 
-?>
+//  todo:create id and save title/id in db
+$heading=ucfirst(str_replace( '_',' ', $smart_contract));
+?> 
 
 <!-- todo move to separate file -->
 <header class="entry-header-green has-text-align-center header-footer-group">
 	<div class="entry-header-inner section-inner medium">
-		<h1 class="entry-title">Bet against a friend</h1>
+		<h1 class="entry-title"><?php echo $heading?></h1>
 	</div><!-- .entry-header-inner -->
 </header>
 
@@ -54,7 +56,7 @@
 					<select multiple class="form-control" style="font-size:large;" id="stockPickSelect">
 					<!-- todo: StockName, but get it later in ajax?-> bad, better in save as key TSLA -->
 						<?php foreach (getAllSymbols() as $symbol){	?>
-							<option><?php echo $symbol?>, <?php echo getStockName($symbol)?></option>
+							<option><?php echo $symbol?></option>
 						<?php } ?>
 					</select>
 

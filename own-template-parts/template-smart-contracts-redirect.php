@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Stocks template
+ * Template Name: Smart Contracts redirect template
  * Template Post Type:  page
  * The template for displaying single posts and pages.
  *
@@ -19,15 +19,10 @@ get_header();
 <main id="site-content" role="main">
 
 <?php
-get_template_part( 'own-template-parts/content-subcategory-stocks' );
-
-// if ( have_posts() ) {
-// 	// Go to the analysis site
-// 	get_template_part( 'own-template-parts/content-posts' );
-// } 
+get_template_part( 'own-template-parts/content-smart-contracts-redirect' );
 
 ?>
-
+ 
 </main><!-- #site-content -->
 
 <?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Smart Contracts Template
+ * Template Name: Smart Contracts Overview Template
  * Template Post Type: post, page
  *
  * @package WordPress

@@ -19,7 +19,7 @@
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
 
-<div class="section-inner">
+<div class="section-inner"> 
 
 
 

@@ -50,13 +50,6 @@ function create_stock_taxonomy() {
 }
 
 
-function filter_taxonomy($tax_template) {
-
-    //todo: check if parent is stocks
-    $tax_template=get_template_directory() . '/own-template-parts/template-taxonomy.php' ;
-    return $tax_template; 
-}
-add_filter( 'taxonomy_template', 'filter_taxonomy' );   
 
 
 //*** Cronjobs
@@ -119,25 +112,42 @@ function update_getStockValue($symbol)
 }
 
 
-
-
+// Redirect stocks
 add_action('init', function() {
-    $page_id = 909; // update 2 (sample page) to your custom page ID where you can get the subscriber(s) data later
-	$page_data = get_post( $page_id );
-	
-    if( ! is_object($page_data) ) { // post not there
+    $stocks_page_id = 909; // Stocks Template Page
+	$stock_page_data = get_post( $stocks_page_id );
+
+    if( ! is_object($stock_page_data) ) { // post not there
         return;
     }
 
 	add_rewrite_rule(
         '^stocks/?([^/]*)/?',
-        'index.php?pagename=' . $page_data->post_name . '&symbol=$matches[1]',
+        'index.php?pagename=' . $stock_page_data->post_name . '&symbol=$matches[1]',
+        'top'
+	);
+});
+
+// Redirect smart contracts
+add_action('init', function() {
+	$smart_contracts_page_id = 921; // Smart Contracts Template Page
+	$smart_contracts_page_data = get_post( $smart_contracts_page_id );
+	
+    if( ! is_object($smart_contracts_page_data) ) { // post not there
+        return;
+    }
+
+	add_rewrite_rule(
+        '^smart_contracts/?([^/]*)/?',
+        'index.php?pagename=' . $smart_contracts_page_data->post_name . '&smart_contract=$matches[1]',
         'top'
     );
 });
 
+
 add_filter( 'query_vars', function( $query_vars ) {
     $query_vars[] = 'symbol';
+    $query_vars[] = 'smart_contract';
     return $query_vars;
 } );
 

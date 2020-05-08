@@ -5370,7 +5370,6 @@ a.to-the-top > * {
 	.entry-content p,
 	.entry-content li {
 		line-height: 1.476;
-		margin:3rem;
 	}
 
 	.entry-content h1,
@@ -6648,7 +6647,6 @@ input.voting_input{
 	color: white;
 	border-radius: 15px;
  }
- #f3f2f2
 /* 
 .tradingview-widget-container-technical {
 	align: center;
@@ -6738,4 +6736,9 @@ button:not(.toggle)
 .first-cover-header-block
 {
 	background-color: rgba(	243, 242, 242,0.3);
+}
+
+.analysis-entry-content{
+	margin-right: 4rem;
+	margin-left: 4rem;
 }

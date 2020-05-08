@@ -24,7 +24,7 @@ if ( (bool) get_the_author_meta( 'description' ) && (bool) get_theme_mod( 'show_
 		</h2>
 		<h2 class="author-score has-accent-color heading-size-4">
 		<?php
-			echo getScore(get_current_user_id());
+			echo getScore(get_the_author_meta( 'ID' ));
 		?>
 		</h2>
 

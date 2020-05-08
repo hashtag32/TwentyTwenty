@@ -58,7 +58,7 @@ function fetch_stock_search($symbol)
 
 		array_push($stock_array,  $obj );
 
-		$category_id=checkCategory($dataEle["symbol"]); // if true -> category already exists, else get_term (cat_id)
+		// $category_id=checkCategory($dataEle["symbol"]); // if true -> category already exists, else get_term (cat_id)
 		// category_id currently not usable because wp_insert_category returns an element that is not usable in content-search.php
 		// Maybe do it through jquery would be the correct way
 		// if($category_id==true){
@@ -83,9 +83,6 @@ function getScore($user_id)
 	{ 
 		$stock_diff=getStockDiff($voting_array["symbol"],(int)$voting_array["voting"]);
 		array_push($stock_diff_array,$stock_diff);
-
-
-
 	}
 
 	// Calculate scores 

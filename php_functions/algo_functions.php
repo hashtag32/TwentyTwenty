@@ -3,7 +3,7 @@
 /*******Server API functions****/
 function vote($symbol, $voting_number,$user_id)
 {
-	checkCategory($symbol);
+	// checkCategory($symbol);
 	
 	$conn = connectDB();
 	$result = insertEntryvotingTable($conn, $symbol, date("d-m-Y H:i:s"), $voting_number, $user_id);

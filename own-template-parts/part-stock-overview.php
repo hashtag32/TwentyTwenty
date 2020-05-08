@@ -20,7 +20,7 @@ set_query_var('gauge_div_class', "radial-gauge-class-voting");
 
 
 <div class="voting-table"> <!-- Stock Overview -->
-    <a href="https://stockvoting.net/category/stocks/<?php echo $symbol?>/">
+    <a href="<?php echo get_symbol_link($symbol)?>/">
         <h2 class="has-text-align-center"><?php echo getStockName($symbol)?></h2>
     </a>
     <!-- Stock Overview Table -->

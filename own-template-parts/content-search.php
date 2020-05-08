@@ -21,25 +21,31 @@
 	// Stock search
 
 	// plus von fmtp -> first 3 results
-	$search_query=get_search_query( false );
-	$stocks_search=fetch_stock_search($search_query);
+	// $search_query=get_search_query( false );
+	// $stocks_search=fetch_stock_search($search_query);
 	// Now the elements should be in the database
 	
 	// Stocks in db
 	$search_term = explode( ' ', get_search_query( false ) ); // Array of separated search elements   
-	global $wpdb;
-	$select = "
-	SELECT DISTINCT t.*, tt.* 
-	FROM wp_terms AS t 
-	INNER JOIN wp_term_taxonomy AS tt 
-	ON t.term_id = tt.term_id 
-	WHERE tt.taxonomy IN ('category')";      
-	$first = true;
-	$select .= " AND (t.name LIKE '%s')";
-	$string_replace[] = '%'.$wpdb->esc_like( $s ).'%';
+	$search_string=get_search_query( false );
 
-	$select .= " OR (t.slug LIKE '%s')";
-	$string_replace[] = '%'. $wpdb->esc_like( $s ).'%';
+	$tableName="SymbolNameToStockName";
+	$columns_array=array('StockName','SymbolName');
+	$sql_query_results=search_strDB($tableName,$columns_array,$search_string);
+	$stocks=$sql_query_results;
+	// global $wpdb;
+	// $select = "
+	// SELECT DISTINCT t.*, tt.* 
+	// FROM wp_terms AS t 
+	// INNER JOIN wp_term_taxonomy AS tt 
+	// ON t.term_id = tt.term_id 
+	// WHERE tt.taxonomy IN ('category')";      
+	// $first = true;
+	// $select .= " AND (t.name LIKE '%s')";
+	// $string_replace[] = '%'.$wpdb->esc_like( $s ).'%';
+
+	// $select .= " OR (t.slug LIKE '%s')";
+	// $string_replace[] = '%'. $wpdb->esc_like( $s ).'%';
 	// 	}
 	// foreach ( $search_term as $s ){
 	// 	if ( $first ){
@@ -51,13 +57,15 @@
 	// 		$string_replace[] = '%'. $wpdb->esc_like( $s ).'%';
 	// 	}
 	// }
-	$select .= " ORDER BY t.name ASC";
-	$stocks_db = $wpdb->get_results( $wpdb->prepare( $select, $string_replace ) );
-	$stocks_db=array();
+	// $select .= " ORDER BY t.name ASC";
+	// $stocks_db = $wpdb->get_results( $wpdb->prepare( $select, $string_replace ) );
+	// $stocks_db=array();
 
 	// Unify both, but make sure only one element of each is given
 	//todo: If one element is in search and db, not working -> displays both elements
-	$stocks=array_unique(array_merge($stocks_db,$stocks_search), SORT_REGULAR); 
+	// $stocks=array_unique(array_merge($stocks_db,$stocks_search), SORT_REGULAR); 
+	// $stocks=$stocks_db;
+	// $symbolList=array();
 	
 	
 	// Search results subheading
@@ -138,7 +146,7 @@ if($number_results==0)
 			<div class="wp-block-column has-accent-color">
 
 			<?php
-			echo '<h3 class="has-accent-color has-text-color"><a href="'.esc_url( get_term_link( $stock ) ).'" title="'.esc_attr( $stock->name ).'">' . esc_html( $stock->name ) . '</a></li>';
+			echo '<h3 class="has-accent-color has-text-color"><a href="'.get_symbol_link($stock["SymbolName"]).'" title="'.esc_attr( $stock["SymbolName"] ).'">' . esc_html( $stock["StockName"]) . '</a></li>';
 			?>
 			</div>
 		</div>

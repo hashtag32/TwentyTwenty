@@ -121,6 +121,25 @@ function update_getStockValue($symbol)
 
 
 
+add_action('init', function() {
+    $page_id = 909; // update 2 (sample page) to your custom page ID where you can get the subscriber(s) data later
+	$page_data = get_post( $page_id );
+	
+    if( ! is_object($page_data) ) { // post not there
+        return;
+    }
+
+	add_rewrite_rule(
+        '^stocks/?([^/]*)/?',
+        'index.php?pagename=' . $page_data->post_name . '&symbol=$matches[1]',
+        'top'
+    );
+});
+
+add_filter( 'query_vars', function( $query_vars ) {
+    $query_vars[] = 'symbol';
+    return $query_vars;
+} );
 
 
 

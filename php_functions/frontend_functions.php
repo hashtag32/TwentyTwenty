@@ -294,6 +294,10 @@ function getValues_quarterly($symbol, $fmp_category, $key)
 	return $value_array; 
 }
 
+function get_symbol_link($symbolName)
+{
+	return "https://stockvoting.net/stocks/". $symbolName;
+}
 
 // General functions
 function getValues_quarterly_income_statement($symbol, $fmp_category, $key)

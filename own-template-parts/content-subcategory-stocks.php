@@ -24,6 +24,7 @@
 
 
 <?php $symbol=getSymbolName(single_cat_title( '', false ));
+$symbol = $wp_query->get( 'symbol' );
 if($symbol!="")
 {
 ?>

@@ -57,7 +57,7 @@
 							<!-- todo: Maybe add average Vote -->
 							<!-- todo: Derive Symbol Names -->
 							<td class="has-text-align-center" data-align="center">
-								<a href="https://stockvoting.net/category/stocks/<?php echo $voting_array["symbol"]?>">
+								<a href="<?php echo get_symbol_link($voting_array["symbol"])?>">
 									<div style="font-weight:bold">
 										<?php echo getStockName($voting_array["symbol"]) ?>
 									</div>

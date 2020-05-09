@@ -30,6 +30,10 @@
 		wp_body_open();
 		?>
 
+		<div class="progress" style="position:fixed;width:100%;z-index:100;display: none;" id="progressBarDiv">
+  			<div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+
 		<header id="site-header" class="header-footer-group" role="banner">
 
 			<div class="header-inner section-inner">
@@ -188,3 +192,26 @@
 		<?php
 		// Output the menu modal.
 		get_template_part( 'template-parts/modal-menu' );
+		?>
+
+<script>
+$(window).scroll(function(e){ 
+	var progressBar = $('.progress-bar'); 
+	var progressBarDiv=$("#progressBarDiv");
+	var currentPosition=$(this).scrollTop();
+	var totalDocLength=$(document).height()-$(window).height();
+
+	var currentPercentage=currentPosition/totalDocLength;
+
+	if ((currentPercentage>0.1) && (currentPercentage<0.9))
+	{
+		progressBarDiv.slideDown('slow');
+		progressBar.css({'width': currentPercentage*$(window).width()}); 
+	}
+	else
+	{
+		progressBarDiv.slideUp('slow');
+	}
+});
+</script>
+

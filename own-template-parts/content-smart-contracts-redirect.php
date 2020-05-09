@@ -44,10 +44,10 @@ $heading=ucfirst(str_replace( '_',' ', $smart_contract));
 		</div>
 
 		<div id="BettingDiv" style="display: none;" >
-			<h2 class="own-h2 has-text-align-center" style="font-size:35px" >Your contract</h2>
+			<h2 class="own-h2 has-text-align-center has-accent-color" style="font-size:35px" >Your contract</h2>
 
 			<a href="https://ropsten.etherscan.io/address/" target="_blank" id="contractMinedHashLink">
-				<h2 class="own-h2 has-text-align-center " id="contractMinedHash"></h2>
+				<h2 class="own-h2 has-text-align-center has-accent-color" id="contractMinedHash"></h2>
 			</a>
 
 			<form>

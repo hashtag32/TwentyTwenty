@@ -14,12 +14,9 @@
 <html class="no-js" <?php language_attributes(); ?>>
 
 	<head>
-
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" >
-
 		<link rel="profile" href="https://gmpg.org/xfn/11">
-
 		<?php wp_head(); ?>
 
 	</head>
@@ -30,7 +27,7 @@
 		wp_body_open();
 		?>
 
-		<div class="progress" style="position:fixed;width:100%;z-index:100;display: none;" id="progressBarDiv">
+		<div class="progress" style="position:fixed;width:100%;z-index:100;display:none; height:5px" id="progressBarDiv">
   			<div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 		</div>
 
@@ -196,20 +193,37 @@
 
 <script>
 $(window).scroll(function(e){ 
+	//todo: Bottom doesn't work like that
+	// Top
+	// Margin (windowHeight)
+	// Begin Article
+	// ...
+	// ...
+	// End Article
+	// Margin (windowHeight)
+	// Bottom
+
+
+	var windowHeight=$(window).height();
 	var progressBar = $('.progress-bar'); 
 	var progressBarDiv=$("#progressBarDiv");
 	var currentPosition=$(this).scrollTop();
-	var totalDocLength=$(document).height()-$(window).height();
+	var totalDocLength=$(document).height()-2*windowHeight;
 
-	var currentPercentage=currentPosition/totalDocLength;
+	var currentPercentage=(currentPosition-windowHeight)/totalDocLength; 
+	console.log(currentPosition);
+	console.log(totalDocLength);
+	console.log(currentPercentage);
 
-	if ((currentPercentage>0.1) && (currentPercentage<0.9))
+	// Activate only within the article
+	if ((currentPosition>windowHeight) && (currentPosition<totalDocLength))
 	{
 		progressBarDiv.slideDown('slow');
 		progressBar.css({'width': currentPercentage*$(window).width()}); 
 	}
 	else
 	{
+		// Hide 
 		progressBarDiv.slideUp('slow');
 	}
 });

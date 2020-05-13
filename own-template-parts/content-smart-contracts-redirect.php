@@ -163,8 +163,7 @@ $heading=ucfirst(str_replace( '_',' ', $smart_contract));
 	</div><!-- .entry-content -->
 </div><!-- .post-inner -->
 
-
-	<script src="https://rawgit.com/ethereum/web3.js/0.16.0/dist/web3.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@1.2.7/dist/web3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/ethjs@0.3.0/dist/ethjs.min.js"></script>
 	<script>
 		// Front End functions

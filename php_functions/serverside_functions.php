@@ -50,8 +50,6 @@ function delete_votesServer()
 add_action('wp_ajax_nopriv_delete_votesServer', 'delete_votesServer');
 add_action('wp_ajax_delete_votesServer', 'delete_votesServer');
 
-
-
 function php_function_call()
 {
     $aResult = array();

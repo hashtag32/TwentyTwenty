@@ -6670,6 +6670,7 @@ input.voting_input{
 	background:#fff; 
 	padding:25px;
 	border-radius:20px;
+	position:relative;
 }
 
 .entry-content .own-h2 {
@@ -6742,3 +6743,24 @@ button:not(.toggle)
 	margin-right: 4rem;
 	margin-left: 4rem;
 }
+
+/* Use this with an empty span in div
+Upper div has to have a positive:relative */
+.fill-div-with-link{
+	position:absolute; 
+	width:100%;
+	height:100%;
+	top:0; 
+	left: 0;
+	/* z-index: 1; */
+} 
+
+.div-with-link
+{
+	position:relative;
+}  
+
+.table-row{
+	cursor:pointer;
+}
+	

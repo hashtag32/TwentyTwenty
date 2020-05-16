@@ -123,6 +123,15 @@ function getVotings( $user_id)
 	return $array_votings;
 }
 
+function getAllKO()
+{
+	$conn = connectDB();
+
+	$sql = "SELECT * FROM ContractActionKO_creation";
+	$result=executeSQLCommand($sql);
+	$queryArray=queryResultToArray($result);
+	return $queryArray;
+}
 
 function delete_all_votes($user_id)
 {
@@ -339,6 +348,11 @@ function display_stock_diff($stockDiff)
 		return 0;
 	}
 	return $stockDiff;
+}
+
+function display_string($string)
+{
+	return ucfirst($string);
 }
 
 

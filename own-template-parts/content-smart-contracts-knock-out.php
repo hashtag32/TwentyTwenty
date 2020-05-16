@@ -26,6 +26,51 @@
 <div class="post-inner">
 	<div class="entry-content entry-smart-contract" >
 
+		<!-- Head of the Table --> 
+		<figure class="wp-block-table alignwide is-style-stripes">
+			<table class="table table-striped has-subtle-pale-blue-background-color has-background table-hover"  >
+
+				<thead class="thead-dark" >
+					<tr>
+						<th class="has-text-align-center" data-align="center">Typ</th>
+						<th class="has-text-align-center" data-align="center">Underlying</th>
+						<th class="has-text-align-center" data-align="center">Threshold</th>
+						<th class="has-text-align-center" data-align="center">Leverage</th>
+						<th class="has-text-align-center" data-align="center">Pot</th>
+						<th class="has-text-align-center" data-align="center">Emission date</th>
+						<th class="has-text-align-center" data-align="center">Due Date</th>
+					</tr>
+				</thead>
+
+			<!-- Iterate over all votings -->
+			<?php
+			foreach (getAllKO() as $KO_contract)
+			{ 
+			?> 
+					<tr class="table-row" data-href="<?php echo get_symbol_link($KO_contract["underlying"])?>" >
+					
+						<td class="has-text-align-center" data-align="center"><?php echo display_string($KO_contract["typ"]) ?></td>
+						<td class="has-text-align-center" data-align="center">
+							<a href="<?php echo get_symbol_link($KO_contract["underlying"])?>">
+								<div style="font-weight:bold">
+									<?php echo getStockName($KO_contract["underlying"])?>
+								</div>
+							</a>
+						</td>
+						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["threshold"] ?></td>
+						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["leverage"] ?></td>
+						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["pot"]?> ETH</td>
+						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["emissionDate"] ?></td>
+						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["dueDate"] ?></td>
+						
+					</tr>
+			<?php  
+			} 
+			?>
+			</table>
+		</figure> 
+
+
 		<div id="LoadCreateContractDiv" >
 			<form>
 				<button type="button" class="btn btn-secondary btn-lg smart-contract-button" data-toggle="modal" data-target="#loadContractModal" id="loadContractButton">Load contract</button>

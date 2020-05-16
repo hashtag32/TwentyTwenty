@@ -2,37 +2,39 @@
 
 function openLink(url, newTab=false)
 {
-  location.href=url;
+  location.href=url; 
 }
+
 
 // Actived on every page
 $(window).scroll(function(e){ 
 	// Top
-	// Margin (windowHeight)
+	// Margin (windowHeight) 
 	// Begin Article
 	// ...
 	// ...
-	// End Article
-	// Margin (windowHeight)
-	// Bottom
+	// End Article 
+	// Margin (windowHeight) 
+	// Bottom  
 
-	var windowHeight=$(window).height();
+	var windowHeight=$(window).height(); 
 	var progressBar = $('.progress-bar'); 
 	var progressBarDiv=$("#progressBarDiv");
-	var currentPosition=$(this).scrollTop();
-	var totalDocLength=$(document).height()-2*windowHeight;
+	var currentTopPosition=$(this).scrollTop();  
+	var currentDownPosition=$(this).scrollTop() +windowHeight;  
+	var totalDocLength=$(document).height()-2*windowHeight;  
 
-  var currentPercentage=(currentPosition)/totalDocLength; 
-
+	var currentPercentage=(currentTopPosition-windowHeight)/(totalDocLength-windowHeight);  
+	
 	// Activate only within the article
-	if ((currentPosition>windowHeight) && (currentPosition<totalDocLength))
+	if ((currentTopPosition>windowHeight) && (currentTopPosition<totalDocLength))
 	{
 		progressBarDiv.slideDown('slow');
 		progressBar.css({'width': currentPercentage*$(window).width()}); 
-	}
-	else
+	} 
+	else  
 	{
-		// Hide 
+		// Hide  
 		progressBarDiv.slideUp('slow');
 	}
 });

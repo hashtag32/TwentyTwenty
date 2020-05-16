@@ -35,7 +35,7 @@
 
 					<!-- Bet against a friend -->
 					<div class="bordered-area">
-						<a href="https://stockvoting.net/smart_contracts/bet_against_a_friend">
+						<a href="https://stockvoting.net/smart-contracts/betting-against-a-friend">
 							<h2 class="has-accent-color has-text-align-center ">Bet against a friend</h2>
 						</a>
 						<p class="has-large-font-size">
@@ -47,7 +47,7 @@
 
 					<!-- Knock Out Certificate -->
 					<div class="bordered-area">
-						<a href="https://stockvoting.net/smart_contracts/knock_out">
+						<a href="https://stockvoting.net/smart-contracts/knock-out">
 							<h2 class="has-accent-color has-text-align-center ">Knock Out</h2>
 						</a>
 						<p class="has-large-font-size">

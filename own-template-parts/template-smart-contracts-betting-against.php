@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Smart Contracts redirect template
+ * Template Name: Smart Contracts Betting Aginst 
  * Template Post Type:  page
  * The template for displaying single posts and pages.
  *
@@ -19,7 +19,7 @@ get_header();
 <main id="site-content" role="main">
 
 <?php
-get_template_part( 'own-template-parts/content-smart-contracts-redirect' );
+get_template_part( 'own-template-parts/content-smart-contracts-betting-against' );
 
 ?>
  

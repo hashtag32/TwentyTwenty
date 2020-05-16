@@ -129,20 +129,20 @@ add_action('init', function() {
 });
 
 // Redirect smart contracts
-add_action('init', function() {
-	$smart_contracts_page_id = 921; // Smart Contracts Template Page
-	$smart_contracts_page_data = get_post( $smart_contracts_page_id );
+// add_action('init', function() {
+// 	$smart_contracts_page_id = 921; // Smart Contracts Template Page
+// 	$smart_contracts_page_data = get_post( $smart_contracts_page_id );
 	
-    if( ! is_object($smart_contracts_page_data) ) { // post not there
-        return;
-    }
+//     if( ! is_object($smart_contracts_page_data) ) { // post not there
+//         return;
+//     }
 
-	add_rewrite_rule(
-        '^smart_contracts/?([^/]*)/?',
-        'index.php?pagename=' . $smart_contracts_page_data->post_name . '&smart_contract=$matches[1]',
-        'top'
-    );
-});
+// 	add_rewrite_rule(
+//         '^smart_contracts/?([^/]*)/?',
+//         'index.php?pagename=' . $smart_contracts_page_data->post_name . '&smart_contract=$matches[1]',
+//         'top'
+//     );
+// }); 
 
 
 add_filter( 'query_vars', function( $query_vars ) {

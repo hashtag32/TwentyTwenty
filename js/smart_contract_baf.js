@@ -1,13 +1,13 @@
 
-	async function createNewContract_betting_against(web3) {
+	async function createNewContract_betting_against() {
 		$('#createContractDiv').fadeIn('slow'); 
 		var firstAccount = web3.eth.accounts[0];
 		var SampleContract = eth.contract(baf_abi); 
 		// To end betting
 		var chairPersonAccount="0x281609b6005d3e3235230d9b88e5dd46f9078e76";
-
-		txHashContract = await SampleContract.new(chairPersonAccount,30,3, {data: baf_byteCode, from: firstAccount, gas: gas_estimate});
-		await waitForMinedContract(web3,txHashContract, "BAF");
+		var runTime=86400*30;
+		txHashContract = await SampleContract.new(chairPersonAccount,runTime,runTime, {data: baf_byteCode, from: firstAccount, gas: gas_estimate, gasPrice: gas_price});
+		await waitForMinedContractBAF(web3,txHashContract, "BAF");
 		//todo: gasprice calculation
 		//todo: add date
 	}
@@ -65,17 +65,9 @@
 	}
 
 	async function sendBet( element,selectedStock, bet_stock_price, bet_due_date, bet_amount) {
-		ethereum.enable();
+		var firstAccount = web3.eth.accounts[0];
 
-		eth = new Eth(web3.currentProvider);
-
-		web3.eth.getAccounts(function(err, accounts)
-		{
-			firstAccount=accounts[0];
-			console.log(bet_stock_price);
-			console.log(bet_amount);
-			var txHash= contractInstance.bid(bet_stock_price,{ from: firstAccount, value: bet_amount, gas: gas_estimate, gasPrice: gas_price });
-		})
+		var txHash= contractInstance.bid(bet_stock_price,{ from: firstAccount, value: bet_amount, gas: gas_estimate, gasPrice: gas_price });
 		//todo: save to sql (contractaddress + selectedStock)
 	}
 

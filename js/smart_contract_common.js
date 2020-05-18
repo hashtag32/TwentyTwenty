@@ -1,5 +1,5 @@
 const gas_estimate = 2000000;
-const gas_price = web3.toWei(25, "gwei");
+const gas_price = web3.toWei(1, "gwei");
 
 // Don't know how this works, but it works...
 function copyToClipboard(element) {

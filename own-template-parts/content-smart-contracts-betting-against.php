@@ -185,6 +185,11 @@
 		} 
 	})
 
+	var createContractButton = document.querySelector('#createContractButton');
+	createContractButton.addEventListener('click', function() {
+		createNewContract_betting_against();
+	});
+
 	
 
 	</script>

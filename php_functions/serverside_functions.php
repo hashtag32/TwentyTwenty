@@ -73,16 +73,22 @@ function php_function_call()
                break; 
             
             case 'AddContractDataKO':
-                if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 2) ) {
+                if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 5) ) {
                     $aResult['error'] = 'Error in arguments!';
                  }
                  else {
                      $argumentList=$_POST['arguments'];
-                     $parameterArray = array("contract_address" => $argumentList[0],  
-                         "due_date" => $argumentList[1], 
-                         "creationDate" => $argumentList[2]
+                     $parameterArray = array(
+                         "contract_address" => $argumentList[0],  
+                         "typ" => $argumentList[1], 
+                         "underlying" => $argumentList[2],
+                         "threshold" => $argumentList[3],
+                         "leverage" => $argumentList[4],
+                         "pot" => $argumentList[5],
+                         "emissionDate" => $argumentList[6],
+                         "dueDate" => $argumentList[7]
                          );
-                     $aResult['result'] = InsertDataToDB("ContractActionBAF_creation", $parameterArray);
+                     $aResult['result']=InsertDataToDB("ContractActionKO_creation", $parameterArray); 
                 }
                 break; 
 

@@ -50,7 +50,7 @@
 				<?php
 				foreach (getAllKO() as $KO_contract) {
 				?>
-					<tr class="table-row" data-target="#buySharesModal" data-val="<?php echo $KO_contract["address"] ?>" data-toggle="modal">
+					<tr class="table-row" data-target="#buySharesModal" data-val="<?php echo $KO_contract["contract_address"] ?>" data-toggle="modal">
 						<td class="has-text-align-center" data-align="center"><?php echo display_string($KO_contract["typ"]) ?></td>
 						<td class="has-text-align-center" data-align="center">
 							<a href="<?php echo get_symbol_link($KO_contract["underlying"]) ?>">
@@ -204,7 +204,7 @@
 							<div class="form-group">
 								<label for="exampleInputEmail1">Amount (wei):</label>
 								<!-- todo: check for minmum  -->
-								<input type="email" class="form-control" id="buyingAmount" aria-describedby="emailHelp" placeholder="100000">
+								<input type="email" class="form-control" id="buyingAmount" aria-describedby="emailHelp" placeholder="100000 wei">
 							</div>
 						</form>
 					</div>
@@ -212,7 +212,7 @@
 					<!-- Footer group -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" onclick="buyShares(modal_contractAddress.value,buyingAmount.value)" data-dismiss="modal" class="btn btn-primary">Buy</button>
+						<button type="submit" onclick="buyShares(modal_contractAddress.textContent,buyingAmount.value)" data-dismiss="modal" class="btn btn-primary">Buy</button>
 					</div>
 				</div>
 			</div>

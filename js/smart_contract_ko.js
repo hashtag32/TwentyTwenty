@@ -1,9 +1,9 @@
 	// Knock Out
-	async function createKOContract(element,contractType, symbol, threshold, leverage, pot, ko_due_date) {
+	async function createKOContract(element,typ, underlying, threshold, leverage, pot, ko_due_date) {
 		$('#creatingContractDiv').fadeIn('slow'); 
 
 		var isPut;
-		if(contractType=="Put")
+		if(typ=="Put")
 		{
 			isPut=true;
 		}
@@ -11,22 +11,21 @@
 		{
 			isPut=false;
 		}
-		
-
-		// php_function_call("AddContractDataKO",[contract_address , "Sawyer", "John" ]  );
-
 
 		var firstAccount = web3.eth.accounts[0];
 		var SampleContract = eth.contract(ko_abi);
 		// To end betting
 		var chairPersonAccount="0x281609b6005d3e3235230d9b88e5dd46f9078e76";
-		var startPrice=10; // todo: get this one from db
-		var runTime=30;
-		var isPut=false;;
+		var startPrice=100; // todo: get this one from db
+		var runTime=864000;
+		var isPut=false;
+		emissionDate="2020-08-10";
+		dueDate="2020-08-10";
 
+		var contractData = new ContractData (typ,underlying, threshold, leverage, pot, emissionDate, ko_due_date);
 
 		txHashContract = await SampleContract.new(chairPersonAccount, threshold, leverage, startPrice, runTime, isPut, {data: ko_byteCode, from: firstAccount, value:pot, gas: gas_estimate, gasPrice: gas_price});
-		await waitForMinedContract(web3,txHashContract, "KO");
+		await waitForMinedContractKO(web3,txHashContract, contractData);
 
 
 		// // $.getJSON('https://ethgasstation.info/json/ethgasAPI.json', async function(data) {
@@ -37,11 +36,58 @@
 
 		//todo: add date
 	}
+
+	function waitForMinedContractKO(web3,txHash, contractData) {   
+		function innerWaitBlock() {
+			web3.eth.getTransactionReceipt(txHash, function(err, receipt){
+				if (receipt && receipt.contractAddress) {
+					console.log("Your contract has been deployed");
+					contractData.setContractAddress(receipt.contractAddress);
+					registerContractKO(contractData);
+					loadContract(receipt.contractAddress);
+				} else {
+					console.log("Waiting for mining of contract " );
+					setTimeout(innerWaitBlock, 4000);
+				}
+			});
+		}
+		innerWaitBlock();
+	}
+
+	class ContractData
+	{
+		constructor (typ,underlying, threshold, leverage, pot, emissionDate, dueDate ) {
+			this.typ=typ;
+			this.underlying=underlying;
+			this.threshold=threshold;
+			this.leverage=leverage;
+			this.pot=pot;
+			this.emissionDate=emissionDate;
+			this.dueDate=dueDate;
+		  }
+		  setContractAddress(contract_address) 
+		  {
+			  this.contract_address=contract_address;
+		  }
+	}
+
+	 
+	function registerContractKO(contractData)
+	{
+		console.log(contractData.threshold);
+		console.log(contractData.contract_address);
+		php_function_call("AddContractDataKO",[contractData.contract_address , contractData.typ, contractData.underlying, contractData.threshold, contractData.leverage, contractData.pot, contractData.emissionDate, contractData.dueDate ]  );
+	}
+	
+
 	async function buyShares (contract_address, amount) {
+		var firstAccount = web3.eth.accounts[0];
+
+		console.log(contract_address);
 		var newContract = eth.contract(ko_abi);
 		contractInstance = await newContract.at(contract_address);
 		
-		var txHash= contractInstance.buyShares({ from: firstAccount, value: amount, gas: gas_estimate });
+		var txHash= contractInstance.buyShare({ from: firstAccount, value: amount, gas: gas_estimate, gasPrice: gas_price});
 
 		console.log("Bought shares at");
 		return;

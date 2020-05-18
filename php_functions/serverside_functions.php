@@ -58,7 +58,7 @@ function php_function_call()
     if( !isset($_POST['arguments']) ) { $aResult['error'] = 'No function arguments!'; }
     if( !isset($aResult['error']) ) {
         switch($_POST['functionname']) {
-            case 'AddContractData':
+            case 'AddContractDataBAF':
                if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 2) ) {
                    $aResult['error'] = 'Error in arguments!';
                 }
@@ -71,6 +71,20 @@ function php_function_call()
                     $aResult['result'] = InsertDataToDB("ContractActionBAF_creation", $parameterArray);
                }
                break; 
+            
+            case 'AddContractDataKO':
+                if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 2) ) {
+                    $aResult['error'] = 'Error in arguments!';
+                 }
+                 else {
+                     $argumentList=$_POST['arguments'];
+                     $parameterArray = array("contract_address" => $argumentList[0],  
+                         "due_date" => $argumentList[1], 
+                         "creationDate" => $argumentList[2]
+                         );
+                     $aResult['result'] = InsertDataToDB("ContractActionBAF_creation", $parameterArray);
+                }
+                break; 
 
             default:
                $aResult['error'] = 'Not found function '.$_POST['functionname'].'!';

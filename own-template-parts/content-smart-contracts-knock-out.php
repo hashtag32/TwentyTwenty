@@ -29,7 +29,7 @@
 <div class="post-inner">
 	<div class="entry-content entry-smart-contract">
 
-		<!-- Head of the Table -->
+		<!-- Overview contracts table -->
 		<figure class="wp-block-table alignwide is-style-stripes">
 			<table class="table table-striped has-subtle-pale-blue-background-color has-background table-hover">
 
@@ -74,13 +74,60 @@
 			</table>
 		</figure>
 
-
+		<!-- Button to add new contract -->
 		<div class="form-group text-center">
-			<button type="button" class="btn btn-primary smart-contract-button btn-lg"  id="createContractButton"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create your Knock Out</button>
+			<button type="button" class="btn btn-primary smart-contract-button btn-lg"  id="createNewContractButton"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create new Knock Out</button>
 		</div>
 
 
-		<div id="createContractDiv" style="display: none;">
+		<!-- Input contract data div -->
+		<div id="InputContractDataDiv" style="display: none;">
+			<h2 class="own-h2 has-text-align-center has-accent-color" style="font-size:35px">Creating new contract</h2>
+
+			<a href="" target="_blank" id="contractMinedHashLink">
+				<h2 class="own-h2 has-text-align-center has-accent-color" id="contractMinedHash"></h2>
+			</a>
+
+			<form>
+				<div class="form-group">
+					<label for="stockPickSelect">Type</label>
+					<select multiple class="form-control" style="font-size:large;" id="typeSelect">
+						<option>Call</option>
+						<option>Put</option>
+					</select>
+
+					<label for="stockPickSelect">Underlying</label>
+					<select multiple class="form-control" style="font-size:large;" id="stockPickSelect">
+						<!-- todo: StockName, but get it later in ajax?-> bad, better in save as key TSLA -->
+						<?php foreach (getAllSymbols() as $symbol) {	?>
+							<option><?php echo $symbol ?></option>
+						<?php } ?>
+					</select>
+
+					<label for="bet_stock_price">Threshold</label>
+					<input type="email" class="form-control" id="threshold" aria-describedby="emailHelp" placeholder="Place your threshold">
+
+					<label for="bet_stock_price">Leverage</label>
+					<input type="email" class="form-control" id="leverage" aria-describedby="emailHelp" placeholder="Place your leverage">
+
+					<label for="bet_amount">Pot</label>
+					<input type="email" class="form-control" id="pot" aria-describedby="emailHelp" placeholder="Put money where your mouth is ;)">
+
+					<label for="bet_due_date">Due Date</label>
+					<input class="form-control" type="date" value="2020-08-19" id="ko_due_date">
+				</div>
+				<!-- Create it! button -->
+				<div class="form-group text-center">
+					<button type="button" class="btn btn-primary smart-contract-button btn-lg" onclick="createKOContract(this,typeSelect.value, stockPickSelect.value, threshold.value, leverage.value, pot.value, ko_due_date.value);" data-toggle="modal" data-target="#sharingModal" id="SendBetButton">Create it!</button>
+				</div>
+			</form>
+		</div>
+
+
+		
+		<!-- ProgressDiv (...creation in progress...) -->
+		<!-- todo: rename to progressingContractDiv -->
+		<div id="creatingContractDiv" style="display: none;">
 			<h2 class="own-h2 has-text-align-center">Loading/Creating contract...</h2>
 			<div class="text-center">
 				<div class="spinner-grow" role="status">
@@ -89,6 +136,12 @@
 			</div>
 		</div>
 
+		
+		<!-- Action div (contract data + input data for e.g. send bet)  -->
+
+
+	
+<!-- todo: rename -->
 		<div id="BettingDiv" style="display: none;">
 			<h2 class="own-h2 has-text-align-center has-accent-color" style="font-size:35px">Your contract</h2>
 
@@ -131,7 +184,7 @@
 		</div>
 
 
-		<!-- Modal/Popup for load contract -->
+		<!-- Modal/Popup for Buying Shares -->
 		<div class="modal fade" id="buySharesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
@@ -159,7 +212,7 @@
 					<!-- Footer group -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" onclick="buyShares(contractAddress,buyingAmount.value)" data-dismiss="modal" class="btn btn-primary">Buy</button>
+						<button type="submit" onclick="buyShares(modal_contractAddress.value,buyingAmount.value)" data-dismiss="modal" class="btn btn-primary">Buy</button>
 					</div>
 				</div>
 			</div>
@@ -238,8 +291,9 @@
 			// Please install MetaMask first
 			$('#installMetaMaskModal').modal('show');
 		}
-		$('#createContractButton').click(function() {
-			$('#createContractDiv').fadeIn('slow');
+		$('#createNewContractButton').click(function() {
+			$('#InputContractDataDiv').fadeIn('slow');
+			$('#createNewContractButton').fadeOut('slow');
 		});
 	});
 

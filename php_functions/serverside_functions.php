@@ -42,7 +42,7 @@ add_action('wp_ajax_request_votingfromServer', 'request_votingfromServer');
 function delete_votesServer()
 {
     $user_id = $_POST['user_id'];
-    $result=delete_all_votes($user_id);
+    $result = delete_all_votes($user_id);
 
     echo json_encode($result);
     wp_die(); // avoiding 0
@@ -54,47 +54,61 @@ function php_function_call()
 {
     $aResult = array();
 
-    if( !isset($_POST['functionname']) ) { $aResult['error'] = 'No function name!'; }
-    if( !isset($_POST['arguments']) ) { $aResult['error'] = 'No function arguments!'; }
-    if( !isset($aResult['error']) ) {
-        switch($_POST['functionname']) {
+    if (!isset($_POST['functionname'])) {
+        $aResult['error'] = 'No function name!';
+    }
+    if (!isset($_POST['arguments'])) {
+        $aResult['error'] = 'No function arguments!';
+    }
+    if (!isset($aResult['error'])) {
+        switch ($_POST['functionname']) {
             case 'AddContractDataBAF':
-               if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 2) ) {
-                   $aResult['error'] = 'Error in arguments!';
-                }
-                else {
-                    $argumentList=$_POST['arguments'];
-                    $parameterArray = array("contract_address" => $argumentList[0],  
-                        "due_date" => $argumentList[1], 
-                        "creationDate" => $argumentList[2]
-                        );
-                    $aResult['result'] = InsertDataToDB("ContractActionBAF_creation", $parameterArray);
-               }
-               break; 
-            
-            case 'AddContractDataKO':
-                if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 5) ) {
+                if (!is_array($_POST['arguments']) || (count($_POST['arguments']) < 2)) {
                     $aResult['error'] = 'Error in arguments!';
-                 }
-                 else {
-                     $argumentList=$_POST['arguments'];
-                     $parameterArray = array(
-                         "contract_address" => $argumentList[0],  
-                         "typ" => $argumentList[1], 
-                         "underlying" => $argumentList[2],
-                         "threshold" => $argumentList[3],
-                         "leverage" => $argumentList[4],
-                         "pot" => $argumentList[5],
-                         "emissionDate" => $argumentList[6],
-                         "dueDate" => $argumentList[7]
-                         );
-                     $aResult['result']=InsertDataToDB("ContractActionKO_creation", $parameterArray); 
+                } else {
+                    $argumentList = $_POST['arguments'];
+                    $parameterArray = array(
+                        "contract_address" => $argumentList[0],
+                        "due_date" => $argumentList[1],
+                        "creationDate" => $argumentList[2]
+                    );
+                    $aResult['result'] = InsertDataToDB("ContractActionBAF_creation", $parameterArray);
                 }
-                break; 
+                break;
+
+            case 'AddContractDataKO':
+                if (!is_array($_POST['arguments']) || (count($_POST['arguments']) < 5)) {
+                    $aResult['error'] = 'Error in arguments!';
+                } else {
+                    $argumentList = $_POST['arguments'];
+                    $parameterArray = array(
+                        "contract_address" => $argumentList[0],
+                        "typ" => $argumentList[1],
+                        "underlying" => $argumentList[2],
+                        "threshold" => $argumentList[3],
+                        "leverage" => $argumentList[4],
+                        "pot" => $argumentList[5],
+                        "emissionDate" => $argumentList[6],
+                        "dueDate" => $argumentList[7]
+                    );
+                    $aResult['result'] = InsertDataToDB("ContractActionKO_creation", $parameterArray);
+                }
+                break;
+
+            case 'getStockValue':
+                if (!is_array($_POST['arguments']) || (count($_POST['arguments']) < 1)) {
+                    $aResult['error'] = 'Error in arguments!';
+                } else {
+                    $argumentList = $_POST['arguments'];
+                    $symbol=$argumentList[0];
+
+                    $aResult['result'] = getStockValue($symbol);
+                }
+                break;
 
             default:
-               $aResult['error'] = 'Not found function '.$_POST['functionname'].'!';
-               break;
+                $aResult['error'] = 'Not found function ' . $_POST['functionname'] . '!';
+                break;
         }
     }
 

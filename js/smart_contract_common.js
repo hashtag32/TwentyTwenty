@@ -8,7 +8,7 @@ function copyToClipboard(element) {
   $temp.val($(element).text()).select();
   document.execCommand("copy");
   $temp.remove();
-}
+} 
 
 // Actions that are triggered through the #share of the link URL
 function ShareActions(link) {

@@ -39,7 +39,8 @@ function send_vote(element, symbolName, voting_number) {
   });
 }
 
-function php_function_call(functionName, argumentArray) {
+function php_function_call(functionName, argumentArray,callbackFunc=null) {
+  var promiseObj = new Promise(function(resolve, reject){
   jQuery.ajax({
     type: "POST",
     url: ajax_unique.ajaxurl,
@@ -52,6 +53,18 @@ function php_function_call(functionName, argumentArray) {
     },
 
     success: function (obj, textstatus) {
+      if(callbackFunc!=null)
+      {
+        // console.log("about to call:" + callbackFunc );
+        // window[callbackFunc](arguments);
+      }
+      if(functionName=="getStockValue")
+      {
+        resolve(obj);
+        return obj;
+      }
+ 
+
       if (!("error" in obj)) {
         yourVariable = obj.result;
       } else {
@@ -59,4 +72,6 @@ function php_function_call(functionName, argumentArray) {
       }
     },
   });
+});
+  return promiseObj;
 }

@@ -1,7 +1,30 @@
 // Knock Out
-async function createKOContract(element,typ, underlying, threshold, leverage, pot, ko_due_date) {
+
+// Class for php insertion 
+class ContractData
+{
+	constructor (typ,underlying, threshold, leverage, pot, emissionDate, dueDate ) {
+		this.typ=typ;
+		this.underlying=underlying;
+		this.threshold=threshold;
+		this.leverage=leverage;
+		this.pot=pot;
+		this.emissionDate=emissionDate;
+		this.dueDate=dueDate;
+		}
+		setContractAddress(contract_address) 
+		{
+			this.contract_address=contract_address;
+		}
+}
+
+async function createKOContract(element,typ, underlying, threshold, leverage, pot, dueDate) {
 	$('#creatingContractDiv').fadeIn('slow'); 
 
+	ethereum.enable();
+	eth = new Eth(web3.currentProvider);
+
+	// Get input parameters straight
 	var isPut;
 	if(typ=="Put")
 	{
@@ -12,32 +35,24 @@ async function createKOContract(element,typ, underlying, threshold, leverage, po
 		isPut=false;
 	}
 
-	ethereum.enable();
-	eth = new Eth(web3.currentProvider);
+	const obj= await getUnderLyingValue(underlying);
+	var startPrice=obj.result;
 
+	var date_due_date = new Date(dueDate); 
+	var date_now = Date.now();
+	var runTime=Math.floor(date_due_date-date_now)/1000;
+	
+	emissionDate=getDateStr(date_now);
+
+	// Contract creation 
 	var firstAccount = web3.eth.accounts[0];
 	var SampleContract = eth.contract(ko_abi);
 	var chairPersonAccount="0x281609b6005d3e3235230d9b88e5dd46f9078e76";
-
-	// const result = await doSomething();
 	
-
-
-	const obj= await getUnderLyingValue(underlying);
-	var startPrice=obj.result;
-	console.log("continuing");
-	console.log(startPrice);
-	console.log(startPrice.result);
-
-	testPrice=startPrice;
-
-	var runTime=864000;
-	var isPut=false;
-	emissionDate="2020-08-10";
-	dueDate="2020-08-10";
-
-	var contractData = new ContractData (typ,underlying, threshold, leverage, pot, emissionDate, ko_due_date);
-
+	var contractData = new ContractData (typ,underlying, threshold, leverage, pot, emissionDate, dueDate);
+	
+	console.log("Creating contract with the following data:");
+	console.log(chairPersonAccount, threshold, leverage, startPrice, runTime, isPut, {data: ko_byteCode, from: firstAccount, value:pot, gas: gas_estimate, gasPrice: gas_price});
 	txHashContract = await SampleContract.new(chairPersonAccount, threshold, leverage, startPrice, runTime, isPut, {data: ko_byteCode, from: firstAccount, value:pot, gas: gas_estimate, gasPrice: gas_price});
 	await waitForMinedContractKO(web3,txHashContract, contractData);
 
@@ -51,38 +66,23 @@ async function createKOContract(element,typ, underlying, threshold, leverage, po
 	//todo: add date
 }
 
-function sleep(milliseconds) {
-	const date = Date.now();
-	let currentDate = null;
-	do {
-	  currentDate = Date.now();
-	} while (currentDate - date < milliseconds);
-  }
-  
+function getDateStr(date)
+{
+	const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' }) 
+	const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(date ) ;
+	var dateStr=`${year}-${month}-${day }`;
 
-function doSomething() {
-	return new Promise((resolve, reject) => {
-	  console.log("It is done.");
-	  // Succeed half of the time.
-		sleep(2000);
+	return dateStr;
 
-		resolve("SUCCESS")
-	})
-  }
-
+}
 
 function getUnderLyingValue(underlying)
 {
 	return new Promise((resolve, reject) => {
-		console.log("waiting in getUnder");
+		console.log("Waiting to obtain underlying value");
 		var stockValue=php_function_call("getStockValue",[underlying], "ajaxCallback");
-		resolve(stockValue)
-	  })
-}
-
-function ajaxCallback()
-{
-	console.log("ajaxCallbac calledk");
+		resolve(stockValue);
+	  });
 }
 
 function waitForMinedContractKO(web3,txHash, contractData) {   
@@ -102,24 +102,7 @@ function waitForMinedContractKO(web3,txHash, contractData) {
 	innerWaitBlock();
 }
 
-class ContractData
-{
-	constructor (typ,underlying, threshold, leverage, pot, emissionDate, dueDate ) {
-		this.typ=typ;
-		this.underlying=underlying;
-		this.threshold=threshold;
-		this.leverage=leverage;
-		this.pot=pot;
-		this.emissionDate=emissionDate;
-		this.dueDate=dueDate;
-		}
-		setContractAddress(contract_address) 
-		{
-			this.contract_address=contract_address;
-		}
-}
 
-	
 function registerContractKO(contractData)
 {
 	console.log(contractData.threshold);

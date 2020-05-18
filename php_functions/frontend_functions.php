@@ -356,6 +356,10 @@ function display_string($string)
 }
 
 
+function get_ropsten_link($contract_address)
+{
+	return "https://ropsten.etherscan.io/address/" . $contract_address;
+}
 
 
 

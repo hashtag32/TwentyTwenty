@@ -162,8 +162,7 @@
 
 	</div><!-- .entry-content -->
 </div><!-- .post-inner -->
-
-	<script src="https://cdn.jsdelivr.net/npm/web3@1.2.7/dist/web3.min.js"></script>
+	<script src="https://rawgit.com/ethereum/web3.js/0.16.0/dist/web3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/ethjs@0.3.0/dist/ethjs.min.js"></script>
 	<script>
 		// Front End functions
@@ -182,7 +181,7 @@
 		// Check if Web3 has been injected by the browser:
 		if (typeof web3 !== 'undefined') {
 			// You have a web3 browser! Continue below!
-			initialization(web3);
+			initialization(web3, "betting-against");
 		} 
 	})
 

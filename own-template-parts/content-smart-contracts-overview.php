@@ -28,7 +28,8 @@
 
 	?>
 
-<div style="position: fixed; top: 0; width: 100%; height: 100%; z-index: -1;">
+<!-- todo: Improve on mobile -->
+<div style="position: fixed; top: 0;width: 100%; height: 100%; z-index: -1;">
     <video autoplay muted loop id="myVideo">
 		<source src="https://www.videvo.net/videvo_files/converted/2013_05/preview/BinaryNumbers1AlphaMatteVidevo.mov37560.webm" type="video/mp4">
 	</video>

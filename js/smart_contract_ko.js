@@ -18,8 +18,8 @@ class ContractData
 		}
 }
 
-async function createKOContract(element,typ, underlying, threshold, leverage, pot, dueDate) {
-	$('#creatingContractDiv').fadeIn('slow'); 
+async function createKOContract(element,typ, underlying, threshold, leverage, pot,pot_currency, dueDate) {
+	$('#loadingContractDiv').fadeIn('slow'); 
 
 	ethereum.enable();
 	eth = new Eth(web3.currentProvider);
@@ -35,6 +35,8 @@ async function createKOContract(element,typ, underlying, threshold, leverage, po
 		isPut=false;
 	}
 
+	var pot_wei=changeCurrency(pot,pot_currency, "wei");
+
 	const obj= await getUnderLyingValue(underlying);
 	var startPrice=obj.result;
 
@@ -49,11 +51,11 @@ async function createKOContract(element,typ, underlying, threshold, leverage, po
 	var SampleContract = eth.contract(ko_abi);
 	var chairPersonAccount="0x281609b6005d3e3235230d9b88e5dd46f9078e76";
 	
-	var contractData = new ContractData (typ,underlying, threshold, leverage, pot, emissionDate, dueDate);
+	var contractData = new ContractData (typ,underlying, threshold, leverage, pot_wei, emissionDate, dueDate);
 	
 	console.log("Creating contract with the following data:");
-	console.log(chairPersonAccount, threshold, leverage, startPrice, runTime, isPut, {data: ko_byteCode, from: firstAccount, value:pot, gas: gas_estimate, gasPrice: gas_price});
-	txHashContract = await SampleContract.new(chairPersonAccount, threshold, leverage, startPrice, runTime, isPut, {data: ko_byteCode, from: firstAccount, value:pot, gas: gas_estimate, gasPrice: gas_price});
+	console.log(chairPersonAccount, threshold, leverage, startPrice, runTime, isPut, {data: ko_byteCode, from: firstAccount, value:pot_wei, gas: gas_estimate, gasPrice: gas_price});
+	txHashContract = await SampleContract.new(chairPersonAccount, threshold, leverage, startPrice, runTime, isPut, {data: ko_byteCode, from: firstAccount, value:pot_wei, gas: gas_estimate, gasPrice: gas_price});
 	await waitForMinedContractKO(web3,txHashContract, contractData);
 
 
@@ -64,16 +66,6 @@ async function createKOContract(element,typ, underlying, threshold, leverage, po
 	// // contractInstance = new SampleContract.new(30, {data: byteCode, from: firstAccount, gas: estimate, gasPrice: estimate});
 
 	//todo: add date
-}
-
-function getDateStr(date)
-{
-	const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' }) 
-	const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(date ) ;
-	var dateStr=`${year}-${month}-${day }`;
-
-	return dateStr;
-
 }
 
 function getUnderLyingValue(underlying)

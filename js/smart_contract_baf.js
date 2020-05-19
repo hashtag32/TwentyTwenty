@@ -1,6 +1,6 @@
 
 	async function createNewContract_betting_against() {
-		$('#createContractDiv').fadeIn('slow'); 
+		$('#loadingContractDiv').fadeIn('slow'); 
 		var firstAccount = web3.eth.accounts[0];
 		var SampleContract = eth.contract(baf_abi); 
 		// To end betting
@@ -33,17 +33,6 @@
 		innerWaitBlock();
 	}
 
-	async function loadContract(contract_address)
-	{
-		$('#createContractDiv').fadeIn('slow');
-
-		var newContract = eth.contract(baf_abi);
-		contractInstance = await newContract.at(contract_address);
-
-		console.log(contractInstance);
-
-		postContractloading( contractInstance);
-	}
 
 	async function getBidOfAccount(web3, account )
 	{
@@ -51,18 +40,7 @@
 		var bidValue=returnArray[0]["words"][0];
 	}
 
-	function postContractloading(contractInstance)
-	{
-		$('#createContractDiv').fadeOut('slow');
 
-		contract_address=contractInstance.address;
-
-		document.getElementById('contractMinedHash').innerText=contract_address;
-		document.getElementById('contractMinedHashLink').href="https://ropsten.etherscan.io/address/"+ contract_address;
-
-		$('#LoadCreateContractDiv').fadeOut('slow');
-		$('#BettingDiv').fadeIn('slow');
-	}
 
 	async function sendBet( element,selectedStock, bet_stock_price, bet_due_date, bet_amount) {
 		var firstAccount = web3.eth.accounts[0];

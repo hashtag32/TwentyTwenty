@@ -73,3 +73,51 @@ function listenForClicks(web3, type) {
   // 	}
   // })
 }
+
+function changeCurrency(value, unit_from, unit_to) {
+  // console.log("input:" + value);
+  var wei_value = web3.toWei(value, unit_from);
+  // console.log("wei:"+wei_value);
+  var unit_to_value=web3.fromWei(wei_value, unit_to);
+  // console.log("unit_to:"+unit_to_value);
+
+  return unit_to_value;
+}
+
+
+async function loadContract(contract_address)
+{
+  $('#loadingContractDiv').fadeIn('slow');
+
+  var newContract = eth.contract(baf_abi);
+  contractInstance = await newContract.at(contract_address);
+
+  console.log(contractInstance);
+
+  postContractloading( contractInstance);
+}
+
+
+function postContractloading(contractInstance)
+{
+  $('#loadingContractDiv').fadeOut('slow');
+
+  contract_address=contractInstance.address;
+
+  document.getElementById('contractMinedHash').innerText=contract_address;
+  document.getElementById('contractMinedHashLink').href="https://ropsten.etherscan.io/address/"+ contract_address;
+
+  // $('#LoadCreateContractDiv').fadeOut('slow');
+  // $('#BettingDiv').fadeIn('slow');
+  $('#ContractLoadingResultDiv').fadeIn('slow');
+}
+
+function getDateStr(date)
+{
+	const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: '2-digit', day: '2-digit' }) 
+	const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(date ) ;
+	var dateStr=`${year}-${month}-${day }`;
+
+	return dateStr;
+
+}

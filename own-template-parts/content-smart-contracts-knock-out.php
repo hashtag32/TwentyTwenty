@@ -45,7 +45,7 @@
 				<?php
 				foreach (getAllKO() as $KO_contract) {
 				?>
-					<tr class="table-row" data-target="#buySharesModal" data-val="<?php echo $KO_contract["contract_address"] ?>" data-toggle="modal">
+					<tr class="table-row" data-target="#actionContractUser" data-val="<?php echo $KO_contract["contract_address"] ?>" data-toggle="modal">
 						<td class="has-text-align-center" data-align="center"><?php echo display_string($KO_contract["typ"]) ?></td>
 						<td class="has-text-align-center" data-align="center">
 							<a href="<?php echo get_symbol_link($KO_contract["underlying"]) ?>">
@@ -59,7 +59,7 @@
 						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["emissionDate"] ?></td>
 						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["dueDate"] ?></td>
 						<td class="has-text-align-center has-accent-color" data-align="center">
-							<a href="<?php echo get_ropsten_link($KO_contract["address"]) ?>">
+							<a href="<?php echo get_ropsten_link($KO_contract["contract_address"]) ?>">
 								Here
 							</a>
 						</td>
@@ -138,6 +138,7 @@
 			</div>
 		</div>
 
+		<!-- Successfully loaded -->
 		<div id="ContractLoadingResultDiv" style="display: none;">
 			<h2 class="own-h2 has-text-align-center has-accent-color" style="font-size:35px">Contract successfully created:</h2>
 
@@ -147,7 +148,7 @@
 		</div>
 
 		<!-- Modal/Popup for Buying Shares -->
-		<div class="modal fade" id="buySharesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal fade" id="actionContractUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 
@@ -206,20 +207,6 @@
 		previous_currency = currency;
 	});
 
-	// Substitute val/href with contract_address
-	$('#buySharesModal').on('show.bs.modal', function(event) {
-		var contract_address = $(event.relatedTarget).data('val');
-		$(this).find("#modal_contractAddress").text(contract_address);
-		$(this).find("#modal_contractAddressLink").attr("href", "https://ropsten.etherscan.io/address/" + contract_address); // Set herf value
-	});
-
-	// Front End functions
-	$(document).ready(function() {
-		$('#createNewContractButton').click(function() {
-			$('#InputContractDataDiv').fadeIn('slow');
-			$('#createNewContractButton').fadeOut('slow');
-		});
-	});
 
 	// Logic for Web3 API
 	window.addEventListener('load', function() {

@@ -1,7 +1,7 @@
 // Knock Out //
 
 // Class for php insertion 
-class ContractData
+class ContractData_KO
 {
 	constructor (typ,underlying, threshold, leverage, pot, emissionDate, dueDate ) {
 		this.typ=typ;
@@ -51,7 +51,7 @@ async function createKOContract(element,typ, underlying, threshold, leverage, po
 	var SampleContract = eth.contract(ko_abi);
 	var chairPersonAccount="0x281609b6005d3e3235230d9b88e5dd46f9078e76";
 	
-	var contractData = new ContractData (typ,underlying, threshold, leverage, pot_wei, emissionDate, dueDate);
+	var contractData = new ContractData_KO (typ,underlying, threshold, leverage, pot_wei, emissionDate, dueDate);
 	
 	console.log("Creating contract with the following data:");
 	console.log(chairPersonAccount, threshold, leverage, startPrice, runTime, isPut, {data: ko_byteCode, from: firstAccount, value:pot_wei, gas: gas_estimate, gasPrice: gas_price});
@@ -84,7 +84,7 @@ function waitForMinedContractKO(web3,txHash, contractData) {
 				console.log("Your contract has been deployed");
 				contractData.setContractAddress(receipt.contractAddress);
 				registerContractKO(contractData);
-				loadContract(receipt.contractAddress);
+				loadContract(receipt.contractAddress, ko_abi);
 			} else {
 				console.log("Waiting for mining of contract " );
 				setTimeout(innerWaitBlock, 4000);
@@ -97,8 +97,6 @@ function waitForMinedContractKO(web3,txHash, contractData) {
 
 function registerContractKO(contractData)
 {
-	console.log(contractData.threshold);
-	console.log(contractData.contract_address);
 	php_function_call("AddContractDataKO",[contractData.contract_address , contractData.typ, contractData.underlying, contractData.threshold, contractData.leverage, contractData.pot, contractData.emissionDate, contractData.dueDate ]  );
 }
 

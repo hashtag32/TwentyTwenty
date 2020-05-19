@@ -8,7 +8,7 @@ function copyToClipboard(element) {
   $temp.val($(element).text()).select();
   document.execCommand("copy");
   $temp.remove();
-}  
+}
 
 // Actions that are triggered through the #share of the link URL
 function ShareActions(link) {
@@ -23,12 +23,11 @@ function ShareActions(link) {
     option_contract_address = "contract_address=";
     var contract_address = linkData.substr(option_contract_address.length);
     console.log("got address:" + contract_address);
-    loadContract(contract_address);
+    loadContract(contract_address,sb_abi);
   }
 }
 
-shareBase =
-  "https://stockvoting.net/smart-contracts/stock-betting#share:";
+shareBase = "https://stockvoting.net/smart-contracts/stock-betting#share:";
 
 function ShareableLink(copyLink = false) {
   console.log("called");
@@ -79,46 +78,55 @@ function changeCurrency(value, unit_from, unit_to) {
   // console.log("input:" + value);
   var wei_value = web3.toWei(value, unit_from);
   // console.log("wei:"+wei_value);
-  var unit_to_value=web3.fromWei(wei_value, unit_to);
+  var unit_to_value = web3.fromWei(wei_value, unit_to);
   // console.log("unit_to:"+unit_to_value);
 
   return unit_to_value;
 }
 
+async function loadContract(contract_address, abi) {
+  $("#loadingContractDiv").fadeIn("slow");
 
-async function loadContract(contract_address)
-{
-  $('#loadingContractDiv').fadeIn('slow');
+  var ContractABI = eth.contract(abi);
+  contractInstance = await ContractABI.at(contract_address);
 
-  var newContract = eth.contract(baf_abi);
-  contractInstance = await newContract.at(contract_address);
+  postContractloading(contractInstance);
+}
 
-  console.log(contractInstance);
+function postContractloading(contractInstance) {
+  $("#loadingContractDiv").fadeOut("slow");
 
-  postContractloading( contractInstance);
+  contract_address = contractInstance.address;
+
+  document.getElementById("contractMinedHash").innerText = contract_address;
+  document.getElementById("contractMinedHashLink").href =
+    "https://ropsten.etherscan.io/address/" + contract_address;
+
+  $("#ContractLoadingResultDiv").fadeIn("slow");
+}
+
+function getDateStr(date) {
+  const dateTimeFormat = new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const [
+    { value: month },
+    ,
+    { value: day },
+    ,
+    { value: year },
+  ] = dateTimeFormat.formatToParts(date);
+  var dateStr = `${year}-${month}-${day}`;
+
+  return dateStr;
 }
 
 
-function postContractloading(contractInstance)
-{
-  $('#loadingContractDiv').fadeOut('slow');
-
-  contract_address=contractInstance.address;
-
-  document.getElementById('contractMinedHash').innerText=contract_address;
-  document.getElementById('contractMinedHashLink').href="https://ropsten.etherscan.io/address/"+ contract_address;
-
-  // $('#LoadCreateContractDiv').fadeOut('slow');
-  // $('#BettingDiv').fadeIn('slow');
-  $('#ContractLoadingResultDiv').fadeIn('slow');
-}
-
-function getDateStr(date)
-{
-	const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: '2-digit', day: '2-digit' }) 
-	const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(date ) ;
-	var dateStr=`${year}-${month}-${day }`;
-
-	return dateStr;
-
-}
+	// Substitute val/href with contract_address
+	$('#actionContractUser').on('show.bs.modal', function(event) {
+		var contract_address = $(event.relatedTarget).data('val');
+		$(this).find("#modal_contractAddress").text(contract_address);
+		$(this).find("#modal_contractAddressLink").attr("href", "https://ropsten.etherscan.io/address/" + contract_address); // Set herf value
+	});

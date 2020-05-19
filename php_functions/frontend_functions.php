@@ -133,6 +133,16 @@ function getAllKO()
 	return $queryArray;
 }
 
+function getAllSB()
+{
+	$conn = connectDB();
+
+	$sql = "SELECT * FROM ContractActionSB_creation";
+	$result=executeSQLCommand($sql);
+	$queryArray=queryResultToArray($result);
+	return $queryArray;
+}
+
 function delete_all_votes($user_id)
 {
 	$conn = connectDB();

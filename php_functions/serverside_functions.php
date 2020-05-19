@@ -62,17 +62,19 @@ function php_function_call()
     }
     if (!isset($aResult['error'])) {
         switch ($_POST['functionname']) {
-            case 'AddContractDataBAF':
+            case 'AddContractDataSB':
                 if (!is_array($_POST['arguments']) || (count($_POST['arguments']) < 2)) {
                     $aResult['error'] = 'Error in arguments!';
                 } else {
                     $argumentList = $_POST['arguments'];
                     $parameterArray = array(
                         "contract_address" => $argumentList[0],
-                        "due_date" => $argumentList[1],
-                        "creationDate" => $argumentList[2]
+                        "underlying" => $argumentList[1],
+                        "emissionDate" => $argumentList[2],
+                        "votingEndDate" => $argumentList[3],
+                        "dueDate" => $argumentList[4],
                     );
-                    $aResult['result'] = InsertDataToDB("ContractActionBAF_creation", $parameterArray);
+                    $aResult['result'] = InsertDataToDB("ContractActionSB_creation", $parameterArray);
                 }
                 break;
 

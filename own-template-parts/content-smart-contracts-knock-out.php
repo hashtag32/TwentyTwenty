@@ -12,24 +12,14 @@
  * @since 1.0.0
  */
 
-//  todo:create id and save title/id in db
-// $heading=ucfirst(str_replace( '_',' ', $smart_contract));
 ?>
 
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
 <script src="https://use.fontawesome.com/f2103e8f69.js"></script>
 
-
-<!-- todo move to separate file -->
-<header class="entry-header-green has-text-align-center header-footer-group">
-	<div class="entry-header-inner section-inner medium">
-		<h1 class="entry-title">Knock Outs</h1>
-	</div><!-- .entry-header-inner -->
-</header>
+<?php get_template_part('template-parts/entry-header'); ?>
 
 <div class="post-inner">
 	<div class="entry-content entry-smart-contract">
@@ -44,7 +34,7 @@
 						<th class="has-text-align-center" data-align="center">Underlying</th>
 						<th class="has-text-align-center" data-align="center">Threshold</th>
 						<th class="has-text-align-center" data-align="center">Leverage</th>
-						<th class="has-text-align-center" data-align="center">Pot [mETH] </th>
+						<th class="has-text-align-center" data-align="center">Pot [gwei] </th>
 						<th class="has-text-align-center" data-align="center">Emission date</th>
 						<th class="has-text-align-center" data-align="center">Due Date</th>
 						<th class="has-text-align-center" data-align="center">Details</th>
@@ -64,8 +54,8 @@
 						</td>
 						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["threshold"] ?></td>
 						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["leverage"] ?></td>
-					<!-- todo: display closest currency -->
-						<td class="has-text-align-center" data-align="center"><?php echo round(($KO_contract["pot"]/1000000000000000),3) ?></td>
+						<!-- todo: display closest currency -->
+						<td class="has-text-align-center" data-align="center"><?php echo round(($KO_contract["pot"] / 1000000000)) ?></td>
 						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["emissionDate"] ?></td>
 						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["dueDate"] ?></td>
 						<td class="has-text-align-center has-accent-color" data-align="center">
@@ -102,7 +92,7 @@
 						<!-- todo: StockName, but get it later in ajax?-> bad, better in save as key TSLA -->
 						<?php foreach (getAllSymbols(true) as $symbolArray) {	?>
 							<option value="<?php echo $symbolArray["SymbolName"] ?>"><?php echo $symbolArray["StockName"] ?></option>
-						<?php } ?> 
+						<?php } ?>
 					</select>
 
 					<label>Threshold</label>
@@ -213,7 +203,7 @@
 		var element = document.getElementById('potValueID');
 		element.value = converted_value;
 		// Workaround because onfocus doesn't work
-		previous_currency=currency;
+		previous_currency = currency;
 	});
 
 	// Substitute val/href with contract_address

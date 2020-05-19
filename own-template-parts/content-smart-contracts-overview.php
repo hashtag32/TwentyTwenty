@@ -41,12 +41,12 @@
 			<div class="wp-block-columns"><!-- ggf. alignwide? -->
 				<div class="wp-block-column">
 
-					<!-- Bet against a friend -->
+					<!-- Stock Betting -->
 					<div class="bordered-area">
-						<a href="https://stockvoting.net/smart-contracts/betting-against-a-friend">
+						<a href="https://stockvoting.net/smart-contracts/stock-betting">
 							<span class="fill-div-with-link"></span>
 						</a> 
-						<h2 class="has-accent-color has-text-align-center ">Bet against a friend</h2>
+						<h2 class="has-accent-color has-text-align-center ">Stock Betting</h2>
 						<p class="has-large-font-size">
 							Bet against your friend through a modern blockchain technology service.
 							Using MetaMask, you can chose to either bet on the Testnetwork or bet for real money.

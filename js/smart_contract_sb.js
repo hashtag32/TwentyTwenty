@@ -1,5 +1,5 @@
 
-	async function createNewContract_betting_against() {
+	async function createNewContract_sb() {
 		$('#loadingContractDiv').fadeIn('slow'); 
 		var firstAccount = web3.eth.accounts[0];
 		var SampleContract = eth.contract(baf_abi); 
@@ -10,8 +10,8 @@
 		await waitForMinedContractBAF(web3,txHashContract, "BAF");
 		//todo: gasprice calculation
 		//todo: add date
-	}
- 
+	} 
+  
 	function registerContractBAF(contract_address)
 	{
 		php_function_call("AddContractDataBAF",[contract_address , "Sawyer", "John" ]  );

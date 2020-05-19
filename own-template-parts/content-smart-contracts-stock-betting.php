@@ -12,27 +12,23 @@
  * @since 1.0.0
  */
 
-//  todo:create id and save title/id in db
-// $heading=ucfirst(str_replace( '_',' ', $smart_contract));
 ?> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/f2103e8f69.js"></script>
 
-<!-- todo move to separate file -->
-<header class="entry-header-green has-text-align-center header-footer-group">
-	<div class="entry-header-inner section-inner medium">
-		<h1 class="entry-title">Betting against a friend</h1>
-	</div><!-- .entry-header-inner -->
-</header>
+<?php get_template_part('template-parts/entry-header'); ?>
+
 
 <div class="post-inner">
 	<div class="entry-content entry-smart-contract" >
 
 		<div id="LoadCreateContractDiv" >
 			<form>
-				<button type="button" class="btn btn-secondary btn-lg smart-contract-button" data-toggle="modal" data-target="#loadContractModal" id="loadContractButton">Load contract</button>
-				<button type="button" class="btn btn-secondary float-right smart-contract-button" id="createContractButton">Create contract</button>
+				<!-- <button type="button" class="btn btn-secondary btn-lg smart-contract-button" data-toggle="modal" data-target="#loadContractModal" id="loadContractButton">Load other contract</button> -->
+				<button type="button" class="btn btn-secondary float-right smart-contract-button" id="createContractButton">Create new betting</button>
 			</form>
 		</div >
-		
 
 		<div id="createContractDiv" style="display: none;" >
 			<h2 class="own-h2 has-text-align-center" >Loading/Creating contract...</h2>
@@ -130,9 +126,9 @@
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					</div>
 				</div>
-			</div>
+			</div> 
 		</div>
-
+ 
 	<?php get_template_part( 'own-parts/install-cryptoWallet' ); ?>
 
 	</div><!-- .entry-content -->
@@ -152,13 +148,13 @@
 		// Check if Web3 has been injected by the browser:
 		if (typeof web3 !== 'undefined') {
 			// You have a web3 browser! Continue below!
-			initialization(web3, "betting-against");
+			initialization(web3);
 		} 
 	})
 
 	var createContractButton = document.querySelector('#createContractButton');
 	createContractButton.addEventListener('click', function() {
-		createNewContract_betting_against();
+		createNewContract_sb();
 	});
 
 	

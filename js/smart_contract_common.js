@@ -28,7 +28,7 @@ function ShareActions(link) {
 }
 
 shareBase =
-  "https://stockvoting.net/category/smart_contracts/bet_against_a_friend#share:";
+  "https://stockvoting.net/smart-contracts/stock-betting#share:";
 
 function ShareableLink(copyLink = false) {
   console.log("called");
@@ -48,12 +48,13 @@ function ShareableLink(copyLink = false) {
 }
 
 // const etherValue = web3.toWei(1, 'ether');
-function initialization(web3, type) {
+function initialization(web3) {
   ethereum.enable();
   eth = new Eth(web3.currentProvider);
 
+  // Analyze url on sharinglinks
   ShareActions(window.location.href);
-  listenForClicks(web3, type);
+  // listenForClicks(web3, type);
 }
 
 function listenForClicks(web3, type) {

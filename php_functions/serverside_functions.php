@@ -54,6 +54,8 @@ function php_function_call()
 {
     $aResult = array();
 
+    // todo: call directPhpFunc -> problem with arguments 
+
     if (!isset($_POST['functionname'])) {
         $aResult['error'] = 'No function name!';
     }
@@ -97,45 +99,57 @@ function php_function_call()
                 }
                 break;
 
-                case 'AddContractDataKO_buyShare':
-                    if (!is_array($_POST['arguments']) || (count($_POST['arguments']) < 2)) {
-                        $aResult['error'] = 'Error in arguments!';
-                    } else {
-                        $argumentList = $_POST['arguments'];
-                        $parameterArray = array(
-                            "contract_address" => $argumentList[0],
-                            "firstAccount" => $argumentList[1],
-                            "amount" => $argumentList[2],
-                            "user_id" => $argumentList[3],
-                        );
-                        $aResult['result'] = InsertDataToDB("ContractActionKO_buyShare", $parameterArray);
-                    }
-                    break;
+            case 'AddContractDataKO_buyShare':
+                if (!is_array($_POST['arguments']) || (count($_POST['arguments']) < 2)) {
+                    $aResult['error'] = 'Error in arguments!';
+                } else {
+                    $argumentList = $_POST['arguments'];
+                    $parameterArray = array(
+                        "contract_address" => $argumentList[0],
+                        "firstAccount" => $argumentList[1],
+                        "amount" => $argumentList[2],
+                        "user_id" => $argumentList[3],
+                    );
+                    $aResult['result'] = InsertDataToDB("ContractActionKO_buyShare", $parameterArray);
+                }
+                break;
 
-                case 'AddContractDataSB_bet':
-                        if (!is_array($_POST['arguments']) || (count($_POST['arguments']) < 2)) {
-                            $aResult['error'] = 'Error in arguments!';
-                        } else {
-                            $argumentList = $_POST['arguments'];
-                            $parameterArray = array(
-                                "contract_address" => $argumentList[0],
-                                "firstAccount" => $argumentList[1],
-                                "stock_price" => $argumentList[2],
-                                "amount" => $argumentList[3],
-                                "user_id" => $argumentList[4],
-                            );
-                            $aResult['result'] = InsertDataToDB("ContractActionSB_bet", $parameterArray);
-                        }
-                        break;
+            case 'AddContractDataSB_bet':
+                if (!is_array($_POST['arguments']) || (count($_POST['arguments']) < 2)) {
+                    $aResult['error'] = 'Error in arguments!';
+                } else {
+                    $argumentList = $_POST['arguments'];
+                    $parameterArray = array(
+                        "contract_address" => $argumentList[0],
+                        "firstAccount" => $argumentList[1],
+                        "stock_price" => $argumentList[2],
+                        "amount" => $argumentList[3],
+                        "user_id" => $argumentList[4],
+                    );
+                    $aResult['result'] = InsertDataToDB("ContractActionSB_bet", $parameterArray);
+                }
+                break;
 
-                    
+            case 'SearchTerm':
+                if (!is_array($_POST['arguments']) || (count($_POST['arguments']) < 2)) {
+                    $aResult['error'] = 'Error in arguments!';
+                } else {
+                    $argumentList = $_POST['arguments'];
+                    $tableName=$argumentList[0];
+                    $columns_array=$argumentList[1];
+                    $search_string=$argumentList[2];
+
+                    $aResult['result'] = search_strDB($tableName,$columns_array,$search_string);
+                }
+                break;
+
 
             case 'getStockValue':
                 if (!is_array($_POST['arguments']) || (count($_POST['arguments']) < 1)) {
                     $aResult['error'] = 'Error in arguments!';
                 } else {
                     $argumentList = $_POST['arguments'];
-                    $symbol=$argumentList[0];
+                    $symbol = $argumentList[0];
 
                     $aResult['result'] = getStockValue($symbol);
                 }

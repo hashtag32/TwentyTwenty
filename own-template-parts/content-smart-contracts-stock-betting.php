@@ -149,7 +149,7 @@
 					<!-- Footer group -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" onclick="sendBet(modal_contractAddress.textContent,bet_stock_price.value,buyingAmount.value)" data-dismiss="modal" class="btn btn-primary">Send</button>
+						<button type="submit" onclick="sendBet(this,modal_contractAddress.textContent,bet_stock_price.value,buyingAmount.value)" data-dismiss="modal" class="btn btn-primary">Send</button>
 					</div>
 				</div>
 			</div>

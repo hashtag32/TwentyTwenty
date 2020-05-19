@@ -13,7 +13,7 @@ function queryResultToArray($sqlQueryResult, $rowName=false)
 {
 	// $symbol=strtoupper($symbol);
 	$element_array=array();
-	if (mysqli_num_rows($sqlQueryResult) > 0) {
+	if ($sqlQueryResult!=false && mysqli_num_rows($sqlQueryResult) > 0) {
 		// output data of each row
 		while ($row = mysqli_fetch_assoc($sqlQueryResult)) {
 			// echo "id: " . $row["symbol"]. " - Name: " . $row["current_price"]. " " . $row["lastname"]. "<br>";

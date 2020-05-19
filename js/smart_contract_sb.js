@@ -90,12 +90,13 @@ async function sendBet(element, contract_address, bet_stock_price, bet_amount) {
     gas: gas_estimate,
     gasPrice: gas_price,
   });
-  //todo: save to sql (contractaddress + selectedStock)
 
-  php_function_call("AddContractAction_SB", [
+  php_function_call("AddContractDataSB_bet", [
     contract_address,
+    firstAccount,
     bet_stock_price,
     bet_amount,
+    ajax_unique.user_id,
   ]);
 }
 

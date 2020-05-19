@@ -123,10 +123,36 @@ function getVotings( $user_id)
 	return $array_votings;
 }
 
+function getKOContracts( $user_id)
+{
+	$sql = "SELECT * FROM `ContractActionKO_buyShare` WHERE `user_id` = " . $user_id;
+	$result=executeSQLCommand($sql);
+	return queryResultToArray($result);
+}
+
+function getSBContracts( $user_id)
+{
+	$sql = "SELECT * FROM `ContractActionSB_bet` WHERE `user_id` = " . $user_id;
+	$result=executeSQLCommand($sql);
+	return queryResultToArray($result);
+}
+
+function getDataOfCreation( $contract_address, $type)
+{
+	$sql="SELECT * FROM `ContractAction" . $type . "_creation` WHERE `contract_address` LIKE '%" . $contract_address . "%' ";
+	// $sql = "SELECT * FROM `ContractAction" . $type . "_creation` WHERE `contract_address` = ". $contract_address;
+	$result=executeSQLCommand($sql);
+	return queryResultToArray($result); 
+}
+
+function getUnderlying($contract_address, $type)
+{
+	$contractData=getDataOfCreation($contract_address, $type);
+	return getStockName($contractData[0]["underlying"]);
+}
+
 function getAllKO()
 {
-	$conn = connectDB();
-
 	$sql = "SELECT * FROM ContractActionKO_creation";
 	$result=executeSQLCommand($sql);
 	$queryArray=queryResultToArray($result);
@@ -376,5 +402,3 @@ function get_ropsten_link($contract_address)
 
 
 // }
-
-?>

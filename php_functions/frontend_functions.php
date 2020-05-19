@@ -173,20 +173,14 @@ function getSymbolName($stockName)
 }
 
 
-function getAllSymbols()
+function getAllSymbols($withStockName=false)
 {
-	$conn = connectDB();
-	$sql = "SELECT SymbolName FROM SymbolNameToStockName";
-	$result = mysqli_query($conn, $sql);
+	$sqlString = "SELECT * FROM SymbolNameToStockName";
 
-	$symbolList=array();
-	if (mysqli_num_rows($result) > 0) {
-		while ($row = mysqli_fetch_assoc($result)) {
-			array_push($symbolList, $row["SymbolName"]);
-		}
-	}
+	$sqlResult=executeSQLCommand($sqlString);
+    $string_array=queryResultToArray($sqlResult);
 
-	return $symbolList;
+    return $string_array;
 }
 
 

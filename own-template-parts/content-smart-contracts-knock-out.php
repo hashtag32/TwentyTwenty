@@ -99,9 +99,9 @@
 					<label for="stockPickSelect">Underlying</label>
 					<select multiple class="form-control" style="font-size:large;" id="stockPickSelect">
 						<!-- todo: StockName, but get it later in ajax?-> bad, better in save as key TSLA -->
-						<?php foreach (getAllSymbols() as $symbol) {	?>
-							<option><?php echo $symbol ?></option>
-						<?php } ?>
+						<?php foreach (getAllSymbols(true) as $symbolArray) {	?>
+							<option value="<?php echo $symbolArray["SymbolName"] ?>"><?php echo $symbolArray["StockName"] ?></option>
+						<?php } ?> 
 					</select>
 
 					<label for="bet_stock_price">Threshold</label>

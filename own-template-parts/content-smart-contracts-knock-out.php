@@ -165,20 +165,20 @@
 						<?php } ?>
 					</select>
 
-					<label for="bet_stock_price">Threshold</label>
+					<label for="bet_stock_price">Threshold [$]</label>
 					<input type="email" class="form-control" id="threshold" aria-describedby="emailHelp" placeholder="Place your threshold">
 
 					<label for="bet_stock_price">Leverage</label>
 					<input type="email" class="form-control" id="leverage" aria-describedby="emailHelp" placeholder="Place your leverage">
 
-					<label for="bet_amount">Pot</label>
+					<label for="bet_amount">Pot </label>
 					<input type="email" class="form-control" id="pot" aria-describedby="emailHelp" placeholder="Put money where your mouth is ;)">
 
 					<label for="bet_due_date">Due Date</label>
 					<input class="form-control" type="date" value="2020-08-19" id="ko_due_date">
 				</div>
 				<div class="form-group text-center">
-					<button type="button" class="btn btn-primary smart-contract-button btn-lg" onclick="createKOContract(this,typeSelect.value, stockPickSelect.value, threshold.value, leverage.value, pot.value, ko_due_date.value);ShareableLink(true);" data-toggle="modal" data-target="#sharingModal" id="SendBetButton">Create it!</button>
+					<button type="button" class="btn btn-primary smart-contract-button btn-lg" onclick="createKOContract(this,typeSelect.value, stockPickSelect.value, threshold.value, leverage.value, pot.value, ko_due_date.value);" id="SendBetButton">Create it!</button>
 				</div>
 			</form>
 		</div>
@@ -244,32 +244,7 @@
 			</div>
 		</div>
 
-		<!-- Modal/Popup for installMetaMaskModal -->
-		<div class="modal fade" id="installMetaMaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-
-					<!-- Header -->
-					<div class="modal-header">
-
-						<h5 class="modal-title text-left" id="exampleModalLabel">Please install MetaMask</h5>
-					</div>
-
-					<!-- Body -->
-					<div class="modal-body">
-						<p class="modal-body-p" id="installMetaMaskModalBody">For the following actions is a blockchain plugin required: MetaMask</p>
-						<a href="https://metamask.io/download.html" target="_blank">
-							<img class="img-centered" src="https://stockvoting.net/wp-content/uploads/2020/05/download-metamask.png" width="150" height="120" alt="Italian Trulli">
-						</a>
-					</div>
-
-					<!-- Footer group -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
+	<?php get_template_part( 'own-parts/install-cryptoWallet' ); ?>
 
 	</div><!-- .entry-content -->
 </div><!-- .post-inner -->
@@ -287,10 +262,6 @@
 
 	// Front End functions
 	$(document).ready(function() {
-		if (typeof web3 == 'undefined') {
-			// Please install MetaMask first
-			$('#installMetaMaskModal').modal('show');
-		}
 		$('#createNewContractButton').click(function() {
 			$('#InputContractDataDiv').fadeIn('slow');
 			$('#createNewContractButton').fadeOut('slow');

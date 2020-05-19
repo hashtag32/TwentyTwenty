@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: My Votings Template
+ * Template Name: My Contracts 
  * Template Post Type: post, page
  * The template for displaying single posts and pages.
  *
@@ -19,7 +19,7 @@ get_header();
 
 	<?php
 
-	get_template_part('own-template-parts/content-my-votings', get_post_type());
+	get_template_part('own-template-parts/content-my-contracts', get_post_type());
 
 	?>
 

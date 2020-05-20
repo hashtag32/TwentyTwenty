@@ -1578,6 +1578,7 @@ body:not(.enable-search-modal) .site-logo img {
 }
 
 ul.primary-menu {
+	color:#05386B;
 	display: flex;
 	font-size: 1.8rem;
 	font-weight: 500;
@@ -1666,7 +1667,7 @@ ul.primary-menu {
 .primary-menu ul {
 	background: #000; 
 	border-radius: 0.4rem;
-	color: #000000;
+	color: white;
 	font-size: 1.7rem;
 	opacity: 0;
 	padding: 1rem 0;
@@ -6764,3 +6765,27 @@ Upper div has to have a positive:relative */
 	cursor:pointer;
 }
 	
+.button-wrap {
+	/* height: 100%; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.smart-button {
+	letter-spacing: 2.5px;
+	color: #fff;
+	background-color: #fff;
+	border: none;
+	border-radius: 45px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+}
+
+.smart-button:hover {
+	background-color: #2EE59D;
+	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+	color: #000;
+	transform: translateY(-7px);
+}

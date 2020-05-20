@@ -67,6 +67,9 @@
 					</div><!-- bordered-area -->
 				</div><!-- /wp:column -->
 			</div><!-- /wp:column -->
+
+			<? get_template_part('own-parts/login-for-feature');?>
+
 			
 		</div><!-- /wp:entry-content -->
 	</div><!-- /wp:post-inner -->

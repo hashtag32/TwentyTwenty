@@ -58,7 +58,7 @@
 											Here
 										</a>
 									</td>
-									<td class="has-text-align-center" data-align="center"><?php echo getUnderlying($contract_array["contract_address"],"SB") ?> </td>
+									<td class="has-text-align-center" data-align="center"><?php echo getUnderlying($contract_array["contract_address"], "SB") ?> </td>
 									<td class="has-text-align-center" data-align="center"><?php echo $contract_array["stock_price"] ?> </td>
 									<td class="has-text-align-center" data-align="center"><?php echo $contract_array["amount"] ?> </td>
 								</tr>
@@ -96,7 +96,7 @@
 											Here
 										</a>
 									</td>
-									<td class="has-text-align-center" data-align="center"><?php echo getUnderlying($contract_array["contract_address"],"KO") ?> </td>
+									<td class="has-text-align-center" data-align="center"><?php echo getUnderlying($contract_array["contract_address"], "KO") ?> </td>
 									<td class="has-text-align-center" data-align="center"><?php echo $contract_array["amount"] ?> </td>
 								</tr>
 							</tbody>
@@ -111,8 +111,7 @@
 
 			// User not logged in  
 			else {
-				echo 'Welcome, visitor!';
-				echo 'You not voted yet, see Votings to get your votes!';
+				get_template_part('own-parts/login-for-feature');
 			}
 
 			if (is_search() || !is_singular() && 'summary' === get_theme_mod('blog_content', 'full')) {

@@ -54,7 +54,7 @@
 							<tbody>
 								<tr>
 									<td class="has-text-align-center has-accent-color" data-align="center">
-										<a href="<?php echo get_ropsten_link($contract_array["contract_address"]) ?>">
+										<a href="<?php echo get_ropsten_link($contract_array["contract_address"]) ?>" target="_blank">
 											Here
 										</a>
 									</td>
@@ -92,7 +92,7 @@
 							<tbody>
 								<tr>
 									<td class="has-text-align-center has-accent-color" data-align="center">
-										<a href="<?php echo get_ropsten_link($contract_array["contract_address"]) ?>">
+										<a href="<?php echo get_ropsten_link($contract_array["contract_address"]) ?>" target="_blank">
 											Here
 										</a>
 									</td>

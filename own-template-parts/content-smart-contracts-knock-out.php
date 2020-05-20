@@ -48,7 +48,7 @@
 					<tr class="table-row" data-target="#actionContractUser" data-val="<?php echo $KO_contract["contract_address"] ?>" data-toggle="modal">
 						<td class="has-text-align-center" data-align="center"><?php echo display_string($KO_contract["typ"]) ?></td>
 						<td class="has-text-align-center" data-align="center">
-							<a href="<?php echo get_symbol_link($KO_contract["underlying"]) ?>">
+							<a href="<?php echo get_symbol_link($KO_contract["underlying"]) ?>" target="_blank">
 								<?php echo getStockName($KO_contract["underlying"]) ?>
 							</a>
 						</td>
@@ -59,7 +59,7 @@
 						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["emissionDate"] ?></td>
 						<td class="has-text-align-center" data-align="center"><?php echo $KO_contract["dueDate"] ?></td>
 						<td class="has-text-align-center has-accent-color" data-align="center">
-							<a href="<?php echo get_ropsten_link($KO_contract["contract_address"]) ?>">
+							<a href="<?php echo get_ropsten_link($KO_contract["contract_address"]) ?>" target="_blank">
 								Here
 							</a>
 						</td>

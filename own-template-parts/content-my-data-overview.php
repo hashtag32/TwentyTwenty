@@ -67,6 +67,7 @@
 					</div><!-- bordered-area -->
 				</div><!-- /wp:column -->
 			</div><!-- /wp:column -->
+				<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/Bwlcn-kka3A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
 			<? get_template_part('own-parts/login-for-feature');?>
 

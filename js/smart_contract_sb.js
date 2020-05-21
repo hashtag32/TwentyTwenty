@@ -32,8 +32,6 @@ async function createSBContract(element, underlying, votingEndDate, dueDate) {
   );
 
   // Contract creation
-  var chairPersonAccount = "0x281609b6005d3e3235230d9b88e5dd46f9078e76";
-
   txHashContract = await StockBettingContract.new(
     chairPersonAccount,
     runTime,

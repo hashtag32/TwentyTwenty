@@ -1,5 +1,6 @@
 const gas_estimate = 2000000;
 const gas_price = web3.toWei(1, "gwei");
+const chairPersonAccount = "0x281609b6005d3e3235230d9b88e5dd46f9078e76";
 
 // Don't know how this works, but it works...
 function copyToClipboard(element) {

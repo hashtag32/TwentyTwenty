@@ -22,7 +22,8 @@ print_r($symbol);
 
 ?>
 
-
+ 
+<iframe width="50px" height="50px" src="https://www.powtoon.com/embed/flxwJFxJsNs/" frameborder="0"></iframe>
 
 
 <div id="like_button_container"></div>

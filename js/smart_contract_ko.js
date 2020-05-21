@@ -61,7 +61,6 @@ async function createKOContract(
   // Contract creation
   var firstAccount = web3.eth.accounts[0];
   var SampleContract = eth.contract(ko_abi);
-  var chairPersonAccount = "0x281609b6005d3e3235230d9b88e5dd46f9078e76";
 
   var contractData = new ContractData_KO(
     typ,

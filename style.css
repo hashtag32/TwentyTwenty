@@ -6737,7 +6737,17 @@ button:not(.toggle)
 /* This is for the transparency of the first block on the cover page */
 .first-cover-header-block
 {
-	background-color: rgba(	243, 242, 242,0.3);
+	background-color: rgba(238, 226, 220, 0.4);
+}
+
+.zoom {
+	transition: transform .2s;
+}
+
+.zoom:hover {
+-ms-transform: scale(1.5); /* IE 9 */
+-webkit-transform: scale(1.5); /* Safari 3-8 */
+transform: scale(1.5); 
 }
 
 .analysis-entry-content{
@@ -6840,6 +6850,9 @@ Upper div has to have a positive:relative */
 .carousel .overview b {
 	text-transform: uppercase;
 	color: #05386B;
+}
+.carousel-item{
+	padding-top:3rem;
 }
 .carousel .carousel-control {
 	width: 40px;

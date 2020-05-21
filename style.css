@@ -128,7 +128,7 @@ html {
 }
 
 body {
-	background: #f3f2f2;
+	background: #EEE2DC;
 	box-sizing: border-box;
 	color: #000;
 	font-family: -apple-system, BlinkMacSystemFont, sans-serif, "Helvetica Neue", Helvetica ;
@@ -2412,9 +2412,9 @@ body:not(.singular) main > article:first-of-type {
 	padding: 4rem 0;
 }
 
-.entry-header-green{
+.entry-header-white{
 	background-color: #fff;
-	padding: 4rem 0;
+	padding: 8rem 0;
 }
 
 .entry-categories {
@@ -2776,7 +2776,7 @@ h2.entry-title {
 
 :root .has-primary-background-color {
 	background-color: #000;
-	color: #f3f2f2;
+	color: #EEE2DC;
 }
 
 :root .has-secondary-color {
@@ -2798,11 +2798,11 @@ h2.entry-title {
 }
 
 :root .has-background-color {
-	color: #f3f2f2;
+	color: #EEE2DC;
 }
 
 :root .has-background-background-color {
-	background-color: #f3f2f2;
+	background-color: #EEE2DC;
 	color: #000;
 }
 

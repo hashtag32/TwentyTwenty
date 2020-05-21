@@ -11,19 +11,19 @@
  * @subpackage Twenty_Twenty
  * @since 1.0.0
  */
-
+get_header();
 ?>
 
-<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+<article <?php post_class(); ?> id="post-<?php the_ID(); ?>" style="padding:0">
 
 <?php $heading=is_search() ? 'Articles' : 'Analysis'; ?>
 
-<header class="entry-header has-text-align-center header-footer-group">
 
-<div class="entry-header-inner section-inner medium">
-	<h1 class="entry-title"><?php echo $heading?></h1>
-</div><!-- .entry-header-inner -->
-
+<!-- todo move to separate file -->
+<header class="entry-header-white has-text-align-center header-footer-group" >
+	<div class="entry-header-inner section-inner medium">
+		<h1 class="entry-title"><?php echo $heading?></h1>
+	</div><!-- .entry-header-inner -->
 </header>
 
 

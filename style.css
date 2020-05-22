@@ -6803,7 +6803,6 @@ Upper div has to have a positive:relative */
 
 /* Carousel for testimonials */
 .testimonials{
-	margin-top:10rem;
 	background-color:#d4e9fd;
 	width:100%;
 	max-width:10000px;
@@ -6832,7 +6831,6 @@ Upper div has to have a positive:relative */
 	height: 135px;
 	margin: 0 auto;
 	padding: 5px;
-	border: 1px solid #ddd;
 	border-radius: 50%;
 }
 .carousel .img-box img {
@@ -6886,4 +6884,24 @@ Upper div has to have a positive:relative */
 .carousel-indicators li.active {	
 	background: #555;		
 	box-shadow: inset 0 2px 1px rgba(0,0,0,0.2);
+}
+
+.wave-top{
+	fill:#EEE2DC;
+	background-color: white;
+}
+
+.wave-testimonials{
+	fill:#EEE2DC;
+	background-color: #d4e9fd;
+}
+
+.wave-footer{
+	fill:#d4e9fd;
+	background-color: white;
+}
+
+.rotation{
+	transform: rotate(180deg);
+	transform-origin: 50% 50%;
 }

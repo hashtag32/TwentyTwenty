@@ -26,6 +26,8 @@ get_header();
 	</div><!-- .entry-header-inner -->
 </header>
 
+<?php get_template_part( 'own-parts/wave'); ?> 
+
 
 <!-- List all articles -->
 <?php

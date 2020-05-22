@@ -81,3 +81,5 @@ $special_title= get_query_var('special_title');
 	</div><!-- .entry-header-inner -->
 
 </header><!-- .entry-header -->
+
+<?php if(!is_home()){get_template_part( 'own-parts/wave');} ?> 

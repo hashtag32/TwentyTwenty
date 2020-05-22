@@ -12,20 +12,29 @@
  * @since 1.0.0
  */
 
+
+$symbol = $wp_query->get('symbol');
+$stockName=getStockName($symbol);
+
+
+ob_start();
+get_header();
+$header = ob_get_clean();
+$header = preg_replace('#<title>(.*?)<\/title>#', '<title>'. $stockName .'</title>', $header);
+echo $header;
 ?>
 
 <script type="text/javascript" src="https://stockvoting.net/wp-content/themes/twentytwenty/own-template-parts/third-party/canvas-gauges/gauge.min.js"></script>
-<?php get_template_part( 'own-parts/wave'); ?> 
 
+
+<?php get_template_part('own-parts/wave'); ?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
 	<div class="section-inner">
 
-		<?php $symbol = getSymbolName(single_cat_title('', false));
-		$symbol = $wp_query->get('symbol');
+		<?php
 		if ($symbol != "") {
 		?>
-
 
 			<!-- TradingView Widget BEGIN -->
 			<div class="tradingview-widget-container">

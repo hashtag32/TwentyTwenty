@@ -6540,8 +6540,13 @@ font-size: 17pt;
 }
 
 .radial-gauge-class-stock {
-	width:100%;
 	padding-top: 10%;
+	height:100%;
+	width:100%;
+
+	max-height:350px;
+	min-height:200px;
+	min-width:200px;
 }
 
 .footer-logo {

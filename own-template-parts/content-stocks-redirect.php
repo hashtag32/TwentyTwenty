@@ -14,13 +14,13 @@
 
 
 $symbol = $wp_query->get('symbol');
-$stockName=getStockName($symbol);
+$stockName = getStockName($symbol);
 
 
 ob_start();
 get_header();
 $header = ob_get_clean();
-$header = preg_replace('#<title>(.*?)<\/title>#', '<title>'. $stockName .'</title>', $header);
+$header = preg_replace('#<title>(.*?)<\/title>#', '<title>' . $stockName . '</title>', $header);
 echo $header;
 ?>
 
@@ -199,9 +199,9 @@ echo $header;
 					<!-- /wp:top-column -->
 					<h2 class="has-text-align-center">StockVoter's opinion (30 days prognosis)</h2>
 					<?php
-					set_query_var('symbol', $symbol);
-					set_query_var('gauge_div_class', "radial-gauge-class-stock");
-					get_template_part('own-template-parts/part', 'gauge');
+						set_query_var('symbol', $symbol);
+						set_query_var('gauge_div_class', "radial-gauge-class-stock");
+						get_template_part('own-template-parts/part', 'gauge');
 					?>
 
 					<hr class="wp-block-separator has-text-color has-background has-accent-background-color has-accent-color is-style-dots" />

@@ -33,11 +33,11 @@
 	</div><!-- .search-modal-inner -->
 
 	<div class="list-group" id="myList" role="tablist">
-		<a class="list-group-item list-group-item-action"  style="display:none;">Home</a>
-		<a class="list-group-item list-group-item-action"  style="display:none;">Profile</a>
-		<a class="list-group-item list-group-item-action"  style="display:none;">Profile</a>
-		<a class="list-group-item list-group-item-action"  style="display:none;">Messages</a>
-		<a class="list-group-item list-group-item-action"  style="display:none;">Settings</a>
+		<a class="list-group-item list-group-item-action has-accent-color" style="display:none;">Result1</a>
+		<a class="list-group-item list-group-item-action has-accent-color" style="display:none;">Result2</a>
+		<a class="list-group-item list-group-item-action has-accent-color" style="display:none;">Result3</a>
+		<a class="list-group-item list-group-item-action has-accent-color" style="display:none;">Result4</a>
+		<a class="list-group-item list-group-item-action has-accent-color" style="display:none;">Result5</a>
 	</div>
 
 </div><!-- .menu-modal -->

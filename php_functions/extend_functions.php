@@ -56,23 +56,19 @@ function create_stock_taxonomy() {
 add_action( 'updatestockdb', 'updateStockDB_func' );
  
 function updateStockDB_func() {
+	writeDBtoFile();
 	updateStockTable();
 	return;
 }
 
 function updateStockTable()
 {
-	$args = array( 
-		'hide_empty'      => false,
-		'child_of' => '187'
-	);
-	
 	$conn = connectDB();
 
 	// Iterate through all subcategories-stocks
-	foreach(get_categories($args) as $stock_cat)
+	foreach(getAllSymbols() as $symbolArray)
 	{
-		$symbol=$stock_cat->category_nicename;
+		$symbol=$symbolArray["SymbolName"];
 		$symbol=strtoupper($symbol); // Everywhere always big letters
 		$stockName=update_getStockName($symbol);
 		
@@ -86,6 +82,30 @@ function updateStockTable()
 	} 
  
 	return closeconnectDB($conn);
+}
+
+function writeDBtoFile()
+{
+	// Table to propagate
+	$tableList = array('ContractActionKO_creation', 'ContractActionSB_creation');
+	// Get data from contracts
+	foreach($tableList as $tableName){
+		$sqlString = "SELECT * FROM " . $tableName;
+		$sqlResult=executeSQLCommand($sqlString);
+		$string_array=queryResultToArray($sqlResult);
+
+		// Write contract data to file
+		$fileName = 'openShare/'.$tableName . '.csv';
+		$fileHandle = fopen($fileName, 'w');
+
+		foreach ($string_array as $element) {
+			fputcsv($fileHandle, [$element["contract_address"], $element["underlying"]], ',');
+		}
+
+		fclose($fileHandle);
+	}
+
+    return $string_array;
 }
 
 function update_getStockName($symbol)

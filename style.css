@@ -3518,7 +3518,7 @@ figure.wp-block-table.is-style-stripes {
 }
 
 .entry-content a { 
-	color: inherit;
+	color: #007fac;
 	text-decoration: none;
 }
 
@@ -6788,9 +6788,9 @@ Upper div has to have a positive:relative */
 }
 
 .smart-button {
-	letter-spacing: 2.5px;
 	color: #fff;
-	background-color: #fff;
+	background-color: #05386B; 
+	letter-spacing: 2.5px;
 	border: none;
 	border-radius: 45px;
 	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -6799,9 +6799,9 @@ Upper div has to have a positive:relative */
 }
 
 .smart-button:hover {
+	color: #000;
 	background-color: #2EE59D;
 	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
-	color: #000;
 	transform: translateY(-7px);
 }
 
@@ -6909,4 +6909,76 @@ Upper div has to have a positive:relative */
 .rotation{
 	transform: rotate(180deg);
 	transform-origin: 50% 50%;
+}
+
+.h2-highlighting-button
+{
+	background-color:#d4e9fd;
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	padding:15px;
+	text-align:center;
+	border-radius:25px;
+}
+
+.h2-highlighting-button:hover
+{
+	background-color:#05386B;
+	color:white;
+	transform: translateY(-7px);
+}
+
+
+  
+/* Sponsor Word Rotator */
+.spinny-wrapper{
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	position: relative;
+}
+.spinny-words{
+	min-width: 350px;
+	text-align:center;
+}
+.spinny-words span{
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	font-weight: bold;
+	display: inline-block;
+	top:0px;
+	opacity: 0;    
+	animation: rotateWord 18s linear infinite 0s;
+}
+/* todo: Dynamically with scss */
+.spinny-words span:nth-child(1) { 
+	animation-delay: 3s; 
+}
+.spinny-words span:nth-child(2) { 
+	animation-delay: 6s; 
+}
+.spinny-words span:nth-child(3) { 
+	animation-delay: 9s; 
+}
+.spinny-words span:nth-child(4) { 
+	animation-delay: 12s; 
+}
+.spinny-words span:nth-child(5) { 
+	animation-delay: 15s; 
+}
+.spinny-words span:nth-child(6) { 
+	animation-delay: 18s; 
+}
+@keyframes rotateWord {
+	0%   { opacity: 0; }
+	2%   { opacity: 0; transform: translateY(-30px); }
+	5%   { opacity: 1; transform: translateY(0px);}
+	17%  { opacity: 1; transform: translateY(0px); }
+	20%  { opacity: 0; transform: translateY(30px); }
+	80%  { opacity: 0; }
+	100% { opacity: 0; }
 }

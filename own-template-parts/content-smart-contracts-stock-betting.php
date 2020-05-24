@@ -42,7 +42,7 @@
 				?>
 					<tr class="table-row" data-target="#actionContractUser" data-val="<?php echo $SB_contract["contract_address"] ?>" data-toggle="modal">
 						<td class="has-text-align-center" data-align="center">
-							<a href="<?php echo get_symbol_link($SB_contract["underlying"]) ?>">
+							<a href="<?php echo get_symbol_link($SB_contract["underlying"]) ?>" target="_blank">
 								<?php echo getStockName($SB_contract["underlying"]) ?>
 							</a>
 						</td>
@@ -50,7 +50,7 @@
 						<td class="has-text-align-center" data-align="center"><?php echo $SB_contract["votingEndDate"] ?></td>
 						<td class="has-text-align-center" data-align="center"><?php echo $SB_contract["dueDate"] ?></td>
 						<td class="has-text-align-center has-accent-color" data-align="center">
-							<a href="<?php echo get_ropsten_link($SB_contract["contract_address"]) ?>">
+							<a href="<?php echo get_ropsten_link($SB_contract["contract_address"]) ?>" target="_blank">
 								Here
 							</a>
 						</td>

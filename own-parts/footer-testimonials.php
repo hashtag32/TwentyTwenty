@@ -54,6 +54,18 @@
       </div>
     </div>
   </div>
+  <!-- Sponsors -->
+  <h2 class="has-text-align-center has-accent-color">Sponsors</h2>
+  <div class="spinny-wrapper">
+    <h2 class="spinny-words">
+      <span>Thomas Gray</span>
+      <span>Phil Otzenberger</span>
+      <span>Lisa Stanley</span>
+      <span>Chen Tang</span>
+      <span>Sara Brabo</span>
+      <span>Romy Schneider</span>
+    </h2>
+  </div>
 </div>
 
 <svg viewBox="0 0 1440 120" class="wave-footer rotation">

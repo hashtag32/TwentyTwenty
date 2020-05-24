@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The main template file
  *
@@ -21,54 +22,63 @@ get_header();
 
 	<?php
 
-	$archive_title    = '';
-	$archive_subtitle = '';
+	global $wp;
+	$url = home_url($wp->request);
 
-	if ( is_search() ) {
-		get_template_part( 'own-template-parts/content-search' );
-	}
-	elseif ( ! is_home() ) {
-		$archive_title    = get_the_archive_title();
-		$archive_subtitle = get_the_archive_description();
-	}
+	// Test if string contains the word 
+	$question_part = "https://stockvoting.net/question";
 
-	// Category page
-	if(is_category())
-	{
-		get_template_part( 'own-template-parts/content-category' );
-	}
-	elseif ( $archive_title || $archive_subtitle ) {
-		?>
+	if (strpos($url, $question_part) !== false) {
+		// Is a question -> 
+		get_template_part('own-template-parts/content-question');
+	} else {
 
-		<header class="archive-header has-text-align-center header-footer-group">
+		$archive_title    = '';
+		$archive_subtitle = '';
 
-			<div class="archive-header-inner section-inner medium">
+		if (is_search()) {
+			get_template_part('own-template-parts/content-search');
+		} elseif (!is_home()) {
+			$archive_title    = get_the_archive_title();
+			$archive_subtitle = get_the_archive_description();
+		}
 
-				<?php if ( $archive_title ) { ?>
-					<h1 class="archive-title"><?php echo wp_kses_post( $archive_title ); ?></h1>
-				<?php } ?>
+		// Category page
+		if (is_category()) {
+			get_template_part('own-template-parts/content-category');
+		} elseif ($archive_title || $archive_subtitle) {
+	?>
 
-				<?php if ( $archive_subtitle ) { ?>
-					<div class="archive-subtitle section-inner thin max-percentage intro-text"><?php echo wp_kses_post( wpautop( $archive_subtitle ) ); ?></div>
-				<?php } ?>
+			<header class="archive-header has-text-align-center header-footer-group">
 
-			</div><!-- .archive-header-inner -->
+				<div class="archive-header-inner section-inner medium">
 
-		</header><!-- .archive-header -->
+					<?php if ($archive_title) { ?>
+						<h1 class="archive-title"><?php echo wp_kses_post($archive_title); ?></h1>
+					<?php } ?>
 
-		<?php
-	}
+					<?php if ($archive_subtitle) { ?>
+						<div class="archive-subtitle section-inner thin max-percentage intro-text"><?php echo wp_kses_post(wpautop($archive_subtitle)); ?></div>
+					<?php } ?>
 
-	if ( is_home() ) {
-		// Go to the analysis site
-		get_template_part( 'own-template-parts/content-posts' );
-	} 
+				</div><!-- .archive-header-inner -->
 
-	get_template_part( 'template-parts/pagination' ); ?>
+			</header><!-- .archive-header -->
+
+	<?php
+		}
+
+		if (is_home()) {
+			// Go to the analysis site
+			get_template_part('own-template-parts/content-posts');
+		}
+
+		get_template_part('template-parts/pagination');
+	} ?>
 
 </main><!-- #site-content -->
 
-<?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
-
 <?php
+get_template_part('template-parts/footer-menus-widgets');
 get_footer();
+?>

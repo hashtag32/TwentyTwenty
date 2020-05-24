@@ -133,6 +133,7 @@ function update_getStockValue($symbol)
 
 
 // Redirect stocks
+// Remember! When changing this function, you need to update the Permalink
 add_action('init', function() {
     $stocks_page_id = 909; // Stocks Template Page
 	$stock_page_data = get_post( $stocks_page_id );

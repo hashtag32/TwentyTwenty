@@ -19,5 +19,8 @@
 <p class="has-text-align-center has-text-color has-large-font-size has-secondary-color">Please login to view this feature</p>
 
 <div class="button-wrap">
-  <button style="width:350px;" onClick="openLink('https://stockvoting.net/wp-login.php')" class="smart-button">Login</button>
+  <button onClick="openLink('https://stockvoting.net/wp-login.php')" class="smart-button">Login</button>
 </div>
+
+
+<?php get_template_part('own-parts', 'keep-in-touch');?>

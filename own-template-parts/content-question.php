@@ -6,6 +6,8 @@
 ?>
 
 <main id="site-content" role="main">
+
+<!-- todo: Check isPatron($user_id): https://github.com/Patreon/patreon-wordpress/blob/master/classes/patreon_wordpress.php -->
     <?php
     while (have_posts()) {
         the_post();

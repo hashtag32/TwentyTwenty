@@ -24,7 +24,7 @@ set_query_var('gauge_div_class', "radial-gauge-class-voting");
         <h2 class="has-text-align-center"><?php echo getStockName($symbol)?></h2>
     </a>
     <!-- Stock Overview Table -->
-    <div class="wp-block-columns alignwide has-background has-text-color has-background-background-color has-secondary-color" >
+    <div class="wp-block-columns alignwide has-background has-text-color has-secondary-color" >
         <div class="wp-block-column"> <!-- Prognosis -->
             <h2 class="vote-span has-text-align-center">In 30 days (Prognosis)</h2> 
             <h2 class="has-accent-color has-text-color has-text-align-center prognosis-text" id="prognosis_<?php echo $symbol?>">

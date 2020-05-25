@@ -28,24 +28,25 @@
 
 	?>
 
-<!-- todo: Improve on mobile -->
-<div style="position: fixed; top: 0;width: 100%; height: 100%; z-index: -1;">
-    <video autoplay muted loop id="myVideo">
-		<source src="https://www.videvo.net/videvo_files/converted/2013_05/preview/BinaryNumbers1AlphaMatteVidevo.mov37560.webm" type="video/mp4">
-	</video>
-</div>
-	
+	<!-- todo: Improve on mobile -->
+	<div style="position: fixed; top: 0;width: 100%; height: 100%; z-index: -1;">
+		<video autoplay muted loop id="myVideo">
+			<source src="https://www.videvo.net/videvo_files/converted/2013_05/preview/BinaryNumbers1AlphaMatteVidevo.mov37560.webm" type="video/mp4">
+		</video>
+	</div>
+
 
 	<div class="post-inner">
 		<div class="entry-content">
-			<div class="wp-block-columns"><!-- ggf. alignwide? -->
+			<div class="wp-block-columns">
+				<!-- ggf. alignwide? -->
 				<div class="wp-block-column">
 
 					<!-- My Votings -->
 					<div class="bordered-area">
 						<a href="https://stockvoting.net/my-data/my-votings">
 							<span class="fill-div-with-link"></span>
-						</a> 
+						</a>
 						<h2 class="has-accent-color has-text-align-center ">My Votings</h2>
 						<p class="has-large-font-size">
 							Keep track of your votings and build your prediction score.
@@ -58,8 +59,8 @@
 					<div class="bordered-area">
 						<a href="https://stockvoting.net/my-data/my-contracts">
 							<span class="fill-div-with-link"></span>
-						</a> 
-					
+						</a>
+
 						<h2 class="has-accent-color has-text-align-center ">My Contracts</h2>
 						<p class="has-large-font-size">
 							Display your bought contracts to oversee your performance
@@ -67,13 +68,16 @@
 					</div><!-- bordered-area -->
 				</div><!-- /wp:column -->
 			</div><!-- /wp:column -->
-				<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/Bwlcn-kka3A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+			<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/Bwlcn-kka3A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
-			<? get_template_part('own-parts/login-for-feature');?>
+			<?php
+			if (!is_user_logged_in()) {
+				get_template_part('own-parts/login-for-feature');
+			}
+			?>
 
-			
+
 		</div><!-- /wp:entry-content -->
 	</div><!-- /wp:post-inner -->
 
-</article><!-- .post --> 
-
+</article><!-- .post -->

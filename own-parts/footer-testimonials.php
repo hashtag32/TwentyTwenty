@@ -54,10 +54,13 @@
       </div>
     </div>
   </div>
+  <!-- Keep in touch -->
+  <?php get_template_part('own-parts/keep-in-touch');      ?>
+
   <!-- Sponsors -->
   <h2 class="has-text-align-center has-accent-color">Sponsors</h2>
   <div class="spinny-wrapper">
-    <h2 class="spinny-words">
+    <h2 class="spinny-words ">
       <span>Thomas Gray</span>
       <span>Phil Otzenberger</span>
       <span>Lisa Stanley</span>

@@ -18,8 +18,8 @@
 <div class="tnp tnp-subscription">
   <form method="post" action="https://stockvoting.net/?na=s" onsubmit="return newsletter_check(this)">
 
-    <input placeholder="Enter your Email here" class="tnp-email" type="email" name="ne" required>
-    <div class="tnp-field tnp-field-button button-wrap">
+    <input style="border-radius:10px;background-color:white;" placeholder="Enter your Email here" class="input-form" type="email" name="ne" required>
+    <div class="tnp-field tnp-field-button button-wrap">  
       <button class="smart-button" type="submit" value="Subscribe">
         Subscribe
       </button>

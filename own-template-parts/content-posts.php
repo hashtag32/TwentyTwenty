@@ -14,47 +14,48 @@
 get_header();
 ?>
 
-<article <?php post_class(); ?> id="post-<?php the_ID(); ?>" style="padding:0">
-
-<?php $heading=is_search() ? 'Articles' : 'Analysis'; ?>
-
+<?php $heading = is_search() ? 'Articles' : 'Analysis'; ?>
 
 <!-- todo move to separate file -->
-<header class="entry-header-white has-text-align-center header-footer-group" >
+<header class="entry-header-white has-text-align-center header-footer-group">
 	<div class="entry-header-inner section-inner medium">
-		<h1 class="entry-title"><?php echo $heading?></h1>
+		<h1 class="entry-title"><?php echo $heading ?></h1>
 	</div><!-- .entry-header-inner -->
 </header>
 
-<?php get_template_part( 'own-parts/wave'); ?> 
+<?php get_template_part('own-parts/wave'); ?>
 
 
 <!-- List all articles -->
-<?php
-while ( have_posts() ) {
+<div class="section-inner" id="section-inner">
+	<?php
+	while (have_posts()) {
 	?>
-	<div class="wp-block-columns"><!-- wp:column {"className":"analysis-column"} -->
-	
-		<div class="wp-block-column analysis-column-left">
-			<?php
-			the_post();
-			get_template_part( 'own-template-parts/content-analysis', get_post_type() );
-			?>
-		</div>
+		<div class="wp-block-columns">
+			<!-- wp:column {"className":"analysis-column"} -->
 
-		<div class="wp-block-column analysis-column-right">
-			<?php
-			the_post();
-			get_template_part( 'own-template-parts/content-analysis', get_post_type() );
-			?>
+			<div class="wp-block-column">
+				<?php
+				the_post();
+				get_template_part('own-template-parts/content-analysis', get_post_type());
+				?>
+			</div>
+			<?php if (wpdocs_has_more_posts()) { ?>
+				<div class="wp-block-column">
+					<?php
+					the_post();
+					get_template_part('own-template-parts/content-analysis', get_post_type());
+					?>
+				</div>
 		</div>
-	</div>
-	<hr class="post-separator styled-separator   has-accent-color is-style-wide section-inner" aria-hidden="true" />
+		<hr class="post-separator styled-separator has-accent-color is-style-wide section-inner" aria-hidden="true" />
 <?php
-}
+			}
+		}
+?>
+</div>
 
+<?php
 // Add your Analysis
 get_template_part('small-parts/add-button');
 ?>
-
-</article>

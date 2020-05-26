@@ -36,7 +36,7 @@
 
 				<!-- Head of the Table -->
 				<figure class="wp-block-table alignwide is-style-stripes">
-					<table class="has-subtle-pale-blue-background-color has-background">
+					<table class="has-subtle-pale-blue-background-color has-background sv-table">
 						<thead>
 							<tr>
 								<th class="has-text-align-center" data-align="center">Contract</th>
@@ -75,7 +75,7 @@
 
 				<!-- Head of the Table -->
 				<figure class="wp-block-table alignwide is-style-stripes">
-					<table class="has-subtle-pale-blue-background-color has-background">
+					<table class="has-subtle-pale-blue-background-color has-background sv-table">
 						<thead>
 							<tr>
 								<th class="has-text-align-center" data-align="center">Contract</th>

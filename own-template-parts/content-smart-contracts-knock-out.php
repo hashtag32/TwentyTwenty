@@ -26,7 +26,7 @@
 
 		<!-- Overview contracts table -->
 		<figure class="wp-block-table alignwide is-style-stripes">
-			<table class="table table-striped has-subtle-pale-blue-background-color has-background table-hover">
+			<table class="table table-striped has-subtle-pale-blue-background-color has-background sv-table table-hover">
 
 				<thead class="thead-dark">
 					<tr>

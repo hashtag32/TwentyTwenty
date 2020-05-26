@@ -206,5 +206,18 @@ add_action(
     'wp_enqueue_scripts',
     'wps_scripts'
 );
+
+
+/**
+ * Check if a loop has any more posts left.
+ *
+ * @global $wp_query
+ *
+ * @return bool True if there are any more posts in this loop, false if not.
+ */
+function wpdocs_has_more_posts() {
+	global $wp_query;
+	return $wp_query->current_post + 1 < $wp_query->post_count;
+  }
  
 ?>

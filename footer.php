@@ -18,7 +18,7 @@
 	<div class="section-inner">
 
 		<div class="footer-logo">
-			<img src="https://stockvoting.net/wp-content/uploads/2020/02/StockVoting_Logo.png" alt="StockVoting Logo" width="35" height="35">
+			<img src="https://stockvoting.net/wp-content/uploads/2020/05/cropped-stockvoting_logo.png" alt="StockVoting Logo" width="35" height="35">
 		</div>
 		<div class="footer-credits">
 

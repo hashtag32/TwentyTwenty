@@ -14,7 +14,7 @@
 
 ?>
 
-<h4 class="has-text-align-center has-accent-color">Just keep in touch</h4>
+<h3 class="has-text-align-center has-accent-color">3 months free usage</h3>
 <div class="tnp tnp-subscription">
   <form method="post" action="https://stockvoting.net/?na=s" onsubmit="return newsletter_check(this)">
 

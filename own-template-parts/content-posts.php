@@ -32,8 +32,6 @@ get_header();
 	while (have_posts()) {
 	?>
 		<div class="wp-block-columns">
-			<!-- wp:column {"className":"analysis-column"} -->
-
 			<div class="wp-block-column">
 				<?php
 				the_post();

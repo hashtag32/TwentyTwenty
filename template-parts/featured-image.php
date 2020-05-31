@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Displays the featured image
  *
@@ -7,31 +8,36 @@
  * @since Twenty Twenty 1.0
  */
 
-if ( has_post_thumbnail() && ! post_password_required() ) {
+if (has_post_thumbnail() && !post_password_required()) {
 
 	$featured_media_inner_classes = '';
 
 	// Make the featured media thinner on archive pages.
-	if ( ! is_singular() ) {
+	if (!is_singular()) {
 		$featured_media_inner_classes .= ' medium';
 	}
-	?>
+?>
 
-	<figure class="featured-media" >
+	<figure class="featured-media">
 
-		<div  class="featured-media-inner section-inner<?php echo $featured_media_inner_classes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static output ?>">
+		<div class="featured-media-inner section-inner<?php echo $featured_media_inner_classes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static output 
+														?>">
 
 			<?php
-			the_post_thumbnail( 'medium');
+			if (is_singular()) {
+				the_post_thumbnail('large');
+			} else {
+				the_post_thumbnail('medium');
+			}
 
 			$caption = get_the_post_thumbnail_caption();
 
-			if ( $caption ) {
-				?>
+			if ($caption) {
+			?>
 
-				<figcaption class="wp-caption-text"><?php echo esc_html( $caption ); ?></figcaption>
+				<figcaption class="wp-caption-text"><?php echo esc_html($caption); ?></figcaption>
 
-				<?php
+			<?php
 			}
 			?>
 
@@ -39,5 +45,5 @@ if ( has_post_thumbnail() && ! post_password_required() ) {
 
 	</figure><!-- .featured-media -->
 
-	<?php
+<?php
 }

@@ -75,6 +75,7 @@ function getPercentage($value)
 }
 
 // todo: should be cronjob
+// todo: getVotings() is empty -> bzw. getVotings no array
 function getScore($user_id)
 { 
 	// Collect stock_diffs
@@ -112,6 +113,7 @@ function getVotings( $user_id)
 	// SELECT * FROM `votingTable` WHERE `user_id` = 1
 	$sql = "SELECT symbol, date, voting, user_id FROM votingTable";
 	$result = mysqli_query($conn, $sql);
+
 
 	// output data of each row
 	while ($row = mysqli_fetch_assoc($result)) {

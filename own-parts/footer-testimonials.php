@@ -23,7 +23,6 @@
 <div class="container testimonials">
   <div class="row">
     <div class="col-md-6 col-center m-auto">
-      <h2 class="has-text-align-center has-accent-color">Testimonials</h2>
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Carousel indicators -->
         <!-- Wrapper for carousel items -->
@@ -55,7 +54,7 @@
     </div>
   </div>
   <!-- Keep in touch -->
-  <?php get_template_part('own-parts/keep-in-touch');      ?>
+  <?php get_template_part('own-parts/keep-in-touch');?>
 
   <!-- Sponsors -->
   <h2 class="has-text-align-center has-accent-color">Sponsors</h2>

@@ -22,6 +22,11 @@
 <?php get_template_part('template-parts/entry-header'); ?>
 
 <div class="post-inner">
+
+	<a href="https://stockvoting.net/guide/">
+		<img data-toggle="tooltip" data-placement="top" title="Ask me anything" class="font-tooltip" src="https://stockvoting.net/wp-content/uploads/2020/05/helping_ape.png" style="width:112px; height:112px;float:right;margin-right:50px">
+	</a>
+
 	<div class="entry-content entry-smart-contract">
 
 		<!-- Overview contracts table -->
@@ -206,6 +211,10 @@
 		// Workaround because onfocus doesn't work
 		previous_currency = currency;
 	});
+
+	$(function() {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
 
 
 	// Logic for Web3 API

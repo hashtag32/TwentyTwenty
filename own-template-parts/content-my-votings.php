@@ -35,8 +35,8 @@
 
 				<!-- Head of the Table -->
 				<figure class="wp-block-table alignwide is-style-stripes">
-					<table class="has-subtle-pale-blue-background-color has-background sv-table">
-						<thead>
+					<table class="table table-striped has-subtle-pale-blue-background-color has-background sv-table table-hover" data-toggle="table" data-pagination="true" >
+						<thead class="thead-dark">
 							<tr>
 								<th class="has-text-align-center" data-align="center">Symbols</th>
 								<th class="has-text-align-center" data-align="center">Vote</th>
@@ -47,11 +47,11 @@
 						</thead>
 
 						<!-- Iterate over all votings -->
+						<tbody>
 						<?php
 						foreach (getVotings(get_current_user_id()) as $voting_array) {
 							$stock_diff = round(getStockDiff($voting_array["symbol"], (int) $voting_array["voting"]), 2);
 						?>
-							<tbody>
 								<tr>
 									<!-- todo: Maybe add average Vote -->
 									<!-- todo: Derive Symbol Names -->
@@ -67,11 +67,13 @@
 									<td class="has-text-align-center" data-align="center"><?php echo $stock_diff ?> %</td>
 									<td class="has-text-align-center" data-align="center"><?php echo getDaysLeft($voting_array["date"], "+30 days") ?></td>
 								</tr>
-							</tbody>
-						<?php
+								<?php
 						}
 						?>
+						</tbody>
+					
 					</table>
+					
 				</figure>
 
 				<div class="scoring-area">
@@ -144,3 +146,7 @@
 	?>
 
 </article><!-- .post -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>

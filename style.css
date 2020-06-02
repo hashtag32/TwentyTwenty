@@ -6767,6 +6767,7 @@ transform: scale(1.5);
 .analysis-entry-content{
 	margin-right: 4rem;
 	margin-left: 4rem;
+	font-size:17px;
 }
 
 /* Use this with an empty span in div
@@ -7018,6 +7019,25 @@ Upper div has to have a positive:relative */
 .sv-table{
     border-radius: 10px;
     box-shadow: 0 1px 20px 0 rgba(46,61,73,.2);
+}
+
+.analysis-card
+{
+	background-color:#fff;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0 0.063em 0.313em 0 rgba(0,0,0,.07), 0 0.438em 1.063em 0 rgba(0,0,0,.1);
+}
+
+.analysis-card-header{
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	background-color: #d4e9fd;
+	padding:5px;
+	color:#05386B;
+	font-weight:700;
+	font-size:30px;
+	position:relative;
 }
 
 .voting-card-header{
@@ -7284,4 +7304,11 @@ Upper div has to have a positive:relative */
 .paginate_button
 {
 	padding:5px;
+}
+
+.helping-ape{
+	width:112px; 
+	height:112px;
+	float:right;
+	margin-right:80px;
 }

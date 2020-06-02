@@ -29,6 +29,10 @@
 
 	<div class="post-inner <?php echo is_page_template('templates/template-full-width.php') ? '' : 'thin'; ?> ">
 
+	<a href="https://stockvoting.net/faq/#voting">
+		<img data-toggle="tooltip" data-placement="top" title="Ask me" class="helping-ape font-tooltip" src="https://stockvoting.net/wp-content/uploads/2020/05/helping_ape.png">
+	</a>
+
 		<div class="entry-content">
 
 			<?php

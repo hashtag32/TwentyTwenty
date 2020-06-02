@@ -21,6 +21,11 @@
 
 
 <div class="post-inner">
+
+	<a href="https://stockvoting.net/faq/#smart-contracts">
+		<img data-toggle="tooltip" data-placement="top" title="Ask me" class="helping-ape font-tooltip" src="https://stockvoting.net/wp-content/uploads/2020/05/helping_ape.png">
+	</a>
+	
 	<div class="entry-content entry-smart-contract">
 
 		<!-- Overview existing bettings table -->
@@ -32,7 +37,7 @@
 						<th class="has-text-align-center" data-align="center">Underlying</th>
 						<th class="has-text-align-center" data-align="center">Emission Date</th>
 						<th class="has-text-align-center" data-align="center">Voting End</th>
-						<th class="has-text-align-center" data-align="center">Due <Date/th>
+						<th class="has-text-align-center" data-align="center">Due <Date/th> 
 						<th class="has-text-align-center" data-align="center">Details</th>
 					</tr>
 				</thead>
@@ -82,10 +87,10 @@
 					</select>
 
 					<label>Voting End Date</label>
-					<input  class="form-control" type="date"  value="2020-08-19"  id="votingEnd" placeholder="After this date, voting is closed">
+					<input class="form-control" type="date" value="2020-08-19" id="votingEnd" placeholder="After this date, voting is closed">
 
 					<label>Due Date</label>
-					<input class="form-control" type="date" value="2020-10-19" id="dueDate" placeholder="Date to resolve betting" >
+					<input class="form-control" type="date" value="2020-10-19" id="dueDate" placeholder="Date to resolve betting">
 				</div>
 				<!-- Create it! button -->
 				<div class="form-group text-center">
@@ -115,7 +120,7 @@
 			</a>
 		</div>
 
-	
+
 		<!-- Modal/Popup for Sending Bet Shares -->
 		<div class="modal fade" id="actionContractUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">

@@ -14,9 +14,9 @@
 
 ?>
 
-<article style="background-color:white; padding-bottom:25px" <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+<article class="analysis-card" style="background-color:white; padding-bottom:25px" <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
-	<header class="has-text-align-center voting-card-header">
+	<header class="has-text-align-center analysis-card-header">
 		<a href="<?php echo esc_url(get_permalink(get_the_ID())) ?>/">
 			<span class="fill-div-with-link"></span>
 		</a>

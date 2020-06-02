@@ -23,8 +23,8 @@
 
 <div class="post-inner">
 
-	<a href="https://stockvoting.net/guide/">
-		<img data-toggle="tooltip" data-placement="top" title="Ask me anything" class="font-tooltip" src="https://stockvoting.net/wp-content/uploads/2020/05/helping_ape.png" style="width:112px; height:112px;float:right;margin-right:50px">
+	<a href="https://stockvoting.net/faq/#smart-contracts">
+		<img data-toggle="tooltip" data-placement="top" title="Ask me" class="helping-ape font-tooltip" src="https://stockvoting.net/wp-content/uploads/2020/05/helping_ape.png">
 	</a>
 
 	<div class="entry-content entry-smart-contract">

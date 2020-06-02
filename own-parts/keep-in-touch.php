@@ -14,11 +14,11 @@
 
 ?>
 
-<h3 class="has-text-align-center has-accent-color">3 months free usage</h3>
+<h3 class="has-text-align-center has-accent-color">Get occasional updates</h3>
 <div class="tnp tnp-subscription">
   <form method="post" action="https://stockvoting.net/?na=s" onsubmit="return newsletter_check(this)">
 
-    <input style="border-radius:10px;background-color:white;" placeholder="Enter your Email here" class="input-form" type="email" name="ne" required>
+    <input style="border-radius:10px;background-color:white;" placeholder="enter email" class="input-form" type="email" name="ne" required>
     <div class="tnp-field tnp-field-button button-wrap">  
       <button class="smart-button" type="submit" value="Subscribe">
         Subscribe

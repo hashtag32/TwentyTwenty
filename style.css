@@ -128,7 +128,7 @@ html {
 }
 
 body {
-	background: #EEE2DC;
+	background: #f6f0ed;
 	box-sizing: border-box;
 	color: #000;
 	font-family: -apple-system, BlinkMacSystemFont, sans-serif, "Helvetica Neue", Helvetica ;
@@ -348,7 +348,7 @@ h6,
 }
 
 p {
-	line-height: 1.5;
+	line-height: 1.8;
 	margin: 0 0 1em 0;
 }
 
@@ -2776,7 +2776,7 @@ h2.entry-title {
 
 :root .has-primary-background-color {
 	background-color: #000;
-	color: #EEE2DC;
+	color: #f6f0ed;
 }
 
 :root .has-secondary-color {
@@ -2798,11 +2798,11 @@ h2.entry-title {
 }
 
 :root .has-background-color {
-	color: #EEE2DC;
+	color: #f6f0ed;
 }
 
 :root .has-background-background-color {
-	background-color: #EEE2DC;
+	background-color: #f6f0ed;
 	color: #000;
 }
 
@@ -3555,7 +3555,7 @@ figure.wp-block-table.is-style-stripes {
 /* Font Families ----------------------------- */
 
 .entry-content {
-	font-family: NonBreakingSpaceOverride, sans-serif, "Hoefler Text", Garamond, "Times New Roman", serif;
+	font-family: "Open Sans",sans-serif;
 	letter-spacing: normal;
 }
 
@@ -5370,7 +5370,7 @@ a.to-the-top > * {
 
 	.entry-content p,
 	.entry-content li {
-		line-height: 1.476;
+		line-height: 1.7;
 	}
 
 	.entry-content h1,
@@ -6740,7 +6740,7 @@ button:not(.toggle)
 /* This is for the transparency of the first block on the cover page */
 .first-cover-header-block
 {
-	background-color: rgba(238, 226, 220, 0.4);
+	background-color: rgba(246, 240, 237, 0.4);
 }
 
 .zoom {
@@ -6905,12 +6905,12 @@ Upper div has to have a positive:relative */
 }
 
 .wave-top{
-	fill:#EEE2DC;
+	fill:#f6f0ed;
 	background-color: white;
 }
 
 .wave-testimonials{
-	fill:#EEE2DC;
+	fill:#f6f0ed;
 	background-color: #d4e9fd;
 }
 
@@ -7311,4 +7311,40 @@ Upper div has to have a positive:relative */
 	height:112px;
 	float:right;
 	margin-right:80px;
+}
+ 
+.landing-page{
+	margin-top: 150px;
+	padding:15px;
+}
+
+.landing-page:before{
+	content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	background: url("https://stockvoting.net/wp-content/uploads/2019/12/blue-and-yellow-graph-on-stock-market-monitor-159888-scaled.jpg") center center;
+	opacity:.65;
+}
+
+/* Skip Link --------------------------------- */
+
+.skip-lp {
+	text-decoration-line:none;
+	padding:70px;
+	font-size:18px;
+	z-index: 999999999;
+	position: absolute;
+	right:0px;
+	bottom:0px;
+}
+
+.skip-lp:hover {
+	font-size: 35px;
+	font-weight: 600;
+	line-height: normal;
+	z-index: 100000;
 }

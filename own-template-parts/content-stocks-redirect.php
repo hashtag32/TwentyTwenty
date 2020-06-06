@@ -12,10 +12,8 @@
  * @since 1.0.0
  */
 
-
 $symbol = $wp_query->get('symbol');
 $stockName = getStockName($symbol);
-
 
 ob_start();
 get_header();

@@ -1,6 +1,6 @@
 <div class="background-cover">
 
-<section class="MainSection-module--mainSection--2NmX-">
+	<section class="MainSection-module--mainSection--2NmX-">
 		<div style="position:absolute;z-index:-99;width:100%;height:100%">
 			<div style="width:100%;height:100%;overflow:hidden;margin:0 auto;outline:none" title="" role="button" aria-label="animation" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 800" width="1920" height="800" preserveAspectRatio="xMidYMid slice" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px);">
 					<defs>
@@ -112,9 +112,9 @@
 					</g>
 				</svg></div>
 		</div>
-		<div style="margin:0 auto;max-width:930px" class="" id="">
-			<h1 class="MainSection-module--mainTagline--1pqL1" style="opacity: 1;">Stock Analysis</h1>
+		<div style="margin:0 auto;max-width:930px;padding:10px" class="has-accent-color" id="">
+			<h1 class="MainSection-module--mainTagline--1pqL1" style="opacity: 1;">StockVoting</h1>
 			<span class="ButtonLink-module--text--mW4mE">Platform for investment knowledge</span>
 		</div>
 	</section>
-	</div>
+</div>

@@ -128,7 +128,7 @@ html {
 }
 
 body {
-	background: #f6f0ed;
+	background: white;
 	box-sizing: border-box;
 	color: #000;
 	font-family: -apple-system, BlinkMacSystemFont, sans-serif, "Helvetica Neue", Helvetica ;
@@ -1359,7 +1359,7 @@ ul.social-icons li {
 
 
 #site-header {
-	background: #fff;
+	background: #d4e9fd;
 	position: relative;
 }
 
@@ -2408,12 +2408,12 @@ body:not(.singular) main > article:first-of-type {
 /* Post Header ------------------------------- */
 
 .singular .entry-header {
-	background-color: #fff;
+	background-color: #d4e9fd;
 	padding: 4rem 0;
 }
 
 .entry-header-white{
-	background-color: #fff;
+	background-color: #d4e9fd;
 	padding: 8rem 0;
 }
 
@@ -6740,7 +6740,6 @@ button:not(.toggle)
 /* This is for the transparency of the first block on the cover page */
 .first-cover-header-block
 {
-	background-color: rgba(246, 240, 237, 0.4);
 }
 
 .zoom {
@@ -6905,12 +6904,12 @@ Upper div has to have a positive:relative */
 }
 
 .wave-top{
-	fill:#f6f0ed;
-	background-color: white;
+	fill:white;
+	background-color: #d4e9fd;
 }
 
 .wave-testimonials{
-	fill:#f6f0ed;
+	fill:white;
 	background-color: #d4e9fd;
 }
 
@@ -7061,6 +7060,7 @@ Upper div has to have a positive:relative */
 /* For the pricing table */
 #generic_price_table .generic_content{
 	background-color: #fff;
+	border: solid 2px #05386B;
 }
 
 #generic_price_table .generic_content .generic_head_price{

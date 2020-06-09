@@ -7348,3 +7348,34 @@ Upper div has to have a positive:relative */
 	line-height: normal;
 	z-index: 100000;
 }
+
+
+
+.feedback-button {
+    box-shadow: 0 6px 6px rgba(0,0,0,0.25) !important;
+    position: fixed;
+    border: 1px solid var(--input-border-color);
+    bottom: 0;
+    right: 20px;
+    margin: 0;
+    font-size: 14px;
+    text-align: left;
+    padding-left: 7px;
+    padding-right: 7px;
+    z-index: 9;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom: 0;
+    border-right: 0;
+    background: #fff;
+    color: var(--input-text-color);
+    background: var(--input-background-color);
+}
+
+
+.input-box{
+	margin:30px;
+}
+

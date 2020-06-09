@@ -293,7 +293,7 @@ function getHighestConfidence($max_count)
 {
 	$conn = connectDB();
 	// SQL in format (TSLA,51), get sorted list by count of symbol
-	$sql="SELECT symbol, stockName, stockPrice, votingPrice, stockDiff FROM StockTable ORDER BY stockDiff DESC LIMIT " . $max_count;
+	$sql="SELECT symbol, stockPrice, votingPrice, stockDiff FROM StockTable ORDER BY stockDiff DESC LIMIT " . $max_count;
 	$result = mysqli_query($conn, $sql);
 
 	$symbolSortedList=array();

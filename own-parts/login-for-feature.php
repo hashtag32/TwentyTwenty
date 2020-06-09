@@ -23,4 +23,4 @@
 </div>
 
 
-<?php get_template_part('own-parts', 'keep-in-touch');?>
+<?php get_template_part('own-parts', 'subscription-box');?>

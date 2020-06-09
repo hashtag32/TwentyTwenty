@@ -63,25 +63,29 @@ function updateStockDB_func() {
 
 function updateStockTable()
 {
-	$conn = connectDB();
-
 	// Iterate through all subcategories-stocks
 	foreach(getAllSymbols() as $symbolArray)
 	{
 		$symbol=$symbolArray["SymbolName"];
-		$symbol=strtoupper($symbol); // Everywhere always big letters
-		$stockName=update_getStockName($symbol);
-		
-		$stockPrice=update_getStockValue($symbol);
-		$votingPrice=getVoting($symbol);
-		$stockDiff = getStockDiff( $symbol, $votingPrice, $stockPrice);
-		// Automatically insert/update
-		$sql = "REPLACE INTO StockTable (symbol, stockName, stockPrice, votingPrice, stockDiff) VALUES ('{$symbol}', '{$stockName}', '{$stockPrice}', '{$votingPrice}', '{$stockDiff}')";
-		$result = $conn->query($sql);
+		updateSymbol($symbol);
 		//todo: check result  
 	} 
  
-	return closeconnectDB($conn);
+	return;
+}
+
+
+function updateSymbol($symbol)
+{
+	$symbol=strtoupper($symbol); // Everywhere always big letters
+		
+	$stockPrice=update_getStockValue($symbol);
+	$votingPrice=getVoting($symbol);
+	$stockDiff = getStockDiff( $symbol, $votingPrice, $stockPrice);
+	// Automatically insert/update
+	$sqlString = "REPLACE INTO StockTable (symbol, stockPrice, votingPrice, stockDiff) VALUES ('{$symbol}', '{$stockPrice}', '{$votingPrice}', '{$stockDiff}')";
+	$sqlResult=executeSQLCommand($sqlString);
+	return $sqlResult;
 }
 
 function writeDBtoFile()
@@ -108,14 +112,14 @@ function writeDBtoFile()
     return $string_array;
 }
 
-function update_getStockName($symbol)
-{
-	// Get name from API
-	$data_arr=fetch_fmpcloud_feed($symbol, "quote")[0];
-	$stockName=$data_arr["name"];
+// function update_getStockName($symbol)
+// {
+// 	// Get name from API
+// 	$data_arr=fetch_fmpcloud_feed($symbol, "quote")[0];
+// 	$stockName=$data_arr["name"];
 	
-	return $stockName;
-}
+// 	return $stockName;
+// }
 
 function update_getStockValue($symbol) 
 {

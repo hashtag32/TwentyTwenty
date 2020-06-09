@@ -57,3 +57,6 @@
 	// Output the menu modal.
 	get_template_part('template-parts/modal-menu');
 	?>
+
+<a class="btn btn-primary feedback-button" href="https://stockvoting.net/contact" role="button">Feedback</a>
+ 

@@ -12,9 +12,9 @@
  * @since 1.0.0
  */
 
-?>
+?> 
 
-<h3 class="has-text-align-center has-accent-color">Get a free report weekly</h3>
+<h3 class="has-text-align-center has-accent-color">Receive updates on latest certificates</h3>
 <div class="tnp tnp-subscription">
   <form method="post" action="https://stockvoting.net/?na=s" onsubmit="return newsletter_check(this)">
 

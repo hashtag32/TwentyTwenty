@@ -54,7 +54,7 @@
     </div>
   </div>
   <!-- Keep in touch -->
-  <?php get_template_part('own-parts/keep-in-touch');?>
+  <?php get_template_part('own-parts/subscription-box');?>
 
   <!-- Sponsors -->
   <h2 class="has-text-align-center has-accent-color">Sponsors</h2>

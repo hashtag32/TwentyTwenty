@@ -9,6 +9,12 @@
  * @since 1.0
  */
 
+
+// Skip the front page
+if (is_user_logged_in()) {
+	wp_redirect("https://stockvoting.net/front-page");
+}
+
 ob_start();
 get_header();
 $header = ob_get_clean();
@@ -16,14 +22,15 @@ $header = preg_replace('#<title>(.*?)<\/title>#', '<title>' . "StockVoting" . '<
 echo $header;
 ?>
 
-<main id="site-content"  class="landing-page" role="main">
+
+<main id="site-content" class="landing-page" role="main">
 
 	<div class="has-text-align-center zoom-1">
 		<div class="site-logo faux-heading"><a href="https://stockvoting.net/" class="custom-logo-link" rel="home"><img width="86" height="71" style="height: 71px;" src="https://stockvoting.net/wp-content/uploads/2020/05/cropped-stockvoting_logo.png" class="custom-logo" alt="StockVoting"></a><span class="screen-reader-text">StockVoting</span></div>
-		<div class="site-description" style="color:black">Independent stock research</div><!-- .site-description -->
+		<div class="site-description" style="color:black">Financial certificates on blockchain</div><!-- .site-description -->
 	</div>
 
-	<h3 class="has-text-align-center has-accent-color zoom-1">Receive the most recent analyst reports</h3>
+	<h3 class="has-text-align-center has-accent-color zoom-1">Receive updates on latest certificates</h3>
 	<div class="tnp tnp-subscription">
 		<form method="post" action="https://stockvoting.net/?na=s" onsubmit="return newsletter_check(this)">
 
@@ -39,16 +46,16 @@ echo $header;
 </main><!-- #site-content -->
 
 <a class="skip-lp" href="https://stockvoting.net/front-page">
-			<span class="to-the-top-long">
-				<?php
-				/* translators: %s: HTML character for up arrow. */
-				printf(__('Skip %s', 'twentytwenty'), '<span class="arrow" aria-hidden="true">&rarr;</span>');
-				?>
-			</span><!-- .to-the-top-long -->
-			<span class="to-the-top-short">
-				<?php
-				/* translators: %s: HTML character for up arrow. */
-				printf(__('Skip %s', 'twentytwenty'), '<span class="arrow" aria-hidden="true">&rarr;</span>');
-				?>
-			</span><!-- .to-the-top-short -->
-		</a><!-- .to-the-top -->
+	<span class="to-the-top-long">
+		<?php
+		/* translators: %s: HTML character for up arrow. */
+		printf(__('Skip %s', 'twentytwenty'), '<span class="arrow" aria-hidden="true">&rarr;</span>');
+		?>
+	</span><!-- .to-the-top-long -->
+	<span class="to-the-top-short">
+		<?php
+		/* translators: %s: HTML character for up arrow. */
+		printf(__('Skip %s', 'twentytwenty'), '<span class="arrow" aria-hidden="true">&rarr;</span>');
+		?>
+	</span><!-- .to-the-top-short -->
+</a><!-- .to-the-top -->

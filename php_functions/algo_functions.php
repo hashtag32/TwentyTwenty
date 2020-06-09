@@ -194,13 +194,13 @@ function insertStockName($symbolName, $stockName)
 }
 
  
-function insertStockValue($symbol, $date_now, $price)
-{
-	$conn = connectDB();
-	$sql = "INSERT INTO SymbolDatePrice (symbol, date, price) VALUES ('{$symbol}', '{$date_now}', '{$price}')";
-	$result = $conn->query($sql);
-	return $result;
-}
+// function insertStockValue($symbol, $date_now, $price)
+// {
+// 	$conn = connectDB();
+// 	$sql = "INSERT INTO SymbolDatePrice (symbol, date, price) VALUES ('{$symbol}', '{$date_now}', '{$price}')";
+// 	$result = $conn->query($sql);
+// 	return $result;
+// }
 
 function fetch_fmpcloud_feed( $symbol, $type, $feed_url="" ) {
 	$symbol=strtoupper($symbol);

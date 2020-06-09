@@ -110,11 +110,11 @@
 							</g>
 						</g>
 					</g>
-				</svg></div>
+				</svg></div> 
 		</div>
 		<div style="margin:0 auto;max-width:930px;padding:10px" class="has-accent-color" id="">
 			<h1 class="MainSection-module--mainTagline--1pqL1" style="opacity: 1;">StockVoting</h1>
-			<span class="ButtonLink-module--text--mW4mE">Platform for investment knowledge</span>
+			<span class="ButtonLink-module--text--mW4mE">Financial certificates on blockchain</span>
 		</div>
 	</section>
 </div>

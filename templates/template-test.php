@@ -16,220 +16,202 @@ get_header();
 
 
 
-	<!-- Example Usage React -->
-	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-	<!-- Load our React component. -->
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+
+
+
+
+
+	<div class="container">
+
+		<div class='col-md-5'>
+			<div class="form-group">
+				<div class='input-group date' id='datetimepicker7'>
+					<input type='text' class="form-control" />
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(function() {
+				$('#datetimepicker6').datetimepicker();
+				$('#datetimepicker7').datetimepicker({
+					useCurrent: false //Important! See issue #1075
+				});
+				$("#datetimepicker6").on("dp.change", function(e) {
+					$('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+				});
+				$("#datetimepicker7").on("dp.change", function(e) {
+					$('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+				});
+			});
+		});
+	</script>
+
+	<form method="post" action="distance(" onsubmit="">
+		<div style="border-radius:10px;background-color:white;margin:30px;right:40px;" class='input-group date input-box input-form ' id='datetimepicker6'>
+			<input type='text' class="form-control" />
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-calendar"></span>
+			</span>
+		</div>
+		<input style="border-radius:10px;background-color:white;margin:30px;" placeholder="Start GPS Location" class="input-box input-form " type="email" name="ne" required>
+		<input id="end_gps_location" style="border-radius:10px;background-color:white;margin:30px;" placeholder="End GPS Location" class="input-box input-form " type="email" name="ne" required>
+		<div class=" button-wrap">
+			<button class="smart-button" type="submit" value="Subscribe">
+				Request delivery
+			</button>
+		</div>
+		<input type="button" class="button-voting" onclick="distance(start_gps_location.value, end_gps_location.value)" value="Request Delivery" alt="Thank you!" />
+	</form>
+
+
+
+
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS9C0YTzYEEbq4U6nrSlgo5q_CHMPl1MQ&callback=initMap">
+	</script>
+
+
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+	<script src="/assets/gmap3.js?body=1" type="text/javascript"></script>
+	<div id="map-wrapper">
+		<div id="map-canvas" style="width: 500px; height: 500px;"></div>
+	</div>
+
+
+	<style>
+		html,
+		body,
+		#map-wrapper,
+		#map_canvas {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			width: 100%;
+		}
+	</style>
+	<div id="map-wrapper">
+		<div id="map_canvas" style="width: 500px; height: 500px;"></div>
+	</div>
+
+
 	<script>
-		'use strict';
-
-		const e = React.createElement;
-
-		class LikeButton extends React.Component {
-			constructor(props) {
-				super(props);
-				this.state = {
-					liked: false
-				};
-			}
-
-			render() {
-				if (this.state.liked) {
-					return 'You liked this.';
+		function distance(lat1, lon1, lat2, lon2, unit) {
+			if ((lat1 == lat2) && (lon1 == lon2)) {
+				return 0;
+			} else {
+				var radlat1 = Math.PI * lat1 / 180;
+				var radlat2 = Math.PI * lat2 / 180;
+				var theta = lon1 - lon2;
+				var radtheta = Math.PI * theta / 180;
+				var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+				if (dist > 1) {
+					dist = 1;
 				}
-
-				return e(
-					'button', {
-						onClick: () => this.setState({
-							liked: true
-						})
-					},
-					'Like'
-				);
+				dist = Math.acos(dist);
+				dist = dist * 180 / Math.PI;
+				dist = dist * 60 * 1.1515;
+				if (unit == "K") {
+					dist = dist * 1.609344
+				}
+				if (unit == "N") {
+					dist = dist * 0.8684
+				}
+				return dist;
 			}
 		}
 
-		const domContainer = document.querySelector('#like_button_container');
-		ReactDOM.render(e(LikeButton), domContainer);
+		var startLong = 6.981903;
+		var startLat = 49.412069;
+
+
+		var endLong = 6.964063;
+		var endLat = 49.409031;
+
+
+		var middleLong = (startLong + endLong) / 2;
+		var middleLat = (startLat + endLat) / 2;
+
+		var total_dist = distance(startLat, startLong, endLat, endLong, "K");
+		console.log(total_dist);
+
+		var locations = [
+			['Start Point', startLat, startLong],
+			['End Point', endLat, endLong],
+		];
+
+
+		var map = new google.maps.Map(document.getElementById('map-canvas'), {
+			zoom: 13,
+			center: new google.maps.LatLng(middleLat, middleLong),
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+
+		var infowindow = new google.maps.InfoWindow();
+
+		var marker, i;
+
+		for (i = 0; i < locations.length; i++) {
+			marker = new google.maps.Marker({
+				position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+				map: map
+			});
+
+			google.maps.event.addListener(marker, 'click', (function(marker, i) {
+				return function() {
+					infowindow.setContent(locations[i][0]);
+					infowindow.open(map, marker);
+				}
+			})(marker, i));
+		}
 	</script>
 
-</main><!-- #site-content -->
-<iframe src="https://www.stockvotin.net"></iframe>
-	<div class="container-fluid pt-1">
-<div class="container py-4 recent-border">
-<div class="row pb-4">
-<div class="col">
-<h2 class="h4 gilroy-semibold">RECENT STORIES</h2>
-</div>
-</div>
-<div class="row">
-<div class="col-12 col-md-6 col-lg-4 mb-4 secondary">
-<a href="/daily/stories/2020/06/01/facebook-employees-stage-virtual-walkout-protest-zuckerbergs-censorship-stance"></a><div class="analysis-card h-100 story-card"><a href="/daily/stories/2020/06/01/facebook-employees-stage-virtual-walkout-protest-zuckerbergs-censorship-stance">
-</a><a href="/daily/stories/2020/06/01/facebook-employees-stage-virtual-walkout-protest-zuckerbergs-censorship-stance"><figure class="story-card-image">
-<img onerror="this.error=null;this.src=&quot;https://morningbrew-oslo.s3.us-west-2.amazonaws.com/1569597117.jpg&quot;;" class="card-img-top rounded-top lazy-load" max_width="500" sizes="(max-width: 770px) 100vw, (max-width: 995px) 300px, (max-width: 1201px) 280px, 350px" src="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTk2L2ZiX2xvZ3Nfb2ZmLmpwZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7fX0=" srcset="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTk2L2ZiX2xvZ3Nfb2ZmLmpwZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MzIwLCJoZWlnaHQiOm51bGx9fX0= 320w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTk2L2ZiX2xvZ3Nfb2ZmLmpwZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjQwLCJoZWlnaHQiOm51bGx9fX0= 640w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTk2L2ZiX2xvZ3Nfb2ZmLmpwZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6OTYwLCJoZWlnaHQiOm51bGx9fX0= 960w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTk2L2ZiX2xvZ3Nfb2ZmLmpwZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTI4MCwiaGVpZ2h0IjpudWxsfX19 1280w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTk2L2ZiX2xvZ3Nfb2ZmLmpwZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTYwMCwiaGVpZ2h0IjpudWxsfX19 1600w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTk2L2ZiX2xvZ3Nfb2ZmLmpwZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTkyMCwiaGVpZ2h0IjpudWxsfX19 1920w" data-loaded="true">
-<div class="inset-box-shadow"></div>
-</figure>
-</a><div class="card-body text-dark justify-content-between d-flex flex-column">
-<small>
-<a class="m-0 text-secondary gilroy-bold" href="/stories?tag=social-media">SOCIAL MEDIA
-</a><a class="literata card-text text-dark text-large" href="/daily/stories/2020/06/01/facebook-employees-stage-virtual-walkout-protest-zuckerbergs-censorship-stance"><p>Facebook Employees Stage Virtual Walkout Over Zuckerberg's Stance on Trump Tweets</p>
-</a></small>
-<div class="d-flex flex-column">
-<a href="/stories?author=toby-howell"><em class="text-dark">Toby Howell</em>
-</a><small class="mb-0 text-muted">June 1, 2020</small>
-</div>
-</div>
-</div>
-</div>
-<div class="col-12 col-md-6 col-lg-4 mb-4 secondary">
-<a href="/daily/stories/2020/06/01/dutch-court-hands-impossible-foods-victory-trademark-case"></a><div class="card h-100 story-card"><a href="/daily/stories/2020/06/01/dutch-court-hands-impossible-foods-victory-trademark-case">
-</a><a href="/daily/stories/2020/06/01/dutch-court-hands-impossible-foods-victory-trademark-case"><figure class="story-card-image">
-<img onerror="this.error=null;this.src=&quot;https://morningbrew-oslo.s3.us-west-2.amazonaws.com/1569597117.jpg&quot;;" class="card-img-top rounded-top" max_width="500" sizes="(max-width: 770px) 100vw, (max-width: 995px) 300px, (max-width: 1201px) 280px, 350px" src="https://media.giphy.com/media/3ofSBq65voKZJKrnZS/giphy.gif">
-<div class="inset-box-shadow"></div>
-</figure>
-</a><div class="card-body text-dark justify-content-between d-flex flex-column">
-<small>
-<a class="m-0 text-secondary gilroy-bold" href="/stories?tag=food">FOOD
-</a><a class="literata card-text text-dark text-large" href="/daily/stories/2020/06/01/dutch-court-hands-impossible-foods-victory-trademark-case"><p>Dutch Court Hands Impossible Foods Victory in Trademark Case</p>
-</a></small>
-<div class="d-flex flex-column">
-<a href="/stories?author=neal-freyman"><em class="text-dark">Neal Freyman</em>
-</a><small class="mb-0 text-muted">June 1, 2020</small>
-</div>
-</div>
-</div>
-</div>
-<div class="col-12 col-md-6 col-lg-4 mb-4 secondary">
-<a href="/daily/stories/2020/06/01/marriott-occupancy-recovers-china-us"></a><div class="card h-100 story-card"><a href="/daily/stories/2020/06/01/marriott-occupancy-recovers-china-us">
-</a><a href="/daily/stories/2020/06/01/marriott-occupancy-recovers-china-us"><figure class="story-card-image">
-<img onerror="this.error=null;this.src=&quot;https://morningbrew-oslo.s3.us-west-2.amazonaws.com/1569597117.jpg&quot;;" class="card-img-top rounded-top" max_width="500" sizes="(max-width: 770px) 100vw, (max-width: 995px) 300px, (max-width: 1201px) 280px, 350px" src="https://media.giphy.com/media/11jmTpFxABHgLC/giphy.gif">
-<div class="inset-box-shadow"></div>
-</figure>
-</a><div class="card-body text-dark justify-content-between d-flex flex-column">
-<small>
-<a class="m-0 text-secondary gilroy-bold" href="/stories?tag=hospitality">HOSPITALITY
-</a><a class="literata card-text text-dark text-large" href="/daily/stories/2020/06/01/marriott-occupancy-recovers-china-us"><p>Marriott Occupancy Recovers in China, U.S.</p>
-</a></small>
-<div class="d-flex flex-column">
-<a href="/stories?author=alex-hickey"><em class="text-dark">Alex Hickey</em>
-</a><small class="mb-0 text-muted">June 1, 2020</small>
-</div>
-</div>
-</div>
-</div>
-<div class="col-12 col-md-6 col-lg-4 mb-4 secondary">
-<a href="/daily/stories/2020/06/01/mlb-players-go-back-forth-season-line"></a><div class="card h-100 story-card"><a href="/daily/stories/2020/06/01/mlb-players-go-back-forth-season-line">
-</a><a href="/daily/stories/2020/06/01/mlb-players-go-back-forth-season-line"><figure class="story-card-image">
-<img onerror="this.error=null;this.src=&quot;https://morningbrew-oslo.s3.us-west-2.amazonaws.com/1569597117.jpg&quot;;" class="card-img-top rounded-top lazy-load" max_width="500" sizes="(max-width: 770px) 100vw, (max-width: 995px) 300px, (max-width: 1201px) 280px, 350px" src="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkzL2Jhc2ViYWxsX3N0YWRpdW0uanBnIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnt9fQ==" srcset="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkzL2Jhc2ViYWxsX3N0YWRpdW0uanBnIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjozMjAsImhlaWdodCI6bnVsbH19fQ== 320w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkzL2Jhc2ViYWxsX3N0YWRpdW0uanBnIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2NDAsImhlaWdodCI6bnVsbH19fQ== 640w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkzL2Jhc2ViYWxsX3N0YWRpdW0uanBnIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo5NjAsImhlaWdodCI6bnVsbH19fQ== 960w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkzL2Jhc2ViYWxsX3N0YWRpdW0uanBnIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMjgwLCJoZWlnaHQiOm51bGx9fX0= 1280w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkzL2Jhc2ViYWxsX3N0YWRpdW0uanBnIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNjAwLCJoZWlnaHQiOm51bGx9fX0= 1600w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkzL2Jhc2ViYWxsX3N0YWRpdW0uanBnIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxOTIwLCJoZWlnaHQiOm51bGx9fX0= 1920w" data-loaded="true">
-<div class="inset-box-shadow"></div>
-</figure>
-</a><div class="card-body text-dark justify-content-between d-flex flex-column">
-<small>
-<a class="m-0 text-secondary gilroy-bold" href="/stories?tag=sports">SPORTS
-</a><a class="literata card-text text-dark text-large" href="/daily/stories/2020/06/01/mlb-players-go-back-forth-season-line"><p>MLB, Players Go Back and Forth With Season on the Line</p>
-</a></small>
-<div class="d-flex flex-column">
-<a href="/stories?author=neal-freyman"><em class="text-dark">Neal Freyman</em>
-</a><small class="mb-0 text-muted">June 1, 2020</small>
-</div>
-</div>
-</div>
-</div>
-<div class="col-12 col-md-6 col-lg-4 mb-4 secondary">
-<a href="/daily/stories/2020/06/01/stores-restaurants-close-due-protests"></a><div class="card h-100 story-card"><a href="/daily/stories/2020/06/01/stores-restaurants-close-due-protests">
-</a><a href="/daily/stories/2020/06/01/stores-restaurants-close-due-protests"><figure class="story-card-image">
-<img onerror="this.error=null;this.src=&quot;https://morningbrew-oslo.s3.us-west-2.amazonaws.com/1569597117.jpg&quot;;" class="card-img-top rounded-top lazy-load" max_width="500" sizes="(max-width: 770px) 100vw, (max-width: 995px) 300px, (max-width: 1201px) 280px, 350px" src="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkxL2xvb3RlZF9zdG9yZS5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6e319" srcset="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkxL2xvb3RlZF9zdG9yZS5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjMyMCwiaGVpZ2h0IjpudWxsfX19 320w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkxL2xvb3RlZF9zdG9yZS5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjY0MCwiaGVpZ2h0IjpudWxsfX19 640w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkxL2xvb3RlZF9zdG9yZS5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjk2MCwiaGVpZ2h0IjpudWxsfX19 960w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkxL2xvb3RlZF9zdG9yZS5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEyODAsImhlaWdodCI6bnVsbH19fQ== 1280w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkxL2xvb3RlZF9zdG9yZS5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE2MDAsImhlaWdodCI6bnVsbH19fQ== 1600w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTkxL2xvb3RlZF9zdG9yZS5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE5MjAsImhlaWdodCI6bnVsbH19fQ== 1920w" data-loaded="true">
-<div class="inset-box-shadow"></div>
-</figure>
-</a><div class="card-body text-dark justify-content-between d-flex flex-column">
-<small>
-<a class="m-0 text-secondary gilroy-bold" href="/stories?tag=retail">RETAIL
-</a><a class="literata card-text text-dark text-large" href="/daily/stories/2020/06/01/stores-restaurants-close-due-protests"><p>Stores, Restaurants Close Due to Protests </p>
-</a></small>
-<div class="d-flex flex-column">
-<a href="/stories?author=alex-hickey"><em class="text-dark">Alex Hickey</em>
-</a><small class="mb-0 text-muted">June 1, 2020</small>
-</div>
-</div>
-</div>
-</div>
-<div class="col-12 col-md-6 col-lg-4 mb-4 secondary">
-<a href="/daily/stories/2020/06/01/essentials-issue-23-listen-learn"></a><div class="card h-100 story-card"><a href="/daily/stories/2020/06/01/essentials-issue-23-listen-learn">
-</a><a href="/daily/stories/2020/06/01/essentials-issue-23-listen-learn"><figure class="story-card-image">
-<img onerror="this.error=null;this.src=&quot;https://morningbrew-oslo.s3.us-west-2.amazonaws.com/1569597117.jpg&quot;;" class="card-img-top rounded-top lazy-load" max_width="500" sizes="(max-width: 770px) 100vw, (max-width: 995px) 300px, (max-width: 1201px) 280px, 350px" src="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC81MDEvdGhlX2Vzc2VudGlhbHMucG5nIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnt9fQ==" srcset="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC81MDEvdGhlX2Vzc2VudGlhbHMucG5nIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjozMjAsImhlaWdodCI6bnVsbH19fQ== 320w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC81MDEvdGhlX2Vzc2VudGlhbHMucG5nIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo2NDAsImhlaWdodCI6bnVsbH19fQ== 640w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC81MDEvdGhlX2Vzc2VudGlhbHMucG5nIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo5NjAsImhlaWdodCI6bnVsbH19fQ== 960w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC81MDEvdGhlX2Vzc2VudGlhbHMucG5nIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMjgwLCJoZWlnaHQiOm51bGx9fX0= 1280w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC81MDEvdGhlX2Vzc2VudGlhbHMucG5nIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxNjAwLCJoZWlnaHQiOm51bGx9fX0= 1600w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC81MDEvdGhlX2Vzc2VudGlhbHMucG5nIiwiYnVja2V0Ijoib3Nsby1wcm9kdWN0aW9uIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxOTIwLCJoZWlnaHQiOm51bGx9fX0= 1920w" data-loaded="true">
-<div class="inset-box-shadow"></div>
-</figure>
-</a><div class="card-body text-dark justify-content-between d-flex flex-column">
-<small>
-<a class="m-0 text-secondary gilroy-bold" href="/stories?tag=quarantine">QUARANTINE
-</a><a class="literata card-text text-dark text-large" href="/daily/stories/2020/06/01/essentials-issue-23-listen-learn"><p>The Essentials, Issue #23: Listen and learn</p>
-</a></small>
-<div class="d-flex flex-column">
-<a href="/stories?author=alex-hickey"><em class="text-dark">Alex Hickey</em>
-</a><small class="mb-0 text-muted">June 1, 2020</small>
-</div>
-</div>
-</div>
-</div>
-<div class="col-12 col-md-6 col-lg-4 mb-4 secondary">
-<a href="/daily/stories/2020/05/31/protests-paralyze-cities-across-us"></a><div class="card h-100 story-card"><a href="/daily/stories/2020/05/31/protests-paralyze-cities-across-us">
-</a><a href="/daily/stories/2020/05/31/protests-paralyze-cities-across-us"><figure class="story-card-image">
-<img onerror="this.error=null;this.src=&quot;https://morningbrew-oslo.s3.us-west-2.amazonaws.com/1569597117.jpg&quot;;" class="card-img-top rounded-top lazy-load" max_width="500" sizes="(max-width: 770px) 100vw, (max-width: 995px) 300px, (max-width: 1201px) 280px, 350px" src="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc5L2dlb3JnZV9mbG95ZF9tZW1vcmlhbC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6e319" srcset="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc5L2dlb3JnZV9mbG95ZF9tZW1vcmlhbC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjMyMCwiaGVpZ2h0IjpudWxsfX19 320w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc5L2dlb3JnZV9mbG95ZF9tZW1vcmlhbC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjY0MCwiaGVpZ2h0IjpudWxsfX19 640w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc5L2dlb3JnZV9mbG95ZF9tZW1vcmlhbC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjk2MCwiaGVpZ2h0IjpudWxsfX19 960w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc5L2dlb3JnZV9mbG95ZF9tZW1vcmlhbC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEyODAsImhlaWdodCI6bnVsbH19fQ== 1280w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc5L2dlb3JnZV9mbG95ZF9tZW1vcmlhbC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE2MDAsImhlaWdodCI6bnVsbH19fQ== 1600w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc5L2dlb3JnZV9mbG95ZF9tZW1vcmlhbC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE5MjAsImhlaWdodCI6bnVsbH19fQ== 1920w" data-loaded="true">
-<div class="inset-box-shadow"></div>
-</figure>
-</a><div class="card-body text-dark justify-content-between d-flex flex-column">
-<small>
-<a class="m-0 text-secondary gilroy-bold" href="/stories?tag=civil-rights">CIVIL RIGHTS
-</a><a class="literata card-text text-dark text-large" href="/daily/stories/2020/05/31/protests-paralyze-cities-across-us"><p>Protests Paralyze Cities Across the U.S. </p>
-</a></small>
-<div class="d-flex flex-column">
-<a href="/stories?author=eliza-carter"><em class="text-dark">Eliza Carter</em>
-</a><small class="mb-0 text-muted">May 31, 2020</small>
-</div>
-</div>
-</div>
-</div>
-<div class="col-12 col-md-6 col-lg-4 mb-4 secondary">
-<a href="/daily/stories/2020/05/31/remembering-99th-anniversary-tulsa-race-massacre"></a><div class="card h-100 story-card"><a href="/daily/stories/2020/05/31/remembering-99th-anniversary-tulsa-race-massacre">
-</a><a href="/daily/stories/2020/05/31/remembering-99th-anniversary-tulsa-race-massacre"><figure class="story-card-image">
-<img onerror="this.error=null;this.src=&quot;https://morningbrew-oslo.s3.us-west-2.amazonaws.com/1569597117.jpg&quot;;" class="card-img-top rounded-top lazy-load" max_width="500" sizes="(max-width: 770px) 100vw, (max-width: 995px) 300px, (max-width: 1201px) 280px, 350px" src="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTgwL3R1c2xhX3JhY2VfcmlvdC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6e319" srcset="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTgwL3R1c2xhX3JhY2VfcmlvdC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjMyMCwiaGVpZ2h0IjpudWxsfX19 320w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTgwL3R1c2xhX3JhY2VfcmlvdC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjY0MCwiaGVpZ2h0IjpudWxsfX19 640w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTgwL3R1c2xhX3JhY2VfcmlvdC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjk2MCwiaGVpZ2h0IjpudWxsfX19 960w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTgwL3R1c2xhX3JhY2VfcmlvdC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEyODAsImhlaWdodCI6bnVsbH19fQ== 1280w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTgwL3R1c2xhX3JhY2VfcmlvdC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE2MDAsImhlaWdodCI6bnVsbH19fQ== 1600w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTgwL3R1c2xhX3JhY2VfcmlvdC5qcGciLCJidWNrZXQiOiJvc2xvLXByb2R1Y3Rpb24iLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjE5MjAsImhlaWdodCI6bnVsbH19fQ== 1920w" data-loaded="true">
-<div class="inset-box-shadow"></div>
-</figure>
-</a><div class="card-body text-dark justify-content-between d-flex flex-column">
-<small>
-<a class="m-0 text-secondary gilroy-bold" href="/stories?tag=history">HISTORY
-</a><a class="literata card-text text-dark text-large" href="/daily/stories/2020/05/31/remembering-99th-anniversary-tulsa-race-massacre"><p>Remembering the 99th Anniversary of the Tulsa Race Massacre </p>
-</a></small>
-<div class="d-flex flex-column">
-<a href="/stories?author=neal-freyman"><em class="text-dark">Neal Freyman</em>
-</a><small class="mb-0 text-muted">May 31, 2020</small>
-</div>
-</div>
-</div>
-</div>
-<div class="col-12 col-md-6 col-lg-4 mb-4 secondary">
-<a href="/daily/stories/2020/05/31/corporate-america-expresses-solidarity-black-community-following-george-floyds-death"></a><div class="card h-100 story-card"><a href="/daily/stories/2020/05/31/corporate-america-expresses-solidarity-black-community-following-george-floyds-death">
-</a><a href="/daily/stories/2020/05/31/corporate-america-expresses-solidarity-black-community-following-george-floyds-death"><figure class="story-card-image">
-<img onerror="this.error=null;this.src=&quot;https://morningbrew-oslo.s3.us-west-2.amazonaws.com/1569597117.jpg&quot;;" class="card-img-top rounded-top lazy-load" max_width="500" sizes="(max-width: 770px) 100vw, (max-width: 995px) 300px, (max-width: 1201px) 280px, 350px" src="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc3L2Rvbl90X2RvX2l0X2FkLnBuZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7fX0=" srcset="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc3L2Rvbl90X2RvX2l0X2FkLnBuZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MzIwLCJoZWlnaHQiOm51bGx9fX0= 320w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc3L2Rvbl90X2RvX2l0X2FkLnBuZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjQwLCJoZWlnaHQiOm51bGx9fX0= 640w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc3L2Rvbl90X2RvX2l0X2FkLnBuZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6OTYwLCJoZWlnaHQiOm51bGx9fX0= 960w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc3L2Rvbl90X2RvX2l0X2FkLnBuZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTI4MCwiaGVpZ2h0IjpudWxsfX19 1280w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc3L2Rvbl90X2RvX2l0X2FkLnBuZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTYwMCwiaGVpZ2h0IjpudWxsfX19 1600w, https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC8xMTc3L2Rvbl90X2RvX2l0X2FkLnBuZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTkyMCwiaGVpZ2h0IjpudWxsfX19 1920w" data-loaded="true">
-<div class="inset-box-shadow"></div>
-</figure>
-</a><div class="card-body text-dark justify-content-between d-flex flex-column">
-<small>
-<a class="m-0 text-secondary gilroy-bold" href="/stories?tag=comms">COMMS
-</a><a class="literata card-text text-dark text-large" href="/daily/stories/2020/05/31/corporate-america-expresses-solidarity-black-community-following-george-floyds-death"><p>Corporate America Expresses Solidarity With Black Community Following George Floyd’s Death</p>
-</a></small>
-<div class="d-flex flex-column">
-<a href="/stories?author=neal-freyman"><em class="text-dark">Neal Freyman</em>
-</a><small class="mb-0 text-muted">May 31, 2020</small>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 
-<?php get_template_part('template-parts/footer-menus-widgets'); ?>
 
-<?php get_footer(); ?>
+
+	<?php print_r(updateSymbol("cost")) ?>
+	<?php get_template_part('template-parts/footer-menus-widgets'); ?>
+
+	<?php get_footer(); ?>
+
+
+	<script>
+		// Read in GPS location
+		navigator.geolocation.getCurrentPosition(function(location) {
+			var start_gps_location_id = document.getElementById('start_gps_location');
+			start_gps_location_id.value = location.coords.latitude + ";" + location.coords.longitude;
+		});
+
+
+
+		$(".form_datetime").datetimepicker({
+			format: 'yyyy-mm-dd hh:ii'
+		});
+		$(function() {
+			$('#datetimepicker1').datetimepicker();
+		});
+	</script>

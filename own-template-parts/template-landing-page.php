@@ -18,7 +18,7 @@ if (is_user_logged_in()) {
 ob_start();
 get_header();
 $header = ob_get_clean();
-$header = preg_replace('#<title>(.*?)<\/title>#', '<title>' . "StockVoting" . '</title>', $header);
+$header = preg_replace('#<title>(.*?)<\/title>#', '<title>' . "Financial certificates on blockchain | StockVoting" . '</title>', $header);
 echo $header;
 ?>
 

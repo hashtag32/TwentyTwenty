@@ -28,6 +28,16 @@
 	</a>
 
 	<div class="entry-content entry-smart-contract">
+		<div class="has-text-align-center">
+			<!-- Explanation -->
+			<h3 class="h2-highlighting-button" id="voting">What is this?</h3>
+			<p>
+				Chose your contract and buy certificate shares.<br>
+				Like a <a href="https://www.investopedia.com/terms/k/knock-outoption.asp" target="_blank">Traditional Knock Out Certificate</a> you can bet against the others.<br>
+				Make sure you watch how this works on blockchain:
+			</p>
+			<iframe src="https://www.youtube.com/embed/Pk5yofQiljo" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
 
 		<!-- Overview contracts table -->
 		<figure class="wp-block-table alignwide is-style-stripes">
@@ -84,16 +94,16 @@
 		<div id="InputContractDataDiv" style="display: none;">
 			<h2 class="own-h2 has-text-align-center has-accent-color" style="font-size:35px">New contract creation</h2>
 
-			<form>
+			<form id="createKOContract_form_id">
 				<div class="form-group">
 					<label for="stockPickSelect">Type</label>
-					<select multiple class="form-control" style="font-size:large;" id="typeSelect">
+					<select multiple class="form-control" style="font-size:large;" id="typeSelect" required='required'>
 						<option>Call</option>
 						<option>Put</option>
 					</select>
 
 					<label for="stockPickSelect">Underlying (use Ctrl+F to search)</label>
-					<select multiple class="form-control" style="font-size:large;" id="stockPickSelect">
+					<select multiple class="form-control" style="font-size:large;" id="stockPickSelect" required='required'>
 						<!-- todo: StockName, but get it later in ajax?-> bad, better in save as key TSLA -->
 						<?php foreach (getAllSymbols(true) as $symbolArray) {	?>
 							<option value="<?php echo $symbolArray["SymbolName"] ?>"><?php echo $symbolArray["StockName"] ?></option>
@@ -101,14 +111,14 @@
 					</select>
 
 					<label>Threshold</label>
-					<input type="number" class="form-control" id="threshold" placeholder="Place your threshold" required>
+					<input type="number" class="form-control" id="threshold" placeholder="Place your threshold" required='required'>
 
 					<label>Leverage</label>
 					<input type="number" class="form-control" id="leverage" placeholder="Place your leverage">
 
 					<label>Pot</label>
 					<div class="input-group">
-						<input type="number" class="form-control" id="potValueID" placeholder="Put money where your mouth is ;)">
+						<input type="number" class="form-control" id="potValueID" placeholder="Put money where your mouth is ;)" required='required'>
 						<div class="input-group-append">
 							<select class="selectpicker" id="pot_currency">
 								<option selected value="finney">mETH</option>
@@ -123,11 +133,11 @@
 					</div>
 
 					<label>Due Date</label>
-					<input class="form-control" type="date" value="2020-08-19" id="ko_due_date">
+					<input class="form-control" type="date" value="2020-08-19" id="ko_due_date" required='required'>
 				</div>
 				<!-- Create it! button -->
 				<div class="form-group text-center">
-					<button type="button" class="btn btn-primary smart-contract-button btn-lg" onclick="createKOContract(this,typeSelect.value, stockPickSelect.value, threshold.value, leverage.value, potValueID.value, pot_currency.value, ko_due_date.value);" id="CreatItButton">Create it!</button>
+					<button type="submit" class="btn btn-primary smart-contract-button btn-lg" onclick="createKOContract(this,typeSelect.value, stockPickSelect.value, threshold.value, leverage.value, potValueID.value, pot_currency.value, ko_due_date.value);" id="CreatItButton">Create it!</button>
 				</div>
 			</form>
 		</div>
@@ -216,6 +226,16 @@
 		$('[data-toggle="tooltip"]').tooltip()
 	})
 
+	// Prevent default behaviour of submit button 
+	$(document).ready(function() {
+		// Listen to click event on the submit button
+		$('#createKOContract_form_id').click(function(e) {
+			if (document.getElementById("createKOContract_form_id").checkValidity()) {
+				e.preventDefault();
+			}
+
+		});
+	});
 
 	// Logic for Web3 API
 	window.addEventListener('load', function() {

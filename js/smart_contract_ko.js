@@ -34,6 +34,9 @@ async function createKOContract(
   pot_currency,
   dueDate
 ) {
+  if (!document.getElementById("createKOContract_form_id").checkValidity()) {
+    return;
+  }
   $("#loadingContractDiv").fadeIn("slow");
 
   ethereum.enable();

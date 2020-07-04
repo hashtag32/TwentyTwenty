@@ -37,9 +37,9 @@
 
 
 	<div class="post-inner">
-		<div class="entry-content">
+		<div class="entry-content"> 
 			<div class="wp-block-columns">
-				<!-- ggf. alignwide? -->
+				<!-- ggf. alignwide? --> 
 				<div class="wp-block-column">
 				<iframe width="1200" height="675" src="https://www.youtube.com/embed/Pk5yofQiljo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					<hr class="post-separator styled-separator has-accent-color is-style-wide section-inner" aria-hidden="true" />

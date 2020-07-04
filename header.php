@@ -46,9 +46,8 @@
 
 	<?php
 	// Output the menu modal.
-	if(!is_front_page()	)
-	{
-	get_template_part('own-template-parts/header-menu');
+	if (!is_front_page()) {
+		get_template_part('own-template-parts/header-menu');
 	}
 	?>
 
@@ -58,5 +57,4 @@
 	get_template_part('template-parts/modal-menu');
 	?>
 
-<a class="btn btn-primary feedback-button" href="https://stockvoting.net/contact" role="button">Feedback</a>
- 
+	<a class="btn btn-primary feedback-button" href="https://stockvoting.net/contact" role="button">Feedback</a>

@@ -7282,7 +7282,7 @@ Upper div has to have a position:relative */
 @media (min-width: 1200px) {
 }
 
-.font-tooltip + .tooltip > .tooltip-inner {font-size:60px;}
+.font-tooltip + .tooltip > .tooltip-inner {font-size:100px;}
 
 .paginate_button.previous, .paginate_button.next{
 	padding:20px;

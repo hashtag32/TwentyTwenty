@@ -42,6 +42,18 @@ get_header();
 
 					</div><!-- /wp:column -->
 				</div><!-- /wp:column -->
+				<div class="wp-block-columns">
+					<div class="wp-block-column">
+						<!-- Stock Betting -->
+						<div class="bordered-area" style="background-color:#d4e9fd">
+							<a href="https://stockvoting.net/specials/get-free-chromecast/">
+								<span class="fill-div-with-link"></span>
+							</a>
+							<h2 class="has-accent-color has-text-align-center ">Get a chromecast for free</h2>
+						</div><!-- bordered-area -->
+
+					</div><!-- /wp:column -->
+				</div><!-- /wp:column -->
 
 			</div><!-- /wp:entry-content -->
 		</div><!-- /wp:post-inner -->

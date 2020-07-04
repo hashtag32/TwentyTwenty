@@ -14,12 +14,8 @@
 if (is_user_logged_in()) {
 	wp_redirect("https://stockvoting.net/front-page");
 }
-
-ob_start();
+ 
 get_header();
-$header = ob_get_clean();
-$header = preg_replace('#<title>(.*?)<\/title>#', '<title>' . "Financial certificates on blockchain | StockVoting" . '</title>', $header);
-echo $header;
 ?>
 
 

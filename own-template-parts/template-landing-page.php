@@ -30,11 +30,11 @@ get_header();
 	<div class="tnp tnp-subscription">
 		<form method="post" action="https://stockvoting.net/?na=s" onsubmit="return newsletter_check(this)">
 
-			<input style="border-radius:10px;background-color:white;" placeholder="enter email" class="input-form zoom-1" type="email" name="ne" required>
+			<input style="border-radius:10px;background-color:white;" placeholder="enter email" class="input-form" type="email" name="ne" required>
 			<div class="tnp-field tnp-field-button button-wrap">
 				<button class="smart-button" type="submit" value="Subscribe">
 					Get them for free
-				</button>
+				</button> 
 			</div>
 		</form>
 	</div>

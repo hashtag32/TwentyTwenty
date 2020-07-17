@@ -6994,12 +6994,19 @@ Upper div has to have a position:relative */
 }
 
 
-.input-form{
-	border-radius:10px !important;
-	background-color:white !important ;
-	margin:30px !important;
-	margin-bottom:0px !important;
+.input-form {
+    background:white;
+    color: black;
+    border-radius: 10px !important;
+    height: 50px;
+    margin-top:40px !important; 
+    padding: 1.5rem 1.8rem;
+    font-size:1.6rem;
+
+    min-width:150px;
+    width: 60%;
 }
+
 
  
 .sv-table{
@@ -7318,10 +7325,9 @@ Upper div has to have a position:relative */
 }
 
 /* Skip Link --------------------------------- */
-
 .skip-lp {
 	text-decoration-line:none;
-	padding:70px;
+	padding:3.5rem;
 	font-size:18px;
 	z-index: 999999999;
 	position: absolute;
@@ -7335,7 +7341,6 @@ Upper div has to have a position:relative */
 	line-height: normal;
 	z-index: 100000;
 }
-
 
 
 .feedback-button {

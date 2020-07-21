@@ -7327,19 +7327,15 @@ Upper div has to have a position:relative */
 /* Skip Link --------------------------------- */
 .skip-lp {
 	text-decoration-line:none;
-	padding:3.5rem;
-	font-size:18px;
+	padding:2.5rem;
+	font-size:35px;
 	z-index: 999999999;
 	position: absolute;
 	right:0px;
 	bottom:0px;
-}
-
-.skip-lp:hover {
-	font-size: 35px;
-	font-weight: 600;
-	line-height: normal;
-	z-index: 100000;
+	margin: 5rem;
+	background-color:black;
+	color:white;
 }
 
 

@@ -26,7 +26,7 @@ get_header();
 		<div class="site-description" style="color:black">Financial certificates on blockchain</div><!-- .site-description -->
 	</div>
 
-	<h3 class="has-text-align-center has-accent-color zoom-1">Receive updates on latest certificates</h3>
+	<h3 class="has-text-align-center has-accent-color zoom-1">Receive updates<br>&<br> Get Ebook for free!</h3>
 	<div class="tnp tnp-subscription">
 		<form method="post" action="https://stockvoting.net/?na=s" onsubmit="return newsletter_check(this)">
 
@@ -38,7 +38,7 @@ get_header();
 			</div>
 		</form>
 	</div>
-
+ 
 </main><!-- #site-content -->
 
 <a class="skip-lp" href="https://stockvoting.net/front-page">

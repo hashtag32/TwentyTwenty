@@ -14,7 +14,7 @@
 if (is_user_logged_in()) {
 	wp_redirect("https://stockvoting.net/front-page");
 }
- 
+
 get_header();
 ?>
 
@@ -34,24 +34,25 @@ get_header();
 			<div class="tnp-field tnp-field-button button-wrap">
 				<button class="smart-button" type="submit" value="Subscribe">
 					Get them for free
-				</button> 
+				</button>
 			</div>
 		</form>
 	</div>
- 
-</main><!-- #site-content -->
+	<div class="has-text-align-center" style="margin-top:5rem;">
+		<a class="skip-lp " href="https://stockvoting.net/front-page">
+			<span class="to-the-top-long">
+				<?php
+				/* translators: %s: HTML character for up arrow. */
+				printf(__('Skip %s', 'twentytwenty'), '<span class="arrow" aria-hidden="true">&rarr;</span>');
+				?>
+			</span><!-- .to-the-top-long -->
+			<span class="to-the-top-short">
+				<?php
+				/* translators: %s: HTML character for up arrow. */
+				printf(__('Skip %s', 'twentytwenty'), '<span class="arrow" aria-hidden="true">&rarr;</span>');
+				?>
+			</span><!-- .to-the-top-short -->
+		</a><!-- .to-the-top -->
+	</div>
 
-<a class="skip-lp" href="https://stockvoting.net/front-page">
-	<span class="to-the-top-long">
-		<?php
-		/* translators: %s: HTML character for up arrow. */
-		printf(__('Skip %s', 'twentytwenty'), '<span class="arrow" aria-hidden="true">&rarr;</span>');
-		?>
-	</span><!-- .to-the-top-long -->
-	<span class="to-the-top-short">
-		<?php
-		/* translators: %s: HTML character for up arrow. */
-		printf(__('Skip %s', 'twentytwenty'), '<span class="arrow" aria-hidden="true">&rarr;</span>');
-		?>
-	</span><!-- .to-the-top-short -->
-</a><!-- .to-the-top -->
+</main><!-- #site-content -->
